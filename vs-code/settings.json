@@ -1,0 +1,22 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "files.autoSave": "off",
+    //"http.proxy": "http://10.181.65.72",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.tabSize": 2,
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+    "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
+    "terminal.integrated.env.windows": {
+        "CHERE_INVOKING": "1"
+    },
+    "terminal.integrated.shellArgs.windows": [
+        "-l"
+    ],
+    "window.zoomLevel": 0,
+    "workbench.colorCustomizations": {
+        "editorError.foreground": "#ffa500",
+        "editorWarning.foreground": "#ffa500"
+   },
+   "workbench.editor.enablePreview": false
+}
