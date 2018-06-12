@@ -29,6 +29,9 @@ set expandtab
 " wrap around in search
 set wrapscan
 
+" avoid tab increments while pasting content over ssh connection
+set paste
+
 "apply these settings only with GUIs, like MacVim
 if has("gui_running")
 
