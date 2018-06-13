@@ -32,6 +32,9 @@ set wrapscan
 " avoid tab increments while pasting content over ssh connection
 set paste
 
+" map jj to ESC
+imap ;; <Esc>
+
 "apply these settings only with GUIs, like MacVim
 if has("gui_running")
 
