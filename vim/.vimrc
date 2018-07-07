@@ -24,7 +24,8 @@ set ruler
 set shiftwidth=2
 
 "use spaces instead of tabs
-set expandtab
+"set expandtab
+set tabstop=8 softtabstop=0 expandtab
 
 " wrap around in search
 set wrapscan
