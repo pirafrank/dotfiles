@@ -20,6 +20,10 @@ set si
 "show line,column
 set ruler
 
+"show line numbers in grey color
+set number
+highlight LineNr ctermfg=grey
+
 "spaces for indenting
 set shiftwidth=2
 
