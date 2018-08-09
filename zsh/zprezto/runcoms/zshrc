@@ -12,5 +12,20 @@ fi
 
 # Customize to your needs...
 
+# aliases
+alias nv=nvim
+alias l='ls -lhA'
+alias lr='ll -RA'
+
+autoload zmv
+
+# custom history size
+export HISTSIZE=20000
+# save history after logout
+export SAVEHIST=20000
+# history file
+export HISTFILE=~/.zsh_history
+
+# exports
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
