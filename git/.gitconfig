@@ -1,0 +1,11 @@
+[user]
+	name = Francesco Pira
+	email = dev@fpira.com
+[alias]
+	co = checkout
+	st = status -s
+	br = branch
+	cm = commit
+	pl = pull
+	ps = push
+	unstage = reset HEAD --
