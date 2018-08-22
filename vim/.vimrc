@@ -2,6 +2,12 @@
 "Use Vim settings in place of Vi ones
 set nocompatible
 
+" case insensitive search by default
+set ignorecase
+
+" case sensitive search if pattern contains any upper case letter
+"set smartcase
+
 "syntax mode on
 syntax on
 
