@@ -1,0 +1,31 @@
+# test keys to work
+# ssh -T git@github.com
+# ssh -T git@bitbucket.org
+
+Host *
+  Protocol 2
+  # Port 22
+  #Ciphers aes256-ctr,aes192-ctr,aes128-ctr,arcfour256,arcfour128,aes128-cbc,3des-cbc
+  #MACs hmac-sha2-256,hmac-sha2-512,hmac-sha1,hmac-md5,umac-64@openssh.com,hmac-ripemd160
+  #ForwardAgent no
+  #ForwardX11 no
+  #ForwardX11Trusted yes
+  HashKnownHosts yes
+  ServerAliveInterval 60
+
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+
+Host gist.github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+
+Host git.example.com
+   HostName git.example.com
+   User git
+   Port 22
+   IdentityFile ~/.ssh/id_rsa
+   VerifyHostKeyDNS yes
