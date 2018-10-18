@@ -9,3 +9,5 @@
 	pl = pull
 	ps = push
 	unstage = reset HEAD --
+	tree = log --all --decorate --oneline --graph
+	adog = log --all --decorate --oneline --graph

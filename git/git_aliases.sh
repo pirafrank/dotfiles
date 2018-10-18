@@ -7,4 +7,5 @@ git config --global alias.pl pull
 git config --global alias.ps push
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.tree "log --all --decorate --oneline --graph"
+git config --global alias.adog "log --all --decorate --oneline --graph"
 
