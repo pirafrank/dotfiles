@@ -27,5 +27,6 @@
         "editorWarning.foreground": "#ffa500"
    },
    "workbench.editor.enablePreview": false,
-   "workbench.iconTheme": "vscode-icons"
+"breadcrumbs.enabled": true,
+"typescript.referencesCodeLens.enabled": true
 }
