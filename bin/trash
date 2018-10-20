@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#########################################################################
+#
+# trash <https://github.com/pirafrank/OSX_utils>
+# move files and folders to trash.
+# Supports macOS. Linux unsupported because of the different locations
+# the bin can be places.
+#
+# Francesco Pira <dev@fpira.com>
+#
+#########################################################################
+
+if [[ $(uname -s) != "Darwin" ]]; then
+    echo "Sorry, this utility runs only on macOS."
+    exit 2
+fi
+
+if [[ $# != 1 ]]; then
+    echo "trash - move files and folders to trash"
+    echo "Usage: trash [file | folder]"
+    exit 1
+fi
+
+mv -r "$1" ~/.Trash/"$(basename "$1")"+"$(date %F_%X)"
