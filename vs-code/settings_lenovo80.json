@@ -1,0 +1,34 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "files.autoSave": "onFocusChange",
+    //"http.proxy": "http://10.181.65.72",
+    "workbench.colorTheme": "Visual Studio Dark",
+    "editor.tabSize": 2,
+    "editor.formatOnPaste": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.wordWrap": "on",
+    "editor.fontSize": 12,
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+    "files.maxMemoryForLargeFilesMB": 2048,
+    "terminal.integrated.shell.osx": "/opt/local/bin/zsh",
+    "terminal.integrated.shell.windows": "C:\\cygwin64\\bin\\bash.exe",
+    "terminal.integrated.env.windows": {
+        "CHERE_INVOKING": "1"
+    },
+    "terminal.integrated.shellArgs.windows": [
+        "-l"
+    ],
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 0,
+    "workbench.colorCustomizations": {
+        "editorError.foreground": "#ffa500",
+        "editorWarning.foreground": "#ffa500"
+   },
+   "workbench.editor.enablePreview": false,
+"breadcrumbs.enabled": true,
+"typescript.referencesCodeLens.enabled": true,
+"maven.executable.options": "-s /Francesco_Home/m2/settings.xml",
+"window.newWindowDimensions": "inherit",
+"java.errors.incompleteClasspath.severity": "ignore"
+}
