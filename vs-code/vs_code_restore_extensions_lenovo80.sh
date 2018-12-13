@@ -1,9 +1,11 @@
-code --install-extension agauniyal.vscode-caniuse
-code --install-extension alefragnani.Bookmarks
 code --install-extension Angular.ng-template
 code --install-extension DotJoshJohnson.xml
-code --install-extension eamodio.gitlens
 code --install-extension EditorConfig.EditorConfig
+code --install-extension PeterJausovec.vscode-docker
+code --install-extension SonarSource.sonarlint-vscode
+code --install-extension agauniyal.vscode-caniuse
+code --install-extension alefragnani.Bookmarks
+code --install-extension eamodio.gitlens
 code --install-extension eg2.tslint
 code --install-extension esbenp.prettier-vscode
 code --install-extension formulahendry.auto-close-tag
@@ -16,11 +18,9 @@ code --install-extension ms-toolsai.vscode-ai
 code --install-extension ms-vscode.azure-account
 code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension naumovs.color-highlight
-code --install-extension PeterJausovec.vscode-docker
 code --install-extension redhat.java
 code --install-extension robertohuertasm.vscode-icons
 code --install-extension robinbentley.sass-indented
-code --install-extension SonarSource.sonarlint-vscode
 code --install-extension thekalinga.bootstrap4-vscode
 code --install-extension vscjava.vscode-java-debug
 code --install-extension vscjava.vscode-java-dependency
