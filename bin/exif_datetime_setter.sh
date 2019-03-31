@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://gist.github.com/pirafrank/9970c15fec0fa6e49be5363ef6ed1cf3
+
 # Simple script to parse JPG photo filename and set exif datetime, 
 # creation date and file modification date accordingly. 
 # Filename pattern is YYYYMMDD_hhmmss. 
