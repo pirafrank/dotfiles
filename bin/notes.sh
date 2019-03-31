@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://gist.github.com/pirafrank/7e9f8cd767f25d66933abfc7996b9fd7
+
 # @Description: A simple notetaking solution in your CLI
 # @Author: Francesco Pira (dev[at]fpira[dot]com)
 #

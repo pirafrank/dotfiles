@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# https://gist.github.com/pirafrank/a1de0dae0c201766dddd
+
 #
 # logged_users.sh
 # Lists who and how many times is logged

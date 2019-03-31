@@ -1,5 +1,7 @@
 #!/usr/bin/env python2
 
+# https://gist.github.com/pirafrank/970cbdb7542dab942da50cab408100d0
+
 #################################################################
 #
 # index generator
