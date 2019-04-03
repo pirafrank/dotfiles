@@ -16,4 +16,4 @@ git config --global alias.adog "log --all --decorate --oneline --graph"
 # %s = subject
 # %ce = author email
 # %cr = relative date (e.g. 2 month ago)
-git config --global alias.pl 'log --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
