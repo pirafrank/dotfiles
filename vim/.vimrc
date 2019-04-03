@@ -1,4 +1,7 @@
 
+"set encoding
+set encoding=utf-8
+
 "Use Vim settings in place of Vi ones
 set nocompatible
 
@@ -6,7 +9,8 @@ set nocompatible
 set ignorecase
 
 " case sensitive search if pattern contains any upper case letter
-"set smartcase
+" (you need to 'set ignorecase' first)
+set smartcase
 
 "syntax mode on
 syntax on
@@ -43,7 +47,7 @@ set wrapscan
 " avoid tab increments while pasting content over ssh connection
 set paste
 
-" map jj to ESC
+" remap ESC btn
 imap ;; <Esc>
 
 "apply these settings only with GUIs, like MacVim
