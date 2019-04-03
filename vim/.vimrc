@@ -12,6 +12,9 @@ set ignorecase
 " (you need to 'set ignorecase' first)
 set smartcase
 
+" set incremental search
+set incsearch
+
 "syntax mode on
 syntax on
 
@@ -43,6 +46,8 @@ set tabstop=8 softtabstop=0 expandtab
 
 " wrap around in search
 set wrapscan
+" disable wrapscan
+"set nowrapscan
 
 " avoid tab increments while pasting content over ssh connection
 set paste
