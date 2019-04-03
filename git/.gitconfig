@@ -12,3 +12,9 @@
 	tree = log --all --decorate --oneline --graph
 	adog = log --all --decorate --oneline --graph
 	ll = log --graph --pretty=format:\"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s\"
+
+[core]
+	excludesfile = /Users/francesco/.gitignore_global
+
+[push]
+	default = matching
