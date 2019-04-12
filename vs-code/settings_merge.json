@@ -28,5 +28,14 @@
    },
    "workbench.editor.enablePreview": false,
 "breadcrumbs.enabled": true,
-"typescript.referencesCodeLens.enabled": true
+"typescript.referencesCodeLens.enabled": true,
+"window.newWindowDimensions": "inherit",
+"java.errors.incompleteClasspath.severity": "ignore",
+"workbench.iconTheme": "vscode-icons",
+"vsicons.projectDetection.disableDetect": true,
+"readTime.enabled": true,
+"readTime.fileTypes": [
+    "markdown",
+    "plaintext"
+]
 }

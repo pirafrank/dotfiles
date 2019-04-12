@@ -30,5 +30,12 @@
 "typescript.referencesCodeLens.enabled": true,
 "maven.executable.options": "-s /Francesco_Home/m2/settings.xml",
 "window.newWindowDimensions": "inherit",
-"java.errors.incompleteClasspath.severity": "ignore"
+"java.errors.incompleteClasspath.severity": "ignore",
+"workbench.iconTheme": "vscode-icons",
+"vsicons.projectDetection.disableDetect": true,
+"readTime.enabled": true,
+"readTime.fileTypes": [
+    "markdown",
+    "plaintext"
+]
 }
