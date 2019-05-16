@@ -50,10 +50,16 @@ set wrapscan
 "set nowrapscan
 
 " avoid tab increments while pasting content over ssh connection
-set paste
+" IMPORTANT : When the 'paste' option is switched on mapping in Insert mode and 
+"             Command-line mode is disabled. In other words remaps do NOT work.
+"set paste
+
+" instead of setting paste ON permanently, toggle it
+" set pastetoggle=<leader>p
+set pastetoggle=<C-p>
 
 " remap ESC btn
-imap ;; <Esc>
+inoremap jj <Esc>
 
 "apply these settings only with GUIs, like MacVim
 if has("gui_running")
