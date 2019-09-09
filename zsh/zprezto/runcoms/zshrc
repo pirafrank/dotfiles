@@ -16,11 +16,15 @@ fi
 alias nv=nvim
 alias l='ls -lhA'
 alias lr='ll -RA'
+alias lt='ll -t'
 #alias jekyll='if [! -d $HOME/.gems_$JEKYLL_VERSION ]; then mkdir $HOME/.gems_$JEKYLL_VERSION; fi ; docker run --rm -v="$PWD:/srv/jekyll" -v="$HOME/.gems_$JEKYLL_VERSION:/srv/gems" --env BUNDLE_PATH=/srv/gems" -it -p 35729:35729 -p 4000:4000 jekyll/jekyll:$JEKYLL_VERSION jekyll'
 alias jk='jekyll'
 #alias jekyll='docker run --rm -v="$PWD:/srv/jekyll" -v="$HOME/.gems_$JEKYLL_VERSION:/srv/gems" --env "BUNDLE_PATH=/srv/gems" -it -p 35729:35729 -p 4000:4000 jekyll/jekyll:$JEKYLL_VERSION jekyll'
 alias gdb='nocorrect gdb'
 alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
+alias tat='tmux a -t'
+alias ebook-convert='$HOME/calibre-bin/calibre/ebook-convert'
+alias ydl='youtube-dl'
 
 autoload zmv
 
@@ -34,6 +38,17 @@ export HISTFILE=~/.zsh_history
 # exports
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
 
+# custom binaries
+export PATH="$PATH:$HOME/.bin"
+export PATH="$PATH:$HOME/.bin2"
+
+# golang
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
+
+# swift
+export PATH=/opt/swift/usr/bin:$PATH
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
