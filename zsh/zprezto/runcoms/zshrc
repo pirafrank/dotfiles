@@ -26,6 +26,13 @@ alias tat='tmux a -t'
 alias ebook-convert='$HOME/calibre-bin/calibre/ebook-convert'
 alias ydl='youtube-dl'
 
+alias pyc='python -m compileall'
+alias pyc3='python3 -m compileall'
+alias npmlist='npm list --depth=0'
+alias npmlistg='npm list -g --depth=0'
+alias wgetnc="wget --no-check-certificate"
+
+
 autoload zmv
 
 # custom history size
