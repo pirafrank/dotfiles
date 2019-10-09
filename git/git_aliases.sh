@@ -9,9 +9,9 @@ git config --global alias.unstage 'reset HEAD --'
 git config --global alias.tree "log --all --decorate --oneline --graph"
 git config --global alias.adog "log --all --decorate --oneline --graph"
 
-# list files in a commit (path+filename only)
-# usage: git lsfiles [commit hash]
-git config --global alias.lsfiles "diff-tree --no-commit-id --name-only -r"
+# list files in a commit (limits history to given commit '-1')
+# usage: git ls [commit hash]
+git config --global alias.ls "log -1 --name-status"
 
 # %h = abbreviated commit hash
 # %x09 = tab (character for code 9)
@@ -27,5 +27,5 @@ git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset%C
 # or (if git ll is enabled):
 #   git ll --follow [filename]
 
-# to show changes inside a commit
+# to show changes inside files in a commit
 #   git show [commit hash] 
