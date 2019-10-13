@@ -53,7 +53,12 @@ DISABLE_UPDATE_PROMPT=true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+plugins=(zsh-256color git osx macports nvm nmap)
+fi
+if [[ "$(uname -s)" == 'Linux' ]]; then
 plugins=(zsh-256color git nmap)
+fi
 
 # User configuration
 
@@ -81,30 +86,32 @@ EDITOR='vim'
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-
-alias zshconfig="vim ~/.zshrc"
-alias ohmyzsh="vim ~/.oh-my-zsh"
-alias mmv='noglob zmv -W'
+source $HOME/.zsh_aliases
 
 # key bindings
 bindkey '[C' forward-word # fixes ALT+right_arrow
 bindkey '[D' backward-word # fixes ALT+left_arrow
 
-# custom history settings
-HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
+# custom history size
+export HISTSIZE=20000
+# save history after logout
+export SAVEHIST=20000
+# history file
+export HISTFILE=~/.zsh_history
 
 autoload zmv
 
-source $HOME/.zshenv
+# load environment
+source $HOME/.zsh_env
 
-# fixing oh-my-zsh bugs...
-#unalias heroku
-
+# default RAILS environment
 RAILS_ENV="development"
 
 # GPG for SSH authentication
-#export "GPG_TTY=$(TTY)"
-#export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+export "GPG_TTY=$(TTY)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 
+# load custom/env specific stuff, but only if file exists
+if [[ -a $HOME/.zsh_custom ]]; then
+source $HOME/.zsh_custom
+fi

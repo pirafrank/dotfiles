@@ -1,0 +1,48 @@
+#
+# common aliases
+#
+
+# config
+alias zshconfig="vim ~/.zshrc"
+alias omzconfig="vim ~/.oh-my-zsh"
+alias sshconfig="vim ~/.ssh/config"
+alias mmv='noglob zmv -W'
+
+# system
+alias nv='nvim'
+alias l='ls -lhA'
+alias lr='ll -RA'
+alias lt='ll -t'
+alias gdb='nocorrect gdb'
+alias tat='tmux a -t'
+alias wgetnc="wget --no-check-certificate"
+alias dk="docker"
+
+# python
+alias py='python'
+alias py3='python3'
+alias pyc='python -m compileall'
+alias pyc3='python3 -m compileall'
+
+# node.js
+alias npmlist='npm list --depth=0'
+alias npmlistg='npm list -g --depth=0'
+
+# jekyll
+alias jk='jekyll'
+alias jk2='jekyll _2.5.3_'
+alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
+
+# other
+alias ebook-convert='$HOME/calibre-bin/calibre/ebook-convert'
+alias ydl='youtube-dl'
+
+#
+# macOS-only aliases
+#
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+alias st='open -a Sublime\ Text'
+alias vscode='open -a Visual\ Studio\ Code'
+alias pip3='pip-3.6'
+fi
+

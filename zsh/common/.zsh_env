@@ -1,0 +1,36 @@
+# precedence is left to right, so paths on the left have higher priority
+
+# java
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+export JAVA_HOME=$(/usr/libexec/java_home)
+fi
+if [[ "$(uname -s)" == 'Linux' ]]; then
+export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" # it assumes you use /etc/alternatives for your java installation
+fi
+
+# dotfiles binaries
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin2"
+
+# golang
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/.golang"
+export PATH="$GOPATH/bin:$PATH"
+
+# swift
+# on macOS it is part of Xcode
+if [[ "$(uname -s)" == 'Linux' ]]; then
+export PATH=/opt/swift/usr/bin:$PATH
+fi
+
+# ruby
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# node.js
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
