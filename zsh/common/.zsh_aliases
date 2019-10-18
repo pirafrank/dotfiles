@@ -17,6 +17,7 @@ alias gdb='nocorrect gdb'
 alias tat='tmux a -t'
 alias wgetnc="wget --no-check-certificate"
 alias dk="docker"
+alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
 
 # python
 alias py='python'
