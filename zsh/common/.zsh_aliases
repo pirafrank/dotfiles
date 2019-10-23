@@ -47,3 +47,21 @@ alias vscode='open -a Visual\ Studio\ Code'
 alias pip3='pip-3.6'
 fi
 
+#
+# common functions
+#
+
+# cheat.sh (as bash function)
+cs() { curl cheat.sh/"$1" }
+
+# weather
+wth() { curl https://wttr.in/"$1" }
+
+# rates
+rates() { curl http://rate.sx/"$1" }
+
+
+
+
+
+

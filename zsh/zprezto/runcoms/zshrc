@@ -12,26 +12,9 @@ fi
 
 # Customize to your needs...
 
-# aliases
-alias nv=nvim
-alias l='ls -lhA'
-alias lr='ll -RA'
-alias lt='ll -t'
-alias jk='jekyll'
-alias gdb='nocorrect gdb'
-alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
-alias tat='tmux a -t'
-alias ebook-convert='$HOME/calibre-bin/calibre/ebook-convert'
-alias ydl='youtube-dl'
+EDITOR='vim'
 
-alias pyc='python -m compileall'
-alias pyc3='python3 -m compileall'
-alias npmlist='npm list --depth=0'
-alias npmlistg='npm list -g --depth=0'
-alias wgetnc="wget --no-check-certificate"
-
-
-autoload zmv
+source $HOME/.zsh_aliases
 
 # custom history size
 export HISTSIZE=20000
@@ -40,31 +23,23 @@ export SAVEHIST=20000
 # history file
 export HISTFILE=~/.zsh_history
 
-# java
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64"
+autoload zmv
 
-# custom binaries
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/bin2"
+# load environment
+source $HOME/.zsh_env
 
-# golang
-export PATH=$PATH:/usr/local/go/bin
-export GOPATH="$HOME/.golang"
-export PATH="$GOPATH/bin:$PATH"
+# default RAILS environment
+RAILS_ENV="development"
 
-# swift
-export PATH=/opt/swift/usr/bin:$PATH
+# GPG for SSH authentication
+# do it only there's TTY
+if [[ $(command -v TTY) ]]; then
+export "GPG_TTY=$(TTY)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+fi
 
-# ruby
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
-
-# node.js
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# rust stuff
-export PATH="$HOME/.cargo/bin:$PATH"
+# load custom/env specific stuff, but only if file exists
+if [[ -a $HOME/.zsh_custom ]]; then
+source $HOME/.zsh_custom
+fi
 
