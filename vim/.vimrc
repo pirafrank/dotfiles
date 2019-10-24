@@ -88,9 +88,25 @@ if has('nvim')
   " (Optional) Multi-entry selection UI.
   Plug 'junegunn/fzf'
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " note: check deoplete requirements. if you use pyenv, you may need to run:
+  " pip install neovim
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
+
+  " nerdtree with git integration
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+
+  " the almost illegal git wrapper
+  Plug 'tpope/vim-fugitive'
+
+  "status/tabline light as air
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " git diff plugin
+  Plug 'airblade/vim-gitgutter'
 
 else
 " plugins to use with vim instead
@@ -105,6 +121,14 @@ call plug#end()
 " specific settings for nvim
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
+
+  " show hidden files in nerdtree by default
+  let NERDTreeShowHidden=1
+  " use ctrl+n to toggle nerdtree
+  map <C-n> :NERDTreeToggle<CR>
+
+  "display all buffers in airline when there's only 1 tab open
+  let g:airline#extensions#tabline#enabled = 1
 
   "color molokai
   color dracula
