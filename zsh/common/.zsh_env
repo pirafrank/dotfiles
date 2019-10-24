@@ -1,5 +1,12 @@
 # precedence is left to right, so paths on the left have higher priority
 
+# pyenv
+if [[ -d $HOME/.pyenv ]]; then
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+fi
+
 # java
 if [[ "$(uname -s)" == 'Darwin' ]]; then
 export JAVA_HOME=$(/usr/libexec/java_home)
