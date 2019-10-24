@@ -61,6 +61,56 @@ set pastetoggle=<C-p>
 " remap ESC btn
 inoremap jj <Esc>
 
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+
+" plugins
+"
+" using vim-plug as plugin manager
+" (https://github.com/junegunn/vim-plug)
+" automatically install vim-plug if it's not
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+" plugins to use only with nvim
+if has('nvim')
+
+  Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+  " (Optional) Multi-entry selection UI.
+  Plug 'junegunn/fzf'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+  " colorschemas
+  Plug 'rafi/awesome-vim-colorschemes'
+
+else
+" plugins to use with vim instead
+
+  "Plug 'Shougo/deoplete.nvim'
+  "Plug 'roxma/nvim-yarp'
+  "Plug 'roxma/vim-hug-neovim-rpc'
+
+endif
+call plug#end()
+
+" specific settings for nvim
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+
+  "color molokai
+  color dracula
+endif
+
+
 "apply these settings only with GUIs, like MacVim
 if has("gui_running")
 
