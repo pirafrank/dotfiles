@@ -44,7 +44,6 @@ alias ydl='youtube-dl'
 if [[ "$(uname -s)" == 'Darwin' ]]; then
 alias st='open -a Sublime\ Text'
 alias vscode='open -a Visual\ Studio\ Code'
-alias pip3='pip-3.6'
 fi
 
 #
