@@ -5,6 +5,11 @@ set encoding=utf-8
 "Use Vim settings in place of Vi ones
 set nocompatible
 
+" use system clipboard
+set clipboard=unnamed
+
+""" search
+
 " case insensitive search by default
 set ignorecase
 
@@ -15,11 +20,19 @@ set smartcase
 " set incremental search
 set incsearch
 
-"syntax mode on
-syntax on
-
 "highlight all search patterns
 set hlsearch
+
+" wrap around in search
+set wrapscan
+" disable wrapscan
+"set nowrapscan
+
+
+""" syntax
+
+"syntax mode on
+syntax on
 
 "allow backspacing over (indent,eol,start) everything in insert mode
 set bs=2
@@ -44,29 +57,43 @@ set shiftwidth=2
 "set expandtab
 set tabstop=8 softtabstop=0 expandtab
 
-" wrap around in search
-set wrapscan
-" disable wrapscan
-"set nowrapscan
+
+""" paste options
 
 " avoid tab increments while pasting content over ssh connection
-" IMPORTANT : When the 'paste' option is switched on mapping in Insert mode and 
+" IMPORTANT : When the 'paste' option is switched on mapping in Insert mode and
 "             Command-line mode is disabled. In other words remaps do NOT work.
 "set paste
-
 " instead of setting paste ON permanently, toggle it
 " set pastetoggle=<leader>p
-set pastetoggle=<C-p>
+set pastetoggle=<C-y>
+
+
+""" remappings
 
 " remap ESC btn
 inoremap jj <Esc>
 
+
+""" panes
+
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
+" choose where to open the new pane
+set splitbelow
+set splitright
 
-" plugins
-"
+"split navigations
+" use ctrl+[UPPERCASE] instead of ctrl+w+[lowercase]
+nnoremap <C-J> <C-w><C-J>
+nnoremap <C-K> <C-w><C-K>
+nnoremap <C-L> <C-w><C-L>
+nnoremap <C-H> <C-w><C-H>
+
+
+""" plugins
+
 " using vim-plug as plugin manager
 " (https://github.com/junegunn/vim-plug)
 " automatically install vim-plug if it's not
@@ -107,6 +134,9 @@ if has('nvim')
 
   " git diff plugin
   Plug 'airblade/vim-gitgutter'
+
+  " ctrl-p to search anything
+  Plug 'kien/ctrlp.vim'
 
 else
 " plugins to use with vim instead
@@ -151,3 +181,23 @@ if has("gui_running")
   set mouse=a
 
 endif
+
+
+""" language specific settings
+
+" python
+au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix
+
+" html, css, js
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
