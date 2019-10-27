@@ -18,6 +18,7 @@ alias tat='tmux a -t'
 alias wgetnc="wget --no-check-certificate"
 alias dk="docker"
 alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
+alias grep="grep -i"
 
 # python
 alias py='python'

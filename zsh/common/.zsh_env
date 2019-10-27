@@ -1,5 +1,14 @@
 # precedence is left to right, so paths on the left have higher priority
 
+# load junegunn/fzf if installed
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+fi
+
+# dotfiles binaries
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/bin2"
+
 # pyenv
 if [[ -d $HOME/.pyenv ]]; then
 export PATH="$HOME/.pyenv/bin:$PATH"
@@ -14,10 +23,6 @@ fi
 if [[ "$(uname -s)" == 'Linux' ]]; then
 export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" # it assumes you use /etc/alternatives for your java installation
 fi
-
-# dotfiles binaries
-export PATH="$PATH:$HOME/bin"
-export PATH="$PATH:$HOME/bin2"
 
 # golang
 export PATH="$PATH:/usr/local/go/bin"
