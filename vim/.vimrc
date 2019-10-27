@@ -8,6 +8,10 @@ set nocompatible
 " use system clipboard
 set clipboard=unnamed
 
+" command line completion that makes sense
+set wildmode=longest:full
+set wildmenu
+
 """ search
 
 " case insensitive search by default
@@ -112,15 +116,21 @@ if has('nvim')
     \ 'do': 'bash install.sh',
     \ }
 
-  " (Optional) Multi-entry selection UI.
-  Plug 'junegunn/fzf'
+  " fuzzy everything search
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
+  Plug 'junegunn/fzf.vim'
+
+  " use deoplete for smart autocompletion
+  " check requirements: you need to install neovim/pynvim module: pip install neovim
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  " note: check deoplete requirements. if you use pyenv, you may need to run:
-  " pip install neovim
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
 
+  "status/tabline light as air
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  "
   " nerdtree with git integration
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -128,28 +138,23 @@ if has('nvim')
   " the almost illegal git wrapper
   Plug 'tpope/vim-fugitive'
 
-  "status/tabline light as air
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-
   " git diff plugin
-  Plug 'airblade/vim-gitgutter'
-
-  " ctrl-p to search anything
-  Plug 'kien/ctrlp.vim'
+  Plug 'mhinz/vim-signify'
 
 else
-" plugins to use with vim instead
-
-  "Plug 'Shougo/deoplete.nvim'
-  "Plug 'roxma/nvim-yarp'
-  "Plug 'roxma/vim-hug-neovim-rpc'
+  " don't use plugins with vim
 
 endif
 call plug#end()
 
 " specific settings for nvim
 if has('nvim')
+
+  " fzf options
+  " set fzf runtime path
+  set rtp+=~/.fzf
+
+  " enable deoplete at startup
   let g:deoplete#enable_at_startup = 1
 
   " show hidden files in nerdtree by default
@@ -157,11 +162,25 @@ if has('nvim')
   " use ctrl+n to toggle nerdtree
   map <C-n> :NERDTreeToggle<CR>
 
+  " set colorscheme
+  "color molokai
+  color dracula
+
   "display all buffers in airline when there's only 1 tab open
   let g:airline#extensions#tabline#enabled = 1
 
-  "color molokai
-  color dracula
+  " vim-signify settings
+  " default updatetime 4000ms is not good for async update
+  set updatetime=100
+  " sign settings
+  let g:signify_sign_add               = '+'
+  let g:signify_sign_delete            = '-'
+  let g:signify_sign_delete_first_line = '‾'
+  let g:signify_sign_change            = 'M'
+  let g:signify_sign_changedelete      = g:signify_sign_change
+  " show number of edited/deleted lines
+  let g:signify_sign_show_count = 1
+
 endif
 
 
