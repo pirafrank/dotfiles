@@ -104,13 +104,6 @@ autoload zmv
 # load environment
 source $HOME/.zsh_env
 
-# default RAILS environment
-RAILS_ENV="development"
-
-# GPG for SSH authentication
-export "GPG_TTY=$(TTY)"
-export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
-
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then
 source $HOME/.zsh_custom

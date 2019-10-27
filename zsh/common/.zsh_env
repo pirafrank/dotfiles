@@ -39,6 +39,9 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+# default RAILS environment
+RAILS_ENV="development"
+
 # node.js
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -46,3 +49,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# GPG for SSH authentication
+# do it only there's TTY
+if [[ $(command -v TTY) ]]; then
+export "GPG_TTY=$(TTY)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+fi
+
