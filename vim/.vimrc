@@ -141,6 +141,9 @@ if has('nvim')
   " git diff plugin
   Plug 'mhinz/vim-signify'
 
+  " editorconfig
+  Plug 'editorconfig/editorconfig-vim'
+
 else
   " don't use plugins with vim
 
@@ -181,6 +184,11 @@ if has('nvim')
   " show number of edited/deleted lines
   let g:signify_sign_show_count = 1
 
+  " editorconfig settings
+  let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
+  let g:EditorConfig_exclude_patterns = ['scp://.\*']
+  let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
+
 endif
 
 
@@ -200,23 +208,4 @@ if has("gui_running")
   set mouse=a
 
 endif
-
-
-""" language specific settings
-
-" python
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-
-" html, css, js
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
 
