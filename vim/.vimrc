@@ -126,6 +126,8 @@ if has('nvim')
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
+  Plug 'flazz/vim-colorschemes'
+  Plug 'flrnprz/plastic.vim'
 
   "status/tabline light as air
   Plug 'vim-airline/vim-airline'
@@ -167,7 +169,11 @@ if has('nvim')
 
   " set colorscheme
   "color molokai
-  color dracula
+  "color dracula
+  " settings to live in plastic, it's fantastic
+  set background=dark
+  color plastic
+  let g:lightline = { 'colorscheme': 'plastic' }
 
   "display all buffers in airline when there's only 1 tab open
   let g:airline#extensions#tabline#enabled = 1
