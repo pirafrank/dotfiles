@@ -60,6 +60,8 @@ wth() { curl https://wttr.in/"$1" }
 # rates
 rates() { curl http://rate.sx/"$1" }
 
+# update dotfiles
+dotup() { cd ~/dotfiles && git pull origin master && cd - }
 
 
 
