@@ -128,6 +128,8 @@ if has('nvim')
   Plug 'rafi/awesome-vim-colorschemes'
   Plug 'flazz/vim-colorschemes'
   Plug 'flrnprz/plastic.vim'
+  Plug 'noahfrederick/vim-noctu'
+  Plug 'jeffkreeftmeijer/vim-dim'
 
   "status/tabline light as air
   Plug 'vim-airline/vim-airline'
@@ -170,10 +172,17 @@ if has('nvim')
   " set colorscheme
   "color molokai
   "color dracula
-  " settings to live in plastic, it's fantastic
-  set background=dark
-  color plastic
-  let g:lightline = { 'colorscheme': 'plastic' }
+
+  " settings to use vim-plastic colorscheme
+  " (live in plastic, it's fantastic)
+  "set background=dark
+  "color plastic
+  "let g:lightline = { 'colorscheme': 'plastic' }
+
+  " 4-bit colorschemes to get consistency in 16-color terminals
+  " set one of these and customize your terminal theme instead.
+  "color noctu
+  color dim
 
   "display all buffers in airline when there's only 1 tab open
   let g:airline#extensions#tabline#enabled = 1
