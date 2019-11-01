@@ -130,6 +130,7 @@ if has('nvim')
   Plug 'flrnprz/plastic.vim'
   Plug 'noahfrederick/vim-noctu'
   Plug 'jeffkreeftmeijer/vim-dim'
+  Plug 'noahfrederick/vim-hemisu'
 
   "status/tabline light as air
   Plug 'vim-airline/vim-airline'
@@ -221,6 +222,16 @@ if has("gui_running")
 
 " enable use of mouse
   set mouse=a
+
+endif
+
+" settings for GUI nvim
+if has('gui_running' && 'nvim')
+
+  " 4-bit colorschemes and settings
+  "set background=light
+  set background=dark
+  colorscheme hemisu
 
 endif
 
