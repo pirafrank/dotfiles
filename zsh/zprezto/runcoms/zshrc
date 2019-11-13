@@ -14,6 +14,15 @@ fi
 
 EDITOR='vim'
 
+# load custom themes
+if [[ -d $HOME/.zsh_user_themes ]]; then
+  # file namings must be: prompt_THEMENAME_setup
+  fpath=( $HOME/.zsh_user_themes $fpath )
+  autoload -Uz promptinit; promptinit
+  # set a custom theme here. This overrides .zpreztorc theme setting.
+  prompt sorinEdit
+fi
+
 source $HOME/.zsh_aliases
 
 # custom history size
