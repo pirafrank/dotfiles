@@ -34,6 +34,7 @@ git config --global alias.ls "log -1 --name-status"
 # %cr = relative date (e.g. 2 month ago)
 #
 git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
 
 # to list changes made on a particular file:
 #   git log --follow [filename]
