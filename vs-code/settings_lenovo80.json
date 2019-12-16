@@ -2,12 +2,12 @@
 {
     "files.autoSave": "onFocusChange",
     //"http.proxy": "http://10.181.65.72",
-    "workbench.colorTheme": "Visual Studio Dark",
+    "workbench.colorTheme": "Plastic",
     "editor.tabSize": 2,
     "editor.formatOnPaste": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordWrap": "on",
-    "editor.fontSize": 12,
+    "editor.fontSize": 14,
     "files.eol": "\n",
     "files.encoding": "utf8",
     "files.maxMemoryForLargeFilesMB": 2048,
@@ -37,5 +37,9 @@
 "readTime.fileTypes": [
     "markdown",
     "plaintext"
-]
+],
+"editor.largeFileOptimizations": false,
+"svn.enableProposedApi": "none",
+"doiuse.enable": true,
+"http.proxy": "http://10.181.65.40:8123"
 }
