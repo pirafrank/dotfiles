@@ -23,8 +23,6 @@ if [[ -d $HOME/.zsh_user_themes ]]; then
   prompt sorinEdit
 fi
 
-source $HOME/.zsh_aliases
-
 # custom history size
 export HISTSIZE=20000
 # save history after logout
@@ -36,6 +34,9 @@ autoload zmv
 
 # load environment
 source $HOME/.zsh_env
+
+# load aliases
+source $HOME/.zsh_aliases
 
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then
