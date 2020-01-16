@@ -26,7 +26,7 @@ alias ducks='du -cksh * | sort -hr | head -n 15'
 alias all2unix="find . -type f -exec dos2unix {} \;"
 # self made dos2unix if original one does not exist
 if [[ -z $(command -v dos2unix) ]]; then
-alias dos2unix="for file in $(find . -iname '*.sh'); do sed -i 's/\r$//' $file; done"
+alias dos2unix="sed -i 's/\r$//'"
 fi
 
 # python
