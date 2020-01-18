@@ -14,8 +14,14 @@ fi
 
 EDITOR='vim'
 
+# overrides theme set in .zpreztorc
+prompt spaceship
+
+# enable or disable custom themes on the fly
+CUSTOM_THEMES_ENABLED=0
+
 # load custom themes
-if [[ -d $HOME/.zsh_user_themes ]]; then
+if [[ CUSTOM_THEMES_ENABLED -eq 1 && -d $HOME/.zsh_user_themes ]]; then
   # file namings must be: prompt_THEMENAME_setup
   fpath=( $HOME/.zsh_user_themes $fpath )
   autoload -Uz promptinit; promptinit
