@@ -48,6 +48,7 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 
 # other
 alias ydl='youtube-dl'
+alias lg='lazygit'
 
 #
 # macOS-only aliases
