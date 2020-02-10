@@ -20,6 +20,13 @@ alias dk="docker"
 alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
 alias grep="grep -i"
 
+#
+# utilities
+#
+
+# print ip and location info
+alias myip='curl ipinfo.io/json'
+
 # print fat folders
 alias ducks='du -cksh * | sort -hr | head -n 15'
 # all CRLF to LF in one shot (binary files will be automatically skipped)
