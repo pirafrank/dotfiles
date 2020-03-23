@@ -63,6 +63,7 @@ alias lg='lazygit'
 if [[ "$(uname -s)" == 'Darwin' ]]; then
 alias st='open -a Sublime\ Text'
 alias vscode='open -a Visual\ Studio\ Code'
+alias fork='open -a /Applications/Fork.app'
 fi
 
 #
