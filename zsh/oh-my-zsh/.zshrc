@@ -54,10 +54,10 @@ DISABLE_UPDATE_PROMPT=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 if [[ "$(uname -s)" == 'Darwin' ]]; then
-plugins=(zsh-256color git osx macports nvm nmap)
+plugins=(zsh-256color git osx macports nvm docker nmap)
 fi
 if [[ "$(uname -s)" == 'Linux' ]]; then
-plugins=(zsh-256color git nmap)
+plugins=(zsh-256color git nvm docker nmap)
 fi
 
 # User configuration
