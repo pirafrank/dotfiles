@@ -28,7 +28,7 @@ alias grep="grep -i"
 alias myip='curl ipinfo.io/json'
 
 # print fat folders
-alias ducks='du -cksh * | sort -hr | head -n 15'
+alias ducks='du -cksh $(ls -A) | sort -hr | head -n 15'
 # all CRLF to LF in one shot (binary files will be automatically skipped)
 alias all2unix="find . -type f -exec dos2unix {} \;"
 # self made dos2unix if original one does not exist
