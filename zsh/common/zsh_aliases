@@ -58,6 +58,13 @@ alias ydl='youtube-dl'
 alias lg='lazygit'
 
 #
+# Linux-only aliases
+#
+if [[ "$(uname -s)" == 'Linux' ]]; then
+alias xclip="xclip -selection c"
+fi
+
+#
 # macOS-only aliases
 #
 if [[ "$(uname -s)" == 'Darwin' ]]; then
