@@ -52,8 +52,11 @@ RAILS_ENV="development"
 
 # GPG for SSH authentication
 # do it only there's TTY
-if [[ $(command -v TTY) ]]; then
+if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
 export "GPG_TTY=$(TTY)"
 export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 fi
-
+if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]]; then
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+fi
