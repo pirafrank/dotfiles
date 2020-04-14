@@ -1,6 +1,6 @@
 {
-    "workbench.iconTheme": "vscode-icons",
-    "editor.tabSize": 4,
+    "editor.tabSize": 2,
+    "workbench.colorTheme": "Plastic",
     "files.encoding": "utf8",
     "files.eol": "\n",
     "window.restoreWindows": "all",
@@ -14,5 +14,17 @@
     "editor.multiCursorModifier": "ctrlCmd",
     "gitlens.advanced.messages": {
         "suppressCommitNotFoundWarning": true
-    }
+    },
+    "explorer.autoReveal": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.jediEnabled": false
 }
+
