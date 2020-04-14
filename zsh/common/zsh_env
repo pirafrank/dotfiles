@@ -25,27 +25,35 @@ export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" # it assumes you use /etc/a
 fi
 
 # golang
+if [[ -d /usr/local/go/bin ]]; then
 export PATH="$PATH:/usr/local/go/bin"
 export GOPATH="$HOME/.golang"
 export PATH="$GOPATH/bin:$PATH"
+fi
 
 # swift
 # on macOS it is part of Xcode
-if [[ "$(uname -s)" == 'Linux' ]]; then
+if [[ "$(uname -s)" == 'Linux' ]] && [[ -d /opt/swift/usr/bin ]]; then
 export PATH=/opt/swift/usr/bin:$PATH
 fi
 
 # node.js
+if [[ -d "$HOME/.nvm" ]]; then
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 #[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 # rust
+if [[ -d "$HOME/.cargo/bin" ]]; then
 export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # ruby
+if [[ -d "$HOME/.rvm" ]]; then
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+fi
 
 # default RAILS environment
 RAILS_ENV="development"
