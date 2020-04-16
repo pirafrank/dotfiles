@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# usage:
+# 1) add an entry in your crontab
+#      0 * * * * (every hour) or */30 * * * * (every 30 mins)
+# 2) set it to run at login
+
+# notes:
 # tested on ubuntu 19.10
 
 #ubuntuversion=$(cat /etc/os-release | grep VERSION_ID | cut -d'=' -f2| cut -d'"' -f2 | sed -s 's/\.//')
