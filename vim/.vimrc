@@ -183,7 +183,13 @@ if has('nvim')
   " 4-bit colorschemes to get consistency in 16-color terminals
   " set one of these and customize your terminal theme instead.
   "color noctu
-  color dim
+  "color dim
+
+  " further theme customization
+  " you can use default theme and customize terminal colors instead
+  color default
+  " keep line numbers grey
+  highlight LineNr ctermfg=grey
 
   "display all buffers in airline when there's only 1 tab open
   let g:airline#extensions#tabline#enabled = 1
