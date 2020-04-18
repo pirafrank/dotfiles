@@ -26,7 +26,12 @@ if [[ "$(uname -s)" == 'Darwin' ]]; then
   alias java11='export JAVA_HOME=$JAVA_11_HOME'
 fi
 if [[ "$(uname -s)" == 'Linux' ]]; then
-export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64" # it assumes you use /etc/alternatives for your java installation
+  load_java_home(){
+    export JAVA_HOME=$(dirname $(dirname $(readlink -e /usr/bin/java)))
+    export PATH="$PATH:$JAVA_HOME/bin"
+  }
+  alias java8='sudo update-alternatives --set java /usr/local/lib/jdk1.8/bin/java; load_java_home'
+  alias java11='sudo update-alternatives --set java /usr/local/lib/jdk11/bin/java; load_java_home'
 fi
 
 # golang
