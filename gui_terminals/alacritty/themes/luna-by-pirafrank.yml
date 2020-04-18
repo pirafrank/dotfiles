@@ -1,0 +1,46 @@
+
+# luna theme
+
+colors:
+    primary:
+      background: '0x333344'
+      foreground: '0xffffff'
+
+    cursor:
+      text: '0x333344'
+      cursor: '0xffe73c'
+
+    selection:
+      text: '0x333344'
+      background: '0x47c5ff'
+
+    normal:
+      black: '0xffffff'
+      red: '0xef0c38'
+      green: '0x63ff56'
+      yellow: '0xc56cff'
+      blue: '0x47c5ff'
+      magenta: '0xff5a37'
+      cyan: '0x4f89ff'
+      white: '0xffffff'
+
+    bright:
+      black: '0xffffff'
+      red: '0xF23D60'
+      green: '0x82FF78'
+      yellow: '0xD189FF'
+      blue: '0x6CD1FF'
+      magenta: '0xFF7B5F'
+      cyan: '0x72A1FF'
+      white: '0xffffff'
+
+    dim:
+      black: '0xffffff'
+      red: '0xC9143A'
+      green: '0x59D652'
+      yellow: '0xA861DA'
+      blue: '0x43A8DA'
+      magenta: '0xD6523A'
+      cyan: '0x4978DA'
+      white: '0xffffff'
+  
