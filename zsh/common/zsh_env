@@ -1,5 +1,8 @@
 # precedence is left to right, so paths on the left have higher priority
 
+# kitty config dir
+export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
+
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
@@ -78,3 +81,4 @@ if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]]; then
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 fi
+
