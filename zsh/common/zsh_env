@@ -72,10 +72,15 @@ fi
 RAILS_ENV="development"
 
 # GPG for SSH authentication
-# do it only there's TTY
+# do it only if there's TTY
 if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
 export "GPG_TTY=$(TTY)"
 export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+# notes:
+#   for command line tty, ~/.gnupg/gpg-agent.conf needs:
+#       pinentry-program /usr/bin/pinentry-curses
+#   if needed, run the command below to force telling the agent which tty to use
+#     gpg-connect-agent updatestartuptty /bye
 fi
 if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]]; then
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
