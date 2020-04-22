@@ -57,11 +57,17 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 alias ydl='youtube-dl'
 alias lg='lazygit'
 
+# pgadmin
+if [[ -z $(command -v pgadmin) ]]; then
+  alias pgadmin="docker run -d --net=host --name pgadmin -e PGADMIN_DEFAULT_EMAIL='email@email.com' -e PGADMIN_DEFAULT_PASSWORD=password -e PGADMIN_LISTEN_PORT=54321 dpage/pgadmin4"
+fi
+
 #
 # Linux-only aliases
 #
 if [[ "$(uname -s)" == 'Linux' ]]; then
 alias xclip="xclip -selection c"
+alias open='xdg-open'
 fi
 
 #
