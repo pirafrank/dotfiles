@@ -56,6 +56,7 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 # other
 alias ydl='youtube-dl'
 alias lg='lazygit'
+alias lk='lazydocker'
 
 # pgadmin
 if [[ -z $(command -v pgadmin) ]]; then
