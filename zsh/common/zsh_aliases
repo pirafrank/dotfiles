@@ -18,6 +18,7 @@ alias tat='tmux a -t'
 alias wgetnc="wget --no-check-certificate"
 alias dk="docker"
 alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
+alias sshforget='ssh-keygen -R'
 alias grep="grep -i"
 
 #
@@ -38,11 +39,14 @@ fi
 
 # python
 alias py='python'
+alias py2='python2'
 alias py3='python3'
 alias pyc='python -m compileall'
+alias pyc2='python2 -m compileall'
 alias pyc3='python3 -m compileall'
 alias serve='python3 -m http.server'
 alias pip='python -m pip'
+alias pip2='python2 -m pip'
 alias pip3='python3 -m pip'
 
 # node.js
@@ -57,6 +61,7 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 alias ydl='youtube-dl'
 alias lg='lazygit'
 alias lk='lazydocker'
+alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 
 # pgadmin
 if [[ -z $(command -v pgadmin) ]]; then
