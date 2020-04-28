@@ -32,11 +32,13 @@ alias myip='curl ipinfo.io/json'
 
 # print fat folders
 alias ducks='du -cksh $(ls -A) | sort -hr | head -n 15'
-# all CRLF to LF in one shot (binary files will be automatically skipped)
-alias all2unix="find . -type f -exec dos2unix {} \;"
+
 # self made dos2unix if original one does not exist
 if [[ -z $(command -v dos2unix) ]]; then
 alias dos2unix="sed -i 's/\r$//'"
+
+# all CRLF to LF in one shot (binary files will be automatically skipped)
+alias all2unix="find . -type f -exec dos2unix {} \;"
 fi
 
 # python
@@ -74,8 +76,13 @@ fi
 # Linux-only aliases
 #
 if [[ "$(uname -s)" == 'Linux' ]]; then
-alias xclip="xclip -selection c"
-alias open='xdg-open'
+  alias xclip="xclip -selection c"
+  alias open='xdg-open'
+
+  # custom sublime text habits are hard to die...
+  if [[ $(command -v subl) ]]; then
+    alias st=subl
+  fi
 fi
 
 #
