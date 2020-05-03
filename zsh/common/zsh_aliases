@@ -23,6 +23,9 @@ alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
 alias sshforget='ssh-keygen -R'
 alias grep="grep -i"
 
+# if you need to jump on many hosts and don't want to setup tons of entries in .ssh/config:
+#alias sshvm='ssh -o ProxyCommand="ssh -l francesco -W %h:%p jumphost.somedomain.com"'
+
 #
 # utilities
 #
