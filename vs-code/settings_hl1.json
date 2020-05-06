@@ -51,4 +51,5 @@
     "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 13,
+    "java.semanticHighlighting.enabled": true,
 }
