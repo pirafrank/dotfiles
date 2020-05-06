@@ -53,3 +53,4 @@ git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Cr
 git config --global pull.rebase true
 
 echo "Done!"
+exit 0
