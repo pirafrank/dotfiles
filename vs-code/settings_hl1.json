@@ -52,4 +52,5 @@
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
+    "explorer.confirmDragAndDrop": false,
 }
