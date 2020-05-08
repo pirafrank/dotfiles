@@ -53,4 +53,5 @@
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
+    "workbench.editor.scrollToSwitchTabs": true,
 }
