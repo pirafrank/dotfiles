@@ -12,17 +12,23 @@ Cygwin support may come later on. [Or may not](https://docs.microsoft.com/en-us/
 
 ## Installation
 
-just clone it to your home dir and symlink all the things.
+Just clone it to your home dir and symlink all the things.
+
+Main setup script is still a draft, rather a memo then an actual script.
 
 ## Usage
 
 There is no how-to. Look at the code. Google is your friend.
 
+## Docker Image
+
+A command-line workspace in a container. Based on this repo. The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace).
+
 ## Credits
 
 #### Scripts
 
-Some files in the `bin` folder may come or contain pieces from the web (twitter? google? stackoverflow?). Onestly I can't remember where I got them from, but the original author should be in the comments.
+I wrote most of the scripts in the `bin` folder, with some of them already publicly available as [gists](https://gist.github.com/pirafrank). But others come or contain pieces from the web (twitter? google? stackoverflow?). Honestly I can't remember where I got them from, but you should find the original authors in the comments.
 
 #### Themes
 
