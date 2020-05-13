@@ -54,4 +54,7 @@
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "workbench.editor.scrollToSwitchTabs": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
 }
