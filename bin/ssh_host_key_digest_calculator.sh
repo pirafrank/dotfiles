@@ -25,17 +25,22 @@ for keyfile in $keylist; do
   SSHFP=$(($SSHFP + 1))
   if [ -f $keyfile ]; then
     printf "\n  $keyfile\n"
-	for algo in $algolist; do
-		HEXHASH=$(hashit $algo $keyfile)
-		BASE64HASH=$(echo $HEXHASH | xxd -r -p | base64)
-		printf "    %-6s -- %-6s -- %s\n" "$(echo ${algo}sum | uppercase)" "HEX" "$HEXHASH"
-		printf "    %-6s -- %-6s -- %s\n" "$(echo ${algo}sum | uppercase)" "BASE64" "$BASE64HASH"
-		printf "\n"
-		printf "    $(hostname) IN SSHFP $SSHFP 1 $HEXHASH\n"
-		printf "    $(hostname) IN SSHFP $SSHFP 2 $BASE64HASH\n"
-		printf "\n\n"
-	done
+    for algo in $algolist; do
+      HEXHASH=$(hashit $algo $keyfile)
+      BASE64HASH=$(echo $HEXHASH | xxd -r -p | base64)
+      printf "    %-6s -- %-6s -- %s\n" "$(echo ${algo}sum | uppercase)" "HEX" "$HEXHASH"
+      printf "    %-6s -- %-6s -- %s\n" "$(echo ${algo}sum | uppercase)" "BASE64" "$BASE64HASH"
+      printf "\n"
+      if [ $algo == 'sha1' ]; then
+        printf "    $(hostname) IN SSHFP $SSHFP 1 $HEXHASH\n"
+      fi
+      if [ $algo == 'sha256' ]; then
+        printf "    $(hostname) IN SSHFP $SSHFP 2 $HEXHASH\n"
+      fi
+      printf "\n\n"
+    done
   fi
 done
+
 
 
