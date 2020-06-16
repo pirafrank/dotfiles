@@ -103,12 +103,11 @@ module.exports = {
     //
     // PowerShell on Windows
     // - Example: `C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe`
-    shell: 'C:\\Program Files\\Git\\git-cmd.exe',
+    shell: 'C:\\cygwin64\\bin\\bash.exe',
 
     // for setting shell arguments (i.e. for using interactive shellArgs: `['-i']`)
     // by default `['--login']` will be used
-    //shellArgs: ['--login'],
-	shellArgs: ['--command=usr/bin/bash.exe', '-l', '-i'],
+    shellArgs: ['--login','-i'],
 
     // for environment variables
     env: {

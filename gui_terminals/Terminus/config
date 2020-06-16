@@ -1,0 +1,70 @@
+hotkeys:
+  shell: {}
+  profile: {}
+terminal:
+  environment: {}
+  shell: custom
+  workingDirectory: 'C:\cygwin64\home\francesco'
+  customShell: 'C:\\Program Files\\Git\\git-cmd.exe --command=usr/bin/bash.exe -l -i'
+  colorScheme:
+    name: Material
+    foreground: '#eceff1'
+    background: 'rgba(38, 50, 56, 1)'
+    cursor: '#FFCC00'
+    colors:
+      - '#000000'
+      - '#D62341'
+      - '#9ECE58'
+      - '#FAED70'
+      - '#396FE2'
+      - '#BB80B3'
+      - '#2DDAFD'
+      - '#d0d0d0'
+      - 'rgba(255, 255, 255, 0.2)'
+      - '#FF5370'
+      - '#C3E88D'
+      - '#FFCB6B'
+      - '#82AAFF'
+      - '#C792EA'
+      - '#89DDFF'
+      - '#ffffff'
+  profile: cygwin
+  profiles:
+    - name: PowerShell
+      shell: default
+      sessionOptions:
+        command: powershell.exe
+        args:
+          - '-nologo'
+        env: {}
+      color: '#0084ff'
+    - name: CMD (stock)
+      shell: cmd
+      sessionOptions:
+        command: cmd.exe
+        args: []
+        env: {}
+      color: '#333333'
+    - name: Cygwin
+      shell: cygwin64
+      sessionOptions:
+        command: 'C:\cygwin64\bin\bash.exe'
+        args:
+          - '--login'
+          - '-i'
+        env:
+          TERM: cygwin
+      color: '#FF4500'
+  background: colorScheme
+  cursor: beam
+  cursorBlink: true
+  bell: visual
+  copyOnSelect: true
+appearance:
+  frame: thin
+  vibrancy: false
+  theme: Standard
+serial: {}
+enableAnalytics: false
+enableWelcomeTab: false
+pluginBlacklist: []
