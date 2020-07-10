@@ -19,7 +19,6 @@
     "workbench.colorTheme": "Plastic",
     "workbench.editor.enablePreview": false,
     "workbench.iconTheme": "vscode-icons",
-    "workbench.startupEditor": "newUntitledFile",
     "breadcrumbs.enabled": true,
     "typescript.referencesCodeLens.enabled": true,
     "vsicons.projectDetection.disableDetect": true,
@@ -53,8 +52,8 @@
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
-    "workbench.editor.scrollToSwitchTabs": true,
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "java.project.importHint": false,
 }
