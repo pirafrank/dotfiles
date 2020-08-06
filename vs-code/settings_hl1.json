@@ -56,4 +56,5 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "java.project.importHint": false,
+    "aws.telemetry": false,
 }
