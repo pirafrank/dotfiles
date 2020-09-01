@@ -57,4 +57,10 @@
     },
     "java.project.importHint": false,
     "aws.telemetry": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
 }
