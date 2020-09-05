@@ -3,6 +3,9 @@
 # kitty config dir
 export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
 
+# LESS options
+export LESS="-F -g -i -M -R -S -w -z-4"
+
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
