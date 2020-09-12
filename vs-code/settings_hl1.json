@@ -63,4 +63,6 @@
     "[xml]": {
         "editor.defaultFormatter": "DotJoshJohnson.xml"
     },
+    "remote.restoreForwardedPorts": true,
+    "editor.formatOnSaveMode": "modifications",
 }
