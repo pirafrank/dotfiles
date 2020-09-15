@@ -15,6 +15,7 @@ git config --global alias.pl pull
 git config --global alias.ps push
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.refresh 'remote update origin --prune'
+git config --global alias.rename 'branch -m' # oldname newname
 
 # log pretty print
 git config --global alias.tree "log --all --decorate --oneline --graph"
