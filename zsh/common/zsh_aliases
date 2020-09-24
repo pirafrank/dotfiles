@@ -32,6 +32,8 @@ alias tmk='tmux kill-session -t'
 # utilities
 #
 
+alias epoch='date +%s'
+
 # print ip and location info
 alias myip='curl ipinfo.io/json'
 
