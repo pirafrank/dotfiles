@@ -65,4 +65,5 @@
     },
     "remote.restoreForwardedPorts": true,
     "editor.formatOnSaveMode": "modifications",
+    "explorer.confirmDelete": false,
 }
