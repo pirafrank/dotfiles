@@ -22,7 +22,7 @@ alias grep="grep -i"
 
 # tmux
 alias tat='tmux a -t'
-alias tm='tmux attach -t main || tmux new -s main'
+alias work='tmux attach -t main || tmux new -s main'
 alias tmk='tmux kill-session -t'
 
 # if you need to jump on many hosts and don't want to setup tons of entries in .ssh/config:

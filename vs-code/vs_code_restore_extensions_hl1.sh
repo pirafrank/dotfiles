@@ -22,7 +22,6 @@ code --install-extension EditorConfig.EditorConfig
 code --install-extension esbenp.prettier-vscode
 code --install-extension formulahendry.auto-close-tag
 code --install-extension formulahendry.code-runner
-code --install-extension formulahendry.docker-explorer
 code --install-extension gerane.Theme-FlatlandDark
 code --install-extension gerane.Theme-FlatlandMonokai
 code --install-extension golang.go
@@ -30,9 +29,9 @@ code --install-extension GrapeCity.gc-excelviewer
 code --install-extension hangxingliu.vscode-nginx-conf-hint
 code --install-extension loganarnett.lambda-snippets
 code --install-extension mark-tucker.aws-cli-configure
-code --install-extension mongodb.mongodb-vscode
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-python.python
+code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode.sublime-keybindings
 code --install-extension octref.vetur
 code --install-extension Pivotal.vscode-spring-boot
