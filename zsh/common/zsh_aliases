@@ -118,7 +118,8 @@ rates() { curl http://rate.sx/"$1" }
 # update dotfiles
 dotup() { cd ~/dotfiles && git pull origin master && cd - }
 
-
+# mkdir && cd
+mkcd() { mkdir -p "$1" && cd "$1" }
 
 
 
