@@ -12,17 +12,45 @@ Cygwin support may come later on. [Or may not](https://docs.microsoft.com/en-us/
 
 ## Installation
 
-Just clone it to your home dir and symlink all the things.
+Main setup comes in two versions, with and without user creation:
 
-Main setup script is still a draft, rather a memo then an actual script.
+```sh
+curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup.sh
+# OR
+curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup_w_user.sh
+```
+
+run the one that best fits your needs.
+
+Or you can just clone the repo to your home dir and symlink all the things.
 
 ## Usage
 
-There is no how-to. Look at the code. Google is your friend.
+To get started, symlink config you want to use to files in your clone and add `./bin` dir to `$PATH`.
 
-## Docker Image
+Setup scripts are meant to be execute manually to install and configure a PC setup or Docker Image workspaces (read below).
 
-A command-line workspace in a container. Based on this repo. The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace).
+Core setup uses zsh and zprezto. Files for oh-my-zsh config are available (yet I don't use it that much anymore).
+
+`~/.zsh_custom` is automatically sourced and `~/bin2` is automatically added to `$PATH`. Those are not part of the repo and can be used for custom/specific aliases and userspace software installation.
+
+That's all, there is no real how-to actually. For more info just look at the code. Google is your friend.
+
+## Docker Images
+
+A command-line workspace in a container, based on this repo.
+
+The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace) in various flavors. They are:
+
+- `pirafrank/workspace`: base image the others are based on. It contains dotfiles, various CLI utils and shell setup
+- `pirafrank/workspace:java`: Java workspace based on OpenJDK or AdoptOpenJDK (check the Docker image tag)
+- `pirafrank/workspace:node`: `nvm` and node env
+- `pirafrank/workspace:python3`: `pyenv` and Python 3
+- `pirafrank/workspace:ruby`: `rvm` and Ruby
+- `pirafrank/workspace:rust`: latest Rust version and its toolchain
+- `pirafrank/workspace:go`: Golang workspace
+
+All workspaces setups are in userspace.
 
 ## Credits
 
