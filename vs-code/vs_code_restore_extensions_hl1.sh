@@ -7,6 +7,7 @@ code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension anseki.vscode-color
 code --install-extension Arjun.swagger-viewer
 code --install-extension astallinger.sourcetrail
+code --install-extension benawad.stories
 code --install-extension bmuskalla.vscode-tldr
 code --install-extension ccimage.jsonviewer
 code --install-extension codezombiech.gitignore
@@ -28,9 +29,11 @@ code --install-extension golang.go
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension hangxingliu.vscode-nginx-conf-hint
 code --install-extension loganarnett.lambda-snippets
+code --install-extension malmaud.tmux
 code --install-extension mark-tucker.aws-cli-configure
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-python.python
+code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode.sublime-keybindings
 code --install-extension octref.vetur
@@ -39,6 +42,7 @@ code --install-extension redhat.java
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension SonarSource.sonarlint-vscode
+code --install-extension TabNine.tabnine-vscode
 code --install-extension thekalinga.bootstrap4-vscode
 code --install-extension thundra.thundra-debugger
 code --install-extension Tyriar.terminal-tabs
