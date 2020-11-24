@@ -122,5 +122,10 @@ dotup() { cd ~/dotfiles && git pull origin master && cd - }
 # mkdir && cd
 mkcd() { mkdir -p "$1" && cd "$1" }
 
-
+scwupdate() {
+        rm -f ~/bin2/scw
+        curl -o ~/bin2/scw -L $(curl -sL https://api.github.com/repos/scaleway/scaleway-cli/releases/latest \
+        | grep http | grep linux | grep x86_64 | cut -d':' -f 2,3 | cut -d'"' -f2)
+        chmod +x ~/bin2/scw
+}
 
