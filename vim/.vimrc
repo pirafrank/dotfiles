@@ -174,6 +174,8 @@ call plug#end()
   " use ctrl+n to toggle nerdtree
   map <C-n> :NERDTreeToggle<CR>
 
+  let g:NERDTreeGitStatusUseNerdFonts = 1
+
   " set colorscheme
   "color molokai
   "color dracula
