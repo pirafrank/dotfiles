@@ -5,6 +5,9 @@ set encoding=utf-8
 "Use Vim settings in place of Vi ones
 set nocompatible
 
+" search deep in subdirs
+set path+=**
+
 " use system clipboard
 set clipboard=unnamed
 
