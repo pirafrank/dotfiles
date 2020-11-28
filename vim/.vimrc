@@ -108,8 +108,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-" plugins to use only with nvim
-if has('nvim')
 
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
@@ -122,7 +120,14 @@ if has('nvim')
 
   " use deoplete for smart autocompletion
   " check requirements: you need to install neovim/pynvim module: pip install neovim
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  endif
+  if has('python3')
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
@@ -135,9 +140,9 @@ if has('nvim')
   "status/tabline light as air
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
-  "
+
   " nerdtree with git integration
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
 
   " the almost illegal git wrapper
@@ -149,14 +154,10 @@ if has('nvim')
   " editorconfig
   Plug 'editorconfig/editorconfig-vim'
 
-else
-  " don't use plugins with vim
-
-endif
 call plug#end()
 
-" specific settings for nvim
-if has('nvim')
+
+""" plugin settings
 
   " fzf options
   " set fzf runtime path
@@ -210,8 +211,6 @@ if has('nvim')
   let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
   let g:EditorConfig_exclude_patterns = ['scp://.\*']
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
-
-endif
 
 
 "apply these settings only with GUIs, like MacVim
