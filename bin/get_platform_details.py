@@ -6,43 +6,35 @@ import platform as pl
 
 def get_os_release():
     if pl.system() == "Darwin":
-        var = pl.mac_ver()[0]  # mac release
+        return pl.mac_ver()[0]  # mac release
     elif pl.system() == "Linux":
-        var = pl.linux_distribution()  # which linux distro
+        return pl.linux_distribution()  # which linux distro
     elif pl.system() == "Windows":
-        var = pl.release()  # which windows release
-    return var
-
-
-def get_arch():
-    if pl.machine() == "x86_64":
-        var = 64
-    elif pl.machine() == "x86":
-        var = 32
-    return var
+        return pl.release()  # which windows release
 
 
 def get_kernel_version():
     if pl.system() == "Darwin":
-        var = pl.release()
+        return pl.release()
     elif pl.system() == "Linux":
-        var = pl.release()
+        return pl.release()
     elif pl.system() == "Windows":
-        var = pl.version()
-    return var
+        return pl.version()
 
 
 def get_platform_info():
-    return pl.system(), get_os_release(), get_arch(), get_kernel_version(), sys.version.split(" ")[0], pl.uname()[1]
+    return pl.system(), get_os_release(), pl.machine(), get_kernel_version(), sys.version.split(" ")[0], pl.uname()[1]
 
 
 def print_platform_info():
-    print pl.system()  # which OS
-    print get_os_release()  # which OS release
-    print get_arch()  # which architecture is in use
-    print get_kernel_version()  # print kernel version
-    print sys.version.split(" ")[0]  # print python version in use
-    print pl.uname()[1]  # print computer name
+    print("{} running {} {} on {}, kernel {}, Python {}".format(
+        pl.uname()[1], # machine name
+        pl.system(),  # which OS
+        get_os_release(),  # which OS release
+        pl.machine(),  # which architecture is in use
+        get_kernel_version(),  # print kernel version
+        sys.version.split(" ")[0],  # print python version in use
+        ))
 
 if __name__ == '__main__':
     print_platform_info()

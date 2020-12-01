@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 # https://gist.github.com/pirafrank/970cbdb7542dab942da50cab408100d0
 
@@ -22,17 +22,17 @@
 
 import os
 import sys
-import urllib
+import urllib.parse
 
 if len(sys.argv) != 2:
-    print "Usage: ./gen_index [path]"
+    print("Usage: ./gen_index [path]")
     sys.exit()
 else:
     path = sys.argv[1]
     if path.endswith('/'): path = path[:-1] # removing the last slash if any
-    print "path is: "+path
+    print("path is: "+path)
 
-print "start working..."
+print("start working...")
 
 title = path.split('/')[-1] # the web page title will be the directory name
 file_list = [file for file in os.listdir(path) if os.path.isfile(os.path.join(path, file))] # saving file list
@@ -47,7 +47,7 @@ with open(path+'/index.html', 'w+') as f:
         # exclude unix/linux hidden and dumb system files and index itself
         if not file.startswith('.') and file not in rubbish:
             # creating links with encoded web safe urls
-            f.write("<a href=\""+urllib.quote(file, safe='')+"\">"+file+"</a><br>\n")
+            f.write("<a href=\""+urllib.parse.quote(file, safe='')+"\">"+file+"</a><br>\n")
     f.write("</body>\n</html>")
     f.close()
-print "done!"
+print("done!")
