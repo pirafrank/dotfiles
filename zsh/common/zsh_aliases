@@ -21,10 +21,10 @@ alias sshforget='ssh-keygen -R'
 alias grep="grep -i"
 
 # tmux
-alias tat='tmux a -t'
 alias main='tmux attach -t main || tmux new -s main'
 alias work='tmux attach -t work || tmux new -s work'
-alias tmk='tmux kill-session -t'
+alias tm_kill='tmux kill-session -t'
+alias tm_kill_unnamed="tmux ls | grep -E '^[0-9]' | cut -d':' -f1 | xargs -I {} tmux kill-session -t {}"
 
 # if you need to jump on many hosts and don't want to setup tons of entries in .ssh/config:
 #alias sshvm='ssh -o ProxyCommand="ssh -l francesco -W %h:%p jumphost.somedomain.com"'
@@ -106,6 +106,8 @@ fi
 #
 # common functions
 #
+
+tat() { tmux attach -t "$1" || tmux new -s "$1" }
 
 # cheat.sh (as bash function)
 cs() { curl cheat.sh/"$1" }
