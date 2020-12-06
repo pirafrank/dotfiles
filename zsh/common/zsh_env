@@ -4,7 +4,9 @@
 export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
 
 # LESS options
-export LESS="-F -g -i -M -R -S -w -z-4"
+if [[ "$(uname -s)" != 'Darwin' ]]; then
+  export LESS="-F -g -i -M -R -S -w -z-4"
+fi
 
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
