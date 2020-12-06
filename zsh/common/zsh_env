@@ -101,3 +101,8 @@ if [[ $(command -v scw) ]]; then
   eval "$(scw autocomplete script shell=zsh)"
 fi
 
+# Secure ShellFish iOS app integration
+if [[ -f "$HOME/.shellfishrc" ]]; then
+  source $HOME/.shellfishrc
+fi
+
