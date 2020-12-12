@@ -52,6 +52,7 @@ git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Cr
 
 # defaults to pull --rebase for all repos
 git config --global pull.rebase true
+git config --global rebase.autoStash true
 
 echo "Done!"
 exit 0
