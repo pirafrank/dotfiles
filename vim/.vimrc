@@ -112,6 +112,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+  " language pack for syntax highlighting
+  Plug 'sheerun/vim-polyglot'
+
   Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
