@@ -68,4 +68,7 @@
     "explorer.confirmDelete": false,
     "tabnine.experimentalAutoImports": true,
     "editor.acceptSuggestionOnEnter": "smart",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v12.16.3/bin/node",
+    "python.languageServer": "Microsoft",
 }
