@@ -52,6 +52,14 @@ The aim is to create a disposable development environment taking advantage of Do
 
 All workspaces setups are in userspace.
 
+Please also check the `run_workspace.sh` script. It is a utility that makes running workspaces as simple as:
+
+```sh
+./run-workspace.sh pirafrank/workspace:java11
+# or for a disposable container
+./run-workspace.sh pirafrank/workspace:java11 --rm
+```
+
 ## Credits
 
 #### Scripts
