@@ -33,6 +33,26 @@ alias tm_kill_unnamed="tmux ls | grep -E '^[0-9]' | cut -d':' -f1 | xargs -I {} 
 # utilities
 #
 
+alias fd=fdfind
+
+# exa
+if [ "$(command -v exa)" ]; then
+  alias lsx='exa -G -x --color auto --icons -s type'
+  alias llx='exa -l --color auto --icons -s type --git'
+  alias lax='llx -a'
+  alias lx='lax'
+  alias ltx='llx -a -snew'
+fi
+
+# on Ubuntu the pkg is called 'batcat'
+if [ "$(command -v batcat)" ]; then alias bat='batcat'; fi
+# bat (cat(1) clone with wings)
+if [ "$(command -v bat)" ]; then
+  export BAT_STYLE="changes,header,numbers,snip"
+  unalias -m 'cat'
+  alias cat='bat -p'
+fi
+
 alias epoch='date +%s'
 
 # print ip and location info
