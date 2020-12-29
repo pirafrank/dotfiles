@@ -24,21 +24,40 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 fi
 
-# system java
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-  #export JAVA_HOME=$(/usr/libexec/java_home)
-  export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
-  export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
-
-  alias java8='export JAVA_HOME=$JAVA_8_HOME'
-  alias java11='export JAVA_HOME=$JAVA_11_HOME'
-elif [[ "$(uname -s)" == 'Linux' ]]; then
-  load_java_home(){
-    export JAVA_HOME=$(dirname $(dirname $(readlink -e /usr/bin/java)))
-    export PATH="$PATH:$JAVA_HOME/bin"
+# check for userspace java first
+if [ -L "$HOME/bin2/jdk" ]; then
+  export JAVA_HOME="$HOME/bin2/jdk"
+  export PATH="$JAVA_HOME/bin:$PATH"
+  switch_java(){
+    if [ -z $1 ]; then
+      echo "You need to specify a major version to link to"
+    else
+      jdkpath="$HOME/bin2/jdk$1"
+      if [ -d $jdkpath ]; then
+        rm -f $HOME/bin2/jdk
+        ln -s $jdkpath $HOME/bin2/jdk
+        echo "jdk symlink updated, now it points to $jdkpath"
+      else
+        echo "$jdkpath doesn't exists. Existing symlinks left untouched."
+      fi
+    fi
   }
-  alias java8='sudo update-alternatives --set java /usr/local/lib/jdk1.8/bin/java; load_java_home'
-  alias java11='sudo update-alternatives --set java /usr/local/lib/jdk11/bin/java; load_java_home'
+# then check for system java
+else
+  if [[ "$(uname -s)" == 'Darwin' ]]; then
+    export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
+    export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+
+    alias java8='export JAVA_HOME=$JAVA_8_HOME'
+    alias java11='export JAVA_HOME=$JAVA_11_HOME'
+  elif [[ "$(uname -s)" == 'Linux' ]]; then
+    load_java_home(){
+      export JAVA_HOME=$(dirname $(dirname $(readlink -e /usr/bin/java)))
+      export PATH="$PATH:$JAVA_HOME/bin"
+    }
+    alias java8='sudo update-alternatives --set java /usr/local/lib/jdk1.8/bin/java; load_java_home'
+    alias java11='sudo update-alternatives --set java /usr/local/lib/jdk11/bin/java; load_java_home'
+  fi
 fi
 
 # maven
