@@ -72,7 +72,7 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 # other
 alias ydl='youtube-dl'
 alias lg='lazygit'
-alias lk='lazydocker'
+alias ldk='lazydocker'
 alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 
 # pgadmin
