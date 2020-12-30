@@ -54,5 +54,8 @@ git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Cr
 git config --global pull.rebase true
 git config --global rebase.autoStash true
 
+# set default branch name for new repos
+git config --global init.defaultBranch main
+
 echo "Done!"
 exit 0
