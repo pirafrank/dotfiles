@@ -47,9 +47,13 @@ else
   if [[ "$(uname -s)" == 'Darwin' ]]; then
     export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
     export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+    export JAVA_14_HOME=$(/usr/libexec/java_home -v14)
 
     alias java8='export JAVA_HOME=$JAVA_8_HOME'
     alias java11='export JAVA_HOME=$JAVA_11_HOME'
+    alias java14='export JAVA_HOME=$JAVA_14_HOME'
+    # set default java version
+    export JAVA_HOME=$JAVA_11_HOME
   elif [[ "$(uname -s)" == 'Linux' ]]; then
     load_java_home(){
       export JAVA_HOME=$(dirname $(dirname $(readlink -e /usr/bin/java)))
@@ -57,6 +61,7 @@ else
     }
     alias java8='sudo update-alternatives --set java /usr/local/lib/jdk1.8/bin/java; load_java_home'
     alias java11='sudo update-alternatives --set java /usr/local/lib/jdk11/bin/java; load_java_home'
+    alias java14='sudo update-alternatives --set java /usr/local/lib/jdk14/bin/java; load_java_home'
   fi
 fi
 
