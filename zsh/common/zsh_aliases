@@ -33,7 +33,9 @@ alias tm_kill_unnamed="tmux ls | grep -E '^[0-9]' | cut -d':' -f1 | xargs -I {} 
 # utilities
 #
 
-alias fd=fdfind
+if [ -f /etc/debian_version ]; then
+  alias fd=fdfind
+fi
 
 # exa
 if [ "$(command -v exa)" ]; then
