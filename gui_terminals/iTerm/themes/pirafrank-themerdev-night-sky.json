@@ -1,11 +1,18 @@
 {
+  "Ansi 5 Color" : {
+    "Red Component" : 0.70196078431372544,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.55294117647058827,
+    "Green Component" : 0.36470588235294116
+  },
   "Working Directory" : "\/Users\/francesco",
   "Prompt Before Closing 2" : 2,
   "Selected Text Color" : {
-    "Red Component" : 0.67450980392156867,
+    "Red Component" : 0.10000000000000001,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.80000000000000004,
-    "Green Component" : 0.74509803921568629
+    "Blue Component" : 0.10000000000000001,
+    "Alpha Component" : 1,
+    "Green Component" : 0.10000000000000001
   },
   "Rows" : 45,
   "Ansi 11 Color" : {
@@ -25,10 +32,11 @@
   "Show Status Bar" : true,
   "Character Encoding" : 4,
   "Selection Color" : {
-    "Red Component" : 0.70196078431372544,
+    "Red Component" : 0.70196080207824707,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.55294117647058827,
-    "Green Component" : 0.36470588235294116
+    "Blue Component" : 0.364705890417099,
+    "Alpha Component" : 1,
+    "Green Component" : 0.69934658248712367
   },
   "Triggers" : [
 
@@ -420,7 +428,7 @@
   },
   "Window Type" : 13,
   "Allow Title Reporting" : false,
-  "Use Bright Bold" : true,
+  "Use Bright Bold" : false,
   "Has Hotkey" : false,
   "Cursor Text Color" : {
     "Red Component" : 0.67450980392156867,
@@ -430,15 +438,16 @@
   },
   "Default Bookmark" : "No",
   "Cursor Color" : {
-    "Red Component" : 0.59215686274509804,
+    "Red Component" : 1,
     "Color Space" : "sRGB",
-    "Blue Component" : 0.69803921568627447,
-    "Green Component" : 0.4392156862745098
+    "Blue Component" : 0.2238006591796875,
+    "Alpha Component" : 1,
+    "Green Component" : 0.56710684346035123
   },
   "Disable Smcup Rmcup" : false,
   "Name" : "pirafrank-themerdev-night-sky",
-  "Blinking Cursor" : false,
   "Guid" : "C410E951-5606-43CF-BF93-71F793E7A57B",
+  "Blinking Cursor" : false,
   "Ansi 1 Color" : {
     "Red Component" : 0.792156862745098,
     "Color Space" : "sRGB",
@@ -534,11 +543,6 @@
   "Use Tab Color" : false,
   "Visual Bell" : true,
   "Custom Directory" : "Recycle",
-  "Ansi 5 Color" : {
-    "Red Component" : 0.70196078431372544,
-    "Color Space" : "sRGB",
-    "Blue Component" : 0.55294117647058827,
-    "Green Component" : 0.36470588235294116
-  },
+  "ASCII Ligatures" : false,
   "Set Local Environment Vars" : true
 }
