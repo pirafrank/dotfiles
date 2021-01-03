@@ -5,8 +5,8 @@ My dotfiles, simple as that.
 This is a WIP and I'll add files from time to time. My usage scenario is same repo and settings for:
 
 - macbook
-- linux desktop
-- linux server accessed via mosh connection on ipad
+- Ubuntu desktop
+- Debian server accessed via mosh connection on ipad
 
 Cygwin support may come later on. [Or may not](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
@@ -23,6 +23,8 @@ curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup_w_user.sh
 run the one that best fits your needs.
 
 Or you can just clone the repo to your home dir and symlink all the things.
+
+Please note that while about >95% of dotfiles will likely work on non-Debian distros, setup scripts are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
 
 ## Usage
 
