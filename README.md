@@ -28,13 +28,13 @@ Please note that while about >95% of dotfiles will likely work on non-Debian dis
 
 ## Usage
 
-To get started, symlink config you want to use to files in your clone and add `./bin` dir to `$PATH`.
+To get started, symlink config you want to use to files in your clone and add the whole cloned repo to `~/dotfiles`.
 
-Setup scripts are meant to be execute manually to install and configure a PC setup or Docker Image workspaces (read below).
+Setup scripts (both in repo root and `workspaces` dir) are meant to be execute manually to install and configure a PC setup or Docker Image workspaces (read below). They assume `~/dotfiles` exists.
 
-Core setup uses zsh and zprezto. Files for oh-my-zsh config are available (yet I don't use it that much anymore).
+Core setup uses zsh and zprezto. Files for oh-my-zsh config are available (yet I don't use such config anymore).
 
-`~/.zsh_custom` is automatically sourced and `~/bin2` is automatically added to `$PATH`. Those are not part of the repo and can be used for custom/specific aliases and userspace software installation.
+`~/.zsh_custom` is automatically sourced, also `~/dotfiles/bin` and `~/bin2` are automatically added to `$PATH`. Those are not part of the repo and can be used for custom/specific aliases and userspace software installation.
 
 That's all, there is no real how-to actually. For more info just look at the code. Google is your friend.
 
