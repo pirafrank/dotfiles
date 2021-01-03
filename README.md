@@ -2,17 +2,33 @@
 
 My dotfiles, simple as that.
 
-This is a WIP and I'll add files from time to time. My usage scenario is same repo and settings for:
+This is an endless WIP and holds my work and personal setup. My daily drivers are:
 
-- macbook
+- macOS + macports
 - Ubuntu desktop
 - Debian server accessed via mosh connection on ipad
 
-Cygwin support may come later on. [Or may not](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+My MacBook runs the latest 10.15, but these dotfiles should work on earlier versions, too.
+
+While almost all files in this repo will also work on non-Debian distros, setup scripts in root are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
+
+On Windows, WSL may work OOTB but I have no daily driver to test it on. I don't think I will ever support zsh on Cygwin, sorry.
 
 ## Installation
 
-Main setup comes in two versions, with and without user creation:
+```sh
+cd && git clone https://github.com/pirafrank/dotfiles.git
+```
+
+Then symlink config you want to use.
+
+If you clone to another dir, please symlink it to `~/dotfiles`.
+
+### Full setup
+
+*Debian-based distros only.*
+
+A full setup involves programs installation and creation of symlinks. It is meant to setup a vanilla environment and to build the Docker workspace baseimage. The setup comes in two flavors, with and without user creation:
 
 ```sh
 curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup.sh
@@ -20,21 +36,15 @@ curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup.sh
 curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup_w_user.sh
 ```
 
-run the one that best fits your needs.
-
-Or you can just clone the repo to your home dir and symlink all the things.
-
-Please note that while about >95% of dotfiles will likely work on non-Debian distros, setup scripts are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
+Run the one that best fits your needs. Remember to always check the content of scripts you're about to execute before running them!
 
 ## Usage
 
-To get started, symlink config you want to use to files in your clone and add the whole cloned repo to `~/dotfiles`.
-
-Setup scripts (both in repo root and `workspaces` dir) are meant to be execute manually to install and configure a PC setup or Docker Image workspaces (read below). They assume `~/dotfiles` exists.
+Setup scripts in `setups` and `workspaces` dirs are meant to be executed manually on Linux or macOS, or to build Docker Image workspaces (read below). They assume `~/dotfiles` exists.
 
 Core setup uses zsh and zprezto. Files for oh-my-zsh config are available (yet I don't use such config anymore).
 
-`~/.zsh_custom` is automatically sourced, also `~/dotfiles/bin` and `~/bin2` are automatically added to `$PATH`. Those are not part of the repo and can be used for custom/specific aliases and userspace software installation.
+`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
 
 That's all, there is no real how-to actually. For more info just look at the code. Google is your friend.
 
@@ -54,21 +64,34 @@ The aim is to create a disposable development environment taking advantage of Do
 
 All workspaces setups are in userspace.
 
-Please also check the `run_workspace.sh` script. It is a utility that makes running workspaces as simple as:
+### Build
+
+Use `./build-all.sh` to build all images.
+
+Add to `pre_start.zsh` to exec anything at Docker image launch.
+
+### Run an image
+
+Use `run_workspace.sh` to do so. For example:
 
 ```sh
-./run-workspace.sh pirafrank/workspace:java11
-# or for a disposable container
-./run-workspace.sh pirafrank/workspace:java11 --rm
+# to run the baseimage
+./run-workspace.sh latest
+# or to run the java11 one
+./run-workspace.sh java11
+# or to run it as a disposable container
+./run-workspace.sh java11 --rm
+# or to name it
+./run-workspace.sh java11 '--name somename --rm'
 ```
 
 ## Credits
 
-#### Scripts
+### Scripts
 
 I wrote most of the scripts in the `bin` folder, with some of them already publicly available as [gists](https://gist.github.com/pirafrank). But others come or contain pieces from the web (twitter? google? stackoverflow?). Honestly I can't remember where I got them from, but you should find the original authors in the comments.
 
-#### Themes
+### Themes
 
 Those without *pirafrank* in their name come from the web, credits go to their creators. I keep them here for the sake of simplicity. I'll try to keep this readme updated to keep them all.
 
@@ -86,4 +109,3 @@ All the rest is given away for free, as-is and with NO WARRANTY.
 By the way, if something really blows your mind, I'll be happy if you cite me.
 
 Enjoy!
-
