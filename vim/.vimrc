@@ -115,10 +115,10 @@ call plug#begin('~/.vim/plugged')
   " language pack for syntax highlighting
   Plug 'sheerun/vim-polyglot'
 
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+  "Plug 'autozimu/LanguageClient-neovim', {
+  "  \ 'branch': 'next',
+  "  \ 'do': 'bash install.sh',
+  "  \ }
 
   " fuzzy everything search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
