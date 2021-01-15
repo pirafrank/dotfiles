@@ -1,0 +1,63 @@
+# Editor configuration, see http://editorconfig.org
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 79
+
+[*.{groovy,java,kt,xml}]
+indent_style = space
+indent_size = 4
+continuation_indent_size = 8
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
+
+[*.{c,h,cpp,hpp}]
+indent_style = space
+indent_size = 2
+
+# anyway go code should be indented using: 'go fmt'
+[{go.mod,go.sum,*.go}]
+indent_style = tab
+indent_size = 8
+
+[*.html]
+indent_size = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.json]
+indent_size = 2
+insert_final_newline = ignore
+
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Batch files use tabs for indentation
+[*.bat]
+indent_style = tab
+
+[*.txt]
+max_line_length = 79
+
