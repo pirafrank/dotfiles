@@ -1,0 +1,14 @@
+reporting: "off"
+startuppopupversion: 1
+# to skip without creating a new repo
+notARepository: 'skip'
+git:
+    branchLogCmd: 'git log --color=always --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" {{branchName}}'
+gui:
+    mainPanelSplitMode: 'horizontal'
+customCommands:
+  - key: 'f'
+    command: "git {{if .SelectedFile.HasUnstagedChanges}} diff -b {{end}} {{.SelectedFile.Name}}"
+    context: 'files'
+    description: 'diff --ignore-space-change'
+    subprocess: true
