@@ -9,5 +9,4 @@ fi
 # and by downloading prebuilt binaries on macOS and Windows
 
 # symlink configuration
-ln -s $HOME/dotfiles/gui_terminals/alacritty/alacritty.yml $HOME/.alacritty.yml
-
+ln -sf "$HOME/dotfiles/gui_terminals/alacritty/alacritty_$(uname -s).yml" $HOME/.alacritty.yml
