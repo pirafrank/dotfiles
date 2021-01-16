@@ -182,7 +182,7 @@ call plug#end()
   " settings to use vim-plastic colorscheme
   " (live in plastic, it's fantastic)
   set background=dark
-  color plastic
+  silent! color plastic
   let g:lightline = { 'colorscheme': 'plastic' }
 
   " 4-bit colorschemes to get consistency in 16-color terminals

@@ -184,7 +184,7 @@ call plug#end()
   " set colorscheme
   "color molokai
   "color dracula
-  color onedark
+  silent! color onedark
 
   " settings to use vim-plastic colorscheme
   " (live in plastic, it's fantastic)
