@@ -7,7 +7,6 @@ code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension anseki.vscode-color
 code --install-extension Arjun.swagger-viewer
 code --install-extension astallinger.sourcetrail
-code --install-extension benawad.stories
 code --install-extension bmuskalla.vscode-tldr
 code --install-extension ccimage.jsonviewer
 code --install-extension codezombiech.gitignore
@@ -18,6 +17,7 @@ code --install-extension dcortes92.FreeMarker
 code --install-extension deerawan.vscode-dash
 code --install-extension devadvice.serverlessconsole
 code --install-extension DotJoshJohnson.xml
+code --install-extension dunstontc.viml
 code --install-extension eamodio.gitlens
 code --install-extension EditorConfig.EditorConfig
 code --install-extension esbenp.prettier-vscode
@@ -28,6 +28,7 @@ code --install-extension gerane.Theme-FlatlandMonokai
 code --install-extension golang.go
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension hangxingliu.vscode-nginx-conf-hint
+code --install-extension jonsmithers.open-in-vim
 code --install-extension loganarnett.lambda-snippets
 code --install-extension malmaud.tmux
 code --install-extension mark-tucker.aws-cli-configure
@@ -56,4 +57,5 @@ code --install-extension vscjava.vscode-maven
 code --install-extension vscjava.vscode-spring-initializr
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension will-stone.plastic
+code --install-extension xshrim.txt-syntax
 code --install-extension Zignd.html-css-class-completion
