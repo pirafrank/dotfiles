@@ -37,6 +37,7 @@ code --install-extension ms-python.python
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode.sublime-keybindings
+code --install-extension nick-rudenko.back-n-forth
 code --install-extension octref.vetur
 code --install-extension Pivotal.vscode-spring-boot
 code --install-extension redhat.java
