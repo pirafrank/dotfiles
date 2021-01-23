@@ -1,0 +1,13 @@
+// Place your key bindings in this file to override the defaults
+// If you put the minus sign before the command, it will unset the
+// corresponding key binding.
+[
+  {
+    "key": "ctrl+shift+w",
+    "command": "workbench.action.duplicateWorkspaceInNewWindow"
+  },
+  {
+    "key": "ctrl+shift+w",
+    "command": "-workbench.action.closeWindow"
+  }
+]
