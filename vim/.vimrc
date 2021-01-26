@@ -15,6 +15,9 @@ set clipboard=unnamed
 set wildmode=longest:full
 set wildmenu
 
+" always show the sidebar used by signify
+set signcolumn=yes
+
 """ search
 
 " case insensitive search by default
