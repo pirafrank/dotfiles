@@ -1,3 +1,10 @@
+shell:
+    program: "C:\\Windows\\System32\\wsl.exe"
+
+window:
+  dimensions:
+    columns: 140
+    lines: 48
 
 key_bindings:
   - { key: V, mods: Control, action: Paste }
