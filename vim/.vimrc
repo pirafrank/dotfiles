@@ -118,14 +118,12 @@ call plug#begin('~/.vim/plugged')
   " language pack for syntax highlighting
   Plug 'sheerun/vim-polyglot'
 
-  "Plug 'autozimu/LanguageClient-neovim', {
-  "  \ 'branch': 'next',
-  "  \ 'do': 'bash install.sh',
-  "  \ }
-
   " fuzzy everything search
   Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
   Plug 'junegunn/fzf.vim'
+
+  " ale
+  Plug 'dense-analysis/ale'
 
   " use deoplete for smart autocompletion
   " check requirements: you need to install neovim/pynvim module: pip install neovim
@@ -137,6 +135,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
+  " java
+  Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
+  " python (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
+  Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
@@ -174,8 +176,33 @@ call plug#end()
   " set fzf runtime path
   set rtp+=~/.fzf
 
+  " ale config
+  " shorter error/warning flags
+  let g:ale_echo_msg_error_str = 'E'
+  let g:ale_echo_msg_warning_str = 'W'
+  " custom icons for errors and warnings
+  let g:ale_sign_error = '✘✘'
+  let g:ale_sign_warning = '⚠⚠'
+  " disable loclist at the bottom of vim
+  let g:ale_open_list = 0
+  let g:ale_loclist = 0
+	" Setup compilers for languages
+	let g:ale_linters = {
+				\  'python': ['pylint'],
+				\  'java': ['javac']
+				\ }
+
+  " enable omnicompletion (disabled by default)
+  filetype plugin indent on  
+  set omnifunc=syntaxcomplete#Complete
+
+  " deoplete config
   " enable deoplete at startup
   let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_completion_start_length = 2
+  " javacomplete config
+  autocmd FileType java setlocal omnifunc=javacomplete#Complete
+  autocmd FileType java JCEnable " enable by default for .java files
 
   " show hidden files in nerdtree by default
   let NERDTreeShowHidden=1
