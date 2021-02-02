@@ -4,15 +4,14 @@ My dotfiles, simple as that.
 
 This is an endless WIP and holds my work and personal setup. My daily drivers are:
 
+- Ubuntu 20.04 desktop
 - macOS + macports
-- Ubuntu desktop
-- Debian server accessed via mosh connection on ipad
+- Debian 10 server accessed via mosh connection on ipad
+- Ubuntu 20.04 WSL on Windows 10 (20H2)
 
-My MacBook runs the latest 10.15, but these dotfiles should work on earlier versions, too.
+My MacBook runs the latest 10.15.x, but these dotfiles should work on earlier versions, too.
 
 While almost all files in this repo will also work on non-Debian distros, setup scripts in root are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
-
-On Windows, WSL may work OOTB but I have no daily driver to test it on. I don't think I will ever support zsh on Cygwin, sorry.
 
 ## Installation
 
