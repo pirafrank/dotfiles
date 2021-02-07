@@ -1,0 +1,78 @@
+{
+    "files.autoSave": "onFocusChange",
+    "editor.tabSize": 2,
+    "editor.formatOnPaste": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.wordWrap": "on",
+    "files.eol": "\n",
+    "files.encoding": "utf8",
+    "files.maxMemoryForLargeFilesMB": 2048,
+    //"terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "window.openFilesInNewWindow": "on",
+    "window.restoreWindows": "all",
+    "window.zoomLevel": 0,
+    "window.newWindowDimensions": "inherit",
+    "workbench.colorCustomizations": {
+        "editorError.foreground": "#ffa500",
+        "editorWarning.foreground": "#ffa500"
+    },
+    "workbench.colorTheme": "Plastic",
+    "workbench.editor.enablePreview": false,
+    "workbench.iconTheme": "vscode-icons",
+    "breadcrumbs.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+    "vsicons.projectDetection.disableDetect": true,
+    "explorer.autoReveal": false,
+    "editor.suggestSelection": "first",
+    // git
+    "gitlens.views.repositories.location": "gitlens",
+    "gitlens.views.fileHistory.location": "gitlens",
+    "gitlens.views.lineHistory.location": "gitlens",
+    "gitlens.views.compare.location": "gitlens",
+    "gitlens.views.search.location": "gitlens",
+    // python
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.jediEnabled": false,
+    // java world
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "java.home": "/usr/local/lib/jdk11",
+    "maven.executable.options": "",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.mouseWheelZoom": true,
+    "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
+    "auto-close-tag.SublimeText3Mode": true,
+    "editor.fontSize": 13,
+    "java.semanticHighlighting.enabled": true,
+    "explorer.confirmDragAndDrop": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "java.project.importHint": false,
+    "aws.telemetry": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[xml]": {
+        "editor.defaultFormatter": "DotJoshJohnson.xml"
+    },
+    "remote.restoreForwardedPorts": true,
+    "editor.formatOnSaveMode": "modifications",
+    "explorer.confirmDelete": false,
+    "tabnine.experimentalAutoImports": true,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v12.16.3/bin/node",
+    "python.languageServer": "Microsoft",
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
+    "workbench.editor.wrapTabs": true,
+    "workbench.editor.decorations.badges": true,
+    "workbench.editor.enablePreviewFromCodeNavigation": true,
+}
