@@ -28,9 +28,14 @@
         "defaults":
         {
             // Put settings here that you want to apply to all profiles.
-			"fontFace": "MesloLGM NF",
+			      "fontFace": "MesloLGM NF",
             "fontSize": 10,
             "closeOnExit": true,
+            "historySize": 10000,
+            "snapOnInput": true,
+            "acrylicOpacity": 0.95,
+            "useAcrylic": true,
+            "padding": "1, 1, 1, 1",
         },
         "list":
         [
@@ -42,6 +47,21 @@
                 "hidden": false
             },
             {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl",
+                "icon": "C:/Users/francesco/AppData/Roaming/ubuntu_logo.png"
+            },
+            {
+                "guid": "{14ad203f-52cc-4110-90d6-d96e0f41b64d}",
+                "hidden": false,
+                "name": "Git Bash",
+                "commandline": "C:/Program Files/Git/bin/bash.exe --login",
+                "icon": "C:/Users/francesco/AppData/Roaming/git_logo.png",
+                "startingDirectory": "C:/Users/francesco/Code"
+            },
+            {
                 // Make changes here to the cmd.exe profile.
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "name": "Command Prompt",
@@ -49,17 +69,11 @@
                 "hidden": false
             },
             {
-                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
-                "hidden": false,
-                "name": "Ubuntu-20.04",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
-            }
+            },
         ]
     },
 
@@ -87,7 +101,14 @@
         // To learn more about panes, visit https://aka.ms/terminal-panes
         { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
         
-        { "command": "closeTab", "keys": "ctrl+shift+w" }
+        { "command": "closeTab", "keys": "ctrl+shift+w" },
+        {
+          "command": {
+            "action": "splitPane",
+            "split": "auto",
+            "splitMode": "duplicate"
+          },
+          "keys": "alt+shift+d"
+        },
     ]
 }
-
