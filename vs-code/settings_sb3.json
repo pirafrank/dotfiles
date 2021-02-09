@@ -36,7 +36,7 @@
     "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
-    "java.home": "/usr/local/lib/jdk11",
+    "java.home": "C:\\Program Files\\Java\\jdk-11.0.10",
     "maven.executable.options": "",
     "files.exclude": {
         "**/.classpath": true,
@@ -75,4 +75,5 @@
     "workbench.editor.wrapTabs": true,
     "workbench.editor.decorations.badges": true,
     "workbench.editor.enablePreviewFromCodeNavigation": true,
+    "workbench.editor.tabSizing": "shrink",
 }

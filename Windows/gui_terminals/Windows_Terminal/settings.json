@@ -47,11 +47,12 @@
                 "hidden": false
             },
             {
+                // you can find icons here: https://www.iconfinder.com/search/?q=
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
-                "name": "Ubuntu-20.04",
+                "name": "WSL",
                 "source": "Windows.Terminal.Wsl",
-                "icon": "C:/Users/francesco/AppData/Roaming/ubuntu_logo.png"
+                "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png"
             },
             {
                 "guid": "{14ad203f-52cc-4110-90d6-d96e0f41b64d}",
@@ -60,6 +61,14 @@
                 "commandline": "C:/Program Files/Git/bin/bash.exe --login",
                 "icon": "C:/Users/francesco/AppData/Roaming/git_logo.png",
                 "startingDirectory": "C:/Users/francesco/Code"
+            },
+            {
+                "guid": "{b3b0e9e6-308d-420f-8d81-7d840cadac04}",
+                "hidden": false,
+                "name": "Cygwin",
+                "commandline": "C:/cygwin64/bin/bash.exe -i -l",
+                "icon": "C:/cygwin64/Cygwin.ico",
+                "startingDirectory": "C:/Users/francesco"
             },
             {
                 // Make changes here to the cmd.exe profile.
