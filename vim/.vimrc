@@ -57,7 +57,7 @@ set si
 set ruler
 
 "show line numbers in grey color
-set number relativenumber
+set number "relativenumber
 highlight LineNr ctermfg=grey
 
 "spaces for indenting
