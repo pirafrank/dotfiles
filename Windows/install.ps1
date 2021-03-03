@@ -22,6 +22,11 @@ cd $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bb
 bkpitem('settings.json')
 powershell "$env:USERPROFILE\dotfiles\Windows\bin\symlink.ps1" $env:USERPROFILE\dotfiles\Windows\gui_terminals\Windows_Terminal\settings.json settings.json
 
+# windows terminal preview
+cd $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState
+bkpitem('settings.json')
+powershell "$env:USERPROFILE\dotfiles\Windows\bin\symlink.ps1" $env:USERPROFILE\dotfiles\Windows\gui_terminals\Windows_Terminal_Preview\settings.json settings.json
+
 # VS Code settings
 cd $env:APPDATA\Code\User
 bkpitem('settings.json')
