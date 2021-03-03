@@ -8,7 +8,7 @@
 {
     "$schema": "https://aka.ms/terminal-profiles-schema",
 
-    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
 
     // You can add more global application settings here.
     // To learn more about global settings, visit https://aka.ms/terminal-global-settings
@@ -52,7 +52,8 @@
                 "hidden": false,
                 "name": "WSL",
                 "source": "Windows.Terminal.Wsl",
-                "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png"
+                "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
+                "colorScheme": "One Half Dark"
             },
             {
                 "guid": "{14ad203f-52cc-4110-90d6-d96e0f41b64d}",
@@ -86,6 +87,10 @@
         ]
     },
 
+    // ** color schemas **
+    // docs:
+    //   - https://docs.microsoft.com/en-us/windows/terminal/customize-settings/color-schemes
+    //   - https://docs.microsoft.com/en-us/windows/terminal/custom-terminal-gallery/custom-schemes
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
     "schemes": [],
@@ -95,29 +100,38 @@
     // To learn more about actions and keybindings, visit https://aka.ms/terminal-keybindings
     "actions":
     [
+        // ** clipboard **
         // Copy and paste are bound to Ctrl+Shift+C and Ctrl+Shift+V in your defaults.json.
         // These two lines additionally bind them to Ctrl+C and Ctrl+V.
         // To learn more about selection, visit https://aka.ms/terminal-selection
+        //
+        // docs: https://docs.microsoft.com/en-us/windows/terminal/customize-settings/actions
+        //
         { "command": {"action": "copy", "singleLine": false }, "keys": "ctrl+c" },
         { "command": "paste", "keys": "ctrl+v" },
 
+        // ** search **
         // Press Ctrl+Shift+F to open the search box
         { "command": "find", "keys": "ctrl+shift+f" },
-
-        // Press Alt+Shift+D to open a new pane.
+        
+        // ** split-duplicate **
         // - "split": "auto" makes this pane open in the direction that provides the most surface area.
         // - "splitMode": "duplicate" makes the new pane use the focused pane's profile.
         // To learn more about panes, visit https://aka.ms/terminal-panes
-        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "ctrl+shift+/" },
+        { "command": "duplicateTab", "keys": "ctrl+shift+d" },
         
+        // ** open-close **
+        { "command": "openNewTabDropdown", "keys": "ctrl+shift+t" },
         { "command": "closeTab", "keys": "ctrl+shift+w" },
-        {
-          "command": {
-            "action": "splitPane",
-            "split": "auto",
-            "splitMode": "duplicate"
-          },
-          "keys": "alt+shift+d"
-        },
+        { "command": "newWindow", "keys": "ctrl+shift+n" },
+        
+        // ** moving **
+        { "command": "nextTab", "keys": "ctrl+shift+right" },
+        { "command": "prevTab", "keys": "ctrl+shift+left" },
+        { "command": "tabSearch", "keys": "ctrl+shift+space"},
+        
+        // ** more **
+        { "command": "openSettings", "keys": "ctrl+shift+," },
     ]
 }
