@@ -139,6 +139,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
   " python (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
   Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
+  " golang
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  " run :GoInstallBinaries after plugin install
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
@@ -203,6 +206,9 @@ call plug#end()
   " javacomplete config
   autocmd FileType java setlocal omnifunc=javacomplete#Complete
   autocmd FileType java JCEnable " enable by default for .java files
+
+  " golang autocomplete on . keypress
+  au filetype go inoremap <buffer> . .<C-x><C-o>
 
   " show hidden files in nerdtree by default
   let NERDTreeShowHidden=1
