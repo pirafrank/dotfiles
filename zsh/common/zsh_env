@@ -65,12 +65,12 @@ export PATH="$HOME/bin2/maven/bin:$PATH"
 # golang
 # look for system install first
 if [[ -d /usr/local/go/bin ]]; then
-  export PATH="$PATH:/usr/local/go/bin"
+  export PATH="/usr/local/go/bin:$PATH"
   export GOPATH="$HOME/.golang"
   export PATH="$GOPATH/bin:$PATH"
 # then for userspace install
 elif [[ -d $HOME/bin2/go/bin ]]; then
-  export PATH="$PATH:$HOME/bin2/go/bin"
+  export PATH="$HOME/bin2/go/bin:$PATH"
   export GOPATH="$HOME/.golang"
   export PATH="$GOPATH/bin:$PATH"
 fi
