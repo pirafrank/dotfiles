@@ -31,6 +31,7 @@ powershell "$env:USERPROFILE\dotfiles\Windows\bin\symlink.ps1" $env:USERPROFILE\
 cd $env:APPDATA\Code\User
 bkpitem('settings.json')
 powershell "$env:USERPROFILE\dotfiles\Windows\bin\symlink.ps1" $env:USERPROFILE\dotfiles\vs-code\settings_sb3.json settings.json
+powershell "$env:USERPROFILE\dotfiles\Windows\bin\symlink.ps1" $env:USERPROFILE\dotfiles\vs-code\keybindings.json keybindings.json
 # VS Code extensions
 powershell "$env:USERPROFILE\dotfiles\vs-code\vs_code_restore_extensions_sb3.ps1"
 

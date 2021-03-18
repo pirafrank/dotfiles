@@ -46,7 +46,7 @@
     },
     //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
-    "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
+    "sonarlint.ls.javaHome": "C:\\Java\\jdk1.8.0_281",
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
@@ -80,6 +80,6 @@
     "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
     "workbench.startupEditor": "newUntitledFile",
     "windowsTerminal.channel": "preview",
-    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
 }
