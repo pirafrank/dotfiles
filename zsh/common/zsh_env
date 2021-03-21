@@ -6,6 +6,12 @@ export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
+  # if fd is present, make fzf use that
+  if [ ! -z "$(command -v fd)" ]; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  elif [ ! -z "$(command -v fdfind)"  ]; then
+    export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  fi
 fi
 
 # dotfiles binaries
@@ -65,12 +71,12 @@ export PATH="$HOME/bin2/maven/bin:$PATH"
 # golang
 # look for system install first
 if [[ -d /usr/local/go/bin ]]; then
-  export PATH="$PATH:/usr/local/go/bin"
+  export PATH="/usr/local/go/bin:$PATH"
   export GOPATH="$HOME/.golang"
   export PATH="$GOPATH/bin:$PATH"
 # then for userspace install
 elif [[ -d $HOME/bin2/go/bin ]]; then
-  export PATH="$PATH:$HOME/bin2/go/bin"
+  export PATH="$HOME/bin2/go/bin:$PATH"
   export GOPATH="$HOME/.golang"
   export PATH="$GOPATH/bin:$PATH"
 fi
