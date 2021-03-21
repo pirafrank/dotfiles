@@ -118,10 +118,6 @@ call plug#begin('~/.vim/plugged')
   " language pack for syntax highlighting
   Plug 'sheerun/vim-polyglot'
 
-  " fuzzy everything search
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf' }
-  Plug 'junegunn/fzf.vim'
-
   " ale
   Plug 'dense-analysis/ale'
 
@@ -137,11 +133,20 @@ call plug#begin('~/.vim/plugged')
   endif
   " java
   Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
+  "filetype off
+  "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
+  "map <C-]> :YcmCompleter GoToImprecise<CR>
   " python (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
   Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " run :GoInstallBinaries after plugin install
+
+  " fuzzy everything search
+  " download the plugin from github to .fzf and
+  " make sure to have the latest version of the fzf binary
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf.vim'
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
@@ -170,6 +175,9 @@ call plug#begin('~/.vim/plugged')
   " editorconfig
   Plug 'editorconfig/editorconfig-vim'
 
+  " toggle comments
+  Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 
@@ -178,6 +186,11 @@ call plug#end()
   " fzf options
   " set fzf runtime path
   set rtp+=~/.fzf
+  " call it via CTRL+P
+  nnoremap <silent> <C-p> :FZF<CR>
+  inoremap <silent> <C-p> :FZF<CR>
+  cnoreabbrev bb Buffers
+  let g:fzf_buffers_jump = 1 " [Buffers] Jump to the existing window if possible
 
   " ale config
   " shorter error/warning flags
@@ -192,7 +205,8 @@ call plug#end()
 	" Setup compilers for languages
 	let g:ale_linters = {
 				\  'python': ['pylint'],
-				\  'java': ['javac']
+				\  'java': ['javac'],
+        \  'go': ['gopls'],
 				\ }
 
   " enable omnicompletion (disabled by default)
@@ -209,6 +223,8 @@ call plug#end()
 
   " golang autocomplete on . keypress
   au filetype go inoremap <buffer> . .<C-x><C-o>
+  let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save 
+  let g:go_auto_type_info = 1 " Automatically get signature/type info for object under cursor
 
   " show hidden files in nerdtree by default
   let NERDTreeShowHidden=1
