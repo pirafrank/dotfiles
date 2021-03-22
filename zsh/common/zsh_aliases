@@ -129,7 +129,14 @@ fi
 # common functions
 #
 
-tat() { tmux attach -t "$1" || tmux new -s "$1" }
+tat() {
+  echo $#
+  if [ $# -eq 0 ]; then
+    tmux ls;
+  else
+    tmux attach -t "$1" || tmux new -s "$1"
+  fi
+}
 
 # cheat.sh (as bash function)
 cs() { curl cheat.sh/"$1" }
