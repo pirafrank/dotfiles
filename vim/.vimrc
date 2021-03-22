@@ -131,13 +131,17 @@ call plug#begin('~/.vim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
+
   " java
   Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
   "filetype off
   "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
   "map <C-]> :YcmCompleter GoToImprecise<CR>
-  " python (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
+
+  " python
+  " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
   Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
+
   " golang
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   " run :GoInstallBinaries after plugin install
@@ -177,6 +181,9 @@ call plug#begin('~/.vim/plugged')
 
   " toggle comments
   Plug 'tpope/vim-commentary'
+
+  " Most Recently Used (MRU) Vim Plugin
+  Plug 'yegappan/mru'
 
 call plug#end()
 
