@@ -1,5 +1,4 @@
 {
-    "files.autoSave": "onFocusChange",
     "editor.tabSize": 2,
     "editor.formatOnPaste": true,
     "editor.multiCursorModifier": "ctrlCmd",
@@ -10,7 +9,6 @@
     //"terminal.integrated.shell.linux": "/usr/bin/zsh",
     "window.openFilesInNewWindow": "on",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 0,
     "window.newWindowDimensions": "inherit",
     "workbench.colorCustomizations": {
         "editorError.foreground": "#ffa500",
@@ -48,7 +46,7 @@
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "C:\\Java\\jdk1.8.0_281",
     "auto-close-tag.SublimeText3Mode": true,
-    "editor.fontSize": 13,
+    "editor.fontSize": 12,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "[javascript]": {
@@ -82,4 +80,19 @@
     "windowsTerminal.channel": "preview",
     "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
+    "sonarlint.rules": {
+        "java:S1135": {
+            "level": "off"
+        },
+        "java:S125": {
+            "level": "off"
+        }
+    },
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "java.project.importOnFirstTimeStartup": "automatic",
 }

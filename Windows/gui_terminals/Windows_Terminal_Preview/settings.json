@@ -81,7 +81,7 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
     "initialCols": 130,
     "initialRows": 40,
     "profiles": 
@@ -89,6 +89,7 @@
         "defaults": 
         {
             "acrylicOpacity": 0.94999999999999996,
+            "bellStyle": "visual",
             "closeOnExit": "graceful",
             "fontFace": "MesloLGM NF",
             "fontSize": 10,
@@ -100,6 +101,7 @@
         "list": 
         [
             {
+                "colorScheme": "One Half Dark",
                 "commandline": "powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
@@ -353,5 +355,6 @@
             "yellow": "#808000"
         }
     ],
+    "tabSwitcherMode": "disabled",
     "windowingBehavior": "useAnyExisting"
 }
