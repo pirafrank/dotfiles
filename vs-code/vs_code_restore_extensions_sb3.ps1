@@ -32,6 +32,7 @@ code --install-extension loganarnett.lambda-snippets.FullName
 code --install-extension malmaud.tmux.FullName
 code --install-extension mark-tucker.aws-cli-configure.FullName
 code --install-extension ms-azuretools.vscode-docker.FullName
+code --install-extension msjsdiag.debugger-for-chrome.FullName
 code --install-extension ms-python.python.FullName
 code --install-extension ms-toolsai.jupyter.FullName
 code --install-extension ms-vscode.powershell.FullName
@@ -57,6 +58,7 @@ code --install-extension vscjava.vscode-java-dependency.FullName
 code --install-extension vscjava.vscode-java-pack.FullName
 code --install-extension vscjava.vscode-java-test.FullName
 code --install-extension vscjava.vscode-maven.FullName
+code --install-extension vscjava.vscode-spring-boot-dashboard.FullName
 code --install-extension vscjava.vscode-spring-initializr.FullName
 code --install-extension vscode-icons-team.vscode-icons.FullName
 code --install-extension will-stone.plastic.FullName
