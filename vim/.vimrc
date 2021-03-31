@@ -143,7 +143,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
 
   " golang
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
   " run :GoInstallBinaries after plugin install
 
   " fuzzy everything search
@@ -217,7 +217,7 @@ call plug#end()
 				\ }
 
   " enable omnicompletion (disabled by default)
-  filetype plugin indent on  
+  filetype plugin indent on
   set omnifunc=syntaxcomplete#Complete
 
   " deoplete config
@@ -230,7 +230,7 @@ call plug#end()
 
   " golang autocomplete on . keypress
   au filetype go inoremap <buffer> . .<C-x><C-o>
-  let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save 
+  let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save
   let g:go_auto_type_info = 1 " Automatically get signature/type info for object under cursor
 
   " show hidden files in nerdtree by default
