@@ -1,13 +1,9 @@
-﻿code --install-extension abusaidm.html-snippets.FullName
-code --install-extension AdrianSanguineti.json-parse-validator.FullName
-code --install-extension agauniyal.vscode-caniuse.FullName
+﻿code --install-extension AdrianSanguineti.json-parse-validator.FullName
 code --install-extension alefragnani.Bookmarks.FullName
 code --install-extension amazonwebservices.aws-toolkit-vscode.FullName
 code --install-extension anseki.vscode-color.FullName
 code --install-extension Arjun.swagger-viewer.FullName
-code --install-extension astallinger.sourcetrail.FullName
 code --install-extension bmuskalla.vscode-tldr.FullName
-code --install-extension ccimage.jsonviewer.FullName
 code --install-extension codezombiech.gitignore.FullName
 code --install-extension danwahlin.angular2-snippets.FullName
 code --install-extension DavidAnson.vscode-markdownlint.FullName
@@ -40,6 +36,7 @@ code --install-extension ms-vscode-remote.remote-containers.FullName
 code --install-extension ms-vscode-remote.remote-wsl.FullName
 code --install-extension nick-rudenko.back-n-forth.FullName
 code --install-extension octref.vetur.FullName
+code --install-extension piotrpalarz.vscode-gitignore-generator.FullName
 code --install-extension Pivotal.vscode-spring-boot.FullName
 code --install-extension redhat.java.FullName
 code --install-extension redhat.vscode-xml.FullName
