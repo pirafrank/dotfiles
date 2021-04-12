@@ -130,7 +130,6 @@ fi
 #
 
 tat() {
-  echo $#
   if [ $# -eq 0 ]; then
     tmux ls;
   else
