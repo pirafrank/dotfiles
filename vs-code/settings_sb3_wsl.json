@@ -1,0 +1,30 @@
+{
+  "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "/home/francesco/bin2/jdk8"
+    },
+    {
+      "name": "JavaSE-11",
+      "path": "/home/francesco/bin2/jdk11",
+      "sources": "/home/francesco/bin2/jdk11/lib/src.zip",
+      "javadoc": "https://docs.oracle.com/en/java/javase/11/docs/api",
+      "default": true
+    },
+  ],
+  "editor.tabSize": 2,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
+  "windowsTerminal.channel": "preview",
+  "terminal.integrated.fontSize": 12,
+  "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
+  "editor.fontSize": 12,
+  "code-runner.executorMap": {
+    "python": "python3",
+  },
+  "terminal.integrated.copyOnSelection": true,
+  "telemetry.enableTelemetry": false,
+  "telemetry.enableCrashReporter": false,
+  "code-runner.enableAppInsights": false,
+}
