@@ -4,6 +4,7 @@ code --install-extension alefragnani.Bookmarks.FullName
 code --install-extension amazonwebservices.aws-toolkit-vscode.FullName
 code --install-extension anseki.vscode-color.FullName
 code --install-extension bmuskalla.vscode-tldr.FullName
+code --install-extension chris-noring.node-snippets.FullName
 code --install-extension christian-kohler.npm-intellisense.FullName
 code --install-extension DavidAnson.vscode-markdownlint.FullName
 code --install-extension dbaeumer.vscode-eslint.FullName
@@ -43,12 +44,13 @@ code --install-extension piotrpalarz.vscode-gitignore-generator.FullName
 code --install-extension Pivotal.vscode-spring-boot.FullName
 code --install-extension prograhammer.tslint-vue.FullName
 code --install-extension redhat.java.FullName
+code --install-extension redhat.vscode-commons.FullName
 code --install-extension redhat.vscode-xml.FullName
 code --install-extension redhat.vscode-yaml.FullName
 code --install-extension rogalmic.bash-debug.FullName
 code --install-extension rust-lang.rust.FullName
 code --install-extension SonarSource.sonarlint-vscode.FullName
-code --install-extension TabNine.tabnine-vscode.FullName
+code --install-extension takkaO.open-window-tab-context.FullName
 code --install-extension thekalinga.bootstrap4-vscode.FullName
 code --install-extension thundra.thundra-debugger.FullName
 code --install-extension Tyriar.windows-terminal.FullName

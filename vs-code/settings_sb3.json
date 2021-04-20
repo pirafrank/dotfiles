@@ -31,7 +31,6 @@
     // python
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
     "java.home": "C:\\Program Files\\Java\\jdk-11.0.10",
@@ -63,7 +62,7 @@
     "remote.restoreForwardedPorts": true,
     "editor.formatOnSaveMode": "modifications",
     "explorer.confirmDelete": false,
-    "tabnine.experimentalAutoImports": true,
+    "tabnine.experimentalAutoImports": false,
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "sonarlint.pathToNodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
@@ -95,4 +94,12 @@
         }
     ],
     "java.project.importOnFirstTimeStartup": "automatic",
+    "java.refactor.renameFromFileExplorer": "autoApply",
+    "code-runner.executorMap": {
+        "python": "python3",
+    },
+    "terminal.integrated.copyOnSelection": true,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "code-runner.enableAppInsights": false,
 }
