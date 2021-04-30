@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -ne 2 ]; then
-  echo "Usage: ./$0 tar_archive_name volume_name"
+  echo "Usage: $0 tar_archive_name volume_name"
   exit 1
 fi
 
