@@ -43,6 +43,11 @@ export HISTFILE=~/.zsh_history
 
 autoload zmv
 
+# autocompletion
+if [ -d $HOME/dotfiles/zsh/completions ]; then fpath=($HOME/dotfiles/zsh/completions $fpath); fi
+autoload -Uz compinit
+compinit
+
 # load aliases
 source $HOME/.zsh_aliases
 
