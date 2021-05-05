@@ -87,6 +87,9 @@ alias pip3='python3 -m pip'
 alias npmlist='npm list --depth=0'
 alias npmlistg='npm list -g --depth=0'
 
+# k8s
+alias k='kubectl'
+
 # jekyll
 alias jk='jekyll'
 alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
