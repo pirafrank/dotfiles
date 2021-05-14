@@ -2,10 +2,15 @@ reporting: "off"
 startuppopupversion: 1
 # to skip without creating a new repo
 notARepository: 'skip'
+disableStartupPopups: true
 git:
     branchLogCmd: 'git log --color=always --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" {{branchName}}'
+    pull:
+        mode: 'rebase'
 gui:
-    mainPanelSplitMode: 'horizontal'
+    mainPanelSplitMode: 'vertical'
+    showRandomTip: false
+    showCommandLog: false
 customCommands:
   - key: 'f'
     command: "git {{if .SelectedFile.HasUnstagedChanges}} diff -b {{end}} {{.SelectedFile.Name}}"
