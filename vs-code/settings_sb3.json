@@ -102,4 +102,5 @@
     "telemetry.enableTelemetry": false,
     "telemetry.enableCrashReporter": false,
     "code-runner.enableAppInsights": false,
+    "terminal.integrated.tabs.enabled": true,
 }

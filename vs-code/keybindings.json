@@ -108,5 +108,13 @@
     "key": "f8",
     "command": "workbench.action.debug.start",
     "when": "!inDebugMode"
+  },
+  {
+    "key": "ctrl+0",
+    "command": "workbench.action.zoomReset"
+  },
+  {
+    "key": "ctrl+numpad0",
+    "command": "-workbench.action.zoomReset"
   }
 ]
