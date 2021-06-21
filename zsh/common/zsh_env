@@ -133,6 +133,10 @@ if [[ $(command -v scw) ]]; then
   eval "$(scw autocomplete script shell=zsh)"
 fi
 
+if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
 # Secure ShellFish iOS app integration
 if [[ -f "$HOME/.shellfishrc" ]]; then
   source $HOME/.shellfishrc
