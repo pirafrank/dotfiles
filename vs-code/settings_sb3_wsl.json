@@ -27,4 +27,6 @@
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
   "code-runner.enableAppInsights": false,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.formatOnSave": true,
 }
