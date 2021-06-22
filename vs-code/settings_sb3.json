@@ -86,12 +86,9 @@
             "level": "off"
         }
     },
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
     "java.project.importOnFirstTimeStartup": "automatic",
     "java.refactor.renameFromFileExplorer": "autoApply",
     "code-runner.executorMap": {

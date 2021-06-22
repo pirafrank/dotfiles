@@ -6,6 +6,7 @@ code --install-extension anseki.vscode-color.FullName
 code --install-extension bmuskalla.vscode-tldr.FullName
 code --install-extension chris-noring.node-snippets.FullName
 code --install-extension christian-kohler.npm-intellisense.FullName
+code --install-extension chrmarti.ssh.FullName
 code --install-extension DavidAnson.vscode-markdownlint.FullName
 code --install-extension dbaeumer.vscode-eslint.FullName
 code --install-extension dcortes92.FreeMarker.FullName
@@ -16,6 +17,7 @@ code --install-extension dunstontc.viml.FullName
 code --install-extension eamodio.gitlens.FullName
 code --install-extension EditorConfig.EditorConfig.FullName
 code --install-extension esbenp.prettier-vscode.FullName
+code --install-extension firefox-devtools.vscode-firefox-debug.FullName
 code --install-extension formulahendry.auto-close-tag.FullName
 code --install-extension formulahendry.code-runner.FullName
 code --install-extension gerane.Theme-FlatlandDark.FullName
@@ -30,14 +32,21 @@ code --install-extension malmaud.tmux.FullName
 code --install-extension mark-tucker.aws-cli-configure.FullName
 code --install-extension mikestead.dotenv.FullName
 code --install-extension mrmlnc.vscode-duplicate.FullName
+code --install-extension ms-azure-devops.azure-pipelines.FullName
 code --install-extension ms-azuretools.vscode-docker.FullName
 code --install-extension msjsdiag.debugger-for-chrome.FullName
+code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools.FullName
 code --install-extension ms-python.python.FullName
+code --install-extension ms-python.vscode-pylance.FullName
 code --install-extension ms-toolsai.jupyter.FullName
+code --install-extension ms-vscode.azure-account.FullName
 code --install-extension ms-vscode.powershell.FullName
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin.FullName
 code --install-extension ms-vscode-remote.remote-containers.FullName
 code --install-extension ms-vscode-remote.remote-wsl.FullName
+code --install-extension ms-vsliveshare.vsliveshare.FullName
+code --install-extension ms-vsliveshare.vsliveshare-audio.FullName
+code --install-extension ms-vsliveshare.vsliveshare-pack.FullName
 code --install-extension nick-rudenko.back-n-forth.FullName
 code --install-extension octref.vetur.FullName
 code --install-extension piotrpalarz.vscode-gitignore-generator.FullName
