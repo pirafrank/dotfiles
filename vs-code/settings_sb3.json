@@ -42,7 +42,7 @@
     },
     //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
-    "sonarlint.ls.javaHome": "C:\\Java\\jdk1.8.0_281",
+    "sonarlint.ls.javaHome": "C:\\Program Files\\Java\\jdk-11.0.10",
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 12,
     "java.semanticHighlighting.enabled": true,

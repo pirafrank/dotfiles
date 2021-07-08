@@ -116,5 +116,9 @@
   {
     "key": "ctrl+numpad0",
     "command": "-workbench.action.zoomReset"
+  },
+  {
+    "key": "ctrl+0 ctrl+0",
+    "command": "editor.action.fontZoomReset"
   }
 ]
