@@ -33,6 +33,10 @@ alias tm_kill_unnamed="tmux ls | grep -E '^[0-9]' | cut -d':' -f1 | xargs -I {} 
 # utilities
 #
 
+alias diceroller='shuf -i 1-6 -n 1'
+alias randompin='shuf -i 100000-999999 -n 1'
+alias randompass="shuf -n6 /usr/share/dict/words | sed 's/$/-/g' | tr -d '\n' | cut -d'-' -f1-6"
+
 if [ -f /etc/debian_version ]; then
   alias fd=fdfind
 fi
