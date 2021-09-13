@@ -102,4 +102,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "editor.formatOnSave": true,
     "editor.formatOnPaste": true,
+    "java.format.enabled": false,
+    "editor.copyWithSyntaxHighlighting": false,
 }

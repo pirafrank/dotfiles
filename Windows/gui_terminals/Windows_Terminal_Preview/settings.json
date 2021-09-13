@@ -11,8 +11,23 @@
             "keys": "ctrl+c"
         },
         {
+            "command": "tabSearch",
+            "keys": "ctrl+shift+space"
+        },
+        {
             "command": "find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": "openNewTabDropdown",
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "command": 
+            {
+                "action": "newWindow"
+            },
+            "keys": "ctrl+shift+n"
         },
         {
             "command": "paste",
@@ -32,19 +47,11 @@
             "keys": "ctrl+shift+/"
         },
         {
-            "command": "openNewTabDropdown",
-            "keys": "ctrl+shift+t"
-        },
-        {
-            "command": "closeTab",
-            "keys": "ctrl+shift+w"
-        },
-        {
             "command": 
             {
-                "action": "newWindow"
+                "action": "closeTab"
             },
-            "keys": "ctrl+shift+n"
+            "keys": "ctrl+shift+w"
         },
         {
             "command": 
@@ -61,15 +68,11 @@
             "keys": "ctrl+shift+left"
         },
         {
-            "command": "tabSearch",
-            "keys": "ctrl+shift+space"
-        },
-        {
             "command": 
             {
                 "action": "openSettings"
             },
-            "keys": "ctrl+shift+,"
+            "keys": "ctrl+shift+comma"
         }
     ],
     "copyFormatting": "none",
@@ -88,9 +91,13 @@
                 "taskbar"
             ],
             "closeOnExit": "graceful",
-            "fontFace": "MesloLGM NF",
-            "fontSize": 10,
+            "font": 
+            {
+                "face": "MesloLGM NF",
+                "size": 10
+            },
             "historySize": 10000,
+            "intenseTextStyle": "bold",
             "padding": "1, 1, 1, 1",
             "snapOnInput": true,
             "useAcrylic": true
@@ -102,6 +109,7 @@
                 "commandline": "powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
+                "intenseTextStyle": "bold",
                 "name": "Windows PowerShell"
             },
             {
@@ -109,6 +117,7 @@
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
+                "intenseTextStyle": "bold",
                 "name": "WSL",
                 "source": "Windows.Terminal.Wsl"
             },
@@ -117,6 +126,7 @@
                 "guid": "{14ad203f-52cc-4110-90d6-d96e0f41b64d}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/git_logo.png",
+                "intenseTextStyle": "bold",
                 "name": "Git Bash",
                 "startingDirectory": "C:/Users/francesco/Code"
             },
@@ -125,6 +135,7 @@
                 "guid": "{b3b0e9e6-308d-420f-8d81-7d840cadac04}",
                 "hidden": false,
                 "icon": "C:/cygwin64/Cygwin.ico",
+                "intenseTextStyle": "bold",
                 "name": "Cygwin",
                 "startingDirectory": "C:/Users/francesco"
             },
@@ -137,6 +148,7 @@
             {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
+                "intenseTextStyle": "bold",
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             }
