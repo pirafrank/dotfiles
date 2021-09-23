@@ -7,6 +7,7 @@ code --install-extension bmuskalla.vscode-tldr.FullName
 code --install-extension chris-noring.node-snippets.FullName
 code --install-extension christian-kohler.npm-intellisense.FullName
 code --install-extension chrmarti.ssh.FullName
+code --install-extension cschleiden.vscode-github-actions.FullName
 code --install-extension DavidAnson.vscode-markdownlint.FullName
 code --install-extension dbaeumer.vscode-eslint.FullName
 code --install-extension dcortes92.FreeMarker.FullName
@@ -22,6 +23,7 @@ code --install-extension formulahendry.auto-close-tag.FullName
 code --install-extension formulahendry.code-runner.FullName
 code --install-extension gerane.Theme-FlatlandDark.FullName
 code --install-extension gerane.Theme-FlatlandMonokai.FullName
+code --install-extension GitHub.remotehub.FullName
 code --install-extension golang.go.FullName
 code --install-extension GrapeCity.gc-excelviewer.FullName
 code --install-extension hangxingliu.vscode-nginx-conf-hint.FullName
@@ -34,15 +36,17 @@ code --install-extension mikestead.dotenv.FullName
 code --install-extension mrmlnc.vscode-duplicate.FullName
 code --install-extension ms-azure-devops.azure-pipelines.FullName
 code --install-extension ms-azuretools.vscode-docker.FullName
-code --install-extension msjsdiag.debugger-for-chrome.FullName
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools.FullName
 code --install-extension ms-python.python.FullName
 code --install-extension ms-python.vscode-pylance.FullName
 code --install-extension ms-toolsai.jupyter.FullName
+code --install-extension ms-toolsai.jupyter-keymap.FullName
 code --install-extension ms-vscode.azure-account.FullName
 code --install-extension ms-vscode.powershell.FullName
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin.FullName
 code --install-extension ms-vscode-remote.remote-containers.FullName
+code --install-extension ms-vscode-remote.remote-ssh.FullName
+code --install-extension ms-vscode-remote.remote-ssh-edit.FullName
 code --install-extension ms-vscode-remote.remote-wsl.FullName
 code --install-extension ms-vsliveshare.vsliveshare.FullName
 code --install-extension ms-vsliveshare.vsliveshare-audio.FullName
@@ -60,7 +64,6 @@ code --install-extension rogalmic.bash-debug.FullName
 code --install-extension rust-lang.rust.FullName
 code --install-extension SonarSource.sonarlint-vscode.FullName
 code --install-extension takkaO.open-window-tab-context.FullName
-code --install-extension thekalinga.bootstrap4-vscode.FullName
 code --install-extension thundra.thundra-debugger.FullName
 code --install-extension Tyriar.windows-terminal.FullName
 code --install-extension uyiosa-enabulele.reopenclosedtab.FullName
@@ -73,6 +76,7 @@ code --install-extension vscjava.vscode-maven.FullName
 code --install-extension vscjava.vscode-spring-boot-dashboard.FullName
 code --install-extension vscjava.vscode-spring-initializr.FullName
 code --install-extension vscode-icons-team.vscode-icons.FullName
+code --install-extension vsls-contrib.gistfs.FullName
 code --install-extension will-stone.plastic.FullName
 code --install-extension Xherdi.fluent-terminal.FullName
 code --install-extension xshrim.txt-syntax.FullName
