@@ -1,5 +1,10 @@
 # precedence is left to right, so paths on the left have higher priority
 
+# setting sort order preference
+if [[ "$(uname -s)" == 'Linux' ]]; then
+  export LC_COLLATE=en_US.utf8
+fi
+
 # kitty config dir
 export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
 

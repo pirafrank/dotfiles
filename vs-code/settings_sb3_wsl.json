@@ -29,4 +29,5 @@
   "code-runner.enableAppInsights": false,
   "editor.formatOnSaveMode": "modifications",
   "editor.formatOnSave": true,
+  "java.format.enabled": false,
 }
