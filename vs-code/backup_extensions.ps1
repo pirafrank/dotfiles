@@ -11,5 +11,5 @@ if ( $($args.Count) -ne 1 ) {
 
 $file=$args[0] 
 code --list-extensions | Sort-Object | ForEach-Object { 
-"code --install-extension $_.FullName"
+"code --install-extension $_"
 } | Out-File -FilePath ".\$file.ps1" -Encoding utf8
