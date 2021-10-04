@@ -9,6 +9,7 @@ Set-Alias -Name l -Value ls -Option AllScope
 Set-Alias which get-command
 Set-Alias lg lazygit
 Set-Alias open Invoke-Item
+Set-Alias k kubectl
 
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
