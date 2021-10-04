@@ -147,3 +147,7 @@ if [[ -f "$HOME/.shellfishrc" ]]; then
   source $HOME/.shellfishrc
 fi
 
+# fasd to jump around
+if [ $(command -v fasd) ]; then
+  eval "$(fasd --init auto)"
+fi
