@@ -17,9 +17,7 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
   "windowsTerminal.channel": "preview",
-  "terminal.integrated.fontSize": 12,
   "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
-  "editor.fontSize": 12,
   "code-runner.executorMap": {
     "python": "python3",
   },
@@ -27,7 +25,6 @@
   "telemetry.enableTelemetry": false,
   "telemetry.enableCrashReporter": false,
   "code-runner.enableAppInsights": false,
-  "editor.formatOnSaveMode": "modifications",
-  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
   "java.format.enabled": false,
 }
