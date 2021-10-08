@@ -1,13 +1,15 @@
 # dotfiles
 
-My dotfiles, simple as that.
+[![build_images](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml/badge.svg)](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml)
+
+My dotfiles and workspace-in-a-container project.
 
 This is an endless WIP and holds my work and personal setup. My daily drivers are:
 
-- Ubuntu 20.04 desktop
-- macOS + macports
-- Debian 10 server accessed via mosh connection on ipad
 - Ubuntu 20.04 WSL on Windows 10 (20H2)
+- Ubuntu 20.04 desktop
+- Debian 10 server accessed via mosh connection on ipad
+- macOS + macports
 
 My MacBook runs the latest 10.15.x, but these dotfiles should work on earlier versions, too.
 
@@ -49,11 +51,15 @@ That's all, there is no real how-to actually. For more info just look at the cod
 
 ## Docker Images
 
-A command-line workspace in a container, based on this repo.
+A command-line workspace-in-a-container, based on this repo.
 
 The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace) in various flavors. They are:
 
 - `pirafrank/workspace`: base image the others are based on. It contains dotfiles, various CLI utils and shell setup
+- `pirafrank/workspace:bundle`: bundle of the ones below. Use `workspace_version` inside the container to know about the versions bundled.
+
+Also available as standalone flavors:
+
 - `pirafrank/workspace:java`: Java workspace based on OpenJDK or AdoptOpenJDK (check the Docker image tag)
 - `pirafrank/workspace:node`: `nvm` and node env
 - `pirafrank/workspace:python3`: `pyenv` and Python 3
@@ -83,6 +89,41 @@ Use `run_workspace.sh` to do so. For example:
 # or to name it
 ./run-workspace.sh java11 '--name somename --rm'
 ```
+
+## Use cases
+
+You can run the workspace-in-a-container in many occasions.
+
+- easy and fast setup of CLI environment e.g. in a VPS
+- [Blink Build](https://beta.blink.build/)
+- interactive CaaS
+- more...
+
+### Usage in Blink Build
+
+*Build* is a new service being built by the guys behind [Blink Shell](https://twitter.com/BlinkShell/), the best SSH and mosh client for iOS and iPadOS. It's currently in beta and allows you to SSH into any container publicly available without taking care of the underlying infrastructure, network or firewall. And it's fully integrated in Blink Shell. [I have started tinkering](https://twitter.com/pirafrank/status/1423633599459471361) with it and I have to say it's a great match with my *workspace* for a portable dev environment!
+
+First setup: authenticate and turn on the VM (aka the *machine*)
+
+```sh
+build device authenticate
+build status
+build machine start
+build machine status
+build ssh-key add
+build ssh-key list
+```
+
+then bring the workspace up and enter it
+
+```sh
+build up --image pirafrank/workspace:bundle bundle
+build ssh bundle
+```
+
+*Build*s is currently available in the [community edition](https://community.blink.sh/).
+
+For more information, run the commands with the `--help` flag.
 
 ## Credits
 
