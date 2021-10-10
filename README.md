@@ -1,21 +1,66 @@
 # dotfiles
 
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/pirafrank.svg?style=social&label=Follow%20%40pirafrank)](https://twitter.com/pirafrank)
 [![build_images](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml/badge.svg)](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml)
+[![docker_pulls](https://img.shields.io/docker/pulls/pirafrank/workspace.svg)](https://hub.docker.com/repository/docker/pirafrank/workspace)
+[![GitHub tag](https://img.shields.io/github/tag/pirafrank/dotfiles?include_prereleases=&sort=semver&color=blue)](https://github.com/pirafrank/dotfiles/releases/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/pirafrank/dotfiles/blob/main/LICENSE.md)
 
 My dotfiles and workspace-in-a-container project.
 
-This is an endless WIP and holds my work and personal setup. My daily drivers are:
+It holds my work and personal setup and fuels a portable environment in a Docker container. You can test it straight away:
+
+```sh
+docker run -it --name=workspace pirafrank/workspace:bundle
+```
+
+## Getting started
+
+The repo is made of two parts: dotfiles and scripts.
+
+Dotfiles only need to be symlinked, scripts are meant to setup specific features (Java+mvn, node.js, etc.) on a vanilla environment and used to build the workspace Docker images.
+
+## Supported platforms
+
+My daily drivers currently are:
 
 - Ubuntu 20.04 WSL on Windows 10 (20H2)
 - Ubuntu 20.04 desktop
 - Debian 10 server accessed via mosh connection on ipad
-- macOS + macports
 
-My MacBook runs the latest 10.15.x, but these dotfiles should work on earlier versions, too.
+My MacBook runs the latest 10.15.x, but these dotfiles should work on earlier versions, too. I don't use it so much but I try to keep the compatibility with macOS + macports.
 
 While almost all files in this repo will also work on non-Debian distros, setup scripts in root are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
 
-## Installation
+## How to get it
+
+Multiple options avaiable:
+
+- run the containerized workspace (Docker required);
+- symlink config and use workspace scripts in your existing env;
+- or run the full setup script on a new env (e.g. a new VPS install).
+
+### Option 1: Docker images
+
+The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace) in various flavors. They are:
+
+- `pirafrank/workspace`: base image on which the others are based on. It contains dotfiles, various CLI utils and shell setup
+- `pirafrank/workspace:bundle`: bundle of the ones below. Use `workspace_version` inside the container to know about what's bundled.
+
+Also available:
+
+- `pirafrank/workspace:java`: Java + `mvn`
+- `pirafrank/workspace:node`: `nvm` + node.js
+- `pirafrank/workspace:python3`: `pyenv` + Python 3
+- `pirafrank/workspace:ruby`: `rvm` + Ruby
+- `pirafrank/workspace:rust`: latest Rust version and its toolchain
+- `pirafrank/workspace:go`: Golang workspace
+
+All workspaces setups are in userspace.
+
+### Option 2: config and scripts
+
+First clone the repo to your $HOME.
 
 ```sh
 cd && git clone https://github.com/pirafrank/dotfiles.git
@@ -23,9 +68,15 @@ cd && git clone https://github.com/pirafrank/dotfiles.git
 
 Then symlink config you want to use.
 
-If you clone to another dir, please symlink it to `~/dotfiles`.
+Setup scripts in `setups` and `workspaces` dirs are meant to be executed manually on Linux or macOS, or to build Docker Image workspaces (read below). They assume `~/dotfiles` exists. If you clone to another dir, please symlink it to `~/dotfiles`.
 
-### Full setup
+Core setup uses zsh and zprezto. Files for oh-my-zsh config are available, but I don't use/update them anymore.
+
+`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
+
+That's all, there is no real how-to actually. For more info just look at the code.
+
+### Option 3: full setup
 
 *Debian-based distros only.*
 
@@ -39,37 +90,7 @@ curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup_w_user.sh
 
 Run the one that best fits your needs. Remember to always check the content of scripts you're about to execute before running them!
 
-## Usage
-
-Setup scripts in `setups` and `workspaces` dirs are meant to be executed manually on Linux or macOS, or to build Docker Image workspaces (read below). They assume `~/dotfiles` exists.
-
-Core setup uses zsh and zprezto. Files for oh-my-zsh config are available (yet I don't use such config anymore).
-
-`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
-
-That's all, there is no real how-to actually. For more info just look at the code. Google is your friend.
-
-## Docker Images
-
-A command-line workspace-in-a-container, based on this repo.
-
-The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace) in various flavors. They are:
-
-- `pirafrank/workspace`: base image the others are based on. It contains dotfiles, various CLI utils and shell setup
-- `pirafrank/workspace:bundle`: bundle of the ones below. Use `workspace_version` inside the container to know about the versions bundled.
-
-Also available as standalone flavors:
-
-- `pirafrank/workspace:java`: Java workspace based on OpenJDK or AdoptOpenJDK (check the Docker image tag)
-- `pirafrank/workspace:node`: `nvm` and node env
-- `pirafrank/workspace:python3`: `pyenv` and Python 3
-- `pirafrank/workspace:ruby`: `rvm` and Ruby
-- `pirafrank/workspace:rust`: latest Rust version and its toolchain
-- `pirafrank/workspace:go`: Golang workspace
-
-All workspaces setups are in userspace.
-
-### Build
+## Build docker images
 
 Use `./build-all.sh` to build all images.
 
@@ -90,7 +111,7 @@ Use `run_workspace.sh` to do so. For example:
 ./run-workspace.sh java11 '--name somename --rm'
 ```
 
-## Use cases
+## Workspace use cases
 
 You can run the workspace-in-a-container in many occasions.
 
@@ -142,10 +163,10 @@ Those without *pirafrank* in their name come from the web, credits go to their c
 
 ## License
 
-Many of the files and scripts in the `bin` folder come from some other repos of mine. Although those repositories are publicly available on GitHub, I am going to continue to maintain them in `dotfiles`. These file will get the same license they had (GNU GPL v3).
+Many of the files and scripts in the `bin` folder come from some other repos of mine and here are gathered. Although those repositories are publicly available on GitHub, I am going to only maintain them in this repo.
 
-All the rest is given away for free, as-is and with NO WARRANTY. 
+Code in this repo is given away for free, as-is and with NO WARRANTY as per the MIT license. 
 
-By the way, if something really blows your mind, I'll be happy if you cite me.
+By the way, if something really blows your mind, I'll be happy if you get in touch with me. I always appreciated feedback!
 
 Enjoy!
