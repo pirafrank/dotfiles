@@ -119,6 +119,7 @@ RAILS_ENV="development"
 
 # GPG for SSH authentication
 # do it only if there's TTY
+# -- look for macOS
 if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
 export "GPG_TTY=$(TTY)"
 export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
@@ -128,7 +129,8 @@ export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 #   if needed, run the command below to force telling the agent which tty to use
 #     gpg-connect-agent updatestartuptty /bye
 fi
-if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]]; then
+# -- look for Linux (excluding WSL which needs socat and a different config)
+if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 fi
