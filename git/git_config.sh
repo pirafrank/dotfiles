@@ -34,9 +34,17 @@ git config --global alias.ls "log -1 --name-status"
 # %s = subject
 # %ce = author email
 # %cr = relative date (e.g. 2 month ago)
+# %G? = show "G" for a good (valid) signature
+#            "B" for a bad signature
+#            "U" for a good signature with unknown validity
+#            "X" for a good signature that has expired
+#            "Y" for a good signature made by an expired key
+#            "R" for a good signature made by a revoked key
+#            "E" if the signature cannot be checked (e.g. missing key)
+#            "N" for no signature
 #
-git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
-git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
 
 # to list changes made on a particular file:
 #   git log --follow [filename]
