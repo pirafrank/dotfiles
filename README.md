@@ -1,4 +1,4 @@
-# dotfiles
+# dotfiles & workspace
 
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/pirafrank.svg?style=social&label=Follow%20%40pirafrank)](https://twitter.com/pirafrank)
 [![build_images](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml/badge.svg)](https://github.com/pirafrank/dotfiles/actions/workflows/docker.yml)
@@ -8,39 +8,40 @@
 
 My dotfiles and workspace-in-a-container project.
 
-It holds my work and personal setup and fuels a portable environment in a Docker container. You can test it straight away:
+`workspace` is a portable environment in a Docker container, powered by my work and personal dotfiles setup. You can test it straight away:
 
 ```sh
 docker run -it --name=workspace pirafrank/workspace:bundle
 ```
 
-## Getting started
+## What's included
 
-The repo is made of two parts: dotfiles and scripts.
+- Ubuntu 20.04-based
+- `zsh` + zprezto as default shell
+- [dotfiles](https://github.com/pirafrank/dotfiles)
+- vim
+- cloud tools
+- Java + mvn
+- node.js
+- Python 3
+- Golang
+- Rust
+- Ruby
+- optional Docker CLI client
+- various utils
+- support for different env versions
+- ...and more.
 
-Dotfiles only need to be symlinked, scripts are meant to setup specific features (Java+mvn, node.js, etc.) on a vanilla environment and used to build the workspace Docker images.
+## Usage
 
-## Supported platforms
+Choose one of the options below:
 
-My daily drivers currently are:
+- run the containerized workspace (Docker required)
+- run the full `setup.sh` script on a vanilla environment (e.g. a new VPS install)
+- setup specific features (Java+mvn, node.js, etc.) running the scripts in `setups` and `workspaces` dirs. Those scripts are also used to build the workspace Docker images (read below)
+- just symlink dotfiles
 
-- Ubuntu 20.04 WSL on Windows 10 (20H2)
-- Ubuntu 20.04 desktop
-- Debian 10 server accessed via mosh connection on ipad
-
-My MacBook runs the latest 10.15.x, but these dotfiles should work on earlier versions, too. I don't use it so much but I try to keep the compatibility with macOS + macports.
-
-While almost all files in this repo will also work on non-Debian distros, setup scripts in root are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
-
-## How to get it
-
-Multiple options avaiable:
-
-- run the containerized workspace (Docker required);
-- symlink config and use workspace scripts in your existing env;
-- or run the full setup script on a new env (e.g. a new VPS install).
-
-### Option 1: Docker images
+### Get a docker image
 
 The aim is to create a disposable development environment taking advantage of Docker. Images are publicly available on [Docker Hub](https://hub.docker.com/r/pirafrank/workspace) in various flavors. They are:
 
@@ -58,29 +59,11 @@ Also available:
 
 All workspaces setups are in userspace.
 
-### Option 2: config and scripts
-
-First clone the repo to your $HOME.
-
-```sh
-cd && git clone https://github.com/pirafrank/dotfiles.git
-```
-
-Then symlink config you want to use.
-
-Setup scripts in `setups` and `workspaces` dirs are meant to be executed manually on Linux or macOS, or to build Docker Image workspaces (read below). They assume `~/dotfiles` exists. If you clone to another dir, please symlink it to `~/dotfiles`.
-
-Core setup uses zsh and zprezto. Files for oh-my-zsh config are available, but I don't use/update them anymore.
-
-`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
-
-That's all, there is no real how-to actually. For more info just look at the code.
-
-### Option 3: full setup
+### Full setup
 
 *Debian-based distros only.*
 
-A full setup involves programs installation and creation of symlinks. It is meant to setup a vanilla environment and to build the Docker workspace baseimage. The setup comes in two flavors, with and without user creation:
+A full setup involves programs installation of programs, their dependencies, download of dotfiles and creation of symlinks. It is meant to setup a vanilla environment. I keep `setup.sh` aligned with the `Dockerfile` used to build the Docker workspace baseimage. The setup comes in two flavors, with and without user creation:
 
 ```sh
 curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup.sh
@@ -90,28 +73,39 @@ curl -sSL https://github.com/pirafrank/dotfiles/raw/main/setup_w_user.sh
 
 Run the one that best fits your needs. Remember to always check the content of scripts you're about to execute before running them!
 
-## Build docker images
+### Partial setup
 
-Use `./build-all.sh` to build all images.
+Setup scripts in `setups` and `workspaces` dirs are meant to be executed manually on Linux or macOS, or to build Docker Image workspaces (read below). They assume `~/dotfiles` exists. If you clone to another dir, please symlink it to `~/dotfiles`.
 
-Add to `pre_start.zsh` to exec anything at Docker image launch.
+Core setup uses zsh and zprezto. Files for oh-my-zsh config are available, but I don't use/update them anymore.
 
-### Run an image
+### dotfiles-only
 
-Use `run_workspace.sh` to do so. For example:
+First clone the repo to your $HOME.
 
 ```sh
-# to run the baseimage
-./run-workspace.sh latest
-# or to run the java11 one
-./run-workspace.sh java11
-# or to run it as a disposable container
-./run-workspace.sh java11 --rm
-# or to name it
-./run-workspace.sh java11 '--name somename --rm'
+cd && git clone https://github.com/pirafrank/dotfiles.git
 ```
 
-## Workspace use cases
+Then symlink config you want to use or install them all running `zsh install_dotfiles.zsh`.
+
+`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
+
+That's all, there is no real how-to actually. For more info just look at the code.
+
+## Supported platforms
+
+While almost all files in this repo will also work on non-Debian distros, setup scripts in root are designed for the Debian-based ones. That said, the only differences shoud rely only on a few package and binary names.
+
+Some setup scripts may also work on macOS + macports.
+
+My daily drivers currently are:
+
+- Ubuntu 20.04 WSL on Windows 10 (20H2)
+- Ubuntu 20.04 desktop
+- Debian 10 server accessed via mosh connection on ipad
+
+## Use cases
 
 You can run the workspace-in-a-container in many occasions.
 
@@ -142,9 +136,34 @@ build up --image pirafrank/workspace:bundle bundle
 build ssh bundle
 ```
 
-*Build*s is currently available in the [community edition](https://community.blink.sh/).
+*Build* is currently available in the [community edition](https://community.blink.sh/).
 
 For more information, run the commands with the `--help` flag.
+
+## Build an image
+
+Use `./build-all.sh` to build all images.
+
+Add anything you want to exec at Docker image launch to `pre_start.zsh`.
+
+## Run an image
+
+Use `run_workspace.sh` to do so. Clone the repo or just download the script.
+
+The script will default to `pirafrank/workspace` images, you just need to specify the tag name.
+
+For example:
+
+```sh
+# to run the baseimage
+./run-workspace.sh latest
+# or to run the java11 one
+./run-workspace.sh java11
+# or to run it as a disposable container
+./run-workspace.sh java11 --rm
+# or to name it
+./run-workspace.sh java11 '--name somename --rm'
+```
 
 ## Credits
 
@@ -165,7 +184,7 @@ Those without *pirafrank* in their name come from the web, credits go to their c
 
 Many of the files and scripts in the `bin` folder come from some other repos of mine and here are gathered. Although those repositories are publicly available on GitHub, I am going to only maintain them in this repo.
 
-Code in this repo is given away for free, as-is and with NO WARRANTY as per the MIT license. 
+Code in this repo is given away for free, as-is and with NO WARRANTY as per the MIT license.
 
 By the way, if something really blows your mind, I'll be happy if you get in touch with me. I always appreciated feedback!
 
