@@ -87,7 +87,7 @@ First clone the repo to your $HOME.
 cd && git clone https://github.com/pirafrank/dotfiles.git
 ```
 
-Then symlink config you want to use or install them all running `zsh install_dotfiles.zsh`.
+Then symlink config you want to use or install them all running `zsh install.sh all`. You can also symlink a specific set of dotfiles by running `zsh install.sh SET_NAME`. Check the script content to know more.
 
 `~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
 
