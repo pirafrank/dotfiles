@@ -65,6 +65,8 @@ git config --global rebase.autoStash true
 # set default branch name for new repos
 git config --global init.defaultBranch main
 
+# follow renames
+git config --global log.follow true
 
 ####################
 #  delta config    #
