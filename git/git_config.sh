@@ -23,7 +23,7 @@ git config --global alias.adog "log --all --decorate --oneline --graph"
 
 # list files in a commit (limits history to given commit '-1')
 # usage: git ls [commit hash]
-git config --global alias.ls "log -1 --name-status"
+git config --global alias.ls "log -1 --name-status --show-signature"
 
 # custom log pretty print
 #
