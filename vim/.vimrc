@@ -195,6 +195,10 @@ call plug#end()
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
 
+""" mappings
+source ~/dotfiles/vim/mappings.vimrc
+
+
 "apply these settings only with GUIs, like MacVim
 if has("gui_running")
 
