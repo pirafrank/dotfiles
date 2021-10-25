@@ -44,6 +44,9 @@ set wrapscan
 "syntax mode on
 syntax on
 
+
+""" tabs and indentation
+
 "allow backspacing over (indent,eol,start) everything in insert mode
 set bs=2
 
@@ -53,6 +56,17 @@ set ai
 "enable smart indent
 set si
 
+" set tabstop=4 "4 space tab
+" set shiftwidth=4 "The amount to block indent when using < and >
+" set smarttab "Uses shiftwidth instead of tabstop at start of lines
+" set expandtab "Replaces a <TAB> with spaces (more portable)
+" set softtabstop=4 "Causes backspace to delete 4 spaces = converted <TAB>
+set shiftwidth=2
+set tabstop=8 softtabstop=0 expandtab
+
+
+""" lines and cursor
+
 "show line,column
 set ruler
 
@@ -60,12 +74,11 @@ set ruler
 set number "relativenumber
 highlight LineNr ctermfg=grey
 
-"spaces for indenting
-set shiftwidth=2
+" highlight the current line
+set cursorline
 
-"use spaces instead of tabs
-"set expandtab
-set tabstop=8 softtabstop=0 expandtab
+" highlight the current column
+set cursorcolumn
 
 
 """ paste options
