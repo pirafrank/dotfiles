@@ -2,6 +2,9 @@
 """ load base vimrc file
 source ~/dotfiles/vim/base.vimrc
 
+""" load backup config
+source ~/dotfiles/vim/backup.vimrc
+
 """ plugins
 
 " using vim-plug as plugin manager
