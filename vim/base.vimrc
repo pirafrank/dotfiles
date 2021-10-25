@@ -1,6 +1,12 @@
 
-"set encoding
+"set encoding (internal representation)
 set encoding=utf-8
+
+" representation that will be used when the file is written
+"set fileencoding = utf-8
+
+" possible encodings to test when reading a file
+set fileencodings=utf-8,latin-1,cp1251
 
 "Use Vim settings in place of Vi ones
 set nocompatible
