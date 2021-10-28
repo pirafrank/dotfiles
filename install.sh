@@ -88,6 +88,9 @@ function viminstall {
     ln -s ${HOME}/dotfiles/vim/.vimrc ${HOME}/.vimrc
     mkdir -p ${HOME}/.vim
     ln -s ${HOME}/dotfiles/vim/.vim/colors ${HOME}/.vim/colors
+    mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
+    mkdir -p ${HOME}/.vim/backups && chmod 700 ${HOME}/.vim/backups
+    mkdir -p ${HOME}/.vim/undo && chmod 700 ${HOME}/.vim/undo
 }
 
 function vimplugininstall {

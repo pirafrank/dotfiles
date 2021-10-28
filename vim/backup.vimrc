@@ -5,9 +5,9 @@
 " it works only if directories exist
 " create them first with strict perms
 " (you may edit sensitive content in vim)
-silent !mkdir -p ~/.vim/swap && chmod 700 ~/.vim/swap
-silent !mkdir -p ~/.vim/backups && chmod 700 ~/.vim/backups
-silent !mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo
+"silent !mkdir -p ~/.vim/swap && chmod 700 ~/.vim/swap
+"silent !mkdir -p ~/.vim/backups && chmod 700 ~/.vim/backups
+"silent !mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo
 
 set swapfile
 set directory^=~/.vim/swap//
