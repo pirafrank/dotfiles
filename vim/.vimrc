@@ -49,6 +49,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
   " run :GoInstallBinaries after plugin install
 
+  " rust
+  Plug 'rust-lang/rust.vim', {'for': 'rs'}
+  " note: you need to run this first to install the required components
+  " rustup component add rls rust-analysis rust-src
+
   " fuzzy everything search
   " download the plugin from github to .fzf and
   " make sure to have the latest version of the fzf binary
@@ -118,6 +123,9 @@ call plug#end()
 				\  'java': ['javac'],
         \  'go': ['gopls'],
 				\ }
+
+  let g:ale_linters.rust = ['cargo', 'rls']
+  let g:ale_rust_rls_toolchain = 'stable'
 
   " enable omnicompletion (disabled by default)
   filetype plugin indent on
