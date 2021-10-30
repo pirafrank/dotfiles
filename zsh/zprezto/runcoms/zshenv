@@ -5,9 +5,15 @@
 # that should be available to other programs.
 # For example, $PATH, $EDITOR, and $PAGER
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+
+# https://blog.patshead.com/2011/04/improve-your-oh-my-zsh-startup-time-maybe.html
+skip_global_compinit=1
+
+# http://disq.us/p/f55b78
+setopt noglobalrcs
+
+# https://github.com/htr3n/zsh-config/blob/master/zshenv
+export SYSTEM=$(uname -s)
 
 # load custom environment
 source $HOME/.zsh_env
