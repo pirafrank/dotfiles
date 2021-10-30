@@ -1,3 +1,6 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 # tmux attach helper function
 if [ $# -eq 0 ]; then
   tmux ls;

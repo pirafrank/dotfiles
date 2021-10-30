@@ -1,1 +1,4 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 echo $(date '+%Y-%m-%d %H:%M:%S')

@@ -1,3 +1,6 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 # weather
 if [[ -z "$1" ]]; then
   curl https://wttr.in/

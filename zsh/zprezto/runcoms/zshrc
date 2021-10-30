@@ -1,3 +1,5 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
 
 # startup speed benchmarks
 # https://htr3n.github.io/2018/07/faster-zsh/

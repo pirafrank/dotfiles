@@ -1,3 +1,6 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 #
 # Executes commands at login in an interactive shell, post-zshrc.
 #

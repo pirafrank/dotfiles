@@ -1,3 +1,6 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 # update scw cli tool
 rm -f ~/bin2/scw
 curl -o ~/bin2/scw -L $(curl -sL https://api.github.com/repos/scaleway/scaleway-cli/releases/latest \
