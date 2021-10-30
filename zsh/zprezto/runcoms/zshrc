@@ -56,6 +56,12 @@ compinit
 # load aliases
 source $HOME/.zsh_aliases
 
+# lazy-load functions
+fpath=($fpath ~/dotfiles/zsh/autoloaded)
+for file in $(ls -1 ~/dotfiles/zsh/autoloaded); do
+  autoload -Uz $file
+done
+
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then
 source $HOME/.zsh_custom

@@ -1,0 +1,6 @@
+# weather
+if [[ -z "$1" ]]; then
+  curl https://wttr.in/
+else
+  curl https://wttr.in/"$1"
+fi
