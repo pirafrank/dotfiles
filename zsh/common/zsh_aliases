@@ -154,7 +154,7 @@ wth() { curl https://wttr.in/"$1" }
 rates() { curl http://rate.sx/"$1" }
 
 # update dotfiles
-dotup() { cd ~/dotfiles && git pull origin master && cd - }
+dotup() { cd ~/dotfiles && git pull --rebase --autostash origin main && cd - }
 
 # mkdir && cd
 mkcd() { mkdir -p "$1" && cd "$1" }
