@@ -1,3 +1,59 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+#
+# interactive env
+#
+
+# load junegunn/fzf if installed
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+  # if fd is present, make fzf use that
+  if [ ! -z "$(command -v fd)" ]; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  elif [ ! -z "$(command -v fdfind)"  ]; then
+    export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  fi
+fi
+
+# GPG for SSH authentication
+# do it only if there's TTY
+# -- look for macOS
+if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
+export "GPG_TTY=$(TTY)"
+export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
+# notes:
+#   for command line tty, ~/.gnupg/gpg-agent.conf needs:
+#       pinentry-program /usr/bin/pinentry-curses
+#   if needed, run the command below to force telling the agent which tty to use
+#     gpg-connect-agent updatestartuptty /bye
+fi
+# -- look for Linux (excluding WSL which needs socat and a different config)
+if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+fi
+
+# Scaleway CLI autocomplete initialization.
+if [[ $(command -v scw) ]]; then
+  eval "$(scw autocomplete script shell=zsh)"
+fi
+
+# Secure ShellFish iOS app integration
+if [[ -f "$HOME/.shellfishrc" ]]; then
+  source $HOME/.shellfishrc
+fi
+
+# krew
+if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]; then
+  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+fi
+
+# fasd to jump around
+if [ $(command -v fasd) ]; then
+  eval "$(fasd --init auto)"
+fi
+
 #
 # common aliases
 #
@@ -7,6 +63,7 @@ alias zshconfig="vim ~/.zshrc"
 alias omzconfig="vim ~/.oh-my-zsh"
 alias sshconfig="vim ~/.ssh/config"
 alias mmv='noglob zmv -W'
+alias history='history 1'
 
 # system
 alias nv='nvim'
@@ -131,49 +188,3 @@ alias vscode='open -a Visual\ Studio\ Code'
 alias fork='open -a /Applications/Fork.app'
 alias listen='lsof -iTCP -sTCP:LISTEN -n -P'
 fi
-
-#
-# common functions
-#
-
-tat() {
-  if [ $# -eq 0 ]; then
-    tmux ls;
-  else
-    tmux attach -t "$1" || tmux new -s "$1"
-  fi
-}
-
-# cheat.sh (as bash function)
-cs() { curl cheat.sh/"$1" }
-
-# weather
-wth() { curl https://wttr.in/"$1" }
-
-# rates
-rates() { curl http://rate.sx/"$1" }
-
-# update dotfiles
-dotup() { cd ~/dotfiles && git pull origin master && cd - }
-
-# mkdir && cd
-mkcd() { mkdir -p "$1" && cd "$1" }
-
-scwupdate() {
-        rm -f ~/bin2/scw
-        curl -o ~/bin2/scw -L $(curl -sL https://api.github.com/repos/scaleway/scaleway-cli/releases/latest \
-        | grep http | grep linux | grep x86_64 | cut -d':' -f 2,3 | cut -d'"' -f2)
-        chmod +x ~/bin2/scw
-}
-
-termcolors() {
-  for i in {0..255}; do  printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
-}
-
-today () {
-  echo $(date '+%Y%m%d')
-}
-
-now() {
-  echo $(date '+%Y-%m-%d %H:%M:%S')
-}

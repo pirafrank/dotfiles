@@ -1,3 +1,11 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# startup speed benchmarks
+# https://htr3n.github.io/2018/07/faster-zsh/
+# uncomment the line below, then source .zshrc and run zprof.
+#zmodload zsh/zprof
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -44,7 +52,7 @@ export HISTFILE=~/.zsh_history
 autoload zmv
 
 # bash autocompletion
-autoload bashcompinit
+autoload -Uz bashcompinit
 bashcompinit
 for file in $HOME/dotfiles/bash/completions/*(.); source $file
 
@@ -54,7 +62,13 @@ autoload -Uz compinit
 compinit
 
 # load aliases
-source $HOME/.zsh_aliases
+source $HOME/dotfiles/zsh/common/zsh_aliases
+
+# lazy-load functions
+fpath=($fpath ~/dotfiles/zsh/autoloaded)
+for file in $(ls -1 ~/dotfiles/zsh/autoloaded); do
+  autoload -Uz $file
+done
 
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then

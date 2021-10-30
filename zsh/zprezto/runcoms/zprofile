@@ -1,5 +1,12 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 #
 # Executes commands at login pre-zshrc.
+#
+# ".zprofile is meant as an alternative to .zlogin for ksh fans;
+# the two are not intended to be used together, although
+# this could certainly be done if desired."
 #
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
@@ -13,55 +20,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
-#
-# Editors
-#
+# kitty config dir
+export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
 
-export EDITOR='vim'
-export VISUAL='vim'
-export PAGER='less'
-
-#
-# Language
-#
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
-
-#
-# Paths
-#
-
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-  /opt/local/{bin,sbin}
-  /usr/local/{bin,sbin}
-  $path
-)
-
-#
-# Less
-#
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X and -F (exit if the content fits on one screen) to enable it.
-export LESS="-g -i -M -R -S -w -z-4"
-
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-if (( $#commands[(i)lesspipe(|.sh)] )); then
-  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-fi
-
-# load custom environment
-source $HOME/.zsh_env
+# default RAILS environment
+RAILS_ENV="development"

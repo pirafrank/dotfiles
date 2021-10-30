@@ -1,11 +1,22 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 #
 # Defines environment variables.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
+# .zshenv is always sourced, it often contains exported variables
+# that should be available to other programs.
+# For example, $PATH, $EDITOR, and $PAGER
 #
 
-# Ensure that a non-login, non-interactive shell has a defined environment.
-if [[ ( "$SHLVL" -eq 1 && ! -o LOGIN ) && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprofile"
-fi
+# https://blog.patshead.com/2011/04/improve-your-oh-my-zsh-startup-time-maybe.html
+skip_global_compinit=1
+
+# http://disq.us/p/f55b78
+setopt noglobalrcs
+
+# https://github.com/htr3n/zsh-config/blob/master/zshenv
+export SYSTEM=$(uname -s)
+
+# load custom environment
+source $HOME/dotfiles/zsh/common/zsh_env

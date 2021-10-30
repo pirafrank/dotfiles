@@ -1,0 +1,9 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# mkdir && cd
+if [[ -z "$1" ]]; then
+  echo "Exactly one argument expected"
+else
+  mkdir -p "$1" && cd "$1"
+fi

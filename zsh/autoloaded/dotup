@@ -1,0 +1,5 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# update dotfiles
+cd ~/dotfiles && git pull --rebase --autostash origin main && cd -

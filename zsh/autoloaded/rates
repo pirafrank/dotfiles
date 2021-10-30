@@ -1,0 +1,9 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# rates
+if [[ -z "$1" ]]; then
+  curl http://rate.sx/
+else
+  curl http://rate.sx/"$1"
+fi

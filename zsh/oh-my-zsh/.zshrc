@@ -1,3 +1,6 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -67,26 +70,24 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
 
-# You may need to manually set your language environment
-export LANG="en_US.UTF-8"
-export LC_ALL=$LANG
-
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
-EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
+
+# load environment
+source $HOME/dotfiles/zsh/common/zsh_env
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-source $HOME/.zsh_aliases
+source $HOME/dotfiles/zsh/common/zsh_aliases
 
 # key bindings
 bindkey '[C' forward-word # fixes ALT+right_arrow
@@ -100,9 +101,6 @@ export SAVEHIST=20000
 export HISTFILE=~/.zsh_history
 
 autoload zmv
-
-# load environment
-source $HOME/.zsh_env
 
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then

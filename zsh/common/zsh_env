@@ -1,26 +1,65 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
 # precedence is left to right, so paths on the left have higher priority
+
+#
+# Editors
+#
+
+export EDITOR='vim'
+export VISUAL='vim'
+export PAGER='less'
+
+#
+# Language
+#
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+  export LC_ALL=$LANG
+fi
+
+#
+# Paths
+#
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
+# Set the list of directories that cd searches.
+# cdpath=(
+#   $cdpath
+# )
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  $HOME/bin2
+  $HOME/dotfiles/bin
+  /opt/local/{bin,sbin}
+  /usr/local/{bin,sbin}
+  $path
+)
+
+#
+# Less
+#
+
+# Set the default Less options.
+# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
+# Remove -X and -F (exit if the content fits on one screen) to enable it.
+export LESS="-g -i -M -R -S -w -z-4"
+
+# Set the Less input preprocessor.
+# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
+if (( $#commands[(i)lesspipe(|.sh)] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+fi
 
 # setting sort order preference
 if [[ "$(uname -s)" == 'Linux' ]]; then
   export LC_COLLATE=en_US.utf8
 fi
-
-# kitty config dir
-export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
-
-# load junegunn/fzf if installed
-if [ -f ~/.fzf.zsh ]; then
-  source ~/.fzf.zsh
-  # if fd is present, make fzf use that
-  if [ ! -z "$(command -v fd)" ]; then
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
-  elif [ ! -z "$(command -v fdfind)"  ]; then
-    export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
-  fi
-fi
-
-# dotfiles binaries
-export PATH="$HOME/bin2:$HOME/dotfiles/bin:$PATH"
 
 # pyenv
 if [[ -d $HOME/.pyenv ]]; then
@@ -114,42 +153,3 @@ elif [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
   source /usr/local/rvm/scripts/rvm
 fi
 
-# default RAILS environment
-RAILS_ENV="development"
-
-# GPG for SSH authentication
-# do it only if there's TTY
-# -- look for macOS
-if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
-export "GPG_TTY=$(TTY)"
-export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
-# notes:
-#   for command line tty, ~/.gnupg/gpg-agent.conf needs:
-#       pinentry-program /usr/bin/pinentry-curses
-#   if needed, run the command below to force telling the agent which tty to use
-#     gpg-connect-agent updatestartuptty /bye
-fi
-# -- look for Linux (excluding WSL which needs socat and a different config)
-if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-fi
-
-# Scaleway CLI autocomplete initialization.
-if [[ $(command -v scw) ]]; then
-  eval "$(scw autocomplete script shell=zsh)"
-fi
-
-if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]; then
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
-
-# Secure ShellFish iOS app integration
-if [[ -f "$HOME/.shellfishrc" ]]; then
-  source $HOME/.shellfishrc
-fi
-
-# fasd to jump around
-if [ $(command -v fasd) ]; then
-  eval "$(fasd --init auto)"
-fi
