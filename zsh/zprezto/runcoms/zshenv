@@ -16,4 +16,4 @@ setopt noglobalrcs
 export SYSTEM=$(uname -s)
 
 # load custom environment
-source $HOME/.zsh_env
+source $HOME/dotfiles/zsh/common/zsh_env

@@ -78,13 +78,13 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # load environment
-source $HOME/.zsh_env
+source $HOME/dotfiles/zsh/common/zsh_env
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-source $HOME/.zsh_aliases
+source $HOME/dotfiles/zsh/common/zsh_aliases
 
 # key bindings
 bindkey '[C' forward-word # fixes ALT+right_arrow

@@ -60,7 +60,7 @@ autoload -Uz compinit
 compinit
 
 # load aliases
-source $HOME/.zsh_aliases
+source $HOME/dotfiles/zsh/common/zsh_aliases
 
 # lazy-load functions
 fpath=($fpath ~/dotfiles/zsh/autoloaded)
