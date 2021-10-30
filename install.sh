@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ### init
+
+SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # setup user config path for current operating system
 platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
@@ -99,18 +101,12 @@ function vimplugininstall {
 }
 
 function zpreztoinstall {
-    setopt EXTENDED_GLOB
-    for rcfile in "${ZDOTDIR:-$HOME}"/dotfiles/zsh/zprezto/runcoms/^README.md(.N); do
-      ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-    done
-
-    export ZPREZTODIR="${ZDOTDIR:-$HOME}/.zprezto"
-
-    # setup user defined themes for zprezto
-    ln -s "${ZDOTDIR:-$HOME}"/dotfiles/zsh/zprezto/zsh_user_themes "${ZDOTDIR:-$HOME}/.zsh_user_themes"
-
-    # powerlevel10k, installation is done automatically by ~/.zpreztorc
-    ln -s "${ZDOTDIR:-$HOME}"/dotfiles/zsh/common/p10k.zsh "${ZDOTDIR:-$HOME}/.p10k.zsh"
+    # check for zsh
+    if [[ -z $ZSH_NAME ]]; then
+      echo "'zpreztoinstall' function is meant to be run by zsh shell. Quitting..."
+      exit 1
+    fi
+    zsh "$SCRIPT_DIR/zprezto_install.sh"
 }
 
 function shellfishinstall {
