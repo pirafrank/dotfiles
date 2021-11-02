@@ -54,3 +54,35 @@ function prompt {
 
     return $userPrompt
 }
+
+# CDPATH equivalent in PowerShell
+# https://stackoverflow.com/questions/7236594/cdpath-functionality-in-powershell
+function cd2 {
+    param($path)
+    if(-not $path){return;}
+
+    if((test-path $path) -or (-not $env:CDPATH)){
+        Set-Location $path
+        return
+    }
+    $cdpath = $env:CDPATH.split(";") | % { $ExecutionContext.InvokeCommand.ExpandString($_) }
+    $npath = ""
+    foreach($p in $cdpath){
+        $tpath = join-path $p $path
+        if(test-path $tpath){$npath = $tpath; break;}
+    }
+    if($npath){
+        #write-host -fore yellow "Using CDPATH"
+        Set-Location $npath
+        return
+    }
+    set-location $path
+}
+set-alias -Name cd -value cd2 -Option AllScope
+# then set values like this $Env:CDPATH = ".;C:\Users\francesco\Code"
+$Env:CDPATH = ".;C:\Users\francesco\Code"
+
+# dir equivalent with target of symbolic links
+function Get-Detailed-List([string]$path){
+    Get-ChildItem $path -recurse -force | Where-Object{$_.LinkType} | Select-Object FullName,LinkType,Target
+}
