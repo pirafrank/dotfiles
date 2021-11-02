@@ -72,6 +72,13 @@ git config --global log.follow true
 # global git hooks
 git config --global core.hooksPath "$HOME/dotfiles/git/hooks"
 
+# terminate lines the unix way
+git config --global core.autocrlf false
+git config --global core.eol lf
+
+# default editor
+git config --global core.editor vim
+
 ####################
 #  delta config    #
 ####################
