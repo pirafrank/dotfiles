@@ -32,7 +32,7 @@
     "python.linting.enabled": true,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
-    "java.home": "C:\\Program Files\\Java\\jdk-11.0.10",
+    "java.home": "C:\\Java\\jdk-11.0.11",
     "maven.executable.options": "",
     "files.exclude": {
         "**/.classpath": true,
@@ -42,9 +42,8 @@
     },
     //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
-    "sonarlint.ls.javaHome": "C:\\Program Files\\Java\\jdk-11.0.10",
+    "sonarlint.ls.javaHome": "C:\\Java\\jdk-11.0.11",
     "auto-close-tag.SublimeText3Mode": true,
-    "editor.fontSize": 12,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "[javascript]": {
@@ -59,7 +58,7 @@
         "editor.defaultFormatter": "DotJoshJohnson.xml"
     },
     "remote.restoreForwardedPorts": true,
-    "editor.formatOnSaveMode": "modifications",
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
     "explorer.confirmDelete": false,
     "tabnine.experimentalAutoImports": false,
     "editor.acceptSuggestionOnEnter": "smart",
@@ -76,7 +75,6 @@
     "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
     "workbench.startupEditor": "newUntitledFile",
     "windowsTerminal.channel": "preview",
-    "terminal.integrated.fontSize": 12,
     "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
     "sonarlint.rules": {
         "java:S1135": {
@@ -100,9 +98,48 @@
     "code-runner.enableAppInsights": false,
     "terminal.integrated.tabs.enabled": true,
     "diffEditor.ignoreTrimWhitespace": false,
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true,
     "java.format.enabled": false,
     "editor.copyWithSyntaxHighlighting": false,
     "docker.showStartPage": false,
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+    "yaml.schemas": {},
+    "git.autofetch": true,
+    "gitlens.advanced.messages": {
+        "suppressCreatePullRequestPrompt": true
+    },
+    "json.schemas": [],
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.changes.locations": [
+        "overview",
+        "gutter"
+    ],
+    "security.workspace.trust.untrustedFiles": "open",
 }
