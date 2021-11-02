@@ -45,6 +45,7 @@ git config --global alias.ls "log -1 --name-status --show-signature"
 #
 git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
 git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.lg 'log --pretty=fuller --show-signature'
 
 # to list changes made on a particular file:
 #   git log --follow [filename]
@@ -52,7 +53,7 @@ git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Cr
 #   git ll --follow [filename]
 
 # to show changes inside files in a commit
-#   git show [commit hash] 
+#   git show [commit hash]
 
 ####################
 # editing defaults #
@@ -68,6 +69,9 @@ git config --global init.defaultBranch main
 # follow renames
 git config --global log.follow true
 
+# global git hooks
+git config --global core.hooksPath "$HOME/dotfiles/git/hooks"
+
 ####################
 #  delta config    #
 ####################
@@ -75,7 +79,7 @@ git config --global log.follow true
 # Note:
 # Wide lines in the left or right panel are currently truncated. If the truncation is a problem,
 # one approach is to set the width of Delta's output to be larger than your terminal (e.g.
-# delta --width 250) and ensure that less doesn't wrap long lines (e.g. export LESS=-RS); 
+# delta --width 250) and ensure that less doesn't wrap long lines (e.g. export LESS=-RS);
 # then one can scroll right to view the full content. (Another approach is to decrease font size
 # in your terminal.)
 #

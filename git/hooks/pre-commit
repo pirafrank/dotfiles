@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# Check against identities in your gpg secrets keys
+# for possible 'unverified' signed commit.
+
+# if gpgsign option is not set, do nothing
+[ -z $( git var -l | grep gpgsign | grep true ) ] && exit 0
+
+# if gpg is not present, do nothing
+[ $(command -v gpg) ] || exit 0
+
+# get author name
+AUTHOR_NAME=$( git var GIT_AUTHOR_IDENT | awk -vFS='<' '{print $1}' )
+
+# you may have multiple identities
+for email in $( gpg --list-secret-keys | grep uid | grep "$AUTHOR_NAME" | awk -vRS='>' -vFS='<' '{print $2}' | xargs echo )
+do
+  [ "$( git var GIT_AUTHOR_IDENT | grep $email )" ] && exit 0  # found match
+done
+echo "ERROR: Your commit may be unverified. No gpg private keys found with email $( git config user.email )"
+exit 1
