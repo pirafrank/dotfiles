@@ -77,6 +77,9 @@ alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
 alias sshforget='ssh-keygen -R'
 alias grep="grep -i"
 
+# git
+alias gg='git grep -i'
+
 # tmux
 alias main='tmux attach -t main || tmux new -s main'
 alias work='tmux attach -t work || tmux new -s work'

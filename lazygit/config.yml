@@ -11,6 +11,7 @@ gui:
     mainPanelSplitMode: 'vertical'
     showRandomTip: false
     showCommandLog: false
+    showFileTree: false
 customCommands:
   - key: 'f'
     command: "git {{if .SelectedFile.HasUnstagedChanges}} diff -b {{end}} {{.SelectedFile.Name}}"
