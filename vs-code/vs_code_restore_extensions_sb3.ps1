@@ -3,7 +3,9 @@ code --install-extension AdrianSanguineti.json-parse-validator
 code --install-extension alefragnani.Bookmarks
 code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension anseki.vscode-color
+code --install-extension AzureADB2CTools.aadb2c
 code --install-extension bmuskalla.vscode-tldr
+code --install-extension burkeholland.simple-timer
 code --install-extension chris-noring.node-snippets
 code --install-extension christian-kohler.npm-intellisense
 code --install-extension chrmarti.ssh
@@ -23,10 +25,12 @@ code --install-extension formulahendry.auto-close-tag
 code --install-extension formulahendry.code-runner
 code --install-extension gerane.Theme-FlatlandDark
 code --install-extension gerane.Theme-FlatlandMonokai
+code --install-extension GitHub.codespaces
 code --install-extension GitHub.remotehub
 code --install-extension golang.go
 code --install-extension GrapeCity.gc-excelviewer
 code --install-extension hangxingliu.vscode-nginx-conf-hint
+code --install-extension JHeilingbrunner.vscode-gnupg-tool
 code --install-extension jonsmithers.open-in-vim
 code --install-extension loganarnett.lambda-snippets
 code --install-extension mads-hartmann.bash-ide-vscode
@@ -41,6 +45,7 @@ code --install-extension ms-python.python
 code --install-extension ms-python.vscode-pylance
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-toolsai.jupyter-keymap
+code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode.azure-account
 code --install-extension ms-vscode.powershell
 code --install-extension ms-vscode.vscode-typescript-tslint-plugin
@@ -78,6 +83,6 @@ code --install-extension vscjava.vscode-spring-initializr
 code --install-extension vscode-icons-team.vscode-icons
 code --install-extension vsls-contrib.gistfs
 code --install-extension will-stone.plastic
-code --install-extension Xherdi.fluent-terminal
 code --install-extension xshrim.txt-syntax
+code --install-extension yzhang.markdown-all-in-one
 code --install-extension Zignd.html-css-class-completion

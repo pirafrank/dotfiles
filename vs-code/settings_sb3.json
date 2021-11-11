@@ -64,7 +64,7 @@
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "sonarlint.pathToNodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Default",
     "vsicons.dontShowNewVersionMessage": true,
     "workbench.editor.wrapTabs": true,
     "workbench.editor.decorations.badges": true,
