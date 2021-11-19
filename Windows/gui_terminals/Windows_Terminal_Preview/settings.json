@@ -1,4 +1,5 @@
 {
+    "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": 
     [
@@ -9,14 +10,6 @@
                 "singleLine": false
             },
             "keys": "ctrl+c"
-        },
-        {
-            "command": "tabSearch",
-            "keys": "ctrl+shift+space"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
         },
         {
             "command": "openNewTabDropdown",
@@ -30,12 +23,20 @@
             "keys": "ctrl+shift+n"
         },
         {
-            "command": "paste",
-            "keys": "ctrl+v"
+            "command": "tabSearch",
+            "keys": "ctrl+shift+space"
+        },
+        {
+            "command": "find",
+            "keys": "ctrl+shift+f"
         },
         {
             "command": "duplicateTab",
             "keys": "ctrl+shift+d"
+        },
+        {
+            "command": "paste",
+            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -77,14 +78,14 @@
     ],
     "copyFormatting": "none",
     "copyOnSelect": true,
-    "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+    "defaultProfile": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+    "firstWindowPreference": "persistedWindowLayout",
     "initialCols": 130,
     "initialRows": 40,
     "profiles": 
     {
         "defaults": 
         {
-            "acrylicOpacity": 0.94999999999999996,
             "bellStyle": 
             [
                 "window",
@@ -98,6 +99,7 @@
             },
             "historySize": 10000,
             "intenseTextStyle": "bold",
+            "opacity": 95,
             "padding": "1, 1, 1, 1",
             "snapOnInput": true,
             "useAcrylic": true
@@ -113,13 +115,14 @@
                 "name": "Windows PowerShell"
             },
             {
-                "colorScheme": "One Half Dark",
+                "colorScheme": "Solarized Dark",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
                 "intenseTextStyle": "bold",
                 "name": "WSL",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "//wsl$/Ubuntu-20.04/home/francesco"
             },
             {
                 "commandline": "C:/Program Files/Git/bin/bash.exe --login",
@@ -146,6 +149,8 @@
                 "name": "Command Prompt"
             },
             {
+                "colorScheme": "One Half Dark",
+                "experimental.retroTerminalEffect": false,
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
                 "hidden": false,
                 "intenseTextStyle": "bold",
@@ -365,5 +370,6 @@
         }
     ],
     "tabSwitcherMode": "disabled",
+    "useAcrylicInTabRow": true,
     "windowingBehavior": "useAnyExisting"
 }
