@@ -142,4 +142,6 @@
         "gutter"
     ],
     "security.workspace.trust.untrustedFiles": "open",
+    "nginx-conf-hint.syntax": "sublime",
+    "markdown.extension.toc.updateOnSave": false,
 }
