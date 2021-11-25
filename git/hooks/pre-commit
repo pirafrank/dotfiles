@@ -4,7 +4,7 @@
 # for possible 'unverified' signed commit.
 
 # if gpgsign option is not set, do nothing
-[ -z $( git var -l | grep gpgsign | grep true ) ] && exit 0
+[ -z "$( git var -l | grep gpgsign | grep true)" ] && exit 0
 
 # if gpg is not present, do nothing
 [ $(command -v gpg) ] || exit 0
