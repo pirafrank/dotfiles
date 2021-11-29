@@ -27,4 +27,5 @@
   "code-runner.enableAppInsights": false,
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "java.format.enabled": false,
+  "nginx-conf-hint.syntax": "sublime",
 }

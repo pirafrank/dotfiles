@@ -3,6 +3,7 @@ code --install-extension AdrianSanguineti.json-parse-validator
 code --install-extension agauniyal.vscode-caniuse
 code --install-extension akamud.vscode-caniuse
 code --install-extension alefragnani.Bookmarks
+code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension Angular.ng-template
 code --install-extension astallinger.sourcetrail
 code --install-extension bmuskalla.vscode-tldr
@@ -11,6 +12,7 @@ code --install-extension christian-kohler.npm-intellisense
 code --install-extension christian-kohler.path-intellisense
 code --install-extension chrmarti.ssh
 code --install-extension codezombiech.gitignore
+code --install-extension cschleiden.vscode-github-actions
 code --install-extension DavidAnson.vscode-markdownlint
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension DotJoshJohnson.xml
@@ -19,7 +21,10 @@ code --install-extension EditorConfig.EditorConfig
 code --install-extension esbenp.prettier-vscode
 code --install-extension formulahendry.code-runner
 code --install-extension hangxingliu.vscode-nginx-conf-hint
+code --install-extension hbenl.vscode-test-explorer
+code --install-extension jonsmithers.open-in-vim
 code --install-extension mads-hartmann.bash-ide-vscode
+code --install-extension mark-tucker.aws-cli-configure
 code --install-extension mindaro-dev.file-downloader
 code --install-extension mindaro.mindaro
 code --install-extension mrmlnc.vscode-duplicate
@@ -30,7 +35,9 @@ code --install-extension ms-python.python
 code --install-extension ms-python.vscode-pylance
 code --install-extension ms-toolsai.jupyter
 code --install-extension ms-toolsai.jupyter-keymap
+code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.test-adapter-converter
 code --install-extension ms-vsliveshare.vsliveshare
 code --install-extension ms-vsliveshare.vsliveshare-audio
 code --install-extension ms-vsliveshare.vsliveshare-pack
@@ -47,7 +54,9 @@ code --install-extension rogalmic.bash-debug
 code --install-extension rust-lang.rust
 code --install-extension SonarSource.sonarlint-vscode
 code --install-extension takkaO.open-window-tab-context
+code --install-extension thundra.thundra-debugger
 code --install-extension tomoki1207.pdf
+code --install-extension vadimcn.vscode-lldb
 code --install-extension VisualStudioExptTeam.vscodeintellicode
 code --install-extension vscjava.vscode-java-debug
 code --install-extension vscjava.vscode-java-dependency
