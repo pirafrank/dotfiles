@@ -1,5 +1,6 @@
 ﻿code --install-extension 42Crunch.vscode-openapi
 code --install-extension AdrianSanguineti.json-parse-validator
+code --install-extension af4jm.vscode-icalendar
 code --install-extension alefragnani.Bookmarks
 code --install-extension amazonwebservices.aws-toolkit-vscode
 code --install-extension anseki.vscode-color
@@ -48,7 +49,6 @@ code --install-extension ms-toolsai.jupyter-keymap
 code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode.azure-account
 code --install-extension ms-vscode.powershell
-code --install-extension ms-vscode.vscode-typescript-tslint-plugin
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension ms-vscode-remote.remote-ssh-edit
