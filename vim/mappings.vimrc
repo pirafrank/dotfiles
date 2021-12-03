@@ -22,6 +22,26 @@ nnoremap <C-L> <C-w><C-L>
 nnoremap <C-H> <C-w><C-H>
 
 
+""" signcolumn
+
+" toggle number and sign columns
+nnoremap <silent> <C-t> :call ToggleNumAndSignColumns()<CR>
+
+" toggle function. Works on vim>=8.1 or NeoVim
+" credits: https://stackoverflow.com/posts/53930943/revisions
+function! ToggleNumAndSignColumns()
+    if !exists("b:signcolumn_on") || b:signcolumn_on
+        set signcolumn=no
+        set nonumber
+        let b:signcolumn_on=0
+    else
+        set signcolumn=yes
+        set number
+        let b:signcolumn_on=1
+    endif
+endfunction
+
+
 """ per filetype settings
 
 " run code by pressing Ctrl+r in normal mode
