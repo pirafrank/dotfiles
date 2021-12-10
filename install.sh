@@ -128,7 +128,6 @@ if [ $# -eq 0 ]; then
   makedirs
   bashinstall
   gitinstall
-  gpginstall
   editorconfiginstall
   inputrcinstall
   htoprcinstall
