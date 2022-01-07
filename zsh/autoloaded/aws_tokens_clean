@@ -1,0 +1,10 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# https://aws.amazon.com/premiumsupport/knowledge-center/authenticate-mfa-cli/
+
+unset  AWS_ACCESS_KEY_ID
+unset  AWS_SECRET_ACCESS_KEY
+unset  AWS_SESSION_TOKEN
+
+echo "Variables unset"

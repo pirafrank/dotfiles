@@ -83,3 +83,13 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Added by serverless binary installer
+if [ -d "$HOME/.serverless/bin" ]; then
+  export PATH="$HOME/.serverless/bin:$PATH"
+fi
+
+# aws-cli autocomplete
+if [ ! -z $(command -v aws_completer) ]; then
+  complete -C 'aws_completer' aws
+fi
