@@ -8,19 +8,23 @@ echo "RAT: Refresh AWS Tokens"
 if [[ -z "$1" ]]; then
   echo "No OTP code provided. Exiting."
 else
+  aws_tokens_clean
   MFA_ARN=$(cat ~/.config/aws/${USER}/mfa)
   RES="$(aws sts get-session-token --serial-number $MFA_ARN --token-code $1 --duration-seconds 86400)"
-  export AWS_ACCESS_KEY_ID="$(printf "$RES" | jq -r '.Credentials.AccessKeyId')"
-  export AWS_SECRET_ACCESS_KEY="$(printf "$RES" | jq -r '.Credentials.SecretAccessKey')"
-  export AWS_SESSION_TOKEN="$(printf "$RES" | jq -r '.Credentials.SessionToken')"
-  TARGET="/mnt/c/Users/${USER}/.aws/credentials"
-  if [ -f ${TARGET} ]; then
-    mv ${TARGET} "${TARGET}.bkp"
-  fi
-  cat <<EOF > ${TARGET}
+  if [ $? -eq 0 ]; then
+    export AWS_ACCESS_KEY_ID="$(printf "$RES" | jq -r '.Credentials.AccessKeyId')"
+    export AWS_SECRET_ACCESS_KEY="$(printf "$RES" | jq -r '.Credentials.SecretAccessKey')"
+    export AWS_SESSION_TOKEN="$(printf "$RES" | jq -r '.Credentials.SessionToken')"
+    TARGET="/mnt/c/Users/${USER}/.aws/credentials"
+    if [ -f ${TARGET} ]; then
+      mv ${TARGET} "${TARGET}.bkp"
+    fi
+    cat <<EOF > ${TARGET}
 [mfa]
 aws_access_key_id = "${AWS_ACCESS_KEY_ID}"
 aws_secret_access_key = "${AWS_SECRET_ACCESS_KEY}"
 aws_session_token = "${AWS_SESSION_TOKEN}"
 EOF
+    echo "Tokens refreshed"
+  fi
 fi
