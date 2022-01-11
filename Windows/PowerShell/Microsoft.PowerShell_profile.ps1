@@ -10,6 +10,7 @@ Set-Alias which get-command
 Set-Alias lg lazygit
 Set-Alias open Invoke-Item
 Set-Alias k kubectl
+Set-Alias dk docker
 
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
