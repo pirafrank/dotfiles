@@ -18,3 +18,9 @@ customCommands:
     context: 'files'
     description: 'diff --ignore-space-change'
     subprocess: true
+  - key: 'L'
+    command: "git la"
+    context: 'global'
+    description: 'git la'
+    subprocess: true
+
