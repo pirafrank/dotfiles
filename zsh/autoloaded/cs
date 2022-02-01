@@ -3,7 +3,7 @@
 
 # cheat.sh (as bash function)
 if [[ -z "$1" ]]; then
-  curl cheat.sh
+  curl -sSL cheat.sh | less
 else
-  curl cheat.sh/"$1"
+  curl -sSL cheat.sh/"$1" | less
 fi
