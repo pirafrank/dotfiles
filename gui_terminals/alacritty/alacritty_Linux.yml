@@ -1,4 +1,8 @@
 
+window:
+  # windows.opacity since version 0.10.0
+  opacity: 0.95
+
 key_bindings:
   - { key: V, mods: Control, action: Paste }
   - { key: Q, mods: Control|Shift, action: Quit }
@@ -10,8 +14,6 @@ selection:
   save_to_clipboard: true
 
 # Alacritty config
-
-background_opacity: 0.95
 
 font:
   size: 10

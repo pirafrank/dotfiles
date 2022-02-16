@@ -2,6 +2,8 @@ shell:
     program: "C:\\Windows\\System32\\wsl.exe"
 
 window:
+  # windows.opacity since version 0.10.0
+  opacity: 0.95
   dimensions:
     columns: 140
     lines: 48
@@ -17,8 +19,6 @@ selection:
   save_to_clipboard: true
 
 # Alacritty config
-
-background_opacity: 0.95
 
 font:
   size: 10
