@@ -67,7 +67,10 @@ code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension rogalmic.bash-debug
 code --install-extension rust-lang.rust
+code --install-extension snyk-security.snyk-vulnerability-scanner
 code --install-extension SonarSource.sonarlint-vscode
+code --install-extension spmeesseman.vscode-taskexplorer
+code --install-extension svelte.svelte-vscode
 code --install-extension takkaO.open-window-tab-context
 code --install-extension thundra.thundra-debugger
 code --install-extension Tyriar.windows-terminal

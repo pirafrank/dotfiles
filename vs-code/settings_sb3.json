@@ -133,7 +133,8 @@
     "yaml.schemas": {},
     "git.autofetch": true,
     "gitlens.advanced.messages": {
-        "suppressCreatePullRequestPrompt": true
+        "suppressCreatePullRequestPrompt": true,
+        "suppressRebaseSwitchToTextWarning": true
     },
     "json.schemas": [],
     "gitlens.advanced.fileHistoryFollowsRenames": true,
@@ -147,4 +148,22 @@
     "git.confirmSync": false,
     "aws.profile": "profile:default",
     "aws.onDefaultRegionMissing": "add",
+    "githubIssues.queries": [
+        {
+            "label": "My Issues",
+            "query": "default"
+        },
+        {
+            "label": "Created Issues",
+            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
+        },
+        {
+            "label": "Recent Issues",
+            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
+        }
+    ],
+    "svelte.enable-ts-plugin": true,
+    "snyk.yesWelcomeNotification": false,
+    "snyk.yesCrashReport": false,
+    "snyk.token": "6e27800a-d338-48d6-8ab4-cb7c0c62c0f4",
 }
