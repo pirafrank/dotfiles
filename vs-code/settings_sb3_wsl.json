@@ -28,4 +28,6 @@
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "java.format.enabled": false,
   "nginx-conf-hint.syntax": "sublime",
+  "sonarlint.disableTelemetry": true,
+  "sonarlint.pathToNodeExecutable": "node",
 }
