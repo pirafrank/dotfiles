@@ -4,12 +4,35 @@
     "actions": 
     [
         {
+            "command": "unbound",
+            "keys": "ctrl+tab"
+        },
+        {
+            "command": "unbound",
+            "keys": "shift+insert"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+shift+tab"
+        },
+        {
+            "command": "unbound",
+            "keys": "ctrl+c"
+        },
+        {
+            "command": "unbound",
+            "keys": "win+sc(41)"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+enter"
+        },
+        {
             "command": 
             {
                 "action": "copy",
                 "singleLine": false
-            },
-            "keys": "ctrl+c"
+            }
         },
         {
             "command": "openNewTabDropdown",
@@ -29,6 +52,10 @@
         {
             "command": "find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "command": "openTabRenamer",
+            "keys": "ctrl+shift+r"
         },
         {
             "command": "duplicateTab",
@@ -115,14 +142,14 @@
                 "name": "Windows PowerShell"
             },
             {
-                "colorScheme": "Solarized Dark",
+                "colorScheme": "One Half Dark",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
                 "intenseTextStyle": "bold",
                 "name": "WSL",
                 "source": "Windows.Terminal.Wsl",
-                "startingDirectory": "//wsl$/Ubuntu-20.04/home/francesco"
+                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\francesco"
             },
             {
                 "commandline": "C:/Program Files/Git/bin/bash.exe --login",

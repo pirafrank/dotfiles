@@ -82,6 +82,9 @@
         },
         "java:S125": {
             "level": "off"
+        },
+        "Web:BoldAndItalicTagsCheck": {
+            "level": "off"
         }
     },
     "workbench.editorAssociations": {
@@ -167,4 +170,5 @@
     "snyk.yesCrashReport": false,
     "snyk.yesTelemetry": false,
     "sonarlint.disableTelemetry": true,
+    "telemetry.telemetryLevel": "off",
 }
