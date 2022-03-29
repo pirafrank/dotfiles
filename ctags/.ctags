@@ -1,0 +1,7 @@
+# you can create a ~/.ctags file with your config, not to specify it on CLI
+--recurse=yes
+--tag-relative=yes
+--exclude=.git
+--exclude=node_modules
+--exclude=test
+

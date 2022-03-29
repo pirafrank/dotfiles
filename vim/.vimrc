@@ -5,6 +5,9 @@ source ~/dotfiles/vim/base.vimrc
 """ load backup config
 source ~/dotfiles/vim/backup.vimrc
 
+""" load ctags configuration
+source ~/dotfiles/vim/ctags.vimrc
+
 """ plugins
 
 " using vim-plug as plugin manager
