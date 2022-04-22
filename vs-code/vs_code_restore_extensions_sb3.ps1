@@ -41,6 +41,7 @@ code --install-extension mikestead.dotenv
 code --install-extension mrmlnc.vscode-duplicate
 code --install-extension ms-azure-devops.azure-pipelines
 code --install-extension ms-azuretools.vscode-docker
+code --install-extension ms-dotnettools.csharp
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension ms-python.python
 code --install-extension ms-python.vscode-pylance
@@ -48,7 +49,9 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension ms-toolsai.jupyter-keymap
 code --install-extension ms-toolsai.jupyter-renderers
 code --install-extension ms-vscode.azure-account
+code --install-extension ms-vscode.hexeditor
 code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.remote-repositories
 code --install-extension ms-vscode-remote.remote-containers
 code --install-extension ms-vscode-remote.remote-ssh
 code --install-extension ms-vscode-remote.remote-ssh-edit

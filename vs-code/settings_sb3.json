@@ -171,4 +171,5 @@
     "snyk.yesTelemetry": false,
     "sonarlint.disableTelemetry": true,
     "telemetry.telemetryLevel": "off",
+    "go.toolsManagement.autoUpdate": true,
 }
