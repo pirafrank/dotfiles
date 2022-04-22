@@ -4,6 +4,10 @@
     "actions": 
     [
         {
+            "command": "find",
+            "keys": "ctrl+shift+f"
+        },
+        {
             "command": "unbound",
             "keys": "ctrl+tab"
         },
@@ -28,6 +32,21 @@
             "keys": "alt+enter"
         },
         {
+            "command": "duplicateTab",
+            "keys": "ctrl+shift+d"
+        },
+        {
+            "command": "paste",
+            "keys": "ctrl+v"
+        },
+        {
+            "command": 
+            {
+                "action": "prevTab"
+            },
+            "keys": "ctrl+shift+left"
+        },
+        {
             "command": 
             {
                 "action": "copy",
@@ -35,8 +54,16 @@
             }
         },
         {
+            "command": "openTabRenamer",
+            "keys": "ctrl+shift+r"
+        },
+        {
             "command": "openNewTabDropdown",
             "keys": "ctrl+shift+t"
+        },
+        {
+            "command": "tabSearch",
+            "keys": "ctrl+shift+space"
         },
         {
             "command": 
@@ -44,26 +71,6 @@
                 "action": "newWindow"
             },
             "keys": "ctrl+shift+n"
-        },
-        {
-            "command": "tabSearch",
-            "keys": "ctrl+shift+space"
-        },
-        {
-            "command": "find",
-            "keys": "ctrl+shift+f"
-        },
-        {
-            "command": "openTabRenamer",
-            "keys": "ctrl+shift+r"
-        },
-        {
-            "command": "duplicateTab",
-            "keys": "ctrl+shift+d"
-        },
-        {
-            "command": "paste",
-            "keys": "ctrl+v"
         },
         {
             "command": 
@@ -87,13 +94,6 @@
                 "action": "nextTab"
             },
             "keys": "ctrl+shift+right"
-        },
-        {
-            "command": 
-            {
-                "action": "prevTab"
-            },
-            "keys": "ctrl+shift+left"
         },
         {
             "command": 
@@ -135,11 +135,11 @@
         [
             {
                 "colorScheme": "One Half Dark",
-                "commandline": "powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "intenseTextStyle": "bold",
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "startingDirectory": "%USERPROFILE%"
             },
             {
                 "colorScheme": "One Half Dark",
@@ -170,7 +170,6 @@
                 "startingDirectory": "C:/Users/francesco"
             },
             {
-                "commandline": "cmd.exe",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
@@ -183,6 +182,20 @@
                 "intenseTextStyle": "bold",
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
+            },
+            {
+                "commandline": "C:\\Users\\francesco\\AppData\\Local\\Programs\\Python\\Python39\\Scripts\\aws-shell.exe",
+                "guid": "{5bc3285e-c997-4023-bcbf-4834266739af}",
+                "hidden": false,
+                "icon": "C:\\Users\\francesco\\AppData\\Roaming\\aws_logo.png",
+                "name": "AWS CloudShell",
+                "startingDirectory": "%USERPROFILE%"
+            },
+            {
+                "guid": "{1777cdf0-b2c4-5a63-a204-eb60f349ea7c}",
+                "hidden": false,
+                "name": "Alpine",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
