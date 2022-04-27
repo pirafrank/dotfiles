@@ -32,6 +32,22 @@
             "keys": "alt+enter"
         },
         {
+            "command": "unbound",
+            "keys": "alt+down"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+left"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+right"
+        },
+        {
+            "command": "unbound",
+            "keys": "alt+up"
+        },
+        {
             "command": "duplicateTab",
             "keys": "ctrl+shift+d"
         },
@@ -42,24 +58,24 @@
         {
             "command": 
             {
-                "action": "prevTab"
-            },
-            "keys": "ctrl+shift+left"
-        },
-        {
-            "command": 
-            {
                 "action": "copy",
                 "singleLine": false
             }
         },
         {
-            "command": "openTabRenamer",
-            "keys": "ctrl+shift+r"
+            "command": 
+            {
+                "action": "prevTab"
+            },
+            "keys": "ctrl+shift+left"
         },
         {
             "command": "openNewTabDropdown",
             "keys": "ctrl+shift+t"
+        },
+        {
+            "command": "openTabRenamer",
+            "keys": "ctrl+shift+r"
         },
         {
             "command": "tabSearch",
@@ -101,6 +117,38 @@
                 "action": "openSettings"
             },
             "keys": "ctrl+shift+comma"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "down"
+            },
+            "keys": "ctrl+shift+j"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "left"
+            },
+            "keys": "ctrl+shift+h"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "right"
+            },
+            "keys": "ctrl+shift+l"
+        },
+        {
+            "command": 
+            {
+                "action": "moveFocus",
+                "direction": "up"
+            },
+            "keys": "ctrl+shift+k"
         }
     ],
     "copyFormatting": "none",
@@ -163,7 +211,7 @@
             {
                 "commandline": "C:/cygwin64/bin/bash.exe -i -l",
                 "guid": "{b3b0e9e6-308d-420f-8d81-7d840cadac04}",
-                "hidden": false,
+                "hidden": true,
                 "icon": "C:/cygwin64/Cygwin.ico",
                 "intenseTextStyle": "bold",
                 "name": "Cygwin",
@@ -192,10 +240,33 @@
                 "startingDirectory": "%USERPROFILE%"
             },
             {
+                "elevate": false,
                 "guid": "{1777cdf0-b2c4-5a63-a204-eb60f349ea7c}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Alpine",
                 "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "colorScheme": "One Half Dark",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d Ubuntu-20.04 ssh leia",
+                "guid": "{71ed9934-7d8e-42aa-b8c8-b67a4a41bb7c}",
+                "hidden": false,
+                "icon": "\ud83d\udcbb",
+                "intenseTextStyle": "bold",
+                "name": "leia",
+                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\francesco",
+                "tabTitle": "leia"
+            },
+            {
+                "colorScheme": "One Half Dark",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d Ubuntu-20.04 kdash",
+                "guid": "{9995e161-f49c-405e-95c0-d029561c64fc}",
+                "hidden": false,
+                "icon": "\u2693",
+                "intenseTextStyle": "bold",
+                "name": "kdash",
+                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\francesco",
+                "tabTitle": "kdash"
             }
         ]
     },
