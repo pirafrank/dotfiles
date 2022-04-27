@@ -73,5 +73,5 @@ autocmd FileType asm set noexpandtab shiftwidth=8 softtabstop=0 syntax=nasm
 "autocmd FileType py setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 
 " javascript and typescript
-autocmd filetype javascript typescript set shiftwidth=2 tabstop=2 expandtab
+autocmd filetype javascript,typescript set shiftwidth=2 tabstop=2 expandtab
 
