@@ -38,6 +38,15 @@ function bashinstall {
     ln -s ${HOME}/dotfiles/bash/.bashrc ${HOME}/.bashrc
 }
 
+function ctagsinstall {
+  if [ ! -f "${HOME}/.ctags" ]; then
+    ln -s "${HOME}/dotfiles/ctags/.ctags" "${HOME}/.ctags"
+    [ $? -eq 0 ] && echo 'Symlink created. Install ok.'
+  else
+    echo 'Symlink already exists. Install skipped.'
+  fi
+}
+
 function fzfinstall {
     ln -s ${HOME}/dotfiles/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
     ln -s ${HOME}/dotfiles/fzf/.fzf.bash ${HOME}/.fzf.bash
@@ -133,6 +142,7 @@ if [ $# -eq 0 ]; then
   htoprcinstall
   viminstall
   shellfishinstall
+  ctagsinstall
   exit 0;
 fi
 
@@ -157,6 +167,10 @@ case "$1" in
         viminstall
         zpreztoinstall
         shellfishinstall
+        ctagsinstall
+        ;;
+    ctags)
+        ctagsinstall
         ;;
     fzf)
         fzfinstall
