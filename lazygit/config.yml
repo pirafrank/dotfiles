@@ -14,12 +14,12 @@ gui:
     showCommandLog: false
     showFileTree: false
 customCommands:
-  - key: 'f'
-    command: "git {{if .SelectedFile.HasUnstagedChanges}} diff -b {{end}} {{.SelectedFile.Name}}"
+  - key: '<c-f>'
+    command: "{{if .SelectedFile.HasUnstagedChanges}} git diff -b {{.SelectedFile.Name}} && read -s -n1 key {{end}}"
     context: 'files'
     description: 'diff --ignore-space-change'
     subprocess: true
-  - key: 'L'
+  - key: '<c-l>'
     command: "git la"
     context: 'global'
     description: 'git la'
