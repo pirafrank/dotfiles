@@ -96,6 +96,9 @@ call plug#begin('~/.vim/plugged')
   " Most Recently Used (MRU) Vim Plugin
   Plug 'yegappan/mru'
 
+  " fzf + rg + vim integration
+  Plug 'wookayin/fzf-ripgrep.vim'
+
 call plug#end()
 
 
