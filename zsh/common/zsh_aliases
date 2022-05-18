@@ -8,12 +8,19 @@
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
-  export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+  export FZF_DEFAULT_OPTS='--layout=reverse'
   # if fd is present, make fzf use that
-  if [ ! -z "$(command -v fd)" ]; then
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
-  elif [ ! -z "$(command -v fdfind)"  ]; then
+  if [ ! -z "$(command -v fdfind)" ]; then
     export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  elif [ ! -z "$(command -v fd)"  ]; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
+  fi
+
+  # config fzf preview alias
+  if [ "$(command -v batcat)" ]; then
+    alias fp="fzf --preview 'batcat --style=numbers --color=always --line-range :500 {}'"
+  elif [ "$(command -v bat)" ]; then
+    alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
   fi
 fi
 
