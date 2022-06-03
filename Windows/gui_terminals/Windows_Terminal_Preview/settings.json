@@ -191,13 +191,14 @@
             },
             {
                 "colorScheme": "One Half Dark",
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe ~ -d Ubuntu-20.04",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
                 "intenseTextStyle": "bold",
                 "name": "WSL",
                 "source": "Windows.Terminal.Wsl",
-                "startingDirectory": "\\\\wsl$\\Ubuntu-20.04\\home\\francesco"
+                "startingDirectory": null
             },
             {
                 "commandline": "C:/Program Files/Git/bin/bash.exe --login",
