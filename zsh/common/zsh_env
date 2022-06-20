@@ -147,6 +147,12 @@ if [[ -d "$HOME/.cargo/bin" ]]; then
 export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# deno.land
+if [[ -d "$HOME/.deno" ]]; then
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
 # ruby
 # for install as user
 if [[ -d "$HOME/.rvm" ]]; then
@@ -156,4 +162,3 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 elif [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
   source /usr/local/rvm/scripts/rvm
 fi
-
