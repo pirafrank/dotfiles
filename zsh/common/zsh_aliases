@@ -162,6 +162,8 @@ alias npmlistg='npm list -g --depth=0'
 
 # k8s
 alias k='kubectl'
+alias kustomize='kubectl kustomize'
+alias kust='kustomize'
 
 # jekyll
 alias jk='jekyll'
