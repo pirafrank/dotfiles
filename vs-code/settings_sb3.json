@@ -172,4 +172,17 @@
     "sonarlint.disableTelemetry": true,
     "telemetry.telemetryLevel": "off",
     "go.toolsManagement.autoUpdate": true,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": false,
+        "yaml": true,
+        "plaintext": false,
+        "markdown": false,
+        "javascript": false
+    },
+    "terminal.integrated.shellIntegration.enabled": true,
+    "serverlessIDE.telemetry.enableTelemetry": false,
 }

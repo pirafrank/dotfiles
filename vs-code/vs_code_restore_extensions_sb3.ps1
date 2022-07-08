@@ -27,6 +27,7 @@ code --install-extension formulahendry.code-runner
 code --install-extension gerane.Theme-FlatlandDark
 code --install-extension gerane.Theme-FlatlandMonokai
 code --install-extension GitHub.codespaces
+code --install-extension GitHub.copilot
 code --install-extension GitHub.remotehub
 code --install-extension golang.go
 code --install-extension GrapeCity.gc-excelviewer
@@ -42,6 +43,7 @@ code --install-extension mrmlnc.vscode-duplicate
 code --install-extension ms-azure-devops.azure-pipelines
 code --install-extension ms-azuretools.vscode-docker
 code --install-extension ms-dotnettools.csharp
+code --install-extension msjsdiag.debugger-for-chrome
 code --install-extension ms-kubernetes-tools.vscode-kubernetes-tools
 code --install-extension ms-python.python
 code --install-extension ms-python.vscode-pylance
@@ -63,13 +65,12 @@ code --install-extension nick-rudenko.back-n-forth
 code --install-extension octref.vetur
 code --install-extension piotrpalarz.vscode-gitignore-generator
 code --install-extension Pivotal.vscode-spring-boot
-code --install-extension prograhammer.tslint-vue
+code --install-extension redhat.ansible
 code --install-extension redhat.java
 code --install-extension redhat.vscode-commons
 code --install-extension redhat.vscode-xml
 code --install-extension redhat.vscode-yaml
 code --install-extension rogalmic.bash-debug
-code --install-extension rust-lang.rust
 code --install-extension snyk-security.snyk-vulnerability-scanner
 code --install-extension SonarSource.sonarlint-vscode
 code --install-extension spmeesseman.vscode-taskexplorer
