@@ -30,4 +30,6 @@
   "nginx-conf-hint.syntax": "sublime",
   "sonarlint.disableTelemetry": true,
   "sonarlint.pathToNodeExecutable": "node",
+  "terminal.integrated.shellIntegration.enabled": true,
+  "serverlessIDE.telemetry.enableTelemetry": false,
 }
