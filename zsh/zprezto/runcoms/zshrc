@@ -98,3 +98,17 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
+function chpwd {
+  # things to do each time you change directory. Zsh will call this.
+  check_nvmrc
+}
+
+check_nvmrc() {
+  if [[ -f .nvmrc ]] && [[ "$(cat .nvmrc)" != "$(node --version)" ]]; then
+    nvm use
+  fi
+}
+
+# run in for every new shell
+check_nvmrc
+
