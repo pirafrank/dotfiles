@@ -32,7 +32,7 @@
     "python.linting.enabled": true,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
-    "java.home": "C:\\Java\\jdk-11.0.11",
+    "java.jdt.ls.java.home": "c:\\Java\\jdk-17.0.4",
     "maven.executable.options": "",
     "files.exclude": {
         "**/.classpath": true,
@@ -178,11 +178,16 @@
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
         "*": false,
-        "yaml": true,
+        "yaml": false,
         "plaintext": false,
         "markdown": false,
         "javascript": false
     },
     "terminal.integrated.shellIntegration.enabled": true,
     "serverlessIDE.telemetry.enableTelemetry": false,
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "disabled"
+    },
+    "editor.experimental.stickyScroll.enabled": true,
+    "git.terminalAuthentication": false,
 }
