@@ -32,4 +32,6 @@
   "sonarlint.pathToNodeExecutable": "node",
   "terminal.integrated.shellIntegration.enabled": true,
   "serverlessIDE.telemetry.enableTelemetry": false,
+  "editor.experimental.stickyScroll.enabled": true,
+  "git.terminalAuthentication": false,
 }
