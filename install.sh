@@ -165,6 +165,7 @@ case "$1" in
         lazygitinstall
         tmuxinstall
         viminstall
+        vimplugininstall
         zpreztoinstall
         shellfishinstall
         ctagsinstall
