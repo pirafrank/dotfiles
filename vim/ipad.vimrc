@@ -90,7 +90,7 @@ call plug#end()
   " you can use default theme and customize terminal colors instead
   "color default
   " keep line numbers grey
-  "highlight LineNr ctermfg=grey
+  highlight LineNr ctermfg=grey
 
   "display all buffers in airline when there's only 1 tab open
 
@@ -111,3 +111,5 @@ call plug#end()
   let g:EditorConfig_exclude_patterns = ['scp://.\*']
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
+""" mappings
+source ~/dotfiles/vim/mappings.vimrc
