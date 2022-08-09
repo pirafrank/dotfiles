@@ -4,12 +4,6 @@
 
 My dotfiles, simple as that.
 
-**Important : Rewritten history!**
-
-This repository has a rewritten history. Files were once part of [workspace](https://github.com/pirafrank/workspace) and have been moved here using git-filter-repo.
-
-If you cloned this repo in the past, please perform a new clone.
-
 ## Supported platforms
 
 My daily drivers currently are alacritty+zsh+tmux on:

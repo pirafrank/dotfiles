@@ -147,6 +147,20 @@ if [[ -d "$HOME/.cargo/bin" ]]; then
 export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+## WebAssembly -- start
+
+# wasmer
+export WASMER_DIR="$HOME/.wasmer"
+[ -s "$WASMER_DIR/wasmer.sh" ] && source "$WASMER_DIR/wasmer.sh"
+
+# wasmtime
+if [[ -d "$HOME/.wasmtime" ]]; then
+  export WASMTIME_HOME="$HOME/.wasmtime"
+  export PATH="$WASMTIME_HOME/bin:$PATH"
+fi
+
+## WebAssembly -- end
+
 # deno.land
 if [[ -d "$HOME/.deno" ]]; then
   export DENO_INSTALL="$HOME/.deno"
