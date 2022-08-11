@@ -193,6 +193,9 @@ case "$1" in
     lazygit)
         lazygitinstall
         ;;
+    makedirs)
+        makedirs
+        ;;
     tmux)
         tmuxinstall
         ;;
@@ -215,7 +218,7 @@ case "$1" in
         shellfishinstall
         ;;
     custom)
-        echo "Open the script and place function to exec below this line"
+        echo "Open the script and place functions to exec below this line"
         exit 0
         ;;
     *)
