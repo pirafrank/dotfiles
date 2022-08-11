@@ -96,7 +96,11 @@ function tmuxinstall {
 }
 
 function viminstall {
-    ln -s ${HOME}/dotfiles/vim/.vimrc ${HOME}/.vimrc
+    if [[ ! -z "$1" ]]; then
+      ln -s ${HOME}/dotfiles/vim/$1.vimrc ${HOME}/.vimrc
+    else
+      ln -s ${HOME}/dotfiles/vim/.vimrc ${HOME}/.vimrc
+    fi
     mkdir -p ${HOME}/.vim
     ln -s ${HOME}/dotfiles/vim/.vim/colors ${HOME}/.vim/colors
     mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
@@ -104,8 +108,11 @@ function viminstall {
     mkdir -p ${HOME}/.vim/undo && chmod 700 ${HOME}/.vim/undo
 }
 
-function vimplugininstall {
+function vimpynviminstall {
     python3 -m pip install --upgrade pynvim
+}
+
+function vimplugininstall {
     vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall
 }
 
@@ -165,6 +172,7 @@ case "$1" in
         lazygitinstall
         tmuxinstall
         viminstall
+        vimpynviminstall
         vimplugininstall
         zpreztoinstall
         shellfishinstall
@@ -190,10 +198,15 @@ case "$1" in
         ;;
     vim)
         viminstall
+        vimpynviminstall
         vimplugininstall
         ;;
     vim-noplugins)
         viminstall
+        ;;
+    vim-minimal)
+        viminstall minimal
+        vimplugininstall
         ;;
     zsh)
         zpreztoinstall
