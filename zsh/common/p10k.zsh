@@ -53,6 +53,7 @@
     vcs                       # git status
     # command_execution_time  # previous command duration
     # virtualenv              # python virtual environment
+    newline                   # \n
     prompt_char               # prompt symbol
   )
 
@@ -73,7 +74,7 @@
 
   # Add an empty line before each prompt except the first. This doesn't emulate the bug
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
   # Magenta prompt symbol if the last command succeeded.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS}_FOREGROUND=$magenta
