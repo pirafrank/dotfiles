@@ -136,6 +136,7 @@
     "yaml.schemas": {},
     "git.autofetch": true,
     "gitlens.advanced.messages": {
+        "suppressCommitNotFoundWarning": true,
         "suppressCreatePullRequestPrompt": true,
         "suppressRebaseSwitchToTextWarning": true
     },
@@ -188,6 +189,11 @@
     "vs-kubernetes": {
         "vs-kubernetes.crd-code-completion": "disabled"
     },
-    "editor.experimental.stickyScroll.enabled": true,
     "git.terminalAuthentication": false,
+    "editor.stickyScroll.enabled": true,
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "markdown-preview-github-styles.colorTheme": "system",
+    "window.commandCenter": true,
 }
