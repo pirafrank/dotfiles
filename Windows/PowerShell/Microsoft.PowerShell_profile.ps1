@@ -88,6 +88,18 @@ function Get-Detailed-List([string]$path){
     Get-ChildItem $path -recurse -force | Where-Object{$_.LinkType} | Select-Object FullName,LinkType,Target
 }
 
+function reload {
+    . $profile
+    Write-Host "$profile loaded in session."
+}
+
+# source dotfiles scripts
+# this sources every powershell script in dir
+$Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
+Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
+    . $_.FullName
+}
+
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
