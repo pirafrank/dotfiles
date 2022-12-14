@@ -29,13 +29,29 @@ function makedirs {
     mkdir -p ${USERCONFIG}/lazygit
     mkdir -p ${HOME}/.config/htop
     mkdir -p ${HOME}/.gnupg
-    ln -s ${HOME}/dotfiles/bin ${HOME}/bin
+    if [ -e ${HOME}/bin ] || [ -h ${HOME}/bin ]; then
+        echo "WARNING: ${HOME}/bin exists. Moving to .bkp"
+        mv ${HOME}/bin ${HOME}/bin.bkp
+    fi
+    ln -s ${SCRIPT_DIR}/bin ${HOME}/bin
     mkdir -p ${HOME}/bin2
     mkdir -p ${HOME}/Code/Workspaces
 }
 
 function bashinstall {
-    ln -s ${HOME}/dotfiles/bash/.bashrc ${HOME}/.bashrc
+    if [ -e ${HOME}/.bashrc ] || [ -h ${HOME}/.bashrc ]; then
+        echo "WARNING: ${HOME}/.bashrc exists. Moving to .bkp"
+        mv ${HOME}/.bashrc ${HOME}/.bashrc.bkp
+    fi
+    ln -s ${SCRIPT_DIR}/bash/.bashrc ${HOME}/.bashrc
+}
+
+function bash_aliases_install {
+    if [ -e ${HOME}/.bash_aliases ] || [ -h ${HOME}/.bash_aliases ]; then
+        echo "WARNING: ${HOME}/.bash_aliases exists. Moving to .bkp"
+        mv ${HOME}/.bash_aliases ${HOME}/.bash_aliases.bkp
+    fi
+    ln -s ${SCRIPT_DIR}/bash/.bash_aliases ${HOME}/.bash_aliases
 }
 
 function ctagsinstall {
@@ -43,47 +59,47 @@ function ctagsinstall {
     ln -s "${HOME}/dotfiles/ctags/.ctags" "${HOME}/.ctags"
     [ $? -eq 0 ] && echo 'Symlink created. Install ok.'
   else
-    echo 'Symlink already exists. Install skipped.'
+    echo "WARNING: ${HOME}/.ctags exists. Skipping."
   fi
 }
 
 function fzfinstall {
-    ln -s ${HOME}/dotfiles/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
-    ln -s ${HOME}/dotfiles/fzf/.fzf.bash ${HOME}/.fzf.bash
+    ln -s ${SCRIPT_DIR}/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
+    ln -s ${SCRIPT_DIR}/fzf/.fzf.bash ${HOME}/.fzf.bash
     sed -i "s@/home/francesco@${HOME}@g" ${HOME}/.fzf.bash
     sed -i "s@/home/francesco@${HOME}@g" ${HOME}/.fzf.zsh
 }
 
 function gitinstall {
-    /bin/bash ${HOME}/dotfiles/git/git_config.sh
-    ln -s ${HOME}/dotfiles/git/.gitignore_global ${HOME}/.gitignore_global
+    /bin/bash ${SCRIPT_DIR}/git/git_config.sh
+    ln -s ${SCRIPT_DIR}/git/.gitignore_global ${HOME}/.gitignore_global
 }
 
 function gpginstall {
     mkdir -p ${HOME}/.gnupg
-    ln -s "${HOME}/dotfiles/gnupg/$(uname -s)/gpg.conf" ${HOME}/.gnupg/gpg.conf
-    ln -s "${HOME}/dotfiles/gnupg/$(uname -s)/gpg-agent.conf" ${HOME}/.gnupg/gpg-agent.conf
+    ln -s "${SCRIPT_DIR}/gnupg/$(uname -s)/gpg.conf" ${HOME}/.gnupg/gpg.conf
+    ln -s "${SCRIPT_DIR}/gnupg/$(uname -s)/gpg-agent.conf" ${HOME}/.gnupg/gpg-agent.conf
 }
 
 function editorconfiginstall {
-    ln -s ${HOME}/dotfiles/home/.editorconfig ${HOME}/.editorconfig
+    ln -s ${SCRIPT_DIR}/home/.editorconfig ${HOME}/.editorconfig
 }
 
 function inputrcinstall {
-    ln -s ${HOME}/dotfiles/home/.inputrc ${HOME}/.inputrc
+    ln -s ${SCRIPT_DIR}/home/.inputrc ${HOME}/.inputrc
 }
 
 function htoprcinstall {
-    ln -s ${HOME}/dotfiles/htop/htoprc ${HOME}/.config/htop/htoprc
+    ln -s ${SCRIPT_DIR}/htop/htoprc ${HOME}/.config/htop/htoprc
 }
 
 function lazygitinstall {
-    ln -s ${HOME}/dotfiles/lazygit/config.yml ${USERCONFIG}/lazygit/config.yml
+    ln -s ${SCRIPT_DIR}/lazygit/config.yml ${USERCONFIG}/lazygit/config.yml
 }
 
 function tmuxinstall {
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-    ln -s ${HOME}/dotfiles/tmux/.tmux.conf .tmux.conf
+    ln -s ${SCRIPT_DIR}/tmux/.tmux.conf .tmux.conf
     #tmux start-server
     #tmux new-session -d
     #${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
@@ -97,12 +113,12 @@ function tmuxinstall {
 
 function viminstall {
     if [[ ! -z "$1" ]]; then
-      ln -s ${HOME}/dotfiles/vim/$1.vimrc ${HOME}/.vimrc
+      ln -s ${SCRIPT_DIR}/vim/$1.vimrc ${HOME}/.vimrc
     else
-      ln -s ${HOME}/dotfiles/vim/.vimrc ${HOME}/.vimrc
+      ln -s ${SCRIPT_DIR}/vim/.vimrc ${HOME}/.vimrc
     fi
     mkdir -p ${HOME}/.vim
-    ln -s ${HOME}/dotfiles/vim/.vim/colors ${HOME}/.vim/colors
+    ln -s ${SCRIPT_DIR}/vim/.vim/colors ${HOME}/.vim/colors
     mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
     mkdir -p ${HOME}/.vim/backups && chmod 700 ${HOME}/.vim/backups
     mkdir -p ${HOME}/.vim/undo && chmod 700 ${HOME}/.vim/undo
@@ -142,14 +158,9 @@ Check the code to know more.
 # fewer customizations to provide compatibility with GitHub Codespaces.
 if [ $# -eq 0 ]; then
   makedirs
-  bashinstall
+  # install just aliases, because .bashrc in populated with Codespaces specific stuff
+  bash_aliases_install
   gitinstall
-  editorconfiginstall
-  inputrcinstall
-  htoprcinstall
-  viminstall
-  shellfishinstall
-  ctagsinstall
   exit 0;
 fi
 
