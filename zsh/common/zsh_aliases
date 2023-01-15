@@ -134,7 +134,7 @@ alias epoch='date +%s'
 alias myip='curl ipinfo.io/json'
 
 # print fat folders
-alias ducks='du -cksh $(ls -A) | sort -hr | head -n 15'
+#alias ducks='du -cksh $(ls -A) | sort -hr | head -n 15'
 
 # self made dos2unix if original one does not exist
 if [[ -z $(command -v dos2unix) ]]; then
