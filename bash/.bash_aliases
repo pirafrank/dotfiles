@@ -3,6 +3,8 @@
 
 # core
 alias l='ls -lhA'
+alias ll='ls -lh'
+alias la='ll -A'
 alias lr='ll -RA'
 alias lt='ll -t'
 alias grep="grep -i"
