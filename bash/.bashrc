@@ -11,3 +11,5 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 HISTFILE="$HOME/.bash_history"
 HISTSIZE=10000
 HISTFILESIZE=10000
+
+source ~/.bash_aliases
