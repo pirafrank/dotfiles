@@ -1,3 +1,5 @@
+# vim:syntax=sshconfig
+
 # test keys to work
 # ssh -T git@github.com
 # ssh -T git@bitbucket.org
@@ -12,13 +14,19 @@ Host *
   #ForwardX11Trusted yes
   HashKnownHosts yes
   ServerAliveInterval 60
+  # do not send all your keys
+  # https://github.com/FiloSottile/whoami.filippo.io
+  PubkeyAuthentication no
+  IdentitiesOnly yes
 
 Host github.com
+  PubkeyAuthentication yes
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_rsa
 
 Host gist.github.com
+  PubkeyAuthentication yes
   HostName github.com
   User git
   IdentityFile ~/.ssh/id_rsa
@@ -27,5 +35,7 @@ Host git.example.com
    HostName git.example.com
    User git
    Port 22
+   PubkeyAuthentication yes
    IdentityFile ~/.ssh/id_rsa
    VerifyHostKeyDNS yes
+
