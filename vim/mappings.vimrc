@@ -4,6 +4,13 @@
 " remap ESC btn
 inoremap jj <Esc>
 
+" cycle through open buffers
+" press F5 and then choose a buffer number
+" credits: https://vim.fandom.com/wiki/Easier_buffer_switching
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" rect / block visual selection
+nnoremap <c-s> <c-v>
 
 """ panes
 
