@@ -98,6 +98,7 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
+# run every time to cd into a directory
 function chpwd {
   # things to do each time you change directory. Zsh will call this.
   check_nvmrc
