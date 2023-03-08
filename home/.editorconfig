@@ -61,3 +61,5 @@ indent_style = tab
 [*.txt]
 max_line_length = 79
 
+[*.toml]
+max_line_length = 100
