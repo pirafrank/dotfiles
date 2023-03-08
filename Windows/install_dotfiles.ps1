@@ -32,10 +32,19 @@ Set-Location $env:USERPROFILE
 Backup-Item('bin')
 powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\bin bin
 
-# powershell user profile
-Set-Location $env:USERPROFILE\Documents\WindowsPowerShell
+# powershell 5.x user profile
+$powershell5home = "$env:USERPROFILE\Documents\WindowsPowerShell"
+New-Folder-If-Not-Exist($powershell5home)
+Set-Location $powershell5home
 Backup-Item('Microsoft.PowerShell_profile.ps1')
 powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\PowerShell\Microsoft.PowerShell_profile.ps1 Microsoft.PowerShell_profile.ps1
+
+# powershell 7.x user profile
+$powershell7home = "$env:USERPROFILE\Documents\PowerShell"
+New-Folder-If-Not-Exist($powershell7home)
+Set-Location $powershell7home
+Backup-Item('Profile.ps1')
+powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\PowerShell\Microsoft.PowerShell_profile.ps1 Profile.ps1
 
 # windows terminal
 Set-Location $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
