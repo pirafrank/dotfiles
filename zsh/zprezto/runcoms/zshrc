@@ -67,6 +67,9 @@ if [ -d $HOME/dotfiles/zsh/completions ]; then fpath=($HOME/dotfiles/zsh/complet
 autoload -Uz compinit
 compinit
 
+# load interactive env
+source $HOME/dotfiles/zsh/common/zsh_env_interactive
+
 # load aliases
 source $HOME/dotfiles/zsh/common/zsh_aliases
 
@@ -83,11 +86,6 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# Added by serverless binary installer
-if [ -d "$HOME/.serverless/bin" ]; then
-  export PATH="$HOME/.serverless/bin:$PATH"
-fi
 
 # aws-cli autocomplete
 if [ ! -z $(command -v aws_completer) ]; then
