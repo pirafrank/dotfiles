@@ -99,7 +99,7 @@ fi
 # run every time to cd into a directory
 function chpwd {
   # things to do each time you change directory. Zsh will call this.
-  check_nvmrc
+  check_nvmrc >/dev/null
 }
 
 check_nvmrc() {
@@ -109,5 +109,5 @@ check_nvmrc() {
 }
 
 # run in for every new shell
-check_nvmrc
+check_nvmrc >/dev/null
 
