@@ -1,0 +1,112 @@
+# Shortcuts, Commands, Aliases & Functions
+
+Here's a simple getting started for who might be interested in understanding my terminal config, or for my future self.
+
+## Notes
+
+I use `less` as pager.
+
+`PATH` is populated as follows (in order):
+
+  - `$HOME/bin2`
+  - `$HOME/dotfiles/bin`
+  - `/opt/local/{bin,sbin}`
+  - `/usr/local/{bin,sbin}`
+  - `$PATH`
+
+as stated in `zsh/common/zsh_env`.
+
+`~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add machine-specific customizations and other executables.
+
+`CDPATH` is set in `zsh/common/zsh_env` file, even if I usually only set it in `~/.zsh_custom`.
+
+## zsh shortcuts
+
+|Name|Action|
+|---|---|
+|`ctrl+t`|open fzf|
+
+## zsh commands
+
+### Moving around
+
+|Name|Type|Action|
+|---|---|---|
+|`mkcd`|function|create a dir and `cd` into it|
+|`grep`|embedded|`grep -i` alias|
+|`z`|alias|jump around `fasd_cd -d` (requires fasd)|
+|`fzf`|exec|fuzzy finder|
+|`fp`|exec|**f**ile**p**review, fuzzy finder with file preview pane powered by batcat (if installed)|
+|`cat`|alias|replaced `cat` with `batcat` (if installed)|
+|`fd`|alias|requires`fd-find`, includes hidden items, excludes: `.git,.idea,.sass-cache,node_modules,build,.rustup,.cache`|
+
+### Time
+
+|Name|Type|Action|
+|---|---|---|
+|`today`|function|print current date|
+|`now`|function|print current datetime|
+|`epoch`|alias|print epoch in seconds|
+
+### Network
+
+|Name|Type|Action|
+|---|---|---|
+|`myip`|alias|get your public IP on Internet and location info|
+
+### Cloud
+
+|Name|Type|Action|
+|---|---|---|
+|`ghlr`|function|`gh`-last-run, monitor or view last GitHub action workflow run (requires `gh`)|
+|`aws_token_clean`|function|unset `AWS_*` auth vars|
+|`rat`|function|Refresh AWS Tokens, useful for MFA enabled accounts|
+
+### Internet-powered utils
+
+|Name|Type|Action|
+|---|---|---|
+|`cs`|function|show cheat sheet from cheat.sh, accepts 1 argument|
+|`wth`|function|print weather|
+|`rates`|function|print currency rates|
+
+### Other
+
+|Name|Type|Action|
+|---|---|---|
+|`termcolors`|function|print all available terminal colors|
+|`dotfiles`|function|update dotfiles repo|
+
+Check content of:
+
+- `zsh/common/zsh_aliases` file for a full list of aliases.
+- `zsh/autoloaded` dir for all available functions
+
+## VIM
+
+### Mappings
+
+|Name|Action|
+|---|---|
+|`jj`|`Esc`|
+|`ctrl+s`|rectangular selection|
+|`ctrl+t`|toggle number and sign column|
+|`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
+
+### Move around
+
+|Name|Action|
+|---|---|
+|`ctrl+shift+j`|move to left split|
+|`ctrl+shift+k`|move to top split|
+|`ctrl+shift+l`|move to right split|
+|`ctrl+shift+h`|move to bottom split|
+
+More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
+
+## tmux
+
+|Alias|Action|
+|---|---|
+|`tat`|list available sessions|
+|`tat SESSION_NAME`|attach to session, create if it doesn't exist|

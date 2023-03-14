@@ -4,6 +4,8 @@
 
 My dotfiles, simple as that.
 
+This repo is a never-ending WIP. It's not meant to be sensible for everybody, or anyone, as YMMV.
+
 ## Supported platforms
 
 My daily drivers currently are alacritty+zsh+tmux on:
@@ -11,7 +13,7 @@ My daily drivers currently are alacritty+zsh+tmux on:
 - Ubuntu 20.04 WSL on Windows 10 (20H2)
 - Ubuntu 20.04 desktop
 - Debian 10 server accessed via mosh connection on iPad
-- occasionally macOS 10.15 (via iTerm2)
+- ~~occasionally macOS 10.15 (via iTerm2)~~ I gifted the MacBook to my family!
 
 ## Try it out
 
@@ -30,6 +32,10 @@ Then symlink config you want to use or install them all running `zsh install.sh 
 `~/.zsh_custom` is automatically sourced if it exists, and `~/bin2` is automatically added to `$PATH`. Both are not part of the repo and can be used to add your-own or machine-specific customizations and other executables.
 
 That's all, there is no real how-to actually. For more info just look at the code.
+
+## Getting started
+
+[`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) file will (hopefully) help.
 
 ## Credits
 
