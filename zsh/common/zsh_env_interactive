@@ -42,6 +42,7 @@ export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 fi
 # -- look for Linux (excluding WSL which needs socat and a different config)
 if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
+export GPG_TTY=$TTY
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 fi
