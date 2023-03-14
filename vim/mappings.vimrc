@@ -22,7 +22,11 @@ set splitbelow
 set splitright
 
 "split navigations
-" use ctrl+[UPPERCASE] instead of ctrl+w+[lowercase]
+" split vertically using pipe
+nnoremap <C-w>\| <C-w>v
+" split horizontally using 'h'.
+nnoremap <C-w>h <C-w>s
+" use ctrl+[UPPERCASE] instead of ctrl+w+[lowercase] to move between splits
 nnoremap <C-J> <C-w><C-J>
 nnoremap <C-K> <C-w><C-K>
 nnoremap <C-L> <C-w><C-L>
