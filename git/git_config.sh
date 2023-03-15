@@ -97,7 +97,9 @@ if [ $(command -v delta) ]; then
   git config --global pager.log delta
   git config --global pager.reflog delta
   git config --global pager.show delta
+  git config --global pager.blame delta
 
+  git config --global diff.colorMoved default
   git config --global interactive.diffFilter 'delta --color-only --features=interactive'
 
   git config --global delta.features decorations
