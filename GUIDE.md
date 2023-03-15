@@ -20,25 +20,33 @@ as stated in `zsh/common/zsh_env`.
 
 `CDPATH` is set in `zsh/common/zsh_env` file, even if I usually only set it in `~/.zsh_custom`.
 
+I use dandavision's `delta` as diff tool for git.
+
 ## zsh shortcuts
 
 |Name|Action|
 |---|---|
 |`ctrl+t`|open fzf|
 
-## zsh commands
+## zsh functions and aliases
 
 ### Moving around
 
 |Name|Type|Action|
 |---|---|---|
 |`mkcd`|function|create a dir and `cd` into it|
-|`grep`|embedded|`grep -i` alias|
 |`z`|alias|jump around `fasd_cd -d` (requires fasd)|
 |`fzf`|exec|fuzzy finder|
 |`fp`|exec|**f**ile**p**review, fuzzy finder with file preview pane powered by batcat (if installed)|
 |`cat`|alias|replaced `cat` with `batcat` (if installed)|
 |`fd`|alias|requires`fd-find`, includes hidden items, excludes: `.git,.idea,.sass-cache,node_modules,build,.rustup,.cache`|
+
+### Grepping
+
+|Name|Type|Action|
+|---|---|---|
+|`grep`|alias|`grep -i`, grep case-insensitive.|
+|`gg`|alias|`git grep -i`, git grep case-insensitive.|
 
 ### Time
 
@@ -93,10 +101,12 @@ Check content of:
 |`ctrl+t`|toggle number and sign column|
 |`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
 
-### Move around
+### Splits
 
 |Name|Action|
 |---|---|
+|`:split` or `:sp`|split horizontally|
+|`:vsplit` or `:vs`|split vertically|
 |`ctrl+shift+j`|move to left split|
 |`ctrl+shift+k`|move to top split|
 |`ctrl+shift+l`|move to right split|
