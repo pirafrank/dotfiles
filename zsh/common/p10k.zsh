@@ -72,8 +72,8 @@
     virtualenv                # python virtual environment
     pyenv                     # python environment (https://github.com/pyenv/pyenv)
     rvm                       # ruby version from rvm (https://rvm.io)
-    #rust_version             # rustc version (https://www.rust-lang.org)
     goenv                     # go environment (https://github.com/syndbg/goenv)
+    rust_version              # rustc version (https://www.rust-lang.org)
     kubecontext               # current kubernetes context (https://kubernetes.io/)
     aws                       # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     nnn                       # nnn shell (https://github.com/jarun/nnn)
@@ -419,6 +419,15 @@
   typeset -g POWERLEVEL9K_GOENV_PROMPT_ALWAYS_SHOW=false
   # Custom icon.
   # typeset -g POWERLEVEL9K_GOENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
+  # Rust version color.
+  # typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_RUST_VERSION_BACKGROUND=208
+  # Show rust version only when in a rust project subdirectory.
+  typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ####################################[ time: current time ]####################################
 
