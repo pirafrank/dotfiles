@@ -82,12 +82,20 @@ fi
 export PATH="$HOME/bin2/maven/bin:$PATH"
 
 # golang
-# look for system install first
-if [[ -d /usr/local/go/bin ]]; then
+# look for goenv first
+if [[ -d $HOME/.goenv ]]; then
+  export GOENV_ROOT="$HOME/.goenv"
+  export PATH="$GOENV_ROOT/bin:$PATH"
+  eval "$(goenv init -)"
+  # make goenv manage GOPATH and GOROOT, too
+  export PATH="$GOROOT/bin:$PATH"
+  export PATH="$PATH:$GOPATH/bin"
+# then look for system install
+elif [[ -d /usr/local/go/bin ]]; then
   export PATH="/usr/local/go/bin:$PATH"
   export GOPATH="$HOME/.golang"
   export PATH="$GOPATH/bin:$PATH"
-# then for userspace install
+# then for custom userspace install
 elif [[ -d $HOME/bin2/go/bin ]]; then
   export PATH="$HOME/bin2/go/bin:$PATH"
   export GOPATH="$HOME/.golang"

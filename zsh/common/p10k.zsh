@@ -73,6 +73,7 @@
     pyenv                     # python environment (https://github.com/pyenv/pyenv)
     rvm                       # ruby version from rvm (https://rvm.io)
     #rust_version             # rustc version (https://www.rust-lang.org)
+    goenv                     # go environment (https://github.com/syndbg/goenv)
     kubecontext               # current kubernetes context (https://kubernetes.io/)
     aws                       # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     nnn                       # nnn shell (https://github.com/jarun/nnn)
@@ -406,6 +407,18 @@
   typeset -g POWERLEVEL9K_RVM_VERSION_PROJECT_ONLY=true
   # Custom icon.
   # typeset -g POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ################[ goenv: go environment (https://github.com/syndbg/goenv) ]################
+  # Goenv color.
+  # typeset -g POWERLEVEL9K_GOENV_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_GOENV_BACKGROUND=4
+  # Hide go version if it doesn't come from one of these sources.
+  typeset -g POWERLEVEL9K_GOENV_SOURCES=(shell local global)
+  # If set to false, hide go version if it's the same as global:
+  # $(goenv version-name) == $(goenv global).
+  typeset -g POWERLEVEL9K_GOENV_PROMPT_ALWAYS_SHOW=false
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_GOENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
 
   ####################################[ time: current time ]####################################
 

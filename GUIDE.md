@@ -20,7 +20,9 @@ as stated in `zsh/common/zsh_env`.
 
 `CDPATH` is set in `zsh/common/zsh_env` file, even if I usually only set it in `~/.zsh_custom`.
 
-I use dandavision's `delta` as diff tool for git.
+I use dandavision's `delta` as diff tool for git. Settings are declared in `git/git_config.sh` script.
+
+`grep` is aliased to `grep -i` so it's always case-insensitive.
 
 ## zsh shortcuts
 
