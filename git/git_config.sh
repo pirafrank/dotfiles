@@ -17,6 +17,9 @@ git config --global alias.unstage 'reset HEAD --'
 git config --global alias.refresh 'remote update origin --prune'
 git config --global alias.rename 'branch -m' # oldname newname
 
+# git push, setting upstream automatically with same name of local counterpart (git >= 2.37.0)
+git config --global --add --bool push.autoSetupRemote true
+
 # log pretty print
 git config --global alias.tree "log --all --decorate --oneline --graph"
 git config --global alias.adog "log --all --decorate --oneline --graph"
