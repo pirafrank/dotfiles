@@ -28,8 +28,13 @@ return {
   --]]
 
   {
-    "zentable",
-    "https://github.com/sayanarijit/zentable.xplr"
+    "zenpath",
+    "https://github.com/pirafrank/zenpath.xplr"
+  },
+
+  {
+    "xclip",
+    "https://github.com/sayanarijit/xclip.xplr"
   },
 
   {
