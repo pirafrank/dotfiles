@@ -132,6 +132,11 @@ function vimplugininstall {
     vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall
 }
 
+function xplrinstall {
+    mkdir -p "$HOME/.config/xplr/plugins"
+    ln -s ${SCRIPT_DIR}/xplr/init.lua ${HOME}/.config/xplr/init.lua
+}
+
 function zpreztoinstall {
     # check for zsh
     if [[ -z $ZSH_NAME ]]; then
@@ -221,6 +226,9 @@ case "$1" in
     vim-minimal)
         viminstall minimal
         vimplugininstall
+        ;;
+    xplr)
+        xplrinstall
         ;;
     zsh)
         zpreztoinstall
