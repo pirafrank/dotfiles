@@ -31,25 +31,33 @@ package.path = home
 
 -- load plugins function
 function require_modules(modules)
-    for _, module_name in ipairs(modules) do
+    for _, module_entry in ipairs(modules) do
+        local module_name = module_entry[1]
+        local setup_args = module_entry[2]
         -- check if plugin dir exists
         if folder_exists(home .. "/.config/xplr/plugins/" .. module_name) then
           local module = require(module_name)
           -- check if module has a setup function
           if type(module.setup) == "function" then
-              module.setup()
+            if setup_args then
+                module.setup(setup_args)
+            else
+                module.setup()
+            end
           end
         end
     end
 end
 
-
--- PLUGINS HERE!
--- add plugins to load to this array.
+-- *** PLUGINS HERE! ***
+-- add plugins to load the array below.
 -- they will be loaded only if their dir exists in ~/.config/xplr/plugins.
 local modules = {
+  -- { "some_module_without_setup_args" },
+  -- { "some_module_with_setup_args", { arg1 = "some value", arg2 = "something else" } }
   -- git clone https://github.com/prncss-xyz/icons.xplr ~/.config/xplr/plugins/icons
-  "icons",
+  { "icons" },
+  { "material-landscape2", { keep_default_layout = true } }
 }
 
 -- keep this at the bottom
