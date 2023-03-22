@@ -30,8 +30,8 @@ local xplr_plugins_dir = home .. "/.config/xplr/plugins"
 create_folder_if_not_exists(xplr_plugins_dir)
 
 for _, plugin_entry in ipairs(plugins) do
-  local plugin_name = plugin_entry[1] -- plugin name is 1st param
-  local plugin_url = plugin_entry[2] -- repo url is 2nd param
+  local plugin_name = plugin_entry.name or plugin_entry[1] -- plugin name is 1st param
+  local plugin_url = plugin_entry.repo_url or plugin_entry[2] -- repo url is 2nd param
   if plugin_url then
     local clone_target = xplr_plugins_dir .. "/" .. plugin_name
     if check_if_folder_exists(clone_target) then

@@ -19,6 +19,14 @@ return {
     "https://github.com/prncss-xyz/icons.xplr"
   },
 
+  {
+    "extra-icons",
+    "https://github.com/dtomvan/extra-icons.xplr",
+    after = function()
+      xplr.config.general.table.row.cols[2] = { format = "custom.icons_dtomvan_col_1" }
+    end
+  },
+
   --[[
   {
     "material-landscape2",
@@ -40,7 +48,7 @@ return {
   {
     "tri-pane",
     "https://github.com/sayanarijit/tri-pane.xplr",
-    {
+    args = {
       layout_key = "T", -- In switch_layout mode
       as_default_layout = true,
       left_pane_width = { Percentage = 15 },

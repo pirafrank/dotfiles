@@ -32,10 +32,16 @@ package.path = home
 -- load plugins function
 function require_modules(modules)
     for _, module_entry in ipairs(modules) do
-        local module_name = module_entry[1]
-        local setup_args = module_entry[3]
+        local module_name = module_entry.name or module_entry[1]
+        local setup_args = module_entry.args
         -- check if plugin dir exists
         if folder_exists(home .. "/.config/xplr/plugins/" .. module_name) then
+          -- handling optional 'before' function, sets stuff BEFORE plugin load
+          local before = module_entry.before
+          if type(before) == "function" then
+            before()
+          end
+          -- loading plugin
           local module = require(module_name)
           -- check if module has a setup function
           if type(module.setup) == "function" then
@@ -44,7 +50,13 @@ function require_modules(modules)
             else
                 module.setup()
             end
+            -- handling optional 'after' function, sets stuff AFTER plugin load
+            local after = module_entry.after
+            if type(after) == "function" then
+              after()
+            end
           end
+        -- safe fallback: do nothing
         end
     end
 end
