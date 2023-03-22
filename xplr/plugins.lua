@@ -9,11 +9,12 @@
 
 return {
   -- { "some_module_without_setup_args", "https://git_repo_url_of_module" },
-  -- { "some_module_with_setup_args", "https://git_repo_url_of_module",
-  --    { arg1 = "some value", arg2 = "something else" }
+  -- {
+  --    "some_module_with_setup_args",
+  --    "https://git_repo_url_of_module",
+  --    args = { arg1 = "some value", arg2 = "something else" }
   -- }
 
-  -- git clone https://github.com/prncss-xyz/icons.xplr ~/.config/xplr/plugins/icons
   {
     "icons",
     "https://github.com/prncss-xyz/icons.xplr"
