@@ -6,6 +6,13 @@
 # uncomment the line below, then source .zshrc and run zprof.
 #zmodload zsh/zprof
 
+
+# Load custom/env specific stuff that needs to be loaded BEFORE Powerlevel10k.
+# This is needed to enable Powerlevel10k instant prompt. Do this only if file exists.
+if [[ -a $HOME/.zsh_custom_pre ]]; then
+  source $HOME/.zsh_custom_pre
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
