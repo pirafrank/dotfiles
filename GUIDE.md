@@ -107,12 +107,18 @@ Check content of:
 
 |Name|Action|
 |---|---|
-|`:split` or `:sp`|split horizontally|
-|`:vsplit` or `:vs`|split vertically|
+|`:split` or `:sp`|create horizontal split|
+|`:vsplit` or `:vs`|create vertical split|
+|`:q`|close focused split|
+|`ctrl+w` `ctrl+w`|cycle between open splits|
 |`ctrl+shift+j`|move to left split|
+|`ctrl+w` then `ctrl+j`|move to left split (default)|
 |`ctrl+shift+k`|move to top split|
+|`ctrl+w` then `ctrl+k`|move to top split (default)|
 |`ctrl+shift+l`|move to right split|
+|`ctrl+w` then `ctrl+l`|move to right split (default)|
 |`ctrl+shift+h`|move to bottom split|
+|`ctrl+w` then `ctrl+h`|move to bottom split (default)|
 
 More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
 
