@@ -45,7 +45,7 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
     "auto-close-tag.SublimeText3Mode": true,
@@ -70,7 +70,16 @@
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v12.16.3/bin/node",
-    "python.languageServer": "Microsoft",
+    "python.languageServer": "Default",
     "json.schemas": [],
     "redhat.telemetry.enabled": false,
+    "window.commandCenter": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "disabled"
+    },
+    "boot-java.rewrite.reconcile": true,
+    "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "[python]": {
+        "editor.formatOnType": true
+    },
 }
