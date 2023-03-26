@@ -1,11 +1,13 @@
 {
+    "files.autoSave": "onFocusChange",
     "editor.tabSize": 2,
+    "editor.formatOnPaste": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordWrap": "on",
     "files.eol": "\n",
     "files.encoding": "utf8",
     "files.maxMemoryForLargeFilesMB": 2048,
-    //"terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "window.openFilesInNewWindow": "on",
     "window.restoreWindows": "all",
     "window.newWindowDimensions": "inherit",
@@ -20,7 +22,8 @@
     "typescript.referencesCodeLens.enabled": true,
     "vsicons.projectDetection.disableDetect": true,
     "explorer.autoReveal": false,
-    "editor.suggestSelection": "first",
+    "editor.suggestSelection": "first",    
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     // git
     "gitlens.views.repositories.location": "gitlens",
     "gitlens.views.fileHistory.location": "gitlens",
@@ -30,6 +33,7 @@
     // python
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
+    "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
     "java.jdt.ls.java.home": "c:\\Java\\jdk-17.0.4",
@@ -40,10 +44,11 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "C:\\Java\\jdk-11.0.11",
     "auto-close-tag.SublimeText3Mode": true,
+    "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "[javascript]": {
@@ -60,50 +65,24 @@
     "remote.restoreForwardedPorts": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
     "explorer.confirmDelete": false,
-    "tabnine.experimentalAutoImports": false,
+    "tabnine.experimentalAutoImports": true,
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "sonarlint.pathToNodeExecutable": "C:\\Program Files\\nodejs\\node.exe",
+    "sonarlint.pathToNodeExecutable": "C:\\Users\\francesco\\AppData\\Roaming\\nvm\\v14.19.0\\node.exe",
     "python.languageServer": "Default",
-    "vsicons.dontShowNewVersionMessage": true,
-    "workbench.editor.wrapTabs": true,
-    "workbench.editor.decorations.badges": true,
-    "workbench.editor.enablePreviewFromCodeNavigation": true,
-    "workbench.editor.tabSizing": "shrink",
-    "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+    "json.schemas": [],
     "redhat.telemetry.enabled": false,
-    "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
-    "workbench.startupEditor": "newUntitledFile",
-    "windowsTerminal.channel": "preview",
-    "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
-    "sonarlint.rules": {
-        "java:S1135": {
-            "level": "off"
-        },
-        "java:S125": {
-            "level": "off"
-        },
-        "Web:BoldAndItalicTagsCheck": {
-            "level": "off"
-        }
+    "window.commandCenter": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "disabled"
     },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+    "boot-java.rewrite.reconcile": true,
+    "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "[python]": {
+        "editor.formatOnType": true
     },
-    "java.project.importOnFirstTimeStartup": "automatic",
-    "java.refactor.renameFromFileExplorer": "autoApply",
-    "code-runner.executorMap": {
-        "python": "python3",
-    },
-    "terminal.integrated.copyOnSelection": true,
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
-    "code-runner.enableAppInsights": false,
-    "terminal.integrated.tabs.enabled": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "java.format.enabled": false,
-    "editor.copyWithSyntaxHighlighting": false,
-    "docker.showStartPage": false,
+    "snyk.advanced.cliPath": "C:\\Users\\francesco\\AppData\\Local\\snyk-ls\\snyk-win.exe",
+    "snyk.yesWelcomeNotification": false,
     "yaml.customTags": [
         "!And",
         "!And sequence",
@@ -133,67 +112,4 @@
         "!Split",
         "!Split sequence"
     ],
-    "yaml.schemas": {},
-    "git.autofetch": true,
-    "gitlens.advanced.messages": {
-        "suppressCommitNotFoundWarning": true,
-        "suppressCreatePullRequestPrompt": true,
-        "suppressRebaseSwitchToTextWarning": true
-    },
-    "json.schemas": [],
-    "gitlens.advanced.fileHistoryFollowsRenames": true,
-    "gitlens.changes.locations": [
-        "overview",
-        "gutter"
-    ],
-    "security.workspace.trust.untrustedFiles": "open",
-    "nginx-conf-hint.syntax": "sublime",
-    "markdown.extension.toc.updateOnSave": false,
-    "git.confirmSync": false,
-    "aws.profile": "profile:default",
-    "aws.onDefaultRegionMissing": "add",
-    "githubIssues.queries": [
-        {
-            "label": "My Issues",
-            "query": "default"
-        },
-        {
-            "label": "Created Issues",
-            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
-        },
-        {
-            "label": "Recent Issues",
-            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
-        }
-    ],
-    "svelte.enable-ts-plugin": true,
-    "snyk.yesWelcomeNotification": false,
-    "snyk.yesCrashReport": false,
-    "snyk.yesTelemetry": false,
-    "sonarlint.disableTelemetry": true,
-    "telemetry.telemetryLevel": "off",
-    "go.toolsManagement.autoUpdate": true,
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "editor.inlineSuggest.enabled": true,
-    "github.copilot.enable": {
-        "*": false,
-        "yaml": false,
-        "plaintext": false,
-        "markdown": false,
-        "javascript": false
-    },
-    "terminal.integrated.shellIntegration.enabled": true,
-    "serverlessIDE.telemetry.enableTelemetry": false,
-    "vs-kubernetes": {
-        "vs-kubernetes.crd-code-completion": "disabled"
-    },
-    "git.terminalAuthentication": false,
-    "editor.stickyScroll.enabled": true,
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
-    "markdown-preview-github-styles.colorTheme": "system",
-    "window.commandCenter": true,
 }
