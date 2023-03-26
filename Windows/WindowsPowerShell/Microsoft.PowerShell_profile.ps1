@@ -14,11 +14,6 @@ $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Obj
 # customized prompt with git integration
 # source: https://bit.ly/3f1JjC5
 
-function uptime () {
-    Get-Uptime -Since # powershell >= 6
-    # Get-CimInstance -ClassName Win32_OperatingSystem | Select LastBootUpTime # powershell =< 5
-}
-
 function Write-BranchName () {
     try {
         $branch = git rev-parse --abbrev-ref HEAD
@@ -95,25 +90,12 @@ function reload {
     Write-Host "$profile loaded in session."
 }
 
-# import fzf
-Import-Module PSFzf
-# Override PSReadLine's history search
-Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' `
-                -PSReadlineChordReverseHistory 'Ctrl+r'
-# Override default tab completion
-Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
-
 # source dotfiles scripts
 # this sources every powershell script in dir
 $Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
 Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
     . $_.FullName
 }
-
-# load Terminal-Icons module
-# install by running: Install-Module -Name Terminal-Icons -Repository PSGallery
-if (Get-Module -ListAvailable -Name Terminal-Icons) { Import-Module -Name Terminal-Icons }
-if (Get-Module -ListAvailable -Name Terminal-Icons) { Import-Module -Name ZLocation }
 
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"

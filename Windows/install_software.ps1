@@ -102,8 +102,10 @@ winget list | Sort-Object
 Write-Output "Installing dev tools..." 
 
 choco install -y wget curl sysinternals
+choco install -y fzf fd
+choco install -y vim
+
 choco install -y duck cyberduck
-choco install -y fzf
 choco install -y mockoon
 choco install -y rsync
 choco install -y krew

@@ -37,7 +37,7 @@ $powershell5home = "$env:USERPROFILE\Documents\WindowsPowerShell"
 New-Folder-If-Not-Exist($powershell5home)
 Set-Location $powershell5home
 Backup-Item('Microsoft.PowerShell_profile.ps1')
-powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\PowerShell\Microsoft.PowerShell_profile.ps1 Microsoft.PowerShell_profile.ps1
+powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 Microsoft.PowerShell_profile.ps1
 
 # powershell 7.x user profile
 $powershell7home = "$env:USERPROFILE\Documents\PowerShell"
