@@ -1,0 +1,7 @@
+
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+local result=$(command tere "$@")
+[ -n "$result" ] && cd -- "$result"
+
