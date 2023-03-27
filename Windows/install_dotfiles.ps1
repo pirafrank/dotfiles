@@ -32,6 +32,10 @@ Set-Location $env:USERPROFILE
 Backup-Item('bin')
 powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\Windows\bin bin
 
+# install powershell modules
+Install-Module -Name Terminal-Icons -Repository PSGallery
+Install-Module -Name ZLocation -Repository PSGallery
+
 # powershell 5.x user profile
 $powershell5home = "$env:USERPROFILE\Documents\WindowsPowerShell"
 New-Folder-If-Not-Exist($powershell5home)
@@ -68,6 +72,28 @@ powershell "$dotfilesPath\vs-code\vs_code_restore_extensions_sb3.ps1"
 Set-Location $env:APPDATA\alacritty
 Backup-Item('alacritty.yml')
 powershell "$dotfilesPath\Windows\bin\symlink.ps1" $dotfilesPath\gui_terminals\alacritty\alacritty_win.yml alacritty.yml
+
+# vim setup
+# backup vim folders and files
+Set-Location $env:USERPROFILE
+Backup-Item('vimfiles')
+Backup-Item('.vim')
+Backup-Item('.vimrc')
+# creating vim folders
+New-Item $HOME/vimfiles/swap -itemType Directory -Force
+New-Item $HOME/vimfiles/backups -itemType Directory -Force
+New-Item $HOME/vimfiles/undo -itemType Directory -Force
+# symlinking colors dir
+New-Item -itemtype symboliclink -path $HOME/vimfiles -name colors -value $HOME/dotfiles/vim/.vim/colors
+# symlinking .vim to vimfiles (practical, to have it as *nix)
+New-Item -itemtype symboliclink -path $HOME -name .vim -value $HOME/vimfiles
+# symlinking .vimrc
+New-Item -itemtype symboliclink -path $HOME -name .vimrc -value $HOME/dotfiles/vim/.vimrc
+# install vim-plug
+if (!(Test-Path $HOME/vimfiles/autoload/plug.vim)) {
+  Invoke-WebRequest -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+      New-Item $HOME/vimfiles/autoload/plug.vim -Force
+}
 
 # return home
 Set-Location $env:USERPROFILE
