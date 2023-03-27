@@ -9,6 +9,10 @@ Set-Alias open Invoke-Item
 Set-Alias k kubectl
 Set-Alias dk docker
 Set-Alias cat bat
+Set-Alias ll ls
+
+# bat output style
+$env:BAT_STYLE="changes,header,numbers,snip"
 
 # here alias
 function Invoke-Here() { explorer.exe . }

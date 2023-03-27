@@ -14,6 +14,11 @@ set fileencodings=utf-8,latin-1,cp1251
 "Use Vim settings in place of Vi ones
 set nocompatible
 
+" choose shell
+if has('win32')
+    set shell=pwsh.exe
+endif
+
 " search deep in subdirs
 set path+=**
 

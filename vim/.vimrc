@@ -231,8 +231,14 @@ if has("gui_running")
   "set window height
   set lines=52
 
-" enable use of mouse
+  "enable use of mouse
   set mouse=a
+
+  "set font for gVim on Windows
+  if has("gui_win32")
+    "set guifont=MesloLGS\ Nerd\ Font\ Mono:h10
+    set guifont=JetBrains\ Mono:h10
+  endif
 
 endif
 
