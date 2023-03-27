@@ -52,7 +52,7 @@ $powershell7home = "$env:USERPROFILE\Documents\PowerShell"
 New-Folder-If-Not-Exist($powershell7home)
 Set-Location $powershell7home
 Backup-Item('Profile.ps1')
-Invoke-Symlink("$dotfilesPath\Windows\PowerShell\Microsoft.PowerShell_profile.ps1", "Profile.ps1")
+Invoke-Symlink("$dotfilesPath\PowerShell\Microsoft.PowerShell_profile.ps1", "Profile.ps1")
 
 # windows terminal
 Set-Location $env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState
