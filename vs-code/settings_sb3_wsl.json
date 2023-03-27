@@ -17,7 +17,7 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
   "windowsTerminal.channel": "preview",
-  "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
   "code-runner.executorMap": {
     "python": "python3",
   },
@@ -34,4 +34,5 @@
   "serverlessIDE.telemetry.enableTelemetry": false,
   "git.terminalAuthentication": false,
   "editor.stickyScroll.enabled": true,
+  "snyk.advanced.cliPath": "/home/francesco/.local/share/snyk-ls/snyk-linux",
 }

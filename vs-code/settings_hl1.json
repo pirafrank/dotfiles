@@ -41,7 +41,7 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    //"editor.fontFamily": "'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
     "auto-close-tag.SublimeText3Mode": true,
@@ -66,153 +66,15 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v12.16.3/bin/node",
     "python.languageServer": "Default",
-    "vsicons.dontShowNewVersionMessage": true,
-    "workbench.editor.wrapTabs": true,
-    "workbench.editor.decorations.badges": true,
-    "workbench.editor.enablePreviewFromCodeNavigation": true,
-    "workbench.editor.tabSizing": "shrink",
-    "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
-    "redhat.telemetry.enabled": false,
-    "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
-    "workbench.startupEditor": "newUntitledFile",
-    "windowsTerminal.channel": "preview",
-    "terminal.integrated.fontFamily": "'Meslo LG M', Consolas, 'Courier New', monospace",
-    "sonarlint.rules": {
-        "java:S1135": {
-            "level": "off"
-        },
-        "java:S125": {
-            "level": "off"
-        },
-        "Web:BoldAndItalicTagsCheck": {
-            "level": "off"
-        }
-    },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
-    },
-    "java.project.importOnFirstTimeStartup": "automatic",
-    "java.refactor.renameFromFileExplorer": "autoApply",
-    "code-runner.executorMap": {
-        "python": "python3",
-    },
-    "terminal.integrated.copyOnSelection": true,
-    "telemetry.enableTelemetry": false,
-    "telemetry.enableCrashReporter": false,
-    "code-runner.enableAppInsights": false,
-    "terminal.integrated.tabs.enabled": true,
-    "diffEditor.ignoreTrimWhitespace": false,
-    "java.format.enabled": false,
-    "editor.copyWithSyntaxHighlighting": false,
-    "docker.showStartPage": false,
-    "yaml.customTags": [
-        "!And",
-        "!And sequence",
-        "!If",
-        "!If sequence",
-        "!Not",
-        "!Not sequence",
-        "!Equals",
-        "!Equals sequence",
-        "!Or",
-        "!Or sequence",
-        "!FindInMap",
-        "!FindInMap sequence",
-        "!Base64",
-        "!Join",
-        "!Join sequence",
-        "!Cidr",
-        "!Ref",
-        "!Sub",
-        "!Sub sequence",
-        "!GetAtt",
-        "!GetAZs",
-        "!ImportValue",
-        "!ImportValue sequence",
-        "!Select",
-        "!Select sequence",
-        "!Split",
-        "!Split sequence"
-    ],
-    "yaml.schemas": {},
-    "git.autofetch": true,
-    "gitlens.advanced.messages": {
-        "suppressCommitNotFoundWarning": true,
-        "suppressCreatePullRequestPrompt": true,
-        "suppressRebaseSwitchToTextWarning": true
-    },
     "json.schemas": [],
-    "gitlens.advanced.fileHistoryFollowsRenames": true,
-    "gitlens.changes.locations": [
-        "overview",
-        "gutter"
-    ],
-    "security.workspace.trust.untrustedFiles": "open",
-    "nginx-conf-hint.syntax": "sublime",
-    "markdown.extension.toc.updateOnSave": false,
-    "git.confirmSync": false,
-    "aws.profile": "profile:default",
-    "aws.onDefaultRegionMissing": "add",
-    "githubIssues.queries": [
-        {
-            "label": "My Issues",
-            "query": "default"
-        },
-        {
-            "label": "Created Issues",
-            "query": "author:${user} state:open repo:${owner}/${repository} sort:created-desc"
-        },
-        {
-            "label": "Recent Issues",
-            "query": "state:open repo:${owner}/${repository} sort:updated-desc"
-        }
-    ],
-    "svelte.enable-ts-plugin": true,
-    "snyk.yesWelcomeNotification": false,
-    "snyk.yesCrashReport": false,
-    "snyk.yesTelemetry": false,
-    "sonarlint.disableTelemetry": true,
-    "telemetry.telemetryLevel": "off",
-    "go.toolsManagement.autoUpdate": true,
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    },
-    "editor.inlineSuggest.enabled": true,
-    "github.copilot.enable": {
-        "*": false,
-        "yaml": false,
-        "plaintext": false,
-        "markdown": false,
-        "javascript": false
-    },
-    "terminal.integrated.shellIntegration.enabled": true,
-    "serverlessIDE.telemetry.enableTelemetry": false,
+    "redhat.telemetry.enabled": false,
+    "window.commandCenter": true,
     "vs-kubernetes": {
         "vs-kubernetes.crd-code-completion": "disabled"
     },
-    "git.terminalAuthentication": false,
-    "editor.stickyScroll.enabled": true,
-    "[markdown]": {
-        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
-    },
-    "markdown-preview-github-styles.colorTheme": "system",
-    "window.commandCenter": true,
-    "snyk.trustedFolders": [
-        "/home/francesco/Code/workspace",
-        "c:\\Users\\francesco\\dotfiles",
-        "/home/francesco/Code/ducks",
-        "/home/francesco/Code/resource-manager-v2-python",
-        "/home/francesco/Code/lisa_backup",
-    ],
-    "remote.SSH.defaultExtensions": [
-        "gitpod.gitpod-remote-ssh"
-    ],
-    "remote.SSH.remotePlatform": {
-        "pirafrank-fpiracom-uu3gs0ffwag.ssh.ws-eu79.gitpod.io": "linux",
-        "pirafrank-fpiracom-ts9ivx5rikd.ssh.ws-eu79.gitpod.io": "linux"
-    },
     "boot-java.rewrite.reconcile": true,
-    "snyk.advanced.cliPath": "/home/francesco/.local/share/snyk-ls/snyk-linux",
-    "editor.accessibilitySupport": "off",
-    "git.openRepositoryInParentFolders": "always",
+    "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "[python]": {
+        "editor.formatOnType": true
+    },
 }

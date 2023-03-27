@@ -6,6 +6,13 @@
 # uncomment the line below, then source .zshrc and run zprof.
 #zmodload zsh/zprof
 
+
+# Load custom/env specific stuff that needs to be loaded BEFORE Powerlevel10k.
+# This is needed to enable Powerlevel10k instant prompt. Do this only if file exists.
+if [[ -a $HOME/.zsh_custom_pre ]]; then
+  source $HOME/.zsh_custom_pre
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -67,6 +74,9 @@ if [ -d $HOME/dotfiles/zsh/completions ]; then fpath=($HOME/dotfiles/zsh/complet
 autoload -Uz compinit
 compinit
 
+# load interactive env
+source $HOME/dotfiles/zsh/common/zsh_env_interactive
+
 # load aliases
 source $HOME/dotfiles/zsh/common/zsh_aliases
 
@@ -84,11 +94,6 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Added by serverless binary installer
-if [ -d "$HOME/.serverless/bin" ]; then
-  export PATH="$HOME/.serverless/bin:$PATH"
-fi
-
 # aws-cli autocomplete
 if [ ! -z $(command -v aws_completer) ]; then
   complete -C 'aws_completer' aws
@@ -101,7 +106,7 @@ fi
 # run every time to cd into a directory
 function chpwd {
   # things to do each time you change directory. Zsh will call this.
-  check_nvmrc
+  check_nvmrc >/dev/null
 }
 
 check_nvmrc() {
@@ -111,5 +116,5 @@ check_nvmrc() {
 }
 
 # run in for every new shell
-check_nvmrc
+check_nvmrc >/dev/null
 

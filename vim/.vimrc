@@ -28,7 +28,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'dense-analysis/ale'
 
   " use deoplete for smart autocompletion
-  " check requirements: you need to install neovim/pynvim module: pip install neovim
+  " check requirements: you need to install pynvim module:
+  " python3 -m pip install --user pynvim
   if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   endif

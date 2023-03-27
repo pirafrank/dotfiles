@@ -48,29 +48,118 @@
 
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+    # =========================[ Line #1 ]=========================
     # context                 # user@host
     dir                       # current directory
     vcs                       # git status
     # command_execution_time  # previous command duration
     # virtualenv              # python virtual environment
     newline                   # \n
+    # =========================[ Line #2 ]=========================
     prompt_char               # prompt symbol
   )
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
+    # =========================[ Line #1 ]=========================
+    status                    # exit code of the last command
     command_execution_time    # previous command duration
+    background_jobs           # presence of background jobs
+    direnv                    # direnv status (https://direnv.net/)
+    jenv                      # java version from jenv (https://github.com/jenv/jenv)
+    #nvm                      # node.js version from nvm (only if .nvmrc exists in current dir)
+    node_version              # node.js version (always print node version)
     virtualenv                # python virtual environment
+    pyenv                     # python environment (https://github.com/pyenv/pyenv)
+    rvm                       # ruby version from rvm (https://rvm.io)
+    goenv                     # go environment (https://github.com/syndbg/goenv)
+    rust_version              # rustc version (https://www.rust-lang.org)
+    kubecontext               # current kubernetes context (https://kubernetes.io/)
+    aws                       # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
+    nnn                       # nnn shell (https://github.com/jarun/nnn)
     context                   # user@host
     time                      # current time
+    # =========================[ Line #2 ]=========================
   )
 
+  # To enable default icons for all segments, don't define POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION
+  # or set it to '${P9K_VISUAL_IDENTIFIER}'.
+  #
+  # To remove trailing space from all default icons, set POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION
+  # to '${P9K_VISUAL_IDENTIFIER% }'.
+  #
+  # To enable default icons for one segment (e.g., dir), set
+  # POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER}'.
+  #
+  # To assign a specific icon to one segment (e.g., dir), set
+  # POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION='⭐'.
+  #
+  # To assign a specific icon to a segment in a given state (e.g., dir in state NOT_WRITABLE),
+  # set POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'.
+  #
+  # Note: You can use $'\u2B50' instead of '⭐'. It's especially convenient when specifying
+  # icons that your text editor cannot render. Don't forget to put $ and use single quotes when
+  # defining icons via Unicode codepoints.
+  #
+  # Note: Many default icons cannot be displayed with system fonts. You'll need to install a
+  # capable font to use them. See POWERLEVEL9K_MODE below.
+  typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER// }'
+
+  # This option makes a difference only when default icons are enabled for all or some prompt
+  # segments (see POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION above). LOCK_ICON can be printed as
+  # $'\uE0A2', $'\uE138' or $'\uF023' depending on POWERLEVEL9K_MODE. The correct value of this
+  # parameter depends on the provider of the font your terminal is using.
+  #
+  #   Font Provider                    | POWERLEVEL9K_MODE
+  #   ---------------------------------+-------------------
+  #   Powerline                        | powerline
+  #   Font Awesome                     | awesome-fontconfig
+  #   Adobe Source Code Pro            | awesome-fontconfig
+  #   Source Code Pro                  | awesome-fontconfig
+  #   Awesome-Terminal Fonts (regular) | awesome-fontconfig
+  #   Awesome-Terminal Fonts (patched) | awesome-patched
+  #   Nerd Fonts                       | nerdfont-complete
+  #   Other                            | compatible
+  #
+  # If this looks overwhelming, either stick with a preinstalled system font and set
+  # POWERLEVEL9K_MODE=compatible, or install the recommended Powerlevel10k font from
+  # https://github.com/romkatv/powerlevel10k/#recommended-meslo-nerd-font-patched-for-powerlevel10k
+  # and set POWERLEVEL9K_MODE=nerdfont-complete.
+  typeset -g POWERLEVEL9K_MODE=nerdfont-complete
+
+  # When set to true, icons appear before content on both sides of the prompt. When set
+  # to false, icons go after content. If empty or not set, icons go before content in the left
+  # prompt and after content in the right prompt.
+  #
+  # You can also override it for a specific segment:
+  #
+  #   POWERLEVEL9K_STATUS_ICON_BEFORE_CONTENT=false
+  #
+  # Or for a specific segment in specific state:
+  #
+  #   POWERLEVEL9K_DIR_NOT_WRITABLE_ICON_BEFORE_CONTENT=false
+  typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=
+
+  # When set to `moderate`, some icons will have an extra space after them. This is meant to avoid
+  # icon overlap when using non-monospace fonts. When set to `none`, spaces are not added.
+  typeset -g POWERLEVEL9K_ICON_PADDING=none
+
   # Basic style options that define the overall prompt look.
+  typeset -g POWERLEVEL9K_FOREGROUND=$grey                       # default foreground color
   typeset -g POWERLEVEL9K_BACKGROUND=                            # transparent background
-  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=  # no surrounding whitespace
-  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SUBSEGMENT_SEPARATOR=' '  # separate segments with a space
-  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_SEGMENT_SEPARATOR=        # no end-of-line symbol
-  typeset -g POWERLEVEL9K_VISUAL_IDENTIFIER_EXPANSION=           # no segment icons
+
+  # Separator between same-color segments on the left.
+  typeset -g POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=' | '
+  # Separator between same-color segments on the right.
+  typeset -g POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=' | '
+  # Separator between different-color segments on the left.
+  typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=
+  # Separator between different-color segments on the right.
+  typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=
+  # no surrounding whitespace
+  typeset -g POWERLEVEL9K_{LEFT,RIGHT}_{LEFT,RIGHT}_WHITESPACE=
+
+  ################################[ prompt_char: prompt symbol ]################################
 
   # Add an empty line before each prompt except the first. This doesn't emulate the bug
   # in Pure that makes prompt drift down whenever you use the Alt-C binding from fzf or similar.
@@ -89,14 +178,120 @@
   # Prompt symbol in overwrite vi mode is the same as in command mode.
   typeset -g POWERLEVEL9K_PROMPT_CHAR_OVERWRITE_STATE=false
 
+  ##################################[ dir: current directory ]##################################
+
+  # Do not show icon near current dir name
+  typeset -g POWERLEVEL9K_DIR_VISUAL_IDENTIFIER_EXPANSION=
+  # Default current directory foreground color.
+  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
+  # Current directory background color.
+  # typeset -g POWERLEVEL9K_DIR_BACKGROUND=4
+  # If directory is too long, shorten some of its segments to the shortest possible unique
+  # prefix. The shortened directory can be tab-completed to the original.
+  typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
+  # Replace removed segment suffixes with this symbol.
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=
+  # Color of the shortened directory segments.
+  typeset -g POWERLEVEL9K_DIR_SHORTENED_FOREGROUND=$blue
+  # Color of the anchor directory segments. Anchor segments are never shortened. The first
+  # segment is always an anchor.
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_FOREGROUND=$blue
+  # Display anchor directory segments in bold.
+  typeset -g POWERLEVEL9K_DIR_ANCHOR_BOLD=true
+  # Don't shorten directories that contain any of these files. They are anchors.
+  local anchor_files=(
+    .bzr
+    .citc
+    .git
+    .hg
+    .node-version
+    .python-version
+    .ruby-version
+    .shorten_folder_marker
+    .svn
+    .terraform
+    CVS
+    Cargo.toml
+    composer.json
+    go.mod
+    package.json
+  )
+  typeset -g POWERLEVEL9K_SHORTEN_FOLDER_MARKER="(${(j:|:)anchor_files})"
+  # Don't shorten this many last directory segments. They are anchors.
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+  # Shorten directory if it's longer than this even if there is space for it. The value can
+  # be either absolute (e.g., '80') or a percentage of terminal width (e.g, '50%'). If empty,
+  # directory will be shortened only when prompt doesn't fit or when other parameters demand it
+  # (see POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS and POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT below).
+  # If set to `0`, directory will always be shortened to its minimum length.
+  typeset -g POWERLEVEL9K_DIR_MAX_LENGTH=80
+  # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least this
+  # many columns for typing commands.
+  typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS=40
+  # When `dir` segment is on the last prompt line, try to shorten it enough to leave at least
+  # COLUMNS * POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT * 0.01 columns for typing commands.
+  typeset -g POWERLEVEL9K_DIR_MIN_COMMAND_COLUMNS_PCT=50
+  # If set to true, embed a hyperlink into the directory. Useful for quickly
+  # opening a directory in the file manager simply by clicking the link.
+  # Can also be handy when the directory is shortened, as it allows you to see
+  # the full directory that was used in previous commands.
+  typeset -g POWERLEVEL9K_DIR_HYPERLINK=false
+
+  # Enable special styling for non-writable directories.
+  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE=true
+  # Show this icon when the current directory is not writable. POWERLEVEL9K_DIR_SHOW_WRITABLE
+  # above must be set to true for this parameter to have effect.
+  # typeset -g POWERLEVEL9K_DIR_NOT_WRITABLE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  # Custom prefix.
+  # typeset -g POWERLEVEL9K_DIR_PREFIX='in '
+
+  # POWERLEVEL9K_DIR_CLASSES allows you to specify custom icons for different directories.
+  # It must be an array with 3 * N elements. Each triplet consists of:
+  #
+  #   1. A pattern against which the current directory is matched. Matching is done with
+  #      extended_glob option enabled.
+  #   2. Directory class for the purpose of styling.
+  #   3. Icon.
+  #
+  # Triplets are tried in order. The first triplet whose pattern matches $PWD wins. If there
+  # are no matches, the directory will have no icon.
+  #
+  # Example:
+  #
+  #   typeset -g POWERLEVEL9K_DIR_CLASSES=(
+  #       '~/work(|/*)'  WORK     '(╯°□°）╯︵ ┻━┻'
+  #       '~(|/*)'       HOME     '⌂'
+  #       '*'            DEFAULT  '')
+  #
+  # With these settings, the current directory in the prompt may look like this:
+  #
+  #   (╯°□°）╯︵ ┻━┻ ~/work/projects/important/urgent
+  #
+  # Or like this:
+  #
+  #   ⌂ ~/best/powerlevel10k
+  #
+  # You can also set different colors for directories of different classes. Remember to override
+  # FOREGROUND, SHORTENED_FOREGROUND and ANCHOR_FOREGROUND for every directory class that you wish
+  # to have its own color.
+  #
+  #   typeset -g POWERLEVEL9K_DIR_WORK_BACKGROUND=4
+  #   typeset -g POWERLEVEL9K_DIR_WORK_FOREGROUND=254
+  #   typeset -g POWERLEVEL9K_DIR_WORK_SHORTENED_FOREGROUND=250
+  #   typeset -g POWERLEVEL9K_DIR_WORK_ANCHOR_FOREGROUND=255
+  #
+  typeset -g POWERLEVEL9K_DIR_CLASSES=()
+
+  ##########################[ virtualenv: python virtual environment ]##########################
+
   # Grey Python Virtual Environment.
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=$grey
   # Don't show Python version.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
 
-  # Blue current directory.
-  typeset -g POWERLEVEL9K_DIR_FOREGROUND=$blue
+  ##################################[ context: user@hostname ]##################################
 
   # Context format when root: user@host. The first part white, the rest grey.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE="%F{$white}%n%f%F{$grey}@%m%f"
@@ -104,6 +299,8 @@
   typeset -g POWERLEVEL9K_CONTEXT_TEMPLATE="%F{$grey}%n@%m%f"
   # Don't show context unless root or in SSH.
   typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_CONTENT_EXPANSION=
+
+  ###################[ command_execution_time: duration of the last command ]###################
 
   # Show previous command duration only if it's >= 5s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=5
@@ -113,6 +310,13 @@
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Yellow previous command duration.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$yellow
+
+  ########################################[ vcs: git ]##########################################
+
+  # Show status of repositories of these types. You can add svn and/or hg if you are
+  # using them. If you do, your prompt may become slow even when your current directory
+  # isn't in an svn or hg reposotiry.
+  typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
 
   # Grey Git prompt. This makes stale prompts indistinguishable from up-to-date ones.
   typeset -g POWERLEVEL9K_VCS_FOREGROUND=$grey
@@ -145,6 +349,87 @@
   typeset -g POWERLEVEL9K_VCS_{COMMITS_AHEAD,COMMITS_BEHIND}_MAX_NUM=1
   # Remove space between '⇣' and '⇡' and all trailing spaces.
   typeset -g POWERLEVEL9K_VCS_CONTENT_EXPANSION='${${${P9K_CONTENT/⇣* :⇡/⇣⇡}// }//:/ }'
+  # Do not show 'git' icon near branch name
+  typeset -g POWERLEVEL9K_VCS_VISUAL_IDENTIFIER_EXPANSION=
+
+  typeset -g POWERLEVEL9K_VCS_{LEFT,RIGHT}_DELIMITER=
+
+  typeset -g POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=
+  typeset -g POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=
+
+  ###############[ jenv: java version from jenv (https://github.com/jenv/jenv) ]################
+  # Java color.
+  # typeset -g POWERLEVEL9K_JENV_FOREGROUND=1
+  # typeset -g POWERLEVEL9K_JENV_BACKGROUND=7
+  # Hide java version if it doesn't come from one of these sources.
+  typeset -g POWERLEVEL9K_JENV_SOURCES=(shell local global)
+  # If set to false, hide java version if it's the same as global:
+  # $(jenv version-name) == $(jenv global).
+  typeset -g POWERLEVEL9K_JENV_PROMPT_ALWAYS_SHOW=true
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_JENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ##############[ nvm: node.js version from nvm (https://github.com/nvm-sh/nvm) ]###############
+
+  # Nvm color.
+  # typeset -g POWERLEVEL9K_NVM_FOREGROUND=70
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_NVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ##############################[ node_version: node.js version ]###############################
+
+  # Node version color.
+  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=$grey
+  # typeset -g POWERLEVEL9K_NODE_VERSION_BACKGROUND=2
+  # Show node version only when in a directory tree containing package.json.
+  typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=false
+  # Custom icon.
+  #typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  #############[ kubecontext: current kubernetes context (https://kubernetes.io/) ]#############
+  typeset -g POWERLEVEL9K_KUBECONTEXT_FOREGROUND=$grey
+  typeset -g POWERLEVEL9K_KUBECONTEXT_SHOW_ON_COMMAND='kubectl|helm|kubens|kubectx|oc'
+  typeset -g POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION=
+  # Show P9K_KUBECONTEXT_CLOUD_CLUSTER if it's not empty and fall back to P9K_KUBECONTEXT_NAME.
+  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${P9K_KUBECONTEXT_CLOUD_CLUSTER:-${P9K_KUBECONTEXT_NAME}}'
+  # Append the current context's namespace if it's not "default".
+  POWERLEVEL9K_KUBECONTEXT_DEFAULT_CONTENT_EXPANSION+='${${:-/$P9K_KUBECONTEXT_NAMESPACE}:#/default}'
+
+  #######################[ rvm: ruby version from rvm (https://rvm.io) ]########################
+
+  # Rvm color.
+  # typeset -g POWERLEVEL9K_RVM_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_RVM_BACKGROUND=240
+  # Don't show @gemset at the end.
+  typeset -g POWERLEVEL9K_RVM_SHOW_GEMSET=false
+  # Don't show ruby- at the front.
+  typeset -g POWERLEVEL9K_RVM_SHOW_PREFIX=false
+  typeset -g POWERLEVEL9K_RVM_VERSION_PROJECT_ONLY=true
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_RVM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ################[ goenv: go environment (https://github.com/syndbg/goenv) ]################
+  # Goenv color.
+  # typeset -g POWERLEVEL9K_GOENV_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_GOENV_BACKGROUND=4
+  # Hide go version if it doesn't come from one of these sources.
+  typeset -g POWERLEVEL9K_GOENV_SOURCES=(shell local global)
+  # If set to false, hide go version if it's the same as global:
+  # $(goenv version-name) == $(goenv global).
+  typeset -g POWERLEVEL9K_GOENV_PROMPT_ALWAYS_SHOW=false
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_GOENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
+  # Rust version color.
+  # typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=0
+  # typeset -g POWERLEVEL9K_RUST_VERSION_BACKGROUND=208
+  # Show rust version only when in a rust project subdirectory.
+  typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
+  # Custom icon.
+  # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ####################################[ time: current time ]####################################
 
   # Grey current time.
   typeset -g POWERLEVEL9K_TIME_FOREGROUND=$grey
@@ -153,7 +438,25 @@
   # If set to true, time will update when you hit enter. This way prompts for the past
   # commands will contain the start times of their commands rather than the end times of
   # their preceding commands.
-  typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=false
+  typeset -g POWERLEVEL9K_TIME_UPDATE_ON_COMMAND=true
+  # Custom icon
+  typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION=
+  # Custom prefix.
+  # typeset -g POWERLEVEL9K_TIME_PREFIX='at '
+
+  ####################################[ user defined prompt ]###################################
+
+  # Example of a user-defined prompt segment. Function prompt_example will be called on every
+  # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
+  # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS. It displays an icon and yellow text on red background
+  # greeting the user.
+  #
+  # Type `p10k help segment` for documentation and a more sophisticated example.
+  function prompt_example() {
+    p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
+  }
+
+  ##############################################################################################
 
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
   # when accepting a command line. Supported values:

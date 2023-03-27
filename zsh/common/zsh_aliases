@@ -1,66 +1,7 @@
 # vim:syntax=zsh
 # vim:filetype=zsh
 
-#
-# interactive env
-#
-
-# load junegunn/fzf if installed
-if [ -f ~/.fzf.zsh ]; then
-  source ~/.fzf.zsh
-  export FZF_DEFAULT_OPTS='--layout=reverse'
-  # if fd is present, make fzf use that
-  if [ ! -z "$(command -v fdfind)" ]; then
-    export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
-  elif [ ! -z "$(command -v fd)"  ]; then
-    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude={.git,.idea,.sass-cache,node_modules,build,.rustup,.cache}'
-  fi
-
-  # config fzf preview alias
-  if [ "$(command -v batcat)" ]; then
-    alias fp="fzf --preview 'batcat --style=numbers --color=always --line-range :500 {}'"
-  elif [ "$(command -v bat)" ]; then
-    alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-  fi
-fi
-
-# GPG for SSH authentication
-# do it only if there's TTY
-# -- look for macOS
-if [[ $(command -v TTY) ]] && [[ "$(uname -s)" == 'Darwin' ]]; then
-export "GPG_TTY=$(TTY)"
-export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
-# notes:
-#   for command line tty, ~/.gnupg/gpg-agent.conf needs:
-#       pinentry-program /usr/bin/pinentry-curses
-#   if needed, run the command below to force telling the agent which tty to use
-#     gpg-connect-agent updatestartuptty /bye
-fi
-# -- look for Linux (excluding WSL which needs socat and a different config)
-if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
-fi
-
-# Scaleway CLI autocomplete initialization.
-if [[ $(command -v scw) ]]; then
-  eval "$(scw autocomplete script shell=zsh)"
-fi
-
-# Secure ShellFish iOS app integration
-if [[ -f "$HOME/.shellfishrc" ]]; then
-  source $HOME/.shellfishrc
-fi
-
-# krew
-if [ -d "${KREW_ROOT:-$HOME/.krew}/bin" ]; then
-  export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-fi
-
-# fasd to jump around
-if [ $(command -v fasd) ]; then
-  eval "$(fasd --init auto)"
-fi
+# Shell aliases only in this file.
 
 #
 # common aliases
@@ -125,7 +66,7 @@ if [ "$(command -v batcat)" ]; then alias bat='batcat'; fi
 if [ "$(command -v bat)" ]; then
   export BAT_STYLE="changes,header,numbers,snip"
   unalias -m 'cat'
-  alias cat='bat -p'
+  alias cat='bat'
 fi
 
 alias epoch='date +%s'

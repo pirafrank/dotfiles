@@ -132,6 +132,17 @@ function vimplugininstall {
     vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall
 }
 
+function xplrinstall {
+    mkdir -p "$HOME/.config/xplr/plugins"
+    ln -s ${SCRIPT_DIR}/xplr/init.lua ${HOME}/.config/xplr/init.lua
+    ln -s ${SCRIPT_DIR}/xplr/plugins.lua ${HOME}/.config/xplr/plugins.lua
+    if command -v lua >/dev/null ; then
+      lua ${SCRIPT_DIR}/xplr/clone_plugins.lua
+    else
+      echo "WARNING: lua is not installed. Cannot clone xplr plugins. Install lua and run xplr/clone_plugins.lua manually."
+    fi
+}
+
 function zpreztoinstall {
     # check for zsh
     if [[ -z $ZSH_NAME ]]; then
@@ -221,6 +232,9 @@ case "$1" in
     vim-minimal)
         viminstall minimal
         vimplugininstall
+        ;;
+    xplr)
+        xplrinstall
         ;;
     zsh)
         zpreztoinstall
