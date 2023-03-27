@@ -4,6 +4,8 @@ This folder contais Windows-only files and config.
 
 Anything else (e.g. cross-platform stuff) lives outside this folder.
 
+Designed to work with PowerShell 7.x, but profile in `WindowsPowerShell` works with Windows PowerShell 5.1.
+
 ## Locations
 
 Powershell user profile

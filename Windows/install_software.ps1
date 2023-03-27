@@ -87,6 +87,13 @@ $env:Path += ";%ALLUSERSPROFILE%\chocolatey\bin"
 Write-Output "Installing winget..." 
 Install-WinGet
 
+## install scoop
+
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
+Invoke-RestMethod get.scoop.sh | Invoke-Expression
+# Add the extras bucket
+scoop bucket add extras
+
 # listing installed packages
 
 Write-Output "Listing installed packages..." 
@@ -104,6 +111,8 @@ Write-Output "Installing dev tools..."
 choco install -y wget curl sysinternals
 choco install -y fzf fd
 choco install -y vim
+
+scoop install lazygit bat tere jq yq less
 
 choco install -y duck cyberduck
 choco install -y mockoon
@@ -187,16 +196,14 @@ winget list | Sort-Object
 
 
 ###################################
-######### cloning dotfiles ########
+######## dotfiles and dirs ########
 ###################################
 
 Set-Location "$env:UserProfile"
 git clone https://github.com/pirafrank/dotfiles
 
 # create 'Code' dir
-
-New-Item "$env:UserProfile\Code" -itemType Directory
-
+New-Item "$env:UserProfile\Code" -itemType Directory -Force
 
 ###################################
 ######### Installing WSL2 #########
@@ -207,7 +214,9 @@ wsl --install
 
 # installing ubuntu distro and X server
 winget install -e --id Canonical.Ubuntu
-winget install -e --id marha.VcXsrv
+
+# Need it no more! Windows 11 WSL2 supports X11 apps natively.
+#winget install -e --id marha.VcXsrv
 
 
 ###################################
@@ -216,9 +225,9 @@ winget install -e --id marha.VcXsrv
 
 Write-Output "Installing extra software..."
 
-winget install -e --id CiderCollective.Cider
-winget install -e --id Nushell.Nushell
+#winget install -e --id CiderCollective.Cider
+#winget install -e --id Nushell.Nushell
 winget install -e --id OpenWhisperSystems.Signal
 winget install -e --id Typora.Typora
 
-winget install -e --id XP8K17RNMM8MTN --source msstore # Canva
+#winget install -e --id XP8K17RNMM8MTN --source msstore # Canva

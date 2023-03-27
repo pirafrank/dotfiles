@@ -1,6 +1,9 @@
 
-"set encoding (internal representation)
+" set encoding (internal representation)
 set encoding=utf-8
+
+" set UI language
+language en_US.utf8
 
 " representation that will be used when the file is written
 "set fileencoding = utf-8
@@ -10,6 +13,11 @@ set fileencodings=utf-8,latin-1,cp1251
 
 "Use Vim settings in place of Vi ones
 set nocompatible
+
+" choose shell
+if has('win32')
+    set shell=pwsh.exe
+endif
 
 " search deep in subdirs
 set path+=**
