@@ -72,6 +72,11 @@ Invoke-Symlink("$dotfilesPath\vs-code\keybindings.json", "keybindings.json")
 # VS Code extensions
 powershell "$dotfilesPath\vs-code\vs_code_restore_extensions_sb3.ps1"
 
+# lazygit config
+Set-Location $env:APPDATA\lazygit
+Backup-Item('config.yml')
+Invoke-Symlink("$dotfilesPath\lazygit\config.yml", "config.yml")
+
 # alacritty config
 Set-Location $env:APPDATA\alacritty
 Backup-Item('alacritty.yml')
