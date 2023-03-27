@@ -1,6 +1,9 @@
 
-"set encoding (internal representation)
+" set encoding (internal representation)
 set encoding=utf-8
+
+" set UI language
+language en_US.utf8
 
 " representation that will be used when the file is written
 "set fileencoding = utf-8
