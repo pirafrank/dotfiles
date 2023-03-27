@@ -18,6 +18,12 @@ $env:BAT_STYLE="changes,header,numbers,snip"
 function Invoke-Here() { explorer.exe . }
 Set-Alias here Invoke-Here
 
+# symlink alias
+function Invoke-Symlink($shortcutTarget, $shortcutName) {
+    New-Item -Type SymbolicLink -Path "$shortcutName" -Target "$shortcutTarget"
+}
+Set-Alias symlink Invoke-Symlink
+
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
 # customized prompt with git integration
