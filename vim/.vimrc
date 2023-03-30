@@ -227,10 +227,10 @@ if has("gui_running")
   colorscheme flatland
 
   "set window width
-  set columns=108
+  set columns=140
 
   "set window height
-  set lines=52
+  set lines=48
 
   "enable use of mouse
   set mouse=a
