@@ -68,10 +68,30 @@ Function Install-WinGet {
     Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.mycommand)"
 }
 
+Function Update-Env {
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") 
+}
+
 
 ###################################
 ############ preparing ############
 ###################################
+
+## install winget
+
+Write-Output "Installing winget..." 
+Install-WinGet
+# update winget repos
+winget source update
+
+# refreshing path
+# consider winget suffers from this issue:
+#   https://github.com/microsoft/winget-cli/issues/222
+refreshenv
+
+## install powershell 7
+
+winget install --id Microsoft.Powershell --source winget
 
 ## install chocolatey
 
@@ -82,67 +102,57 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 # attaching chocolatey at the end of PATH
 $env:Path += ";%ALLUSERSPROFILE%\chocolatey\bin"
 
-## install winget
-
-Write-Output "Installing winget..." 
-Install-WinGet
-
-## install scoop
-
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-Invoke-RestMethod get.scoop.sh | Invoke-Expression
-# Add the extras bucket
-scoop bucket add extras
-
-# listing installed packages
-
-Write-Output "Listing installed packages..." 
-winget list | Sort-Object
-
 
 ###################################
 ####### installing software #######
 ###################################
 
-## dev tools
+## essential cli tools
 
 Write-Output "Installing dev tools..." 
 
-choco install -y wget curl sysinternals
+choco install -y wget curl
 choco install -y fzf fd
 choco install -y vim
+## dev tools
 
-scoop install lazygit bat tere jq yq less
+winget install -e --id Git.Git
+winget install -e --id Microsoft.WindowsTerminal.Preview
 
+winget install -e --id Microsoft.VisualStudioCode
+winget install -e --id Notepad++.Notepad++
+
+## more dev tools
+
+choco install -y sysinternals
 choco install -y duck cyberduck
 choco install -y mockoon
 choco install -y rsync
 choco install -y krew
 
 choco install -y oraclejdk maven nodejs python3 deno go
-choco install -y vscode dbeaver
+choco install -y dbeaver
 choco install -y microsoftazurestorageexplorer servicebusexplorer
 
 winget install -e --id CoreyButler.NVMforWindows
 winget install -e --id Microsoft.AzureCLI
+winget install -e --id Microsoft.Azure.StorageExplorer
+winget install -e --id Microsoft.DotNet.SDK.7
 winget install -e --id Amazon.AWSCLI
 winget install -e --id Amazon.SAM-CLI
-winget install -e --id Git.Git
 winget install -e --id GitHub.cli
 
 winget install -e --id Docker.DockerDesktop
 winget install -e --id Fork.Fork
 winget install -e --id JetBrains.Toolbox
 winget install -e --id Meld.Meld
-winget install -e --id Notepad++.Notepad++
-winget install -e --id Alacritty.Alacritty
-winget install -e --id Microsoft.WindowsTerminal.Preview
 
 winget install -e --id Mozilla.Firefox
 winget install -e --id Google.Chrome
 
 winget install -e --id Insomnia.Insomnia
 winget install -e --id Postman.Postman
+winget install -e --id SmartBear.SoapUI
 
 winget install -e --id PostgreSQL.pgAdmin
 winget install -e --id PuTTY.PuTTY
@@ -153,17 +163,19 @@ winget install -e --id SmartBear.SoapUI
 winget install -e --id Telerik.Fiddler.Classic
 winget install -e --id Wasmer.Wasmer
 
-## essentials
+## vm essentials
 
-Write-Output "Installing essentials software..." 
-
-choco install -y adobereader caffeine
-
+choco install -y caffeine
 winget install -e --id 7zip.7zip
+winget install -e --id namazso.OpenHashTab
+
+## desktop essentials
+
 winget install -e --id GnuPG.GnuPG
 winget install -e --id GnuPG.Gpg4win
+winget install -e --id Yubico.YubikeyManager
 winget install -e --id Skillbrains.Lightshot
-winget install -e --id namazso.OpenHashTab
+winget install -e --id Adobe.Acrobat.Reader.64-bit
 
 winget install -e --id Bitwarden.Bitwarden
 winget install -e --id Cryptomator.Cryptomator
@@ -175,35 +187,18 @@ winget install -e --id ZeroTier.ZeroTierOne
 winget install -e --id Microsoft.OneDrive
 winget install -e --id Microsoft.Teams
 winget install -e --id Cisco.WebexTeams
+winget install -e --id Zoom.Zoom
 
-## utils
+## generic desktop utils
 
-Write-Output "Installing utilities..." 
-
-choco install -y paint.net
-choco install -y vlc
-
+winget install -e --id VideoLAN.VLC
+winget install -e --id dotPDNLLC.paintdotnet
 winget install -e --id Microsoft.PowerToys
 winget install -e --id Armin2208.WindowsAutoNightMode
 winget install -e --id Loom.Loom
 winget install -e --id RealVNC.VNCViewer
 winget install -e --id WinDirStat.WinDirStat
 
-# check installed packages
-
-Write-Output "Re-listing installed packages..." 
-winget list | Sort-Object
-
-
-###################################
-######## dotfiles and dirs ########
-###################################
-
-Set-Location "$env:UserProfile"
-git clone https://github.com/pirafrank/dotfiles
-
-# create 'Code' dir
-New-Item "$env:UserProfile\Code" -itemType Directory -Force
 
 ###################################
 ######### Installing WSL2 #########
@@ -212,7 +207,7 @@ New-Item "$env:UserProfile\Code" -itemType Directory -Force
 Write-Output "Installing Windows Subsystem for Linux..."
 wsl --install
 
-# installing ubuntu distro and X server
+# installing ubuntu distro
 winget install -e --id Canonical.Ubuntu
 
 # Need it no more! Windows 11 WSL2 supports X11 apps natively.
@@ -231,3 +226,9 @@ winget install -e --id OpenWhisperSystems.Signal
 winget install -e --id Typora.Typora
 
 #winget install -e --id XP8K17RNMM8MTN --source msstore # Canva
+
+
+# finally, check installed packages
+
+Write-Output "Re-listing installed packages..." 
+winget list | Sort-Object
