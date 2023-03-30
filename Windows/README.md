@@ -18,8 +18,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
 2. Download and run install script as admin:
 
 ```pwsh
-# Open Admin Powershell
-irm https://github.com/pirafrank/dotfiles/raw/main/Windows/install_dotfiles.ps1 -outfile 'install_software.ps1'
+# Open Admin PowerShell
+irm https://github.com/pirafrank/dotfiles/raw/main/Windows/install_software.ps1 -outfile 'install_software.ps1'
 .\install_software.ps1
 ```
 
@@ -29,6 +29,14 @@ irm https://github.com/pirafrank/dotfiles/raw/main/Windows/install_dotfiles.ps1 
 # Open user PowerShell
 irm https://github.com/pirafrank/dotfiles/raw/main/Windows/install_user_software.ps1 -outfile 'install_user_software.ps1'
 .\install_user_software.ps1
+```
+
+## Install dotfiles
+
+```pwsh
+# Open Admin PowerShell
+Set-Location "$env:USERPROFILE\dotfiles\Windows"
+.\install_dotfiles.ps1
 ```
 
 ## Locations

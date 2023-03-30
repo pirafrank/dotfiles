@@ -12,6 +12,8 @@ if (!(Get-Command scoop)){
 scoop bucket add main
 # Add the extras bucket
 scoop bucket add extras
+# Add bucket with multiple software versions
+scoop bucket add versions
 # Add Java bucket
 scoop bucket add java
 
