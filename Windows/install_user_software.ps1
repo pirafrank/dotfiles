@@ -12,9 +12,45 @@ if (!(Get-Command scoop)){
 scoop bucket add main
 # Add the extras bucket
 scoop bucket add extras
+# Add Java bucket
+scoop bucket add java
 
-# Installing scoop software in current user session
-scoop install lazygit bat tere jq yq less
+# essential cli tools
+scoop install `
+  vim `
+  fzf `
+  fd `
+  wget `
+  curl `
+  lazygit `
+  lazydocker `
+  gh `
+  bat `
+  tere `
+  jq `
+  yq `
+  less `
+  rclone
+
+# environments
+scoop install `
+  nvm `
+  pyenv `
+  go `
+  deno `
+  wasmer
+
+# dev tools
+scoop install `
+  meld `
+  insomnia `
+  postman `
+  mockoon
+
+# desktop utils
+scoop install `
+  caffeine `
+  sudo
 
 # clone dotfiles
 Set-Location "$env:USERPROFILE"

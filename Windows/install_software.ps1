@@ -107,13 +107,6 @@ $env:Path += ";%ALLUSERSPROFILE%\chocolatey\bin"
 ####### installing software #######
 ###################################
 
-## essential cli tools
-
-Write-Output "Installing dev tools..." 
-
-choco install -y wget curl
-choco install -y fzf fd
-choco install -y vim
 ## dev tools
 
 winget install -e --id Git.Git
@@ -126,32 +119,23 @@ winget install -e --id Notepad++.Notepad++
 
 choco install -y sysinternals
 choco install -y duck cyberduck
-choco install -y mockoon
 choco install -y rsync
 choco install -y krew
 
-choco install -y oraclejdk maven nodejs python3 deno go
-choco install -y dbeaver
-choco install -y microsoftazurestorageexplorer servicebusexplorer
-
-winget install -e --id CoreyButler.NVMforWindows
+winget install -e --id dbeaver.dbeaver
 winget install -e --id Microsoft.AzureCLI
 winget install -e --id Microsoft.Azure.StorageExplorer
 winget install -e --id Microsoft.DotNet.SDK.7
 winget install -e --id Amazon.AWSCLI
 winget install -e --id Amazon.SAM-CLI
-winget install -e --id GitHub.cli
 
 winget install -e --id Docker.DockerDesktop
 winget install -e --id Fork.Fork
 winget install -e --id JetBrains.Toolbox
-winget install -e --id Meld.Meld
 
 winget install -e --id Mozilla.Firefox
 winget install -e --id Google.Chrome
 
-winget install -e --id Insomnia.Insomnia
-winget install -e --id Postman.Postman
 winget install -e --id SmartBear.SoapUI
 
 winget install -e --id PostgreSQL.pgAdmin
@@ -161,11 +145,9 @@ winget install -e --id WinMerge.WinMerge
 winget install -e --id WinSCP.WinSCP
 winget install -e --id SmartBear.SoapUI
 winget install -e --id Telerik.Fiddler.Classic
-winget install -e --id Wasmer.Wasmer
 
 ## vm essentials
 
-choco install -y caffeine
 winget install -e --id 7zip.7zip
 winget install -e --id namazso.OpenHashTab
 
