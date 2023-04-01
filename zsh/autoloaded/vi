@@ -1,0 +1,5 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+vim -u ~/dotfiles/vim/minimal.vimrc "$@"
+
