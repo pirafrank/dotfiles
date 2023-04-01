@@ -53,6 +53,10 @@ function! ToggleNumAndSignColumns()
 endfunction
 
 
+""" Tagbar
+nmap <F9> :TagbarToggle<CR>
+
+
 """ per filetype settings
 
 " run code by pressing Ctrl+r in normal mode

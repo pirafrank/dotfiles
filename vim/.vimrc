@@ -100,6 +100,9 @@ call plug#begin('~/.vim/plugged')
   " fzf + rg + vim integration
   Plug 'wookayin/fzf-ripgrep.vim'
 
+  " Tagbar
+  Plug 'preservim/tagbar'
+
 call plug#end()
 
 

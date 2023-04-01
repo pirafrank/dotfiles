@@ -102,6 +102,7 @@ Check content of:
 |`ctrl+s`|rectangular selection|
 |`ctrl+t`|toggle number and sign column|
 |`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
+|`F9`|open tagbar|
 
 ### Splits
 
@@ -119,6 +120,15 @@ Check content of:
 |`ctrl+w` then `ctrl+l`|move to right split (default)|
 |`ctrl+shift+h`|move to bottom split|
 |`ctrl+w` then `ctrl+h`|move to bottom split (default)|
+|`ctrl+w >`|resize a vertical split to the right by a column|
+|`ctrl+w 5<`|resize a vertical split to the left by 5 columns|
+|`ctrl+w 5>`|resize a vertical split to the right by 5 columns|
+|`ctrl+w <`|resize a vertical split to the left by a column|
+|`ctrl+w +`|resize an horizontal split by one line|
+|`ctrl+w -`|resize an horizontal split by one line|
+|`ctrl+w 5+`|resize an horizontal split by 5 lines|
+|`ctrl+w 5-`|resize an horizontal split by 5 lines|
+|`ctrl+w =`|resize to equal dimensions|
 
 More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
 

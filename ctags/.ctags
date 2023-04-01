@@ -1,7 +1,15 @@
 # you can create a ~/.ctags file with your config, not to specify it on CLI
+#
+# symlink ctags folder where this file lives as ~/.ctags.d to use with universal-ctags.
+# on windows symlink to ~/ctags.d (note the initial dot is missing).
+# ref: https://buildmedia.readthedocs.org/media/pdf/ctags/latest/ctags.pdf
+#
 --recurse=yes
 --tag-relative=yes
 --exclude=.git
 --exclude=node_modules
 --exclude=test
-
+--exclude=target
+--exclude=dist
+--exclude=venv
+--exclude=bin
