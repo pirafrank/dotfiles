@@ -56,7 +56,7 @@ call plug#begin('~/.vim/plugged')
   " rust
   Plug 'rust-lang/rust.vim', {'for': 'rs'}
   " note: you need to run this first to install the required components
-  " rustup component add rls rust-analysis rust-src
+  " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
 
   " fuzzy everything search
   " download the plugin from github to .fzf and
@@ -129,10 +129,20 @@ call plug#end()
 				\  'python': ['pylint'],
 				\  'java': ['javac'],
         \  'go': ['gopls'],
+        \  'rust': ['rls', 'cargo'],
 				\ }
 
-  let g:ale_linters.rust = ['cargo', 'rls']
-  let g:ale_rust_rls_toolchain = 'stable'
+  let g:ale_rust_rls_toolchain = ''
+  let g:ale_rust_rls_executable = 'rust-analyzer'
+
+  " do not enable rustfmt, or :w will become painfully slow
+  " issue: https://github.com/rust-lang/rust.vim/issues/293
+  " let b:ale_fixers = { 'rust': ['rustfmt'] }
+
+  " same as above, due to rustfmt.
+  " format manually by running :RustFmt
+  " set g:rustfmt_autosave = 1, to format on save in rust files
+  let g:rustfmt_autosave = 0
 
   " enable omnicompletion (disabled by default)
   filetype plugin indent on
