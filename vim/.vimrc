@@ -101,7 +101,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'wookayin/fzf-ripgrep.vim'
 
   " Tagbar
-  Plug 'preservim/tagbar'
+  " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
+  "   https://github.com/vim-airline/vim-airline/issues/1313
+  " disabling airline integration with tagbar may help too, set it to 0 to disable.
+  "let g:airline#extensions#tagbar#enabled = 0
+  Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 
 call plug#end()
 
