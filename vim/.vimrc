@@ -66,13 +66,13 @@ call plug#begin('~/.vim/plugged')
 
   " colorschemas
   Plug 'rafi/awesome-vim-colorschemes'
-  Plug 'flazz/vim-colorschemes'
-  Plug 'flrnprz/plastic.vim'
-  Plug 'noahfrederick/vim-noctu'
-  Plug 'jeffkreeftmeijer/vim-dim'
-  Plug 'noahfrederick/vim-hemisu'
-  Plug 'sainnhe/sonokai'
-  Plug 'hzchirs/vim-material'
+  "Plug 'flazz/vim-colorschemes'
+  "Plug 'flrnprz/plastic.vim'
+  "Plug 'noahfrederick/vim-noctu'
+  "Plug 'jeffkreeftmeijer/vim-dim'
+  "Plug 'noahfrederick/vim-hemisu'
+  "Plug 'sainnhe/sonokai'
+  "Plug 'hzchirs/vim-material'
 
   "status/tabline light as air
   Plug 'vim-airline/vim-airline'
