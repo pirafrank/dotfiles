@@ -94,6 +94,21 @@ Check content of:
 
 ## VIM
 
+### Configuration paths
+
+|Editor|Item|Platform|Path|
+|---|---|---|---|
+|vim|config|*nix|`$HOME/.vimrc`|
+|vim|dir|*nix|`$HOME/.vim`|
+|vim|config|Win|`$env:USERPROFILE\.vimrc`|
+|vim|dir|Win|`$env:USERPROFILE\vimfiles`|
+|nvim|config|*nix|`$XDG_CONFIG_HOME/nvim/init.vim`|
+|nvim|dir|*nix|`$XDG_CONFIG_HOME/nvim`|
+|nvim|config|Win|`$env:USERPROFILE\AppData\Local\nvim\init.vim`|
+|nvim|dir|Win|`$env:USERPROFILE\AppData\Local\nvim`|
+
+`XDG_CONFIG_HOME` is usually set to: `$HOME/.config`.
+
 ### Mappings
 
 |Name|Action|
