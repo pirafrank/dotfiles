@@ -5,6 +5,7 @@ Set-Alias -Name dir -Value Get-ChildItem -Option AllScope
 Set-Alias -Name l -Value ls -Option AllScope
 Set-Alias which get-command
 Set-Alias lg lazygit
+Set-Alias ldk lazydocker
 Set-Alias open Invoke-Item
 Set-Alias k kubectl
 Set-Alias dk docker

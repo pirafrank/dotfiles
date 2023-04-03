@@ -112,4 +112,9 @@
         "!Split",
         "!Split sequence"
     ],
+    "terminal.external.windowsExec": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+    "gitlens.advanced.messages": {
+        "suppressCommitNotFoundWarning": true
+    },
+    "workbench.startupEditor": "none",
 }

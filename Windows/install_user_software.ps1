@@ -24,6 +24,7 @@ scoop install `
   fd `
   wget `
   curl `
+  delta `
   lazygit `
   lazydocker `
   gh `
