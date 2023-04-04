@@ -19,6 +19,10 @@ if has('win32')
     set shell=pwsh.exe
 endif
 
+" autoload file changes
+" undo loading by pressing 'u'
+set autoread
+
 " search deep in subdirs
 set path+=**
 
@@ -31,6 +35,10 @@ set wildmenu
 
 " always show the sidebar used by signify
 set signcolumn=yes
+
+" empty line below the cursor
+set scrolloff=1
+
 
 """ search
 
@@ -52,6 +60,10 @@ set wrapscan
 " disable wrapscan
 "set nowrapscan
 
+" start searching before pressing enter
+if has('reltime')
+    set incsearch
+endif
 
 """ syntax
 
