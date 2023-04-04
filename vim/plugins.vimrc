@@ -1,15 +1,26 @@
 """ plugin settings
 
-" fzf options
+""" fzf config
 " set fzf runtime path
 set rtp+=~/.fzf
-" call it via CTRL+P
-nnoremap <silent> <C-p> :FZF<CR>
-inoremap <silent> <C-p> :FZF<CR>
+nnoremap <silent> <C-t> :Files<CR>
+inoremap <silent> <C-t> :Files<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
 cnoreabbrev bb Buffers
 let g:fzf_buffers_jump = 1 " [Buffers] Jump to the existing window if possible
+"let g:fzf_command_prefix = 'Fzf'
+" override default fzf keybindings on highlighted items in fzf popup
+let g:fzf_action = {
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-w': 'vsplit'
+  \ }
+" override fzf default layout
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
+" more here:
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md
 
-" ale config
+
+""" ale config
 " shorter error/warning flags
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -39,6 +50,8 @@ let g:ale_rust_rls_executable = 'rust-analyzer'
 " set g:rustfmt_autosave = 1, to format on save in rust files
 let g:rustfmt_autosave = 0
 
+
+""" deoplete
 " enable omnicompletion (disabled by default)
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
@@ -56,17 +69,20 @@ au filetype go inoremap <buffer> . .<C-x><C-o>
 let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save
 let g:go_auto_type_info = 1 " Automatically get signature/type info for object under cursor
 
+
+""" NerdTree
 " show hidden files in nerdtree by default
 let NERDTreeShowHidden=1
 " use ctrl+n to toggle nerdtree
 map <C-n> :NERDTreeToggle<CR>
-
+" nerdtree uses nerdfonts
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
 "display all buffers in airline when there's only 1 tab open
 let g:airline#extensions#tabline#enabled = 1
 
-" vim-signify settings
+
+""" vim-signify settings
 " default updatetime 4000ms is not good for async update
 set updatetime=100
 " sign settings
@@ -78,7 +94,12 @@ let g:signify_sign_changedelete      = g:signify_sign_change
 " show number of edited/deleted lines
 let g:signify_sign_show_count = 1
 
-" editorconfig settings
+
+""" editorconfig settings
 let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
 let g:EditorConfig_exclude_patterns = ['scp://.\*']
 let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
+
+
+""" Tagbar
+nmap <F9> :TagbarToggle<CR>

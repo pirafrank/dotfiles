@@ -4,13 +4,21 @@
 " remap ESC btn
 inoremap jj <Esc>
 
+" leaders won't last, change leader
+let mapleader = "\<Space>"
+
+" enable folding with the spacebar
+nnoremap <leader>z za
+
 " cycle through open buffers
 " press F5 and then choose a buffer number
 " credits: https://vim.fandom.com/wiki/Easier_buffer_switching
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " rect / block visual selection
-nnoremap <c-s> <c-v>
+" xnoremap: visual mode only map, you need to enter visual mode first
+xnoremap <c-r> <c-v>
+
 
 """ panes
 
@@ -23,9 +31,9 @@ set splitright
 
 "split navigations
 " split vertically using pipe
-nnoremap <C-w>\| <C-w>v
+nnoremap <leader>w <C-w>v
 " split horizontally using 'h'.
-nnoremap <C-w>h <C-w>s
+nnoremap <leader>s <C-w>s
 " use ctrl+[UPPERCASE] instead of ctrl+w+[lowercase] to move between splits
 nnoremap <C-J> <C-w><C-J>
 nnoremap <C-K> <C-w><C-K>
@@ -36,7 +44,7 @@ nnoremap <C-H> <C-w><C-H>
 """ signcolumn
 
 " toggle number and sign columns
-nnoremap <silent> <C-t> :call ToggleNumAndSignColumns()<CR>
+nnoremap <silent> <leader>l :call ToggleNumAndSignColumns()<CR>
 
 " toggle function. Works on vim>=8.1 or NeoVim
 " credits: https://stackoverflow.com/posts/53930943/revisions
@@ -51,10 +59,6 @@ function! ToggleNumAndSignColumns()
         let b:signcolumn_on=1
     endif
 endfunction
-
-
-""" Tagbar
-nmap <F9> :TagbarToggle<CR>
 
 
 """ per filetype settings
