@@ -40,6 +40,14 @@ set signcolumn=yes
 set scrolloff=1
 
 
+""" terminal
+
+set termencoding=utf-8
+set termguicolors
+set ttyfast
+set t_Co=256
+
+
 """ search
 
 " case insensitive search by default
