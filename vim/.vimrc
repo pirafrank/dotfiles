@@ -10,7 +10,7 @@ endfunction
 let is_vim = !has('nvim')
 let is_nvim = has('nvim')
 let has_terminal = has('nvim') || has('terminal')
-
+let has_gui = has("gui_running")
 
 """ plugins
 
@@ -33,13 +33,67 @@ endif
 
 " using vim-plug as plugin manager
 " (https://github.com/junegunn/vim-plug)
+" partially inspired by https://github.com/threkk/dotfiles/blob/master/dotfiles/config/nvim/init.vim
 call plug#begin($BASE.'/plugged')
 
-  " language pack for syntax highlighting
-  Plug 'sheerun/vim-polyglot'
+  """"""""""""""""""""""""""""""" Editor """""""""""""""""""""""""""""""""""""
 
-  " ale
-  Plug 'dense-analysis/ale'
+  Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Supporting library
+  Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Supporting library
+
+  Plug 'luukvbaal/stabilize.nvim'                     " stabilize the UI
+  Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
+  Plug 'kyazdani42/nvim-web-devicons', Cond(is_nvim)  " Nerd font lua support
+  Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
+  Plug 'editorconfig/editorconfig-vim'                " editorconfig
+  Plug 'tpope/vim-commentary'                         " toggle comments
+
+  " Brackets
+  Plug 'tpope/vim-surround' " delete/change/add surroundings
+  Plug 'luochen1990/rainbow' " color match bracket pairs
+
+  " File tree
+  Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'Xuyuanp/nerdtree-git-plugin'
+
+  " Status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+
+  " Git
+  Plug 'tpope/vim-fugitive'                   " the almost illegal git wrapper
+  Plug 'mhinz/vim-signify'                    " git diff plugin
+
+  " Search
+  " download from github to .fzf + updates binary to latest version
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } } "
+  Plug 'junegunn/fzf.vim'                         " fzf + vim integration
+  Plug 'ctrlpvim/ctrlp.vim'                       " Moving around in vim
+  "Plug 'mileszs/ack.vim'                          " ACK, AG, RG...
+
+  " Tagbar
+  " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
+  "   https://github.com/vim-airline/vim-airline/issues/1313
+  " disabling airline integration with tagbar may help too, set it to 0 to disable.
+  "let g:airline#extensions#tagbar#enabled = 0
+  Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
+
+  """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
+
+  Plug 'rafi/awesome-vim-colorschemes'
+  "Plug 'flazz/vim-colorschemes'
+  "Plug 'flrnprz/plastic.vim'
+  "Plug 'noahfrederick/vim-noctu'
+  "Plug 'jeffkreeftmeijer/vim-dim'
+  "Plug 'noahfrederick/vim-hemisu'
+  "Plug 'sainnhe/sonokai'
+  "Plug 'hzchirs/vim-material'
+
+  """""""""""""""" Language support (syntax, linting, etc.) """"""""""""""""""
+
+  Plug 'sheerun/vim-polyglot', Cond(is_vim)              " syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim)  " syntax highlighting
+  Plug 'dense-analysis/ale'                              " ale
 
   " use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
@@ -71,55 +125,6 @@ call plug#begin($BASE.'/plugged')
   Plug 'rust-lang/rust.vim', {'for': 'rs'}
   " note: you need to run this first to install the required components
   " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
-
-  " fuzzy everything search
-  " download the plugin from github to .fzf and
-  " make sure to have the latest version of the fzf binary
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-
-  " colorschemas
-  Plug 'rafi/awesome-vim-colorschemes'
-  "Plug 'flazz/vim-colorschemes'
-  "Plug 'flrnprz/plastic.vim'
-  "Plug 'noahfrederick/vim-noctu'
-  "Plug 'jeffkreeftmeijer/vim-dim'
-  "Plug 'noahfrederick/vim-hemisu'
-  "Plug 'sainnhe/sonokai'
-  "Plug 'hzchirs/vim-material'
-
-  "status/tabline light as air
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-
-  " nerdtree with git integration
-  Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'Xuyuanp/nerdtree-git-plugin'
-
-  " the almost illegal git wrapper
-  Plug 'tpope/vim-fugitive'
-
-  " git diff plugin
-  Plug 'mhinz/vim-signify'
-
-  " editorconfig
-  Plug 'editorconfig/editorconfig-vim'
-
-  " toggle comments
-  Plug 'tpope/vim-commentary'
-
-  " Most Recently Used (MRU) Vim Plugin
-  Plug 'yegappan/mru'
-
-  " fzf + rg + vim integration
-  Plug 'wookayin/fzf-ripgrep.vim'
-
-  " Tagbar
-  " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
-  "   https://github.com/vim-airline/vim-airline/issues/1313
-  " disabling airline integration with tagbar may help too, set it to 0 to disable.
-  "let g:airline#extensions#tagbar#enabled = 0
-  Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
 
 call plug#end()
 
