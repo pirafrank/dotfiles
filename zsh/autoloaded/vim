@@ -1,0 +1,44 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# for lazy people who don't want to remember to write 'floaterm' in place of 'vim'
+# when in a floating vim terminal.
+
+# this autoloaded funzion is an edited version of:
+# https://github.com/voldikss/vim-floaterm/blob/master/bin/floaterm
+
+absolute_path() {
+    local result=""
+    if [ -x "$(which realpath 2> /dev/null)" ]; then
+        result="$(realpath -s """$1""" 2> /dev/null)"
+    fi
+    if [ -z "$result" ] && [ -x "$(which perl 2> /dev/null)" ]; then
+        result="$(perl -MCwd -e 'print Cwd::realpath($ARGV[0])' """$1""")"
+    fi
+    if [ -z "$result" ] && [ -x "$(which python 2> /dev/null)" ]; then
+        result="$(python -c 'import sys, os;sys.stdout.write(os.path.abspath(sys.argv[1]))' """$1""")"
+    fi
+    if [ -z "$result" ] && [ -x "$(which python3 2> /dev/null)" ]; then
+        result="$(python3 -c 'import sys, os;sys.stdout.write(os.path.abspath(sys.argv[1]))' """$1""")"
+    fi
+    if [ -z "$result" ] && [ -x "$(which python2 2> /dev/null)" ]; then
+        result="$(python2 -c 'import sys, os;sys.stdout.write(os.path.abspath(sys.argv[1]))' """$1""")"
+    fi
+    if [ -z "$result" ] && [ -x "$(which realpath 2> /dev/null)" ]; then
+        result="$(realpath """$1""")"
+    fi
+    if [ -z "$result" ]; then
+        result="$1"
+    fi
+    echo $result
+}
+
+if [ -z $FLOATERM ]; then
+  # standard shell, open vim
+  unfunction vim
+  eval $(which vim) "$@"
+else
+  # we're in a shell inside vim terminal, avoid nested vim
+  name="$(absolute_path """$1""")"
+  eval $FLOATERM $name
+fi

@@ -41,7 +41,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Supporting library
   Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Supporting library
 
-  Plug 'luukvbaal/stabilize.nvim'                     " stabilize the UI
+  Plug 'luukvbaal/stabilize.nvim'                     " stabilize UI splits
   Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
   Plug 'kyazdani42/nvim-web-devicons', Cond(is_nvim)  " Nerd font lua support
   Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
@@ -77,6 +77,9 @@ call plug#begin($BASE.'/plugged')
   " disabling airline integration with tagbar may help too, set it to 0 to disable.
   "let g:airline#extensions#tagbar#enabled = 0
   Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
+
+  " Terminal
+  Plug 'voldikss/vim-floaterm'
 
   """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
 

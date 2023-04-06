@@ -20,6 +20,10 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
 " https://github.com/junegunn/fzf/blob/master/README-VIM.md
 
 
+""" ctrlp
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+
+
 """ ale config
 " shorter error/warning flags
 let g:ale_echo_msg_error_str = 'E'
@@ -103,3 +107,25 @@ let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
 """ Tagbar
 nmap <F9> :TagbarToggle<CR>
+
+
+""" floatterm
+let g:floaterm_giteditor=1
+let g:floaterm_wintype='float'
+let g:floaterm_width=0.9
+let g:floaterm_height=0.85
+let g:floaterm_position='center'
+let g:floaterm_autoclose=0
+let g:floaterm_opener='tabe'
+let g:floaterm_autohide=1
+
+nnoremap   <silent>   <C-t><C-t>    :FloatermNew<CR>
+tnoremap   <silent>   <C-t><C-t>    <C-\><C-n>:FloatermNew<CR>
+nnoremap   <silent>   <F10>    :FloatermPrev<CR>
+tnoremap   <silent>   <F10>    <C-\><C-n>:FloatermPrev<CR>
+nnoremap   <silent>   <F11>    :FloatermNext<CR>
+tnoremap   <silent>   <F11>    <C-\><C-n>:FloatermNext<CR>
+nnoremap   <silent>   <F12>   :FloatermToggle<CR>
+tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermToggle<CR>
+nnoremap   <silent>   <C-t><C-k>   :FloatermKill<CR>
+tnoremap   <silent>   <C-t><C-k>   <C-\><C-n>:FloatermKill<CR>
