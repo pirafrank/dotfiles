@@ -10,10 +10,13 @@ let mapleader = "\<Space>"
 " enable folding with the spacebar
 nnoremap <leader>z za
 
-" cycle through open buffers
+" buffer list
 " press F5 and then choose a buffer number
 " credits: https://vim.fandom.com/wiki/Easier_buffer_switching
-nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <silent> <leader>b :buffers<CR>:buffer<Space>
+
+" cycle through open buffers
+nnoremap <F3> :bn<CR>
 
 " rect / block visual selection
 " xnoremap: visual mode only map, you need to enter visual mode first

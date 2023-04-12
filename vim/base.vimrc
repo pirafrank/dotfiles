@@ -36,8 +36,8 @@ set wildmenu
 " always show the sidebar used by signify
 set signcolumn=yes
 
-" empty line below the cursor
-set scrolloff=1
+" locks this number of lines while scrolling
+set scrolloff=4
 
 
 """ terminal
