@@ -1,7 +1,7 @@
 " .vimrc - Francesco Pira <dev@fpira.com>
 
 " load basic functions
-source ~/dotfiles/vim/require.vim
+source ~/dotfiles/vim/common/require.vim
 
 " Lazy loading
 " From https://github.com/junegunn/vim-plug/wiki/faq#conditional-activation
@@ -131,12 +131,13 @@ call plug#begin($BASE.'/plugged')
 call plug#end()
 
 
-" load config
-source ~/dotfiles/vim/base.vimrc
-source ~/dotfiles/vim/backup.vimrc
-source ~/dotfiles/vim/mappings.vimrc
-source ~/dotfiles/vim/ctags.vimrc
+" load common config
+source ~/dotfiles/vim/common/base.vim
+source ~/dotfiles/vim/common/backup.vim
+source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/ctags.vim
+source ~/dotfiles/vim/common/gui.vim
 
-source ~/dotfiles/vim/plugins.vimrc
-source ~/dotfiles/vim/colors.vimrc
-source ~/dotfiles/vim/gui.vimrc
+source ~/dotfiles/vim/plugins/plugins.vim
+source ~/dotfiles/vim/plugins/colors.vim
+

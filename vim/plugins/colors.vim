@@ -37,5 +37,6 @@ silent! color onedark
 " further theme customization
 " you can use default theme and customize terminal colors instead
 "color default
+
 " keep line numbers grey
 highlight LineNr ctermfg=grey

@@ -1,7 +1,7 @@
 """ vim settings on iSH for iOS
 
 """ load base vimrc file
-source ~/dotfiles/vim/base.vimrc
+source ~/dotfiles/vim/common/base.vim
 
 """ plugins
 
@@ -112,4 +112,4 @@ call plug#end()
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
 """ mappings
-source ~/dotfiles/vim/mappings.vimrc
+source ~/dotfiles/vim/common/mappings.vim
