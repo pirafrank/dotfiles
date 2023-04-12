@@ -88,6 +88,8 @@ call plug#begin($BASE.'/plugged')
   "Plug 'noahfrederick/vim-hemisu'
   "Plug 'sainnhe/sonokai'
   "Plug 'hzchirs/vim-material'
+  Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
+  Plug 'ghifarit53/tokyonight-vim', Cond(is_vim)
 
   """""""""""""""" Language support (syntax, linting, etc.) """"""""""""""""""
 

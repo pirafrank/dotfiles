@@ -5,6 +5,12 @@
 "color dracula
 silent! color onedark
 
+" my 2nd fav color scheme
+"let g:tokyonight_style = 'storm' " available: night, storm
+"let g:tokyonight_enable_italic = 1
+"color tokyonight
+
+
 " settings to use vim-plastic colorscheme
 " (live in plastic, it's fantastic)
 "set background=dark
