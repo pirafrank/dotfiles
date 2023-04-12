@@ -1,5 +1,8 @@
 " .vimrc - Francesco Pira <dev@fpira.com>
 
+" load basic functions
+source ~/dotfiles/vim/require.vim
+
 " Lazy loading
 " From https://github.com/junegunn/vim-plug/wiki/faq#conditional-activation
 function! Cond(cond, ...)
@@ -7,23 +10,17 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
-let is_vim = !has('nvim')
-let is_nvim = has('nvim')
-let has_terminal = has('nvim') || has('terminal')
-let has_gui = has("gui_running")
 
 """ plugins
 
 " automatically install vim-plug if it's not
 if has('nvim')
-  let $BASE = stdpath('config')
   if empty(stdpath('config').'/autoload/plug.vim')
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 else
-  let $BASE = '$HOME/.vim'
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -101,7 +98,7 @@ call plug#begin($BASE.'/plugged')
   " use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
   " python3 -m pip install --user pynvim
-  if has('nvim')
+  if is_nvim
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
   endif
   if has('python3')

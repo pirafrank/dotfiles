@@ -1,6 +1,6 @@
 
 """ backup settings
-" settings from: https://github.com/lengthmin/dotfiles/blob/master/ubuntu_wsl/init.vim
+" forked from: https://github.com/lengthmin/dotfiles/blob/master/ubuntu_wsl/init.vim
 
 " it works only if directories exist
 " create them first with strict perms
@@ -10,7 +10,6 @@
 "silent !mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo
 
 set swapfile
-set directory^=~/.vim/swap//
 
 " protect against crash-during-write
 set writebackup
@@ -18,11 +17,14 @@ set writebackup
 set nobackup
 " use rename-and-write-new method whenever safe
 set backupcopy=auto
-" patch required to honor double slash at end
-set backupdir^=~/.vim/backups//
-" persist the undo tree for each file
+
 set undofile
-set undodir^=~/.vim/undo//
+
+" patch required to honor double slash at end
+set directory^=$BASE.'/swap//'
+set backupdir^=$BASE.'/backups//'
+" persist the undo tree for each file
+set undodir^=$BASE.'/undo//'
 
 """ update time
 " If this many milliseconds nothing is typed the swap file will be written to disk

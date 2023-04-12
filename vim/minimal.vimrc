@@ -1,5 +1,8 @@
 """ vim minimal settings, no IDE features, fewer plugins
 
+" load basic functions
+source ~/dotfiles/vim/require.vim
+
 """ load base vimrc file
 source ~/dotfiles/vim/base.vimrc
 
