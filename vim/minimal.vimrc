@@ -36,5 +36,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 
-""" mappings
+""" source config
 source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim

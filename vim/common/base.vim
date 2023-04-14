@@ -36,6 +36,9 @@ set wildmenu
 " always show the sidebar used by signify
 set signcolumn=yes
 
+" default updatetime 4000ms is not good for async update
+set updatetime=100
+
 " locks this number of lines while scrolling
 set scrolloff=4
 
@@ -115,12 +118,11 @@ set cursorline
 set cursorcolumn
 
 
-""" paste options
+""" panes
 
-" avoid tab increments while pasting content over ssh connection
-" IMPORTANT : When the 'paste' option is switched on mapping in Insert mode and
-"             Command-line mode is disabled. In other words remaps do NOT work.
-"set paste
-" instead of setting paste ON permanently, toggle it
-" set pastetoggle=<leader>p
-set pastetoggle=<C-y>
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+" choose where to open the new pane
+set splitbelow
+set splitright

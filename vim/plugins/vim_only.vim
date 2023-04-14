@@ -1,4 +1,5 @@
-""" plugin settings
+
+""" vim-only plugin settings and mappings """
 
 """ fzf config
 " set fzf runtime path
@@ -87,8 +88,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 """ vim-signify settings
-" default updatetime 4000ms is not good for async update
-set updatetime=100
 " sign settings
 let g:signify_sign_add               = '+'
 let g:signify_sign_delete            = '-'
@@ -97,12 +96,6 @@ let g:signify_sign_change            = 'M'
 let g:signify_sign_changedelete      = g:signify_sign_change
 " show number of edited/deleted lines
 let g:signify_sign_show_count = 1
-
-
-""" editorconfig settings
-let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
-let g:EditorConfig_exclude_patterns = ['scp://.\*']
-let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
 
 """ Tagbar

@@ -135,9 +135,13 @@ call plug#end()
 source ~/dotfiles/vim/common/base.vim
 source ~/dotfiles/vim/common/backup.vim
 source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim
 source ~/dotfiles/vim/common/ctags.vim
 source ~/dotfiles/vim/common/gui.vim
 
-source ~/dotfiles/vim/plugins/plugins.vim
+source ~/dotfiles/vim/plugins/common.vim
 source ~/dotfiles/vim/plugins/colors.vim
 
+if is_vim
+  source ~/dotfiles/vim/plugins/vim_only.vim
+endif

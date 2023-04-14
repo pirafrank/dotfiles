@@ -111,5 +111,7 @@ call plug#end()
   let g:EditorConfig_exclude_patterns = ['scp://.\*']
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
-""" mappings
+
+""" source config
 source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim
