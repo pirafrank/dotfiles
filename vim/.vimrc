@@ -35,23 +35,28 @@ call plug#begin($BASE.'/plugged')
 
   """"""""""""""""""""""""""""""" Editor """""""""""""""""""""""""""""""""""""
 
-  Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Supporting library
-  Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Supporting library
+  Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Dependency lib
+  Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Dependency lib
 
   Plug 'luukvbaal/stabilize.nvim'                     " stabilize UI splits
   Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
   Plug 'kyazdani42/nvim-web-devicons', Cond(is_nvim)  " Nerd font lua support
+  Plug 'roxma/vim-paste-easy'                         " auto-set paste mode
   Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
   Plug 'editorconfig/editorconfig-vim'                " editorconfig
   Plug 'tpope/vim-commentary'                         " toggle comments
 
   " Brackets
-  Plug 'tpope/vim-surround' " delete/change/add surroundings
-  Plug 'luochen1990/rainbow' " color match bracket pairs
+  Plug 'tpope/vim-surround'                   " delete/change/add surroundings
+  Plug 'luochen1990/rainbow'                  " color match bracket pairs
+  Plug 'cohama/lexima.vim'                    " auto-closes parenthesis
 
   " File tree
   Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
   Plug 'Xuyuanp/nerdtree-git-plugin'
+
+  " Bufferline
+  " in vim bufferline is provided by airline
 
   " Status bar
   Plug 'vim-airline/vim-airline'

@@ -83,9 +83,6 @@ map <C-n> :NERDTreeToggle<CR>
 " nerdtree uses nerdfonts
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
-"display all buffers in airline when there's only 1 tab open
-let g:airline#extensions#tabline#enabled = 1
-
 
 """ vim-signify settings
 " sign settings
