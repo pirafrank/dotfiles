@@ -52,8 +52,8 @@ call plug#begin($BASE.'/plugged')
   Plug 'cohama/lexima.vim'                    " auto-closes parenthesis
 
   " File tree
-  Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-  Plug 'Xuyuanp/nerdtree-git-plugin'
+  Plug 'preservim/nerdtree', Cond(is_vim, { 'on': 'NERDTreeToggle' })
+  Plug 'Xuyuanp/nerdtree-git-plugin', Cond(is_vim)
 
   " Bufferline
   " in vim bufferline is provided by airline
@@ -64,24 +64,22 @@ call plug#begin($BASE.'/plugged')
 
   " Git
   Plug 'tpope/vim-fugitive'                   " the almost illegal git wrapper
-  Plug 'mhinz/vim-signify'                    " git diff plugin
+  Plug 'mhinz/vim-signify', Cond(is_vim)               " git diff in vim
 
   " Search
   " download from github to .fzf + updates binary to latest version
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } } "
-  Plug 'junegunn/fzf.vim'                         " fzf + vim integration
-  Plug 'ctrlpvim/ctrlp.vim'                       " Moving around in vim
-  "Plug 'mileszs/ack.vim'                          " ACK, AG, RG...
+  Plug 'junegunn/fzf', Cond(is_vim, { 'dir': '~/.fzf', 'do': { -> fzf#install() } })
+  Plug 'junegunn/fzf.vim', Cond(is_vim)                " fzf + vim integration
+  Plug 'ctrlpvim/ctrlp.vim', Cond(is_vim && has_gui)   " Moving around in vim
+  "Plug 'mileszs/ack.vim'                               " ACK, AG, RG...
 
-  " Tagbar
+  " Right sidebar
   " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
   "   https://github.com/vim-airline/vim-airline/issues/1313
-  " disabling airline integration with tagbar may help too, set it to 0 to disable.
-  "let g:airline#extensions#tagbar#enabled = 0
-  Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
+  Plug 'preservim/tagbar', Cond(is_vim, { 'on': 'TagbarToggle' })
 
   " Terminal
-  Plug 'voldikss/vim-floaterm'
+  Plug 'voldikss/vim-floaterm', Cond(is_vim && has_terminal) " vim float term
 
   """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
 
@@ -100,38 +98,37 @@ call plug#begin($BASE.'/plugged')
 
   Plug 'sheerun/vim-polyglot', Cond(is_vim)              " syntax highlighting
   Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim)  " syntax highlighting
-  Plug 'dense-analysis/ale'                              " ale
+  Plug 'dense-analysis/ale', Cond(is_vim)                " linting
 
-  " use deoplete for smart autocompletion
+  " in vim, use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
   " python3 -m pip install --user pynvim
-  if is_nvim
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  endif
-  if has('python3')
+  if is_vim && has('python3')
     Plug 'Shougo/deoplete.nvim'
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
 
   " java
-  Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
+  Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
   "filetype off
   "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
   "map <C-]> :YcmCompleter GoToImprecise<CR>
 
   " python
   " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
-  Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
+  Plug 'deoplete-plugins/deoplete-jedi', Cond(is_vim, {'for': 'py'})
 
   " golang
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+  Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
   " run :GoInstallBinaries after plugin install
 
   " rust
-  Plug 'rust-lang/rust.vim', {'for': 'rs'}
+  Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
   " note: you need to run this first to install the required components
   " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
 
