@@ -54,6 +54,7 @@ call plug#begin($BASE.'/plugged')
   " File tree
   Plug 'preservim/nerdtree', Cond(is_vim, { 'on': 'NERDTreeToggle' })
   Plug 'Xuyuanp/nerdtree-git-plugin', Cond(is_vim)
+  Plug 'nvim-neo-tree/neo-tree.nvim', Cond(is_nvim)
 
   " Bufferline
   " in vim bufferline is provided by airline
@@ -65,6 +66,7 @@ call plug#begin($BASE.'/plugged')
   " Git
   Plug 'tpope/vim-fugitive'                   " the almost illegal git wrapper
   Plug 'mhinz/vim-signify', Cond(is_vim)               " git diff in vim
+  Plug 'lewis6991/gitsigns.nvim', Cond(is_nvim)        " git diff in nvim
 
   " Search
   " download from github to .fzf + updates binary to latest version
@@ -72,6 +74,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'junegunn/fzf.vim', Cond(is_vim)                " fzf + vim integration
   Plug 'ctrlpvim/ctrlp.vim', Cond(is_vim && has_gui)   " Moving around in vim
   "Plug 'mileszs/ack.vim'                               " ACK, AG, RG...
+  Plug 'nvim-telescope/telescope.nvim', Cond(is_nvim)  " Moving around in nvim
 
   " Right sidebar
   " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
@@ -146,4 +149,6 @@ source ~/dotfiles/vim/plugins/colors.vim
 
 if is_vim
   source ~/dotfiles/vim/plugins/vim_only.vim
+elseif is_nvim
+  lua require('plugins')
 endif
