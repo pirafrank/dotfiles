@@ -61,4 +61,4 @@ endfunction
 "set paste
 " instead of setting paste ON permanently, toggle it
 " set pastetoggle=<leader>p
-set pastetoggle=<C-y>
+set pastetoggle=<leader>y
