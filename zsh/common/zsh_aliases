@@ -47,7 +47,7 @@ alias diceroller='shuf -i 1-6 -n 1'
 alias randompin='shuf -i 100000-999999 -n 1'
 alias randompass="shuf -n6 /usr/share/dict/words | sed 's/$/-/g' | tr -d '\n' | cut -d'-' -f1-6"
 
-if [ -f /etc/debian_version ]; then
+if [ -f /etc/debian_version ] && [ $(dpkg --get-selections | grep -q 'fd-find') ]; then
   alias fd=fdfind
 fi
 
