@@ -28,6 +28,27 @@ if [ -f ~/.fzf.zsh ]; then
   fi
 fi
 
+# exa
+if [ "$(command -v exa)" ]; then
+  alias lsx='exa -G -x --color auto --icons -s type'
+  alias llx='exa -l --color auto --icons -s type --git'
+  alias lax='llx -a'
+  alias lx='lax'
+  alias ltx='llx -a -snew'
+fi
+
+# kitty terminal app
+alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+# pgadmin
+if [[ -z $(command -v pgadmin) ]]; then
+  alias pgadmin="docker run -d --net=host --name pgadmin -e PGADMIN_DEFAULT_EMAIL='email@email.com' -e PGADMIN_DEFAULT_PASSWORD=password -e PGADMIN_LISTEN_PORT=54321 dpage/pgadmin4"
+fi
+
+# cd on exit in xplr file manager
+if [[ $(command -v xplr) ]]; then
+  alias xcd='cd "$(xplr --print-pwd-as-result)"'
+fi
+
 # GPG for SSH authentication
 # do it only if there's TTY
 # -- look for macOS
@@ -61,3 +82,27 @@ fi
 if [ -d "$HOME/.serverless/bin" ]; then
   export PATH="$HOME/.serverless/bin:$PATH"
 fi
+
+#
+# Linux-only aliases
+#
+if [[ "$(uname -s)" == 'Linux' ]]; then
+  alias xclip="xclip -selection c"
+  alias open='xdg-open'
+
+  # custom sublime text habits are hard to die...
+  if [[ $(command -v subl) ]]; then
+    alias st=subl
+  fi
+fi
+
+#
+# macOS-only aliases
+#
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+alias st='open -a Sublime\ Text'
+alias vscode='open -a Visual\ Studio\ Code'
+alias fork='open -a /Applications/Fork.app'
+alias listen='lsof -iTCP -sTCP:LISTEN -n -P'
+fi
+

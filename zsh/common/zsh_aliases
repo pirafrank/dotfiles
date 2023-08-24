@@ -47,17 +47,8 @@ alias diceroller='shuf -i 1-6 -n 1'
 alias randompin='shuf -i 100000-999999 -n 1'
 alias randompass="shuf -n6 /usr/share/dict/words | sed 's/$/-/g' | tr -d '\n' | cut -d'-' -f1-6"
 
-if [ -f /etc/debian_version ] && [ $(dpkg --get-selections | grep -q 'fd-find') ]; then
+if [[ $(command -v dpkg) ]] && [[ $(dpkg --get-selections | grep 'fd-find') ]]; then
   alias fd=fdfind
-fi
-
-# exa
-if [ "$(command -v exa)" ]; then
-  alias lsx='exa -G -x --color auto --icons -s type'
-  alias llx='exa -l --color auto --icons -s type --git'
-  alias lax='llx -a'
-  alias lx='lax'
-  alias ltx='llx -a -snew'
 fi
 
 # on Ubuntu the pkg is called 'batcat'
@@ -114,37 +105,4 @@ alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 alias ydl='youtube-dl'
 alias lg='lazygit'
 alias ldk='lazydocker'
-alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
 
-# pgadmin
-if [[ -z $(command -v pgadmin) ]]; then
-  alias pgadmin="docker run -d --net=host --name pgadmin -e PGADMIN_DEFAULT_EMAIL='email@email.com' -e PGADMIN_DEFAULT_PASSWORD=password -e PGADMIN_LISTEN_PORT=54321 dpage/pgadmin4"
-fi
-
-#
-# Linux-only aliases
-#
-if [[ "$(uname -s)" == 'Linux' ]]; then
-  alias xclip="xclip -selection c"
-  alias open='xdg-open'
-
-  # custom sublime text habits are hard to die...
-  if [[ $(command -v subl) ]]; then
-    alias st=subl
-  fi
-
-  # cd on exit in xplr file manager
-  if [[ $(command -v xplr) ]]; then
-    alias xcd='cd "$(xplr --print-pwd-as-result)"'
-  fi
-fi
-
-#
-# macOS-only aliases
-#
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-alias st='open -a Sublime\ Text'
-alias vscode='open -a Visual\ Studio\ Code'
-alias fork='open -a /Applications/Fork.app'
-alias listen='lsof -iTCP -sTCP:LISTEN -n -P'
-fi
