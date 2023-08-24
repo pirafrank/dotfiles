@@ -132,6 +132,11 @@ if [[ "$(uname -s)" == 'Linux' ]]; then
   if [[ $(command -v subl) ]]; then
     alias st=subl
   fi
+
+  # cd on exit in xplr file manager
+  if [[ $(command -v xplr) ]]; then
+    alias xcd='cd "$(xplr --print-pwd-as-result)"'
+  fi
 fi
 
 #
