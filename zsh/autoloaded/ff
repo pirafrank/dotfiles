@@ -1,0 +1,9 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# set CD-on-exit for fff
+# https://github.com/dylanaraps/fff#cd-on-exit
+
+fff "$@"
+cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
+
