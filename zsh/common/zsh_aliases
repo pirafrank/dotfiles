@@ -57,7 +57,7 @@ if [ "$(command -v batcat)" ]; then alias bat='batcat'; fi
 if [ "$(command -v bat)" ]; then
   export BAT_STYLE="changes,header,numbers,snip"
   unalias -m 'cat'
-  alias cat='bat'
+  alias cat='bat -p'
 fi
 
 alias epoch='date +%s'
