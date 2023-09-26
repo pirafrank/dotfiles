@@ -1,11 +1,13 @@
 {
+    "files.autoSave": "onFocusChange",
     "editor.tabSize": 2,
+    "editor.formatOnPaste": true,
     "editor.multiCursorModifier": "ctrlCmd",
     "editor.wordWrap": "on",
     "files.eol": "\n",
     "files.encoding": "utf8",
     "files.maxMemoryForLargeFilesMB": 2048,
-    //"terminal.integrated.shell.linux": "/usr/bin/zsh",
+    "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "window.openFilesInNewWindow": "on",
     "window.restoreWindows": "all",
     "window.zoomLevel": 0,
@@ -22,6 +24,7 @@
     "vsicons.projectDetection.disableDetect": true,
     "explorer.autoReveal": false,
     "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     // git
     "gitlens.views.repositories.location": "gitlens",
     "gitlens.views.fileHistory.location": "gitlens",
@@ -31,6 +34,7 @@
     // python
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
+    "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
     "java.home": "/usr/local/lib/jdk11",
@@ -45,6 +49,7 @@
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
     "auto-close-tag.SublimeText3Mode": true,
+    "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
     "explorer.confirmDragAndDrop": false,
     "[javascript]": {
@@ -61,10 +66,10 @@
     "remote.restoreForwardedPorts": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
     "explorer.confirmDelete": false,
-    "tabnine.experimentalAutoImports": false,
+    "tabnine.experimentalAutoImports": true,
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v12.16.3/bin/node",
+    "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v18.15.0/bin/node",
     "python.languageServer": "Default",
     "json.schemas": [],
     "redhat.telemetry.enabled": false,
@@ -73,8 +78,73 @@
         "vs-kubernetes.crd-code-completion": "disabled"
     },
     "boot-java.rewrite.reconcile": true,
-    "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS NF', 'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
     "[python]": {
         "editor.formatOnType": true
     },
+    "snyk.advanced.cliPath": "C:\\Users\\francesco\\AppData\\Local\\snyk-ls\\snyk-win.exe",
+    "snyk.yesWelcomeNotification": false,
+    "yaml.customTags": [
+        "!And",
+        "!And sequence",
+        "!If",
+        "!If sequence",
+        "!Not",
+        "!Not sequence",
+        "!Equals",
+        "!Equals sequence",
+        "!Or",
+        "!Or sequence",
+        "!FindInMap",
+        "!FindInMap sequence",
+        "!Base64",
+        "!Join",
+        "!Join sequence",
+        "!Cidr",
+        "!Ref",
+        "!Sub",
+        "!Sub sequence",
+        "!GetAtt",
+        "!GetAZs",
+        "!ImportValue",
+        "!ImportValue sequence",
+        "!Select",
+        "!Select sequence",
+        "!Split",
+        "!Split sequence"
+    ],
+    "terminal.external.windowsExec": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+    "gitlens.advanced.messages": {
+        "suppressCommitNotFoundWarning": true
+    },
+    "workbench.startupEditor": "none",
+    "remote.SSH.remotePlatform": {
+        "pfshell.westeurope.azurecontainer.io": "linux",
+        "dimora-gi": "linux"
+    },
+    "git.openRepositoryInParentFolders": "always",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "rust": true,
+        "java": true
+    },
+    "editor.inlineSuggest.showToolbar": "always",
+    "cmake.configureOnOpen": true,
+    "aws.suppressPrompts": {
+        "codeWhispererConnectionExpired": true
+    },
+    "snyk.trustedFolders": [
+        "/home/francesco/services",
+        "c:\\Users\\francesco\\Code\\leonardo-code\\cdp\\ETD-HCA-PCA-CDP-SOA12Migration",
+        "c:\\Users\\francesco\\Code\\leonardo-code\\CSDCC-website-fe\\Custom Policy Azure B2C",
+        "c:\\Users\\francesco\\Code\\leonardo-code\\Avvocatura_Scrivania\\Avvocatura\\Source\\AvvocaturaScrivania.API.QW",
+        "c:\\Users\\francesco\\Code\\leonardo-code\\Avvocatura_Scrivania\\Avvocatura\\Source\\Frontend",
+        "C:\\Users\\francesco\\AppData\\Local\\Programs\\Microsoft VS Code\\vsls:"
+    ],
+    "go.toolsManagement.autoUpdate": true,
+    "powershell.promptToUpdatePowerShell": false,
 }

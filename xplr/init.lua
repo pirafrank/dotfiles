@@ -74,12 +74,12 @@ require_modules(modules)
 -- *** KEYBINDINGS ***
 
 -- use enter to enter dirs
-/*
+--[[
 xplr.config.modes.builtin.default.key_bindings.on_key["enter"] = {
   help = "enter",
   messages = {
     "Enter"
   },
 }
-*/
+--]]
 
