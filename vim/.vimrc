@@ -38,7 +38,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Dependency lib
   Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Dependency lib
 
-  Plug 'luukvbaal/stabilize.nvim'                     " stabilize UI splits
+  Plug 'luukvbaal/stabilize.nvim', Cond(is_nvim)      " stabilize UI splits
   Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
   Plug 'kyazdani42/nvim-web-devicons', Cond(is_nvim)  " Nerd font lua support
   Plug 'roxma/vim-paste-easy'                         " auto-set paste mode
@@ -101,6 +101,7 @@ call plug#begin($BASE.'/plugged')
 
   Plug 'sheerun/vim-polyglot', Cond(is_vim)              " syntax highlighting
   Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim)  " syntax highlighting
+
   Plug 'dense-analysis/ale', Cond(is_vim)                " linting
 
   " in vim, use deoplete for smart autocompletion
