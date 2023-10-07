@@ -104,6 +104,17 @@ call plug#begin($BASE.'/plugged')
 
   Plug 'dense-analysis/ale', Cond(is_vim)                " linting
 
+  " Autocomplete & LSP support
+  Plug 'neovim/nvim-lspconfig', Cond(is_nvim)            " LSP configuration
+  Plug 'hrsh7th/cmp-nvim-lsp', Cond(is_nvim)             " LSP support
+  Plug 'hrsh7th/cmp-buffer', Cond(is_nvim)               " Buffer support
+  Plug 'hrsh7th/cmp-path', Cond(is_nvim)                 " Path support
+  Plug 'hrsh7th/cmp-cmdline', Cond(is_nvim)              " cmdline support
+  Plug 'hrsh7th/cmp-nvim-lua', Cond(is_nvim)             " Neovim Lua API
+  Plug 'onsails/lspkind-nvim', Cond(is_nvim)             " VSCode-like pictograms
+  Plug 'hrsh7th/nvim-cmp', Cond(is_nvim)                 " Autocomplete
+  Plug 'j-hui/fidget.nvim', Cond(is_nvim)                " show nvim-lsp progress
+
   " in vim, use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
   " python3 -m pip install --user pynvim
@@ -152,4 +163,7 @@ if is_vim
   source ~/dotfiles/vim/plugins/vim_only.vim
 elseif is_nvim
   lua require('plugins')
+  lua require('languages')
+  lua require('autocmds')
+  lua require('utils')
 endif

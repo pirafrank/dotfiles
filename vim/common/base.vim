@@ -26,9 +26,6 @@ set autoread
 " search deep in subdirs
 set path+=**
 
-" use system clipboard
-set clipboard=unnamed
-
 " command line completion that makes sense
 set wildmode=longest:full
 set wildmenu
@@ -41,6 +38,17 @@ set updatetime=100
 
 " locks this number of lines while scrolling
 set scrolloff=4
+
+
+""" use system clipboard
+
+" use '*' register for clipboard ops (one way).
+" select in Visual mode and press 'y' to copy to system clipboard.
+" in Normal mode, press 'p' (or other paste options) to paste from the system clipboard.
+set clipboard=unnamed
+
+" use both '*' and '+' registers for clipboard ops (two way).
+"set clipboard=unnamedplus
 
 
 """ terminal
