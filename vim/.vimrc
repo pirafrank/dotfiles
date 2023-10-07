@@ -35,16 +35,16 @@ call plug#begin($BASE.'/plugged')
 
   """"""""""""""""""""""""""""""" Editor """""""""""""""""""""""""""""""""""""
 
+  " Deps
   Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Dependency lib
   Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Dependency lib
+  Plug 'MunifTanjim/nui.nvim', Cond(is_nvim)          " UI lib
 
+  " UI
   Plug 'luukvbaal/stabilize.nvim', Cond(is_nvim)      " stabilize UI splits
   Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
   Plug 'kyazdani42/nvim-web-devicons', Cond(is_nvim)  " Nerd font lua support
-  Plug 'roxma/vim-paste-easy'                         " auto-set paste mode
-  Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
-  Plug 'editorconfig/editorconfig-vim'                " editorconfig
-  Plug 'tpope/vim-commentary'                         " toggle comments
+  Plug 'folke/twilight.nvim', Cond(is_nvim)           " dim inactive blocks of code
 
   " Brackets
   Plug 'tpope/vim-surround'                   " delete/change/add surroundings
@@ -84,6 +84,14 @@ call plug#begin($BASE.'/plugged')
   " Terminal
   Plug 'voldikss/vim-floaterm', Cond(is_vim && has_terminal) " vim float term
 
+  " Pasting
+  Plug 'roxma/vim-paste-easy'                         " auto-set paste mode
+  Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
+
+  " More
+  Plug 'editorconfig/editorconfig-vim'                " editorconfig
+  Plug 'tpope/vim-commentary'                         " toggle comments
+
   """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
 
   Plug 'rafi/awesome-vim-colorschemes'
@@ -105,7 +113,10 @@ call plug#begin($BASE.'/plugged')
   Plug 'dense-analysis/ale', Cond(is_vim)                " linting
 
   " Autocomplete & LSP support
+  Plug 'williamboman/mason.nvim', Cond(is_nvim)          " manage LSP, DAP, linters, and formatters
+  Plug 'williamboman/mason-lspconfig.nvim',Cond(is_nvim) " mason extensions with lspconfig utils
   Plug 'neovim/nvim-lspconfig', Cond(is_nvim)            " LSP configuration
+  Plug 'mfussenegger/nvim-dap', Cond(is_nvim)            " Debug Adapter Protocol client
   Plug 'hrsh7th/cmp-nvim-lsp', Cond(is_nvim)             " LSP support
   Plug 'hrsh7th/cmp-buffer', Cond(is_nvim)               " Buffer support
   Plug 'hrsh7th/cmp-path', Cond(is_nvim)                 " Path support
@@ -124,24 +135,25 @@ call plug#begin($BASE.'/plugged')
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
 
-  " java
-  Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
+  """ java """
   "filetype off
   "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
   "map <C-]> :YcmCompleter GoToImprecise<CR>
+  Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
 
-  " python
+  """ python """
   " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
   Plug 'deoplete-plugins/deoplete-jedi', Cond(is_vim, {'for': 'py'})
 
-  " golang
-  Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
+  """ golang """
   " run :GoInstallBinaries after plugin install
+  Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
 
-  " rust
-  Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
+  """ rust """
   " note: you need to run this first to install the required components
   " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
+  Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
+  Plug 'simrat39/rust-tools.nvim', Cond(is_nvim, {'for': 'rs'})
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -162,6 +174,7 @@ source ~/dotfiles/vim/plugins/colors.vim
 if is_vim
   source ~/dotfiles/vim/plugins/vim_only.vim
 elseif is_nvim
+  lua require('mappings')
   lua require('plugins')
   lua require('languages')
   lua require('autocmds')

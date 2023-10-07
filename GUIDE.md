@@ -92,7 +92,7 @@ Check content of:
 - `zsh/common/zsh_aliases` file for a full list of aliases.
 - `zsh/autoloaded` dir for all available functions
 
-## VIM
+## VIM/NeoVim
 
 ### Configuration paths
 
@@ -109,19 +109,47 @@ Check content of:
 
 `XDG_CONFIG_HOME` is usually set to: `$HOME/.config`.
 
-### Mappings
+### Native mappings
 
-|Name|Action|
+|Editor|Mapping|Action|
+|---|---|---|
+|both|`jj`|`Esc`|
+|both|`ctrl+s`|rectangular selection|
+|both|`ctrl+t`|toggle number and sign column|
+|both|`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
+
+### Plugins
+
+Plugins powering the same mapping may be different in VIm and NeoVim.
+
+|Editor|Mapping|Action|
+|---|---|---|
+|both|`:PlugInstall`|Install new plugins|
+|both|`:PlugUpdate`|Update existing plugins|
+|both|`F9`|Open Tagbar|
+|both|`ctrl+n`|Open Navigation pane|
+|both|`ctrl+p`|Search files|
+|both|`ctrl+b`|Search among buffers|
+
+### NeoVim only
+
+|Command|Action|
 |---|---|
-|`jj`|`Esc`|
-|`ctrl+s`|rectangular selection|
-|`ctrl+t`|toggle number and sign column|
-|`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
-|`F9`|open tagbar|
+|`:checkhealth`|Check all installed plugin and health config|
+|`:Mason`|Open Mason, the package manager for LSP, DAP, etc.|
+|`:Telescope`|Open Telescope|
+|`:TSInstall <language>`|Install Telescope extension for the given language|
+|`:TSUpdate <language>`|Update Telescope extension for the given language|
+
+|Mapping|Action|
+|---|---|
+|`<leader>+p`|Open Telescope to search VIm commands|
 
 ### Splits
 
-|Name|Action|
+Those apply to both VIm and NeoVim.
+
+|Mapping|Action|
 |---|---|
 |`:split` or `:sp`|create horizontal split|
 |`:vsplit` or `:vs`|create vertical split|

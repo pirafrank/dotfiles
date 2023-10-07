@@ -98,7 +98,7 @@ set bs=2
 "always enabled autoindent
 set ai
 
-"enable smart indent
+"enable smartindent
 set si
 
 " set tabstop=4 "4 space tab

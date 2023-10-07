@@ -9,6 +9,9 @@
 "silent !mkdir -p ~/.vim/backups && chmod 700 ~/.vim/backups
 "silent !mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo
 
+" load basic functions
+source ~/dotfiles/vim/common/require.vim
+
 set swapfile
 
 " protect against crash-during-write

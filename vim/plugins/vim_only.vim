@@ -4,8 +4,8 @@
 """ fzf config
 " set fzf runtime path
 set rtp+=~/.fzf
-nnoremap <silent> <C-t> :Files<CR>
-inoremap <silent> <C-t> :Files<CR>
+nnoremap <silent> <C-p> :Files<CR>
+inoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
 cnoreabbrev bb Buffers
 let g:fzf_buffers_jump = 1 " [Buffers] Jump to the existing window if possible
@@ -22,7 +22,7 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
 
 
 """ ctrlp
-nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+"nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 
 """ ale config
@@ -42,7 +42,9 @@ let g:ale_linters = {
       \  'go': ['gopls'],
       \  'rust': ['rls', 'cargo'],
       \ }
-
+" Python options in ale
+let g:ale_python_flake8_options = '--max-line-length=88'
+" Rust options in ale
 let g:ale_rust_rls_toolchain = ''
 let g:ale_rust_rls_executable = 'rust-analyzer'
 
