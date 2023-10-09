@@ -22,6 +22,13 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.85 } }
 
 
 """ ctrlp
+let g:ctrlp_cmd = 'CtrlP'
+"let g:ctrlp_map = '<c-p>'  " default mapping
+let g:ctrlp_map = '<leader>P'  " override default mapping to use <c-p> somewhere else
+
+" start with a tab searching all entry types
+nnoremap <silent> <leader>p :CtrlPMixed<CR>
+
 "nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 

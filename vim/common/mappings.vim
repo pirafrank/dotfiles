@@ -60,5 +60,4 @@ endfunction
 "             Command-line mode is disabled. In other words remaps do NOT work.
 "set paste
 " instead of setting paste ON permanently, toggle it
-" set pastetoggle=<leader>p
 set pastetoggle=<leader>y

@@ -72,7 +72,7 @@ call plug#begin($BASE.'/plugged')
   " download from github to .fzf + updates binary to latest version
   Plug 'junegunn/fzf', Cond(is_vim, { 'dir': '~/.fzf', 'do': { -> fzf#install() } })
   Plug 'junegunn/fzf.vim', Cond(is_vim)                " fzf + vim integration
-  Plug 'ctrlpvim/ctrlp.vim', Cond(is_vim && has_gui)   " Moving around in vim
+  Plug 'ctrlpvim/ctrlp.vim', Cond(is_vim)              " Moving around in vim
   "Plug 'mileszs/ack.vim'                               " ACK, AG, RG...
   Plug 'nvim-telescope/telescope.nvim', Cond(is_nvim)  " Moving around in nvim
 
