@@ -50,6 +50,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'tpope/vim-surround'                   " delete/change/add surroundings
   Plug 'luochen1990/rainbow'                  " color match bracket pairs
   Plug 'cohama/lexima.vim'                    " auto-closes parenthesis
+  Plug 'godlygeek/tabular'                    " automatic text alignment
 
   " File tree
   Plug 'preservim/nerdtree', Cond(is_vim, { 'on': 'NERDTreeToggle' })

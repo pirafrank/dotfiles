@@ -36,8 +36,6 @@ augroup javaconf
   autocmd FileType java set foldlevel=99
   autocmd FileType java set foldenable
   autocmd FileType java set encoding=utf-8
-  " auto pair insertion (e.g., {} and ())
-  autocmd FileType java set autopair
   " auto-close HTML tags
   autocmd FileType java set matchpairs+=<:>
   " Show matching parentheses/brackets
