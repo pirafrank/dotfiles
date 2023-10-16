@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>gg', tsb.git_files, {})
 vim.keymap.set('n', '<leader>fg', tsb.live_grep, {})
 
 -- vim pickers (via Telescope) --
-vim.keymap.set('n', '<C-b>', tsb.buffers, ns)
+vim.keymap.set('n', '<leader>b', tsb.buffers, ns)
 vim.keymap.set('n', '<leader>oo', tsb.oldfiles, ns)
 -- search vim commands using Telescope
 vim.keymap.set('n', '<leader>hh', tsb.help_tags, ns)
