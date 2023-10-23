@@ -26,6 +26,10 @@ config.font_size = 10.0
 config.default_prog = { 'C:\\Windows\\System32\\wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'cd $HOME;exec $SHELL' }
 config.default_cwd = "$HOME"
 
+-- Set the initial window size
+config.initial_cols = 150
+config.initial_rows = 38
+
 
 -- and finally, return the configuration to wezterm
 return config

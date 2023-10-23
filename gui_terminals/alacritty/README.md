@@ -32,3 +32,15 @@ https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.5.scd
 - [terminal.sexy](https://terminal.sexy)
 
 - [4bit. Terminal Color Scheme Designer](https://ciembor.github.io/4bit/)
+
+### Alacritty x PowerShell (Windows shortcut)
+
+Useful if you use Alacritty config to start a WSL shell and want another shortcut to start PowerShell in Alacritty.
+
+1. Create a new Shortcut in `%APPDATA%\Microsoft\Windows\Start Menu\Programs`
+2. Edit its Properties > Location with the following (note: adjust paths to match your Alacritty installation and User dirs).
+
+```
+C:\Users\francesco\scoop\apps\alacritty\current\alacritty.exe --config-file "C:\Users\francesco\dotfiles\gui_terminals\alacritty\alacritty_pwsh.yml" --working-directory "%USERPROFILE%"
+```
+
