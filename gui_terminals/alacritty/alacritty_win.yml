@@ -1,3 +1,9 @@
+# alacritty themes
+# https://github.com/alacritty/alacritty-theme
+
+# online man pages
+# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.1.scd
+
 shell:
     program: "C:\\Windows\\System32\\wsl.exe"
 
@@ -42,47 +48,9 @@ font:
 
 
 # to change theme, replace the section below
-
-# paprika theme
-colors:
-    primary:
-      background: '0x333344'
-      foreground: '0xffffff'
-
-    cursor:
-      text: '0x333344'
-      cursor: '0xffe73c'
-
-    selection:
-      text: '0x333344'
-      background: '0xffa447'
-
-    normal:
-      black: '0x333344'
-      red: '0xef0c38'
-      green: '0x63ff56'
-      yellow: '0xc56cff'
-      blue: '0xffa447'
-      magenta: '0xff5a37'
-      cyan: '0x4f89ff'
-      white: '0xffffff'
-
-    bright:
-      black: '0x7D7D87'
-      red: '0xF23D60'
-      green: '0x82FF78'
-      yellow: '0xD189FF'
-      blue: '0xFFB66C'
-      magenta: '0xFF7B5F'
-      cyan: '0x72A1FF'
-      white: '0xffffff'
-
-    dim:
-      black: '0x5C5C69'
-      red: '0xC9143A'
-      green: '0x59D652'
-      yellow: '0xA861DA'
-      blue: '0xD68D46'
-      magenta: '0xD6523A'
-      cyan: '0x4978DA'
-      white: '0xffffff' 
+# or import a different theme
+import:
+    #- "~\\dotfiles\\gui_terminals\\alacritty\\themes\\paprika-by-pirafrank.yml"
+    - "~\\dotfiles\\gui_terminals\\alacritty\\themes\\one-dark-by-themer-dot-dev.yml"
+    #- "~\\dotfiles\\gui_terminals\\alacritty\\themes\\mojave-dark-by-themer-dot-dev.yml"
+ 
