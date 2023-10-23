@@ -1,55 +1,10 @@
-# alacritty themes
-# https://github.com/alacritty/alacritty-theme
-
-# online man pages
-# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.1.scd
-
 shell:
     program: "C:\\Windows\\System32\\wsl.exe"
 
-window:
-  # windows.opacity since version 0.10.0
-  opacity: 0.95
-  dimensions:
-    columns: 140
-    lines: 48
-
-key_bindings:
-  - { key: V, mods: Control, action: Paste }
-  - { key: Q, mods: Control|Shift, action: Quit }
-  - { key: W, mods: Control|Shift, action: Quit }
-  - { key: N, mods: Control|Shift, command: { program: "alacritty" } }
-
-# copy to clipboard on mouse selection
-selection:
-  save_to_clipboard: true
-
-# Alacritty config
-
-font:
-  size: 10
-  # The normal (roman) font face to use.
-  normal:
-    family: MesloLGS NF
-    # Style can be specified to pick a specific face.
-    style: Regular
-
-  # The bold font face
-  bold:
-    family: MesloLGS NF
-    # Style can be specified to pick a specific face.
-    style: Bold
-
-  # The italic font face
-  italic:
-    family: MesloLGS NF
-    # Style can be specified to pick a specific face.
-    style: Italic
-
-
-# to change theme, replace the section below
-# or import a different theme
 import:
+    # import common config
+    - ~\\dotfiles\\gui_terminals\\alacritty\\common.yml
+    # import themes
     #- "~\\dotfiles\\gui_terminals\\alacritty\\themes\\paprika-by-pirafrank.yml"
     - "~\\dotfiles\\gui_terminals\\alacritty\\themes\\one-dark-by-themer-dot-dev.yml"
     #- "~\\dotfiles\\gui_terminals\\alacritty\\themes\\mojave-dark-by-themer-dot-dev.yml"

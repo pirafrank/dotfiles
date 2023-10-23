@@ -1,0 +1,44 @@
+# alacritty themes
+# https://github.com/alacritty/alacritty-theme
+
+# online man pages
+# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.1.scd
+
+window:
+  # windows.opacity since version 0.10.0
+  opacity: 0.95
+  dimensions:
+    columns: 140
+    lines: 48
+
+key_bindings:
+  - { key: V, mods: Control, action: Paste }
+  - { key: Q, mods: Control|Shift, action: Quit }
+  - { key: W, mods: Control|Shift, action: Quit }
+  - { key: N, mods: Control|Shift, command: { program: "alacritty" } }
+
+# copy to clipboard on mouse selection
+selection:
+  save_to_clipboard: true
+
+# Alacritty config
+
+font:
+  size: 10
+  # The normal (roman) font face to use.
+  normal:
+    family: MesloLGS NF
+    # Style can be specified to pick a specific face.
+    style: Regular
+
+  # The bold font face
+  bold:
+    family: MesloLGS NF
+    # Style can be specified to pick a specific face.
+    style: Bold
+
+  # The italic font face
+  italic:
+    family: MesloLGS NF
+    # Style can be specified to pick a specific face.
+    style: Italic
