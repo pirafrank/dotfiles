@@ -22,7 +22,7 @@
     "typescript.referencesCodeLens.enabled": true,
     "vsicons.projectDetection.disableDetect": true,
     "explorer.autoReveal": false,
-    "editor.suggestSelection": "first",    
+    "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     // git
     "gitlens.views.repositories.location": "gitlens",
@@ -77,7 +77,7 @@
         "vs-kubernetes.crd-code-completion": "disabled"
     },
     "boot-java.rewrite.reconcile": true,
-    "terminal.integrated.fontFamily": "'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS NF', 'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
     "[python]": {
         "editor.formatOnType": true
     },
@@ -117,4 +117,21 @@
         "suppressCommitNotFoundWarning": true
     },
     "workbench.startupEditor": "none",
+    "git.openRepositoryInParentFolders": "always",
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": true,
+        "scminput": false,
+        "rust": true,
+        "java": true
+    },
+    "editor.inlineSuggest.showToolbar": "always",
+    "cmake.configureOnOpen": true,
+    "aws.suppressPrompts": {
+        "codeWhispererConnectionExpired": true
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "powershell.promptToUpdatePowerShell": false,
 }

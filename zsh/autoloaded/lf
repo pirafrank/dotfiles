@@ -1,0 +1,7 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# `command` is needed in case `lfcd` is aliased to `lf`
+# or if the zsh function name is 'lf'
+cd "$(command lf -print-last-dir "$@")"
+
