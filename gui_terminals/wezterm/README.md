@@ -17,6 +17,12 @@ WezTerm info and configuration.
 | Unix-like | `~/.config/wezterm/wezterm.lua` |
 | Windows   | `%USERPROFILE%\.wezterm.lua`    |
 
+Show configuration keys:
+
+```
+wezterm show-keys
+```
+
 ### Install
 
 Unix-like

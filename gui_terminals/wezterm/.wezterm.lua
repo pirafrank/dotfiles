@@ -219,7 +219,10 @@ config.mouse_bindings = {
   {
     event = { Up = { streak = 1, button = 'Left' } },
     mods = 'NONE',
-    action = action.CompleteSelection 'ClipboardAndPrimarySelection',
+    action = wezterm.action_callback(function(window, pane)
+        window:perform_action(action.CompleteSelection 'ClipboardAndPrimarySelection', pane)
+        window:perform_action(action.ClearSelection, pane)
+    end),
   },
   -- ...and disable the 'Down' event
   {
