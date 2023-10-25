@@ -16,6 +16,13 @@ end
 
 -- BELOW THIS LINE is where you actually apply your config choices
 
+config.automatically_reload_config = true
+config.show_update_window = true
+
+wezterm.on('window-config-reloaded', function(window, pane)
+  window:toast_notification('wezterm', 'Configuration reloaded!', nil, 3000)
+end)
+
 config.term = 'xterm-256color'
 
 -- default shell to launch
@@ -25,6 +32,15 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 end
 
 config.default_cwd = "$HOME"
+
+----------
+-- tabs --
+----------
+
+config.show_tabs_in_tab_bar = true
+config.show_tab_index_in_tab_bar = true
+config.show_new_tab_button_in_tab_bar = true
+config.mouse_wheel_scrolls_tabs = true
 
 ----------------
 -- appearance --
@@ -69,7 +85,19 @@ local nix_menu_entries = {
     args = { 'top' },
   },
   {
-    label = 'kdash',
+    label = 'ctop - Container top',
+    args = { 'ctop' },
+  },
+  {
+    label = 'lazydocker',
+    args = { 'lazydocker' },
+  },
+  {
+    label = 'dry - Docker dashboard',
+    args = { 'dry' },
+  },
+  {
+    label = 'kdash - Kubernetes dashboard',
     args = { 'kdash' },
   },
 }
@@ -80,7 +108,19 @@ local windows_menu_entries = {
     args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'exec top' }
   },
   {
-    label = 'kdash',
+    label = 'ctop - Container top',
+    args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'exec ctop' }
+  },
+  {
+    label = 'lazydocker',
+    args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'exec lazydocker' }
+  },
+  {
+    label = 'dry - Docker dashboard',
+    args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'exec dry' }
+  },
+  {
+    label = 'kdash - Kubernetes dashboard',
     args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'kdash' }
   },
   {
@@ -115,13 +155,22 @@ config.launch_menu = launch_menu
 
 -- disabling default, avoid conflicts with mine
 config.disable_default_key_bindings = true
+
 config.keys = {
   --
   -- leader key not set, not to conflict with vim
   -- https://wezfurlong.org/wezterm/config/keys.html#leader-key
   --
+
+  -- reload config
+  {
+    key = 'r',
+    mods = 'CTRL|SHIFT',
+    action = action.ReloadConfiguration,
+  },  
   -- CTRL-SHIFT-d activates the (interactive) debug tab
   { key = 'D', mods = 'CTRL', action = action.ShowDebugOverlay },
+
   -- paste from the clipboard
   { key = 'v', mods = 'CTRL', action = action.PasteFrom 'Clipboard' },
   -- copy to clipboard AND primary selection (X11)
