@@ -21,7 +21,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
 fi
 
 # kitty config dir
-export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/gui_terminals/kitty"
+export KITTY_CONFIG_DIRECTORY="$HOME/dotfiles/terminals/kitty"
 
 # default RAILS environment
 RAILS_ENV="development"

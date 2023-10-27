@@ -43,5 +43,5 @@ EOF
 sed -i "s@/home/francesco@${HOME}@g" ~/.local/share/applications/alacritty.desktop
 
 # symlink configuration
-ln -sf "$HOME/dotfiles/gui_terminals/alacritty/alacritty_$(uname -s).yml" $HOME/.alacritty.yml
-
+mkdir -p "$HOME/.config/alacritty"
+ln -sf "$HOME/dotfiles/terminals/alacritty/alacritty_$(uname -s).yml" "$HOME/.config/alacritty/alacritty.yml"

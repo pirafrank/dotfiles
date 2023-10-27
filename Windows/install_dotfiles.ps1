@@ -55,13 +55,13 @@ Invoke-Symlink "$dotfilesPath\PowerShell\Microsoft.PowerShell_profile.ps1" "$pow
 $win_term_home = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"
 New-Folder-If-Not-Exist "$win_term_home"
 Backup-Item "$win_term_home\settings.json"
-Invoke-Symlink "$dotfilesPath\Windows\gui_terminals\Windows_Terminal\settings.json" "$win_term_home\settings.json"
+Invoke-Symlink "$dotfilesPath\Windows\terminals\Windows_Terminal\settings.json" "$win_term_home\settings.json"
 
 # windows terminal preview
 $win_term_pre_home = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState"
 New-Folder-If-Not-Exist "$win_term_pre_home"
 Backup-Item "$win_term_pre_home\settings.json"
-Invoke-Symlink "$dotfilesPath\Windows\gui_terminals\Windows_Terminal_Preview\settings.json" "$win_term_pre_home\settings.json"
+Invoke-Symlink "$dotfilesPath\Windows\terminals\Windows_Terminal_Preview\settings.json" "$win_term_pre_home\settings.json"
 
 # VS Code settings
 $vs_code_home = "$env:APPDATA\Code\User"
@@ -83,7 +83,13 @@ Invoke-Symlink "$dotfilesPath\lazygit\config.yml" "$lazygit_home\config.yml"
 $alacritty_home = "$env:APPDATA\alacritty"
 New-Folder-If-Not-Exist "$alacritty_home"
 Backup-Item "$alacritty_home\alacritty.yml"
-Invoke-Symlink "$dotfilesPath\gui_terminals\alacritty\alacritty_win.yml" "$alacritty_home\alacritty.yml"
+Invoke-Symlink "$dotfilesPath\terminals\alacritty\alacritty_win.yml" "$alacritty_home\alacritty.yml"
+
+# wezterm config
+$wezterm_home = "$env:USERPROFILE"
+#New-Folder-If-Not-Exist "$wezterm_home"
+Backup-Item "$wezterm_home\.wezterm.lua"
+Invoke-Symlink "$dotfilesPath\terminals\wezterm\.wezterm.lua" "$wezterm_home\.wezterm.lua"
 
 # vim setup
 # backup vim folders and files
