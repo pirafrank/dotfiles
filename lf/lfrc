@@ -1,5 +1,7 @@
+# lf file manager configuration file
+
 # interpreter for shell commands
-set shell sh
+set shell bash
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -20,14 +22,33 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
+# set color256
+set icons
+set hidden
+set incsearch
+set scrolloff 4
+set tabstop 2
+set smartcase
+set dircounts
+set info size
+set sortby natural
+
 # Use the `dim` attribute instead of underline for the cursor in the preview pane
 set cursorpreviewfmt "\033[7;2m"
 
-# use enter for shell commands
-map <enter> shell
+# shell commands
+#map <enter> shell
+map e shell
+
+# use enter to open files
+map <enter> open
 
 # show the result of execution of previous commands
 map ` !true
+
+#################
+# open commands #
+#################
 
 # execute current file (must be executable)
 map x $$f
@@ -43,7 +64,14 @@ map O $mimeopen --ask $f
 # text files and a file opener for the rest.
 cmd open &{{
     case $(file --mime-type -Lb $f) in
-        text/*) lf -remote "send $id \$$EDITOR \$fx";;
+        text/*)
+            if [[ $f == *.md ]]; then
+                #lf -remote "send $id \$$MARKDOWN_EDITOR \$fx"
+                lf -remote "send $id \$/home/francesco/bin2/glow -p \$fx"
+            else
+                lf -remote "send $id \$$EDITOR \$fx"
+            fi
+            ;;
         *) for f in $fx; do $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -73,7 +101,7 @@ cmd trash %set -f; mv $fx ~/.trash
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
-# map <delete> delete
+map <delete> delete
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
@@ -106,3 +134,4 @@ cmd zip ${{
     zip -r $1.zip $1
     rm -rf $1
 }}
+

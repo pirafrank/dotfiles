@@ -13,3 +13,5 @@ HISTSIZE=10000
 HISTFILESIZE=10000
 
 source ~/.bash_aliases
+
+export PATH="$HOME/bin2:$HOME/dotfiles/bin:$PATH"
