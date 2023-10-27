@@ -1,0 +1,11 @@
+shell:
+    program: "C:\\Windows\\System32\\wsl.exe"
+
+import:
+    # import common config
+    - ~\\dotfiles\\terminals\\alacritty\\common.yml
+    # import themes
+    #- "~\\dotfiles\\terminals\\alacritty\\themes\\paprika-by-pirafrank.yml"
+    - "~\\dotfiles\\terminals\\alacritty\\themes\\one-dark-by-themer-dot-dev.yml"
+    #- "~\\dotfiles\\terminals\\alacritty\\themes\\mojave-dark-by-themer-dot-dev.yml"
+ 
