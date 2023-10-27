@@ -2,7 +2,7 @@
 
 import:
     # import common config
-    - ~/dotfiles/gui_terminals/alacritty/common.yml
+    - ~/dotfiles/terminals/alacritty/common.yml
     # import themes
-    #- "~/dotfiles/gui_terminals/alacritty/themes/paprika-by-pirafrank.yml"
-    - "~/dotfiles/gui_terminals/alacritty/themes/one-dark-by-themer-dot-dev.yml"
+    #- "~/dotfiles/terminals/alacritty/themes/paprika-by-pirafrank.yml"
+    - "~/dotfiles/terminals/alacritty/themes/one-dark-by-themer-dot-dev.yml"

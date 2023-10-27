@@ -28,12 +28,12 @@ wezterm show-keys
 Unix-like
 
 ```
-ln -s ~/dotfiles/gui_terminals/wezterm/.wezterm.lua ~/.config/wezterm/wezterm.lua
+ln -s ~/dotfiles/terminals/wezterm/.wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
 Windows
 
 ```
-symlink  "C:\Users\francesco\dotfiles\gui_terminals\wezterm\.wezterm.lua" "C:\Users\francesco\.wezterm.lua"
+symlink  "C:\Users\francesco\dotfiles\terminals\wezterm\.wezterm.lua" "C:\Users\francesco\.wezterm.lua"
 ```
 
