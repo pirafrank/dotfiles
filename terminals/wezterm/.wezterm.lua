@@ -104,6 +104,22 @@ local nix_menu_entries = {
 -- windows only entries
 local windows_menu_entries = {
   {
+    label = 'WSL (default distro)',
+    args = { 'wsl.exe' }
+  },
+  {
+    label = 'PowerShell 7',
+    args = { 'C:/Program Files/PowerShell/7/pwsh.exe' },
+  },
+  {
+    label = 'Git bash',
+    args = { 'C:/Program Files/Git/bin/bash.exe', '--login' },
+  },
+  {
+    label = 'Windows PowerShell',
+    args = { 'powershell.exe', '-NoLogo' },
+  },
+  {
     label = 'top',
     args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'exec top' }
   },
@@ -122,18 +138,6 @@ local windows_menu_entries = {
   {
     label = 'kdash - Kubernetes dashboard',
     args = { 'wsl.exe', '-d', 'Ubuntu-20.04', 'kdash' }
-  },
-  {
-    label = 'PowerShell 7',
-    args = { 'C:/Program Files/PowerShell/7/pwsh.exe' },
-  },
-  {
-    label = 'Git bash',
-    args = { 'C:/Program Files/Git/bin/bash.exe', '--login' },
-  },
-  {
-    label = 'PowerShell',
-    args = { 'powershell.exe', '-NoLogo' },
   },
 }
 -- populate launch_menu table
@@ -274,7 +278,15 @@ config.mouse_bindings = {
   {
     event = { Up = { streak = 1, button = 'Left' } },
     mods = 'NONE',
-    action = action.CompleteSelection 'ClipboardAndPrimarySelection',
+    --action = action.CompleteSelection 'ClipboardAndPrimarySelection',
+    action = wezterm.action_callback(function(window, pane)
+      local has_selection = window:get_selection_text_for_pane(pane) ~= ''
+      if has_selection then
+        window:perform_action(action.CompleteSelection 'ClipboardAndPrimarySelection', pane)
+      else
+        window:perform_action(action.ClearSelection, pane)
+      end
+    end)
   },
   -- ...and disable the 'Down' event
   {
