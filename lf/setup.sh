@@ -7,4 +7,5 @@ if [[ -f ~/.config/lf/lfrc ]]; then
   mv ~/.config/lf/lfrc ~/.config/lf/lfrc_${now} 
 fi
 ln -s ~/dotfiles/lf/lfrc ~/.config/lf/lfrc
+ln -s ~/dotfiles/lf/icons ~/.config/lf/icons
 
