@@ -260,6 +260,9 @@ config.keys = {
 -- keep defaults
 config.disable_default_mouse_bindings = false
 
+-- do not pass click on unfocused window to below pane
+config.swallow_mouse_click_on_window_focus = true
+
 config.mouse_bindings = {
   -- paste with right click
   {
