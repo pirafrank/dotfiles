@@ -16,10 +16,10 @@ if [ $# -eq 0 ]; then
   exit 1
 elif [ $# -eq 1 ]; then
     LENGTH="$1"
-    CHARS="[A-Za-z]0-9"
+    CHARS="A-Za-z0-9"
 elif [[ ! -z "$2" && "$1" == '-l' ]]; then
     LENGTH="$2"
-    CHARS="[a-z]0-9"
+    CHARS="a-z0-9"
 else
   echo "Use '-l' parameter for lowercase letters and numbers.
 Current set of arguments is not supported."
