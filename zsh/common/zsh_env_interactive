@@ -28,6 +28,9 @@ if [ -f ~/.fzf.zsh ]; then
   fi
 fi
 
+# glow
+alias glow='command glow -p'
+
 # exa
 if [ "$(command -v exa)" ]; then
   alias lsx='exa -G -x --color auto --icons -s type'
