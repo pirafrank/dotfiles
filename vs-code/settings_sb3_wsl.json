@@ -17,7 +17,7 @@
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
   "windowsTerminal.channel": "preview",
-  "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS NF', 'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS Nerd Font', 'Meslo LG M', 'Meslo LGS Nerd Font', Consolas, 'Courier New', monospace",
   "code-runner.executorMap": {
     "python": "python3",
   },

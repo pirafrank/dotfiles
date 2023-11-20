@@ -46,9 +46,9 @@ config.mouse_wheel_scrolls_tabs = true
 -- appearance --
 ----------------
 
--- config.font = wezterm.font 'MesloLGM NF'
+-- config.font = wezterm.font 'MesloLGM Nerd Font'
 config.font = wezterm.font_with_fallback {
-  'MesloLGM NF',
+  'MesloLGM Nerd Font',
   'JetBrains Mono',
   'Courier New'
 }

@@ -275,7 +275,7 @@ profiles:
             regular:
                 # Font family defines the font family name, such as:
                 # Fira Code", "Courier New", or "monospace" (default).
-                family: "MesloLGS NF"
+                family: "MesloLGS Nerd Font"
                 # Font weight can be one of:
                 #   thin, extra_light, light, demilight, book, normal,
                 #   medium, demibold, bold, extra_bold, black, extra_black.
