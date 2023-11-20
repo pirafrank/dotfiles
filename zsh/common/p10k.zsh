@@ -66,6 +66,7 @@
     command_execution_time    # previous command duration
     background_jobs           # presence of background jobs
     direnv                    # direnv status (https://direnv.net/)
+    azcli
     jenv                      # java version from jenv (https://github.com/jenv/jenv)
     #nvm                      # node.js version from nvm (only if .nvmrc exists in current dir)
     node_version              # node.js version (always print node version)
@@ -454,6 +455,15 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
+  }
+
+  ######################################[ azure cli prompt ]####################################
+
+  function prompt_azcli() {
+    if [[ ! -z $AZURE_CONFIG_DIR && $(printf $AZURE_CONFIG_DIR | grep azcli) ]]; then
+      local output="$(printf $AZURE_CONFIG_DIR | cut -d'.' -f2 | cut -d'_' -f3)"
+      p10k segment -i "$output" -t '%s'
+    fi
   }
 
   ##############################################################################################
