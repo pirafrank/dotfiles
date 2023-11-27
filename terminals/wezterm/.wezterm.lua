@@ -24,6 +24,7 @@ end
 package.path = package.path .. ";" .. module_path .. "/?.lua"
 
 local utils = require 'utils'
+local defaults = require 'defaults'
 
 -- *************************************************************** --
 -- BELOW THIS LINE is where you actually apply your config choices --
@@ -48,6 +49,18 @@ wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace() .. ' workspace  ')
 end)
 
+wezterm.on('gui-startup', function(cmd)
+  -- allow `wezterm start -- something` to affect what we spawn
+  -- in our initial window
+  local args = {}
+  if cmd then args = cmd.args end
+
+  -- import and call functions below this line
+
+  -- import and call functions above this line
+  end
+)
+
 -----------
 -- shell --
 -----------
@@ -56,11 +69,10 @@ config.term = 'xterm-256color'
 
 -- default shell to launch
 -- default to user's shell on *nix, explicitly set on Windows.
-if is_windows then
-  config.default_prog = { 'C:\\Windows\\System32\\wsl.exe', '-d', 'Ubuntu-20.04', 'sh', '-c', 'cd $HOME;exec $SHELL' }
-end
-
-config.default_cwd = "$HOME"
+config.default_prog = defaults.default_prog
+config.default_domain = defaults.default_domain
+config.default_cwd = defaults.default_cwd
+config.default_workspace = defaults.default_workspace
 
 ----------
 -- tabs --
