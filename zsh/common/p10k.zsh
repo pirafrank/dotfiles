@@ -460,6 +460,8 @@
   ######################################[ azure cli prompt ]####################################
 
   function prompt_azcli() {
+    #if [[ $(command -v az) ]]; then
+    #  local output="$(az account list | jq -r '.[] | select(.isDefault == true) | .name')"
     if [[ ! -z $AZURE_CONFIG_DIR && $(printf $AZURE_CONFIG_DIR | grep azcli) ]]; then
       local output="$(printf $AZURE_CONFIG_DIR | cut -d'.' -f2 | cut -d'_' -f3)"
       p10k segment -i "$output" -t '%s'
