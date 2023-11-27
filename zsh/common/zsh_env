@@ -145,6 +145,9 @@ if [[ -d "$HOME/.deno" ]]; then
   export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
+# terraform (tfenv)
+export PATH="$HOME/.tfenv/bin:$PATH"
+
 # ruby
 # for install as user
 if [[ -d "$HOME/.rvm" ]]; then

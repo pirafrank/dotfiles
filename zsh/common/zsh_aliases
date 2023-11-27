@@ -97,6 +97,9 @@ alias k='kubectl'
 alias kustomize='kubectl kustomize'
 alias kust='kustomize'
 
+# terraform
+alias terra='terraform'
+
 # jekyll
 alias jk='jekyll'
 alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
