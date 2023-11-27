@@ -5,6 +5,9 @@
 local wezterm = require 'wezterm'
 local action = wezterm.action
 
+local defaults = require 'defaults'
+local workspace_functions = require 'workspaces'
+
 return {
   --
   -- leader key not set, not to conflict with vim
@@ -141,6 +144,17 @@ return {
         -- An empty string if they just hit enter
         -- Or the actual line of text they wrote
         if line then
+          -- if line is empty, then switch to the default workspace
+          if line == '' then
+            line = defaults.default_workspace
+          end
+          -- get known workspaces
+          local workspaces = wezterm.mux.get_workspace_names()
+          -- create custom workspace from workspaces package if it is not already open
+          if workspaces and not workspaces[line] and workspace_functions[line] then
+            workspace_functions[line]()
+          end
+          -- switch to existing or create new workspace
           window:perform_action(
             action.SwitchToWorkspace {
               name = line,
