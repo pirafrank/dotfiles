@@ -19,7 +19,7 @@ WezTerm info and configuration.
 
 Show configuration keys:
 
-```
+```sh
 wezterm show-keys
 ```
 
@@ -27,13 +27,12 @@ wezterm show-keys
 
 Unix-like
 
-```
-ln -s ~/dotfiles/terminals/wezterm/.wezterm.lua ~/.config/wezterm/wezterm.lua
+```sh
+ln -s ~/dotfiles/terminals/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 ```
 
 Windows
 
+```powershell
+symlink  "C:\Users\francesco\dotfiles\terminals\wezterm\wezterm.lua" "C:\Users\francesco\.wezterm.lua"
 ```
-symlink  "C:\Users\francesco\dotfiles\terminals\wezterm\.wezterm.lua" "C:\Users\francesco\.wezterm.lua"
-```
-
