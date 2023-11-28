@@ -9,6 +9,7 @@ defaults.nix = {}
 defaults.win = {}
 
 -- *nix entries
+-- default to user's shell on *nix, explicitly set on Windows.
 defaults.nix.default_prog = { os.getenv("SHELL") }
 defaults.nix.default_domain = 'DefaultDomain'
 defaults.nix.default_cwd = "$HOME"

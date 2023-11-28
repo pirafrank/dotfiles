@@ -67,8 +67,7 @@ wezterm.on('gui-startup', function(cmd)
 
 config.term = 'xterm-256color'
 
--- default shell to launch
--- default to user's shell on *nix, explicitly set on Windows.
+-- shell to launch and other defaults
 config.default_prog = defaults.default_prog
 config.default_domain = defaults.default_domain
 config.default_cwd = defaults.default_cwd
