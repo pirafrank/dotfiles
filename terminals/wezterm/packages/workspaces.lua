@@ -4,6 +4,7 @@
 
 local wezterm = require 'wezterm'
 local defaults = require 'defaults'
+local utils = require 'utils'
 
 local mux = wezterm.mux
 local default_domain = defaults.default_domain
@@ -29,4 +30,13 @@ function workspaces.fuzzypi(args)
   build_pane:send_text 'cargo build\n'
 end
 
-return workspaces
+-- merge workspaces into one table
+-- check if workspaces_hidden.lua exists:
+-- if it does, merge it with workspaces
+-- if it doesn't, just return workspaces
+local ws = {}
+local ok, hidden = pcall(require, 'workspaces_hidden')
+if ok then
+  ws = utils.merge_tables(workspaces, hidden)
+end
+return ws
