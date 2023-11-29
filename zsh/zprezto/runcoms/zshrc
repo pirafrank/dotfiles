@@ -107,12 +107,17 @@ fi
 function chpwd {
   # things to do each time you change directory. Zsh will call this.
   check_nvmrc >/dev/null
+  prompt_oscseq
 }
 
 check_nvmrc() {
   if [[ -f .nvmrc ]] && [[ "$(cat .nvmrc)" != "$(node --version)" ]]; then
     nvm use
   fi
+}
+
+prompt_oscseq() {
+  printf "\033]7;file://$(hostname)/$(pwd)\033\\"
 }
 
 # run in for every new shell
