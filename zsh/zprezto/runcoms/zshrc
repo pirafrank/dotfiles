@@ -120,6 +120,7 @@ prompt_oscseq() {
   printf "\033]7;file://$(hostname)/$(pwd)\033\\"
 }
 
-# run in for every new shell
+# run these for every new shell
 check_nvmrc >/dev/null
+prompt_oscseq
 
