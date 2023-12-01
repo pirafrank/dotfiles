@@ -4,6 +4,6 @@
 # set CD-on-exit for fff
 # https://github.com/dylanaraps/fff#cd-on-exit
 
-fff "$@"
+command fff "$@"
 cd "$(cat "${XDG_CACHE_HOME:=${HOME}/.cache}/fff/.fff_d")"
 
