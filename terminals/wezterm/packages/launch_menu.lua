@@ -84,23 +84,28 @@ local nix_menu_entries = {
 
 --
 -- windows only entries
+-- note: 'local' domain is required for Windows entries to work when WSL is set as the default domain
 --
 local windows_only_menu_entries = {
   {
     label = 'WSL (default distro)',
-    args = { 'wsl.exe' }
+    args = { 'wsl.exe' },
+    domain = { DomainName = 'local' },
   },
   {
     label = 'PowerShell 7',
     args = { 'C:/Program Files/PowerShell/7/pwsh.exe' },
+    domain = { DomainName = 'local' },
   },
   {
     label = 'Git bash',
     args = { 'C:/Program Files/Git/bin/bash.exe', '--login' },
+    domain = { DomainName = 'local' },
   },
   {
     label = 'Windows PowerShell',
     args = { 'powershell.exe', '-NoLogo' },
+    domain = { DomainName = 'local' },
   }
 }
 

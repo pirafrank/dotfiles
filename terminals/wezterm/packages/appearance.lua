@@ -15,6 +15,8 @@ config.font = wezterm.font_with_fallback {
 config.font_size = 10.0
 
 -- change the color scheme:
+-- list of color schemes available here:
+--   https://wezfurlong.org/wezterm/colorschemes/index.html
 config.color_scheme = 'OneHalfDark'
 
 config.window_background_opacity = 0.95

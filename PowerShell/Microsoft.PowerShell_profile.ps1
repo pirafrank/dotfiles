@@ -46,7 +46,7 @@ function Write-BranchName () {
         }
         else {
             # we're on an actual branch, so print it
-            Write-Host -NoNewline " ($branch)" -ForegroundColor "DarkGray"
+            Write-Host -NoNewline " ($branch)" -ForegroundColor "Gray"
         }
     } catch {
         # we'll end up here if we're in a newly initiated git repo
