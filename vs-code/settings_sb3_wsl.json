@@ -1,21 +1,30 @@
 {
   "java.codeGeneration.toString.codeStyle": "STRING_BUILDER",
+  /*
   "java.configuration.runtimes": [
     {
-      "name": "JavaSE-1.8",
-      "path": "/home/francesco/bin2/jdk8"
+      "name": "JavaSE-17",
+      "path": "/home/francesco/bin2/jdk17",
+      "sources": "/home/francesco/bin2/jdk17/lib/src.zip",
+      "javadoc": "https://docs.oracle.com/en/java/javase/17/docs/api",
+      "default": true
     },
     {
       "name": "JavaSE-11",
       "path": "/home/francesco/bin2/jdk11",
       "sources": "/home/francesco/bin2/jdk11/lib/src.zip",
-      "javadoc": "https://docs.oracle.com/en/java/javase/11/docs/api",
-      "default": true
+      "javadoc": "https://docs.oracle.com/en/java/javase/11/docs/api"
     },
+    {
+      "name": "JavaSE-1.8",
+      "path": "/home/francesco/bin2/jdk8"
+    }
   ],
+  "java.jdt.ls.java.home": "/home/francesco/bin2/jdk17",
+  */
   "editor.tabSize": 2,
   "editor.multiCursorModifier": "ctrlCmd",
-  "editor.fontFamily": "'JetBrains Mono', 'Meslo LG M', Consolas, 'Courier New', monospace",
+  "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS Nerd Font', Consolas, 'Courier New', monospace",
   "windowsTerminal.channel": "preview",
   "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS Nerd Font', 'Meslo LG M', 'Meslo LGS Nerd Font', Consolas, 'Courier New', monospace",
   "code-runner.executorMap": {
@@ -28,11 +37,16 @@
   "editor.formatOnSaveMode": "modificationsIfAvailable",
   "java.format.enabled": false,
   "nginx-conf-hint.syntax": "sublime",
-  "sonarlint.disableTelemetry": true,
   "sonarlint.pathToNodeExecutable": "node",
   "terminal.integrated.shellIntegration.enabled": true,
   "serverlessIDE.telemetry.enableTelemetry": false,
   "git.terminalAuthentication": false,
   "editor.stickyScroll.enabled": true,
-  "snyk.advanced.cliPath": "/home/francesco/.local/share/snyk-ls/snyk-linux",
+  //"snyk.advanced.cliPath": "/home/francesco/.local/share/snyk-ls/snyk-linux",
+  //"sonarlint.ls.javaHome": "/home/francesco/bin2/jdk17",
+  "aws.telemetry": false,
+  "gitlens.telemetry.enabled": false,
+  "java.jdt.ls.java.home": "/home/francesco/bin2/java/jdk-17.0.6+10",
+  "dotnetAcquisitionExtension.enableTelemetry": false,
+  "sonarlint.disableTelemetry": true,
 }
