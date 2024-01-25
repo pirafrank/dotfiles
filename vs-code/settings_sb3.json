@@ -31,8 +31,6 @@
     "gitlens.views.compare.location": "gitlens",
     "gitlens.views.search.location": "gitlens",
     // python
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
     "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
@@ -44,9 +42,9 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'Droid Sans Fallback', monospace",
     "editor.mouseWheelZoom": true,
-    "sonarlint.ls.javaHome": "C:\\Java\\jdk-11.0.11",
+    "sonarlint.ls.javaHome": "C:\\Java\\jdk-17.0.4",
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
@@ -117,6 +115,9 @@
         "suppressCommitNotFoundWarning": true
     },
     "workbench.startupEditor": "none",
+    "remote.SSH.remotePlatform": {
+        "dimora-gi": "linux"
+    },
     "git.openRepositoryInParentFolders": "always",
     "editor.inlineSuggest.enabled": true,
     "github.copilot.enable": {
@@ -130,8 +131,15 @@
     "editor.inlineSuggest.showToolbar": "always",
     "cmake.configureOnOpen": true,
     "aws.suppressPrompts": {
-        "codeWhispererConnectionExpired": true
+        "codeWhispererConnectionExpired": true,
+        "codeWhispererNewWelcomeMessage": true
     },
     "go.toolsManagement.autoUpdate": true,
     "powershell.promptToUpdatePowerShell": false,
+    // pre-monaspace
+    //"editor.fontLigatures": false,
+    // after monaspace
+    "editor.fontLigatures": "'ss03', 'ss06', 'ss07', 'ss08', 'calt'",
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.fontWeightBold": "bold",
 }
