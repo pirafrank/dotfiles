@@ -3,6 +3,9 @@
 ### init
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+# assign DOTFILES to the directory where this script is located.
+# it is supposed to be the root of the dotfiles repo, which you clone in your $HOME.
+DOTFILES="${SCRIPT_DIR}"
 
 # setup user config path for current operating system
 platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
@@ -27,14 +30,15 @@ function usage {
 
 function makedirs {
     mkdir -p ${USERCONFIG}/lazygit
-    mkdir -p ${HOME}/.config/htop
+    mkdir -p ${USERCONFIG}/htop
     mkdir -p ${HOME}/.gnupg
     if [ -e ${HOME}/bin ] || [ -h ${HOME}/bin ]; then
         echo "WARNING: ${HOME}/bin exists. Moving to .bkp"
         mv ${HOME}/bin ${HOME}/bin.bkp
     fi
-    ln -s ${SCRIPT_DIR}/bin ${HOME}/bin
+    ln -s ${DOTFILES}/bin ${HOME}/bin
     mkdir -p ${HOME}/bin2
+    mkdir -p ${HOME}/bin2/man
     mkdir -p ${HOME}/Code/Workspaces
 }
 
@@ -43,7 +47,7 @@ function bashinstall {
         echo "WARNING: ${HOME}/.bashrc exists. Moving to .bkp"
         mv ${HOME}/.bashrc ${HOME}/.bashrc.bkp
     fi
-    ln -s ${SCRIPT_DIR}/bash/.bashrc ${HOME}/.bashrc
+    ln -s ${DOTFILES}/bash/.bashrc ${HOME}/.bashrc
 }
 
 function bash_aliases_install {
@@ -51,7 +55,7 @@ function bash_aliases_install {
         echo "WARNING: ${HOME}/.bash_aliases exists. Moving to .bkp"
         mv ${HOME}/.bash_aliases ${HOME}/.bash_aliases.bkp
     fi
-    ln -s ${SCRIPT_DIR}/bash/.bash_aliases ${HOME}/.bash_aliases
+    ln -s ${DOTFILES}/bash/.bash_aliases ${HOME}/.bash_aliases
 }
 
 function ctagsinstall {
@@ -64,42 +68,42 @@ function ctagsinstall {
 }
 
 function fzfinstall {
-    ln -s ${SCRIPT_DIR}/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
-    ln -s ${SCRIPT_DIR}/fzf/.fzf.bash ${HOME}/.fzf.bash
+    ln -s ${DOTFILES}/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
+    ln -s ${DOTFILES}/fzf/.fzf.bash ${HOME}/.fzf.bash
     sed -i "s@/home/francesco@${HOME}@g" ${HOME}/.fzf.bash
     sed -i "s@/home/francesco@${HOME}@g" ${HOME}/.fzf.zsh
 }
 
 function gitinstall {
-    /bin/bash ${SCRIPT_DIR}/git/git_config.sh
-    ln -s ${SCRIPT_DIR}/git/.gitignore_global ${HOME}/.gitignore_global
+    /bin/bash ${DOTFILES}/git/git_config.sh
+    ln -s ${DOTFILES}/git/.gitignore_global ${HOME}/.gitignore_global
 }
 
 function gpginstall {
     mkdir -p ${HOME}/.gnupg
-    ln -s "${SCRIPT_DIR}/gnupg/$(uname -s)/gpg.conf" ${HOME}/.gnupg/gpg.conf
-    ln -s "${SCRIPT_DIR}/gnupg/$(uname -s)/gpg-agent.conf" ${HOME}/.gnupg/gpg-agent.conf
+    ln -s "${DOTFILES}/gnupg/$(uname -s)/gpg.conf" ${HOME}/.gnupg/gpg.conf
+    ln -s "${DOTFILES}/gnupg/$(uname -s)/gpg-agent.conf" ${HOME}/.gnupg/gpg-agent.conf
 }
 
 function editorconfiginstall {
-    ln -s ${SCRIPT_DIR}/home/.editorconfig ${HOME}/.editorconfig
+    ln -s ${DOTFILES}/home/.editorconfig ${HOME}/.editorconfig
 }
 
 function inputrcinstall {
-    ln -s ${SCRIPT_DIR}/home/.inputrc ${HOME}/.inputrc
+    ln -s ${DOTFILES}/home/.inputrc ${HOME}/.inputrc
 }
 
 function htoprcinstall {
-    ln -s ${SCRIPT_DIR}/htop/htoprc ${HOME}/.config/htop/htoprc
+    ln -s ${DOTFILES}/htop/htoprc ${HOME}/.config/htop/htoprc
 }
 
 function lazygitinstall {
-    ln -s ${SCRIPT_DIR}/lazygit/config.yml ${USERCONFIG}/lazygit/config.yml
+    ln -s ${DOTFILES}/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
 }
 
 function tmuxinstall {
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-    ln -s ${SCRIPT_DIR}/tmux/.tmux.conf .tmux.conf
+    ln -s ${DOTFILES}/tmux/.tmux.conf .tmux.conf
     #tmux start-server
     #tmux new-session -d
     #${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
@@ -113,12 +117,12 @@ function tmuxinstall {
 
 function viminstall {
     if [[ ! -z "$1" ]]; then
-      ln -s ${SCRIPT_DIR}/vim/$1.vimrc ${HOME}/.vimrc
+      ln -s ${DOTFILES}/vim/$1.vimrc ${HOME}/.vimrc
     else
-      ln -s ${SCRIPT_DIR}/vim/.vimrc ${HOME}/.vimrc
+      ln -s ${DOTFILES}/vim/.vimrc ${HOME}/.vimrc
     fi
     mkdir -p ${HOME}/.vim
-    ln -s ${SCRIPT_DIR}/vim/.vim/colors ${HOME}/.vim/colors
+    ln -s ${DOTFILES}/vim/.vim/colors ${HOME}/.vim/colors
     mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
     mkdir -p ${HOME}/.vim/backups && chmod 700 ${HOME}/.vim/backups
     mkdir -p ${HOME}/.vim/undo && chmod 700 ${HOME}/.vim/undo
@@ -134,10 +138,10 @@ function vimplugininstall {
 
 function xplrinstall {
     mkdir -p "$HOME/.config/xplr/plugins"
-    ln -s ${SCRIPT_DIR}/xplr/init.lua ${HOME}/.config/xplr/init.lua
-    ln -s ${SCRIPT_DIR}/xplr/plugins.lua ${HOME}/.config/xplr/plugins.lua
+    ln -s ${DOTFILES}/xplr/init.lua ${HOME}/.config/xplr/init.lua
+    ln -s ${DOTFILES}/xplr/plugins.lua ${HOME}/.config/xplr/plugins.lua
     if command -v lua >/dev/null ; then
-      lua ${SCRIPT_DIR}/xplr/clone_plugins.lua
+      lua ${DOTFILES}/xplr/clone_plugins.lua
     else
       echo "WARNING: lua is not installed. Cannot clone xplr plugins. Install lua and run xplr/clone_plugins.lua manually."
     fi
@@ -149,12 +153,46 @@ function zpreztoinstall {
       echo "'zpreztoinstall' function is meant to be run by zsh shell. Quitting..."
       exit 1
     fi
-    zsh "$SCRIPT_DIR/zprezto_install.sh"
+    zsh "${DOTFILES}/zprezto_install.sh"
 }
 
 function shellfishinstall {
     echo "downloading latest version of Secure ShellFish shell integration"
     wget https://gist.github.com/palmin/46c2d0f069d0ba6b009f9295d90e171a/raw/.shellfishrc -O ${HOME}/.shellfishrc
+}
+
+function move_if_exists {
+    local target=$1
+    local suffix=".bkp.$(date +'%Y-%m-%d_%H%M%S')"
+    local backup_path="${target}${suffix}"
+
+    if [ -e "$target" ]; then
+        mv "$target" "$backup_path"
+        echo "Renamed $target to $backup_path"
+    fi
+}
+
+function do_codespace_symlinks {
+    move_if_exists "${DOTFILES}"
+    ln -s '/workspaces/.codespaces/.persistedshare/dotfiles' "${DOTFILES}"
+}
+
+function do_codespace_ohmyzsh_install {
+    move_if_exists "$HOME/.zprofile"
+    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshrc" "$HOME/.zprofile"
+
+    move_if_exists "$HOME/.zshrc"
+    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshrc" "$HOME/.zshrc"
+}
+
+function install_devcontainer_scripts {
+    local scripts_dir="${DOTFILES}/.devcontainer/scripts"
+    # execute all scripts in the scripts dir
+    for script in "$scripts_dir"/*.sh; do
+        if [ -f "$script" ] && [ -x "$script" ]; then
+            "$script"
+        fi
+    done
 }
 
 ### actual script
@@ -168,10 +206,20 @@ Check the code to know more.
 # if no args are given, default to bash shell and
 # fewer customizations to provide compatibility with GitHub Codespaces.
 if [ $# -eq 0 ]; then
+  # it may be unset in Codespaces
+  USERCONFIG="$HOME/.config"
+  DOTFILES="$HOME/dotfiles"
+  # prepare codespace env by symlink dotfiles folder.
+  # this isn't cloned in the Codespace $HOME by the Codespace creation process
+  do_codespace_symlinks
+
   makedirs
-  # install just aliases, because .bashrc in populated with Codespaces specific stuff
+  # install just aliases, because .bashrc is populated with Codespaces specific stuff
   bash_aliases_install
+  do_codespace_ohmyzsh_install
   gitinstall
+  lazygitinstall
+  install_devcontainer_scripts
   exit 0;
 fi
 
