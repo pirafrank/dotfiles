@@ -67,8 +67,8 @@ export "SSH_AUTH_SOCK=${HOME}/.gnupg/S.gpg-agent.ssh"
 #   if needed, run the command below to force telling the agent which tty to use
 #     gpg-connect-agent updatestartuptty /bye
 fi
-# -- look for Linux (excluding WSL which needs socat and a different config)
-if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]]; then
+# -- look for Linux (excluding WSL which needs socat and a different config and GitHub Codespaces, which has its own git signing magic)
+if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]] && [[ -z "$(uname -a | grep -i codespaces)" ]]; then
 export GPG_TTY=$TTY
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent

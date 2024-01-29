@@ -179,7 +179,10 @@ function do_codespace_symlinks {
 
 function do_codespace_ohmyzsh_install {
     move_if_exists "$HOME/.zprofile"
-    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshrc" "$HOME/.zprofile"
+    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zprofile" "$HOME/.zprofile"
+
+    move_if_exists "$HOME/.zshenv"
+    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshenv" "$HOME/.zshenv"
 
     move_if_exists "$HOME/.zshrc"
     ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshrc" "$HOME/.zshrc"
