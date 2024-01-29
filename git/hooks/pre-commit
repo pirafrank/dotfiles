@@ -3,6 +3,12 @@
 # Check against identities in your gpg secrets keys
 # for possible 'unverified' signed commit.
 
+# do not execute this pre-commit check in GitHub Codespaces,
+# it has its own git signing magic.
+if [[ ! -z "$(uname -a | grep -i codespaces)" ]]; then
+  exit 0
+fi
+
 # if gpgsign option is not set, do nothing
 [ -z "$( git var -l | grep gpgsign | grep true)" ] && exit 0
 
