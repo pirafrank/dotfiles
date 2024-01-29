@@ -23,6 +23,8 @@
         "terminal.integrated.defaultProfile.windows": "PowerShell"
       },
       "extensions": [
+        // bash
+        "mads-hartmann.bash-ide-vscode", // bash ide
         // editor styling
         "vscode-icons-team.vscode-icons", // better vs code icons
         "will-stone.plastic", // my fav theme
@@ -34,9 +36,13 @@
         "streetsidesoftware.code-spell-checker", // spell checks
         "wayou.vscode-todo-highlight", // to-do highlighting
         "mrmlnc.vscode-duplicate", // option to duplicate files/folders
+        "tamasfe.even-better-toml", // toml support
+        "dunstontc.viml", // vim syntax support
+        "malmaud.tmux", // tmux syntax support
+        "hangxingliu.vscode-nginx-conf-hint", // nginx syntax support
         // gh related
         "GitHub.vscode-pull-request-github", // gh pr support
-        "cschleiden.vscode-github-actions", // gh actions support
+        "github.vscode-github-actions", // gh actions support
         "GitHub.copilot", // gh copilot
         "GitHub.copilot-chat" // gh copilot chat
       ]
