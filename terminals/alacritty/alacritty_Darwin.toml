@@ -1,0 +1,22 @@
+# shell not specified, going with user's default one
+
+import = [
+  # import common config
+  "~/dotfiles/terminals/alacritty/common.toml",
+  # import themes
+  "~/dotfiles/terminals/alacritty/themes/paprika-by-pirafrank.toml"
+]
+
+#
+# Keybindings for macOS
+# docs: https://alacritty.org/config-alacritty.html
+#
+
+[keyboard]
+bindings = [
+  { key = "V", mods = "Command", action = "Paste" },
+  { key = "Q", mods = "Command|Shift", action = "Quit" },
+  { key = "W", mods = "Command|Shift", action = "Quit" },
+    # open new window with CMD+N
+  { key = "N", mods = "Command|Shift", command = { program = "open", args = ["-nb", "io.alacritty"] } }
+]

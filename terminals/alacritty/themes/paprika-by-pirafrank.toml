@@ -1,0 +1,44 @@
+
+# paprika theme
+
+[colors.primary]
+background = "#333344"
+foreground = "#FFFFFF"
+
+[colors.cursor]
+text = "#333344"
+cursor = "#FFE73C"
+
+[colors.selection]
+text = "#333344"
+background = "#FFA447"
+
+[colors.normal]
+black = "#FFFFFF"
+red = "#EF0C38"
+green = "#63FF56"
+yellow = "#C56CFF"
+blue = "#FFA447"
+magenta = "#FF5A37"
+cyan = "#4F89FF"
+white = "#FFFFFF"
+
+[colors.bright]
+black = "#FFFFFF"
+red = "#F23D60"
+green = "#82FF78"
+yellow = "#D189FF"
+blue = "#FFB66C"
+magenta = "#FF7B5F"
+cyan = "#72A1FF"
+white = "#FFFFFF"
+
+[colors.dim]
+black = "#FFFFFF"
+red = "#C9143A"
+green = "#59D652"
+yellow = "#A861DA"
+blue = "#D68D46"
+magenta = "#D6523A"
+cyan = "#4978DA"
+white = "#FFFFFF"

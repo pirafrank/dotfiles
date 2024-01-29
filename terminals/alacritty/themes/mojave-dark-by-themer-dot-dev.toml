@@ -1,0 +1,44 @@
+# Mojave dark theme
+# by https://themer.dev/
+
+[colors.primary]
+background = "#222323"
+foreground = "#C2C2C2"
+
+[colors.cursor]
+text = "#222323"
+cursor = "#A550A7"
+
+[colors.selection]
+text = "#222323"
+background = "#007AFF"
+
+[colors.normal]
+black = "#575858"
+red = "#FF5257"
+green = "#62BA46"
+yellow = "#FBB927"
+blue = "#007AFF"
+magenta = "#F74F9E"
+cyan = "#00C7A3"
+white = "#C2C2C2"
+
+[colors.bright]
+black = "#727373"
+red = "#F86E72"
+green = "#7BC164"
+yellow = "#F5C04B"
+blue = "#2C8EF8"
+magenta = "#F26BAB"
+cyan = "#2CCBAF"
+white = "#DDDDDD"
+
+[colors.dim]
+black = "#3D3E3E"
+red = "#D3494D"
+green = "#559C3F"
+yellow = "#D09B26"
+blue = "#0769D3"
+magenta = "#CC4685"
+cyan = "#07A689"
+white = "#A8A8A8"

@@ -1,0 +1,44 @@
+# alacritty themes
+# https://github.com/alacritty/alacritty-theme
+
+# online man pages
+# https://github.com/alacritty/alacritty/blob/master/extra/man/alacritty.1.scd
+
+#
+# Appearance
+#
+
+[window]
+# windows.opacity since version 0.10.0
+opacity = 0.95
+
+[window.dimensions]
+columns = 140
+lines = 48
+
+#
+# Fonts
+#
+
+[font]
+size = 10
+
+[font.bold]
+family = "MesloLGS Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "MesloLGS Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "MesloLGS Nerd Font"
+style = "Regular"
+
+#
+# Mouse config
+#
+
+# copy to clipboard on mouse selection
+[selection]
+save_to_clipboard = true

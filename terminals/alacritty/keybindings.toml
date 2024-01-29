@@ -1,0 +1,10 @@
+# docs: https://alacritty.org/config-alacritty.html
+
+[keyboard]
+bindings = [
+  { key = "V", mods = "Control", action = "Paste" },
+  { key = "Q", mods = "Control|Shift", action = "Quit" },
+  { key = "W", mods = "Control|Shift", action = "Quit" },
+    # open new window with CMD+N
+  { key = "N", mods = "Control|Shift", command = { program = "alacritty" } }
+]

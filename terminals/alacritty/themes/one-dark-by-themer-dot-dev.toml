@@ -1,0 +1,44 @@
+# One-dark theme
+# by https://themer.dev/
+
+[colors.bright]
+black = "#5C6370"
+blue = "#70B0E5"
+cyan = "#67B5C1"
+green = "#9CC087"
+magenta = "#BA645E"
+red = "#D57A84"
+white = "#ABB2BF"
+yellow = "#D9BD89"
+
+[colors.cursor]
+cursor = "#C678DD"
+text = "#282C34"
+
+[colors.dim]
+black = "#393E48"
+blue = "#5695CA"
+cyan = "#4D9AA6"
+green = "#82A56B"
+magenta = "#A04942"
+red = "#BB5F68"
+white = "#828997"
+yellow = "#BFA26D"
+
+[colors.normal]
+black = "#4B515C"
+blue = "#61AFEF"
+cyan = "#56B6C2"
+green = "#98C379"
+magenta = "#BE5046"
+red = "#E06C75"
+white = "#979EAB"
+yellow = "#E5C07B"
+
+[colors.primary]
+background = "#282C34"
+foreground = "#979EAB"
+
+[colors.selection]
+background = "#61AFEF"
+text = "#282C34"
