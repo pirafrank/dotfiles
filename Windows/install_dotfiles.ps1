@@ -82,8 +82,8 @@ Invoke-Symlink "$dotfilesPath\lazygit\config.yml" "$lazygit_home\config.yml"
 # alacritty config
 $alacritty_home = "$env:APPDATA\alacritty"
 New-Folder-If-Not-Exist "$alacritty_home"
-Backup-Item "$alacritty_home\alacritty.yml"
-Invoke-Symlink "$dotfilesPath\terminals\alacritty\alacritty_win.yml" "$alacritty_home\alacritty.yml"
+Backup-Item "$alacritty_home\alacritty.toml"
+Invoke-Symlink "$dotfilesPath\terminals\alacritty\alacritty_wsl.toml" "$alacritty_home\alacritty.toml"
 
 # wezterm config
 $wezterm_home = "$env:USERPROFILE"

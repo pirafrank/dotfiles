@@ -69,5 +69,5 @@ VS Code settings
 Alacritty config
 
 ```txt
-%APPDATA%\alacritty\alacritty.yml
+%APPDATA%\alacritty\alacritty.toml
 ```

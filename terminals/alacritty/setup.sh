@@ -44,4 +44,4 @@ sed -i "s@/home/francesco@${HOME}@g" ~/.local/share/applications/alacritty.deskt
 
 # symlink configuration
 mkdir -p "$HOME/.config/alacritty"
-ln -sf "$HOME/dotfiles/terminals/alacritty/alacritty_$(uname -s).yml" "$HOME/.config/alacritty/alacritty.yml"
+ln -sf "$HOME/dotfiles/terminals/alacritty/alacritty_$(uname -s).toml" "$HOME/.config/alacritty/alacritty.toml"
