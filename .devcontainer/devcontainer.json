@@ -3,10 +3,14 @@
 {
   "name": "Rust",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+  // info about this base image:
+  //   https://github.com/devcontainers/images/blob/main/src/base-debian/.devcontainer/devcontainer.json
   "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
-    //"ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/sshd:1": {
+      "version": "latest"
+    },
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   // Configure tool-specific properties.
