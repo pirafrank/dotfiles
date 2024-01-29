@@ -38,11 +38,13 @@
         "GitHub.copilot-chat" // gh copilot chat
       ]
     }
-  }
+  },
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
   // Use 'postCreateCommand' to run commands after the container is created.
   // "postCreateCommand": "rustc --version",
+  // NOTE: gh cli is installed by the 'features' property above.
+  "postCreateCommand": "gh extension install github/gh-copilot"
   // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
   // "remoteUser": "root"
 }
