@@ -28,6 +28,9 @@ if [ -f ~/.fzf.zsh ]; then
   fi
 fi
 
+# custom manpath
+export MANPATH="$HOME/bin2/man:/usr/local/man:$MANPATH"
+
 # glow
 alias glow='command glow -p'
 
