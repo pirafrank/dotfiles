@@ -16,6 +16,10 @@ scoop bucket add extras
 scoop bucket add versions
 # Add Java bucket
 scoop bucket add java
+# Add bucket of NirSoft utilities
+scoop bucket add nirsoft
+# Add bucket of non-portable applications
+scoop bucket add nonportable
 
 # essential cli tools
 scoop install `
@@ -33,7 +37,15 @@ scoop install `
   jq `
   yq `
   less `
+  cwrsync `
   rclone
+
+# additional CLI tools
+scoop install `
+  krew
+# imgcat displays images and gifs in terminal
+scoop bucket add scoop-imgcat https://github.com/danielgatis/scoop-imgcat.git
+scoop install scoop-imgcat/imgcat
 
 # environments
 scoop install `
@@ -43,12 +55,14 @@ scoop install `
   deno `
   wasmer
 
-# dev tools
+# dev tools w/ a GUI
 scoop install `
   meld `
   insomnia `
   postman `
-  mockoon
+  mockoon `
+  lens `
+  dbeaver
 
 # desktop utils
 scoop install `

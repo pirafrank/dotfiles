@@ -107,7 +107,7 @@ $env:Path += ";%ALLUSERSPROFILE%\chocolatey\bin"
 ####### installing software #######
 ###################################
 
-## dev tools
+## essential dev tools
 
 winget install -e --id Git.Git
 winget install -e --id Microsoft.WindowsTerminal.Preview
@@ -115,29 +115,17 @@ winget install -e --id Microsoft.WindowsTerminal.Preview
 winget install -e --id Microsoft.VisualStudioCode
 winget install -e --id Notepad++.Notepad++
 
-## more dev tools
+## dev tools
 
-choco install -y sysinternals
-choco install -y duck cyberduck
-choco install -y rsync
-choco install -y krew
-
-winget install -e --id dbeaver.dbeaver
 winget install -e --id Microsoft.AzureCLI
-winget install -e --id Microsoft.Azure.StorageExplorer
-winget install -e --id Microsoft.DotNet.SDK.7
 winget install -e --id Amazon.AWSCLI
 winget install -e --id Amazon.SAM-CLI
 
-winget install -e --id Docker.DockerDesktop
 winget install -e --id Fork.Fork
 winget install -e --id JetBrains.Toolbox
 
-winget install -e --id Mozilla.Firefox
-winget install -e --id Google.Chrome
-
+winget install -e --id Microsoft.Azure.StorageExplorer
 winget install -e --id SmartBear.SoapUI
-
 winget install -e --id PostgreSQL.pgAdmin
 winget install -e --id PuTTY.PuTTY
 winget install -e --id WinFsp.WinFsp
@@ -146,40 +134,55 @@ winget install -e --id WinSCP.WinSCP
 winget install -e --id SmartBear.SoapUI
 winget install -e --id Telerik.Fiddler.Classic
 
-## vm essentials
+## environments
+
+winget install -e --id Microsoft.DotNet.SDK.7
+winget install -e --id Docker.DockerDesktop  # docker desktop also installas kubectl
+
+## essential desktop utilities
 
 winget install -e --id 7zip.7zip
 winget install -e --id namazso.OpenHashTab
+winget install -e --id Skillbrains.Lightshot
+winget install -e --id Microsoft.PowerToys
+winget install -e --id WinDirStat.WinDirStat
+winget install -e --id Armin2208.WindowsAutoNightMode
+choco install -y sysinternals
 
 ## desktop essentials
 
-winget install -e --id GnuPG.GnuPG
-winget install -e --id GnuPG.Gpg4win
-winget install -e --id Yubico.YubikeyManager
-winget install -e --id Skillbrains.Lightshot
-winget install -e --id Adobe.Acrobat.Reader.64-bit
+winget install -e --id Mozilla.Firefox
+winget install -e --id Google.Chrome
+winget install -e --id Microsoft.Edge
 
 winget install -e --id Bitwarden.Bitwarden
 winget install -e --id Cryptomator.Cryptomator
 winget install -e --id KeePassXCTeam.KeePassXC
 
+winget install -e --id GnuPG.GnuPG
+winget install -e --id GnuPG.Gpg4win
+winget install -e --id Yubico.YubikeyManager
+
 winget install -e --id OpenVPNTechnologies.OpenVPN
 winget install -e --id ZeroTier.ZeroTierOne
+winget install -e --id tailscale.tailscale
 
+choco install -y duck cyberduck
 winget install -e --id Microsoft.OneDrive
-winget install -e --id Microsoft.Teams
-winget install -e --id Cisco.WebexTeams
-winget install -e --id Zoom.Zoom
+winget install -e --id RealVNC.VNCViewer
 
 ## generic desktop utils
 
+winget install -e --id Adobe.Acrobat.Reader.64-bit
 winget install -e --id VideoLAN.VLC
 winget install -e --id dotPDNLLC.paintdotnet
-winget install -e --id Microsoft.PowerToys
-winget install -e --id Armin2208.WindowsAutoNightMode
 winget install -e --id Loom.Loom
-winget install -e --id RealVNC.VNCViewer
-winget install -e --id WinDirStat.WinDirStat
+
+# desktop webcall software
+
+winget install -e --id Microsoft.Teams
+winget install -e --id Cisco.WebexTeams
+winget install -e --id Zoom.Zoom
 
 
 ###################################
