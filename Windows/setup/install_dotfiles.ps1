@@ -1,12 +1,25 @@
 
+#
 # vars
+#
 
 $dotfilesPath = "$env:USERPROFILE\dotfiles"
 
+#
 # functions
+#
+
+function Test-Privileges {
+  $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+  $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+  if(-not $?) {
+    Write-Host "Please run this script as an administrator."
+    exit
+  }
+}
 
 function Backup-Item($FileName) {
-    if (Test-Path $FileName) { 
+    if (Test-Path $FileName) {
       Rename-Item -Path $FileName -NewName "$FileName.bak" -Force
     }
 }
@@ -18,14 +31,21 @@ function New-Folder-If-Not-Exist($path){
   }
 }
 
+function Invoke-Symlink($shortcutTarget, $shortcutName) {
+  New-Item -Type SymbolicLink -Path "$shortcutName" -Target "$shortcutTarget"
+}
+
+#
+# main script
+#
+
+# check admin privileges
+Test-Privileges
+
 # check dotfiles dir to exist
 if (!(test-path $dotfilesPath)){
   Write-Host "$dotfilesPath dir not found. Quitting..."
   exit
-}
-
-function Invoke-Symlink($shortcutTarget, $shortcutName) {
-  New-Item -Type SymbolicLink -Path "$shortcutName" -Target "$shortcutTarget"
 }
 
 Write-Output "User home dir is = $env:USERPROFILE"

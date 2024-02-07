@@ -3,73 +3,8 @@
 ############ functions ############
 ###################################
 
-# credits: https://www.powershellgallery.com/packages/WingetTools/0.5.0/Content/functions%5CInstall-Winget.ps1
-Function Install-WinGet {
-    #Install the latest package from GitHub
-    [cmdletbinding(SupportsShouldProcess)]
-    [alias("iwg")]
-    [OutputType("None")]
-    [OutputType("Microsoft.Windows.Appx.PackageManager.Commands.AppxPackage")]
-    Param(
-        [Parameter(HelpMessage = "Display the AppxPackage after installation.")]
-        [switch]$Passthru
-    )
-
-    Write-Verbose "[$((Get-Date).TimeofDay)] Starting $($myinvocation.mycommand)"
-
-    if ($PSVersionTable.PSVersion.Major -eq 7) {
-        Write-Warning "This command does not work in PowerShell 7. You must install in Windows PowerShell."
-        return
-    }
-
-    #test for requirement
-    $Requirement = Get-AppPackage "Microsoft.DesktopAppInstaller"
-    if (-Not $requirement) {
-        Write-Verbose "Installing Desktop App Installer requirement"
-        Try {
-            Add-AppxPackage -Path "https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx" -erroraction Stop
-        }
-        Catch {
-            Throw $_
-        }
-    }
-
-    $uri = "https://api.github.com/repos/microsoft/winget-cli/releases"
-
-    Try {
-        Write-Verbose "[$((Get-Date).TimeofDay)] Getting information from $uri"
-        $get = Invoke-RestMethod -uri $uri -Method Get -ErrorAction stop
-
-        Write-Verbose "[$((Get-Date).TimeofDay)] getting latest release"
-        #$data = $get | Select-Object -first 1
-        $data = $get[0].assets | Where-Object name -Match 'msixbundle'
-
-        $appx = $data.browser_download_url
-        #$data.assets[0].browser_download_url
-        Write-Verbose "[$((Get-Date).TimeofDay)] $appx"
-        If ($pscmdlet.ShouldProcess($appx, "Downloading asset")) {
-            $file = Join-Path -path $env:temp -ChildPath $data.name
-
-            Write-Verbose "[$((Get-Date).TimeofDay)] Saving to $file"
-            Invoke-WebRequest -Uri $appx -UseBasicParsing -DisableKeepAlive -OutFile $file
-
-            Write-Verbose "[$((Get-Date).TimeofDay)] Adding Appx Package"
-            Add-AppxPackage -Path $file -ErrorAction Stop
-
-            if ($passthru) {
-                Get-AppxPackage microsoft.desktopAppInstaller
-            }
-        }
-    } #Try
-    Catch {
-        Write-Verbose "[$((Get-Date).TimeofDay)] There was an error."
-        Throw $_
-    }
-    Write-Verbose "[$((Get-Date).TimeofDay)] Ending $($myinvocation.mycommand)"
-}
-
 Function Update-Env {
-    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User") 
+    $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path", "User")
 }
 
 
@@ -77,10 +12,6 @@ Function Update-Env {
 ############ preparing ############
 ###################################
 
-## install winget
-
-Write-Output "Installing winget..." 
-Install-WinGet
 # update winget repos
 winget source update
 
@@ -89,19 +20,8 @@ winget source update
 #   https://github.com/microsoft/winget-cli/issues/222
 refreshenv
 
-## install powershell 7
-
+# install powershell 7
 winget install --id Microsoft.Powershell --source winget
-
-## install chocolatey
-
-Write-Output "Installing chocolatey..." 
-
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
-# attaching chocolatey at the end of PATH
-$env:Path += ";%ALLUSERSPROFILE%\chocolatey\bin"
-
 
 ###################################
 ####### installing software #######
@@ -125,7 +45,6 @@ winget install -e --id Fork.Fork
 winget install -e --id JetBrains.Toolbox
 
 winget install -e --id Microsoft.Azure.StorageExplorer
-winget install -e --id SmartBear.SoapUI
 winget install -e --id PostgreSQL.pgAdmin
 winget install -e --id PuTTY.PuTTY
 winget install -e --id WinFsp.WinFsp
@@ -133,10 +52,15 @@ winget install -e --id WinMerge.WinMerge
 winget install -e --id WinSCP.WinSCP
 winget install -e --id SmartBear.SoapUI
 winget install -e --id Telerik.Fiddler.Classic
+winget install -e --id qishivo.AnotherRedisDesktopManager
 
 ## environments
 
 winget install -e --id Microsoft.DotNet.SDK.7
+winget install -e --id Python.Python.3.11
+winget install -e --id Python.Python.3.9
+winget install -e --id GoLang.Go
+winget install -e --id Python.Launcher
 winget install -e --id Docker.DockerDesktop  # docker desktop also installas kubectl
 
 ## essential desktop utilities
@@ -144,6 +68,7 @@ winget install -e --id Docker.DockerDesktop  # docker desktop also installas kub
 winget install -e --id 7zip.7zip
 winget install -e --id namazso.OpenHashTab
 winget install -e --id Skillbrains.Lightshot
+winget install -e --id SomePythonThings.WingetUIStore
 winget install -e --id Microsoft.PowerToys
 winget install -e --id WinDirStat.WinDirStat
 winget install -e --id Armin2208.WindowsAutoNightMode
@@ -154,6 +79,7 @@ choco install -y sysinternals
 winget install -e --id Mozilla.Firefox
 winget install -e --id Google.Chrome
 winget install -e --id Microsoft.Edge
+winget install -e --id Microsoft.EdgeWebView2Runtime
 
 winget install -e --id Bitwarden.Bitwarden
 winget install -e --id Cryptomator.Cryptomator
@@ -166,10 +92,13 @@ winget install -e --id Yubico.YubikeyManager
 winget install -e --id OpenVPNTechnologies.OpenVPN
 winget install -e --id ZeroTier.ZeroTierOne
 winget install -e --id tailscale.tailscale
+winget install -e --id NordSecurity.NordVPN
+winget install -e --id Ngrok.Ngrok
 
-choco install -y duck cyberduck
 winget install -e --id Microsoft.OneDrive
-winget install -e --id RealVNC.VNCViewer
+winget install -e --id Iterate.Cyberduck
+winget install -e --id Iterate.MountainDuck
+winget install -e --id Notion.Notion
 
 ## generic desktop utils
 
@@ -215,5 +144,5 @@ winget install -e --id Typora.Typora
 
 # finally, check installed packages
 
-Write-Output "Re-listing installed packages..." 
+Write-Output "Re-listing installed packages..."
 winget list | Sort-Object

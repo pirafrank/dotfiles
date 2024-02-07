@@ -1,12 +1,7 @@
 
-if (!(Get-Command scoop)){
-  ## install scoop (running this as user)
-  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser # Optional: Needed to run a remote script the first time
-  Invoke-RestMethod get.scoop.sh | Invoke-Expression
-
-  # add scoop to Path (this to avoid opening a new shell session)
-  $env:Path += ";$env:USERPROFILE\scoop\shims"
-}
+#
+# Install scoop provided packages
+#
 
 # Add main bucket
 scoop bucket add main
@@ -24,6 +19,7 @@ scoop bucket add nonportable
 # essential cli tools
 scoop install `
   vim `
+  neovim `
   fzf `
   fd `
   wget `
@@ -47,16 +43,28 @@ scoop install `
 scoop bucket add scoop-imgcat https://github.com/danielgatis/scoop-imgcat.git
 scoop install scoop-imgcat/imgcat
 
+# terminals
+scoop install `
+  alacritty `
+  wezterm
+
 # environments
 scoop install `
   nvm `
   pyenv `
   go `
+  rust `
+  rustup `
   deno `
   wasmer
 
-# dev tools w/ a GUI
+# dev tools
 scoop install `
+  mongodb-compass `
+  mongodb-database-tools `
+  mongosh `
+  robo-3t `
+  redis-desktop-manager `
   meld `
   insomnia `
   postman `
@@ -66,12 +74,11 @@ scoop install `
 
 # desktop utils
 scoop install `
+  element `
+  typora `
+  vncviewer
+
+# additional desktop utils
+scoop install `
   caffeine `
   sudo
-
-# clone dotfiles
-Set-Location "$env:USERPROFILE"
-git clone https://github.com/pirafrank/dotfiles.git dotfiles
-
-# create 'Code' dir
-New-Item "$env:UserProfile\Code" -itemType Directory -Force
