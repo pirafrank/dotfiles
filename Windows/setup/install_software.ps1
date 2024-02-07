@@ -18,7 +18,12 @@ winget source update
 # refreshing path
 # consider winget suffers from this issue:
 #   https://github.com/microsoft/winget-cli/issues/222
-refreshenv
+if ($PSVersionTable.PSVersion.Major -ge 7) {
+  refreshenv
+}
+else {
+  $env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+}
 
 # install powershell 7
 winget install --id Microsoft.Powershell --source winget
@@ -136,8 +141,7 @@ Write-Output "Installing extra software..."
 
 #winget install -e --id CiderCollective.Cider
 #winget install -e --id Nushell.Nushell
-winget install -e --id OpenWhisperSystems.Signal
-winget install -e --id Typora.Typora
+#winget install -e --id OpenWhisperSystems.Signal
 
 #winget install -e --id XP8K17RNMM8MTN --source msstore # Canva
 

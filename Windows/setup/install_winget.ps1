@@ -74,18 +74,35 @@ Function Install-WinGet {
 # check if winget is already installed
 if (Get-Command winget -ErrorAction SilentlyContinue) {
   Write-Output "winget is already installed."
-  return
-}
 
-# check if this is an admin shell
-if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-  Write-Output "Please run this script as an administrator."
-  return
-}
+  # Get latest winget version from GitHub release API
+  $latestReleaseUrl = "https://api.github.com/repos/microsoft/winget-cli/releases/latest"
+  $latestReleaseInfo = Invoke-RestMethod -Uri $latestReleaseUrl
+  $latestVersion = $latestReleaseInfo.tag_name
 
-# install winget
-Write-Output "Installing winget..."
-Install-WinGet
+  # Check if winget is upgraded
+  $wingetVersion = (winget --version).Trim()
+  if ($wingetVersion -ge $latestVersion) {
+    Write-Host "winget is already upgraded"
+  }
+  else {
+    Write-Host "winget is not upgraded. Upgrading..."
+    Start-Process -FilePath "winget" -ArgumentList "upgrade" -Verb RunAs
+  }
+
+} else {
+  Write-Output "winget is not installed."
+  Write-Output "Installing winget..."
+
+  # check if this is an admin shell
+  if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+    Write-Output "Please run this script as an administrator."
+    return
+  }
+
+  Install-WinGet
+
+}
 
 # update winget repos
 winget source update
@@ -93,4 +110,8 @@ winget source update
 # refreshing path
 # consider winget suffers from this issue:
 #   https://github.com/microsoft/winget-cli/issues/222
-refreshenv
+if ($PSVersionTable.PSVersion.Major -ge 7) {
+  refreshenv
+} else {
+  $env:Path = [System.Environment]::GetEnvironmentVariable("Path", [System.EnvironmentVariableTarget]::Machine)
+}

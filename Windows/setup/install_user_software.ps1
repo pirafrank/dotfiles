@@ -1,4 +1,11 @@
 
+# check if scoop is installed
+if (-not (Test-Path -Path $env:USERPROFILE\scoop)) {
+  # install scoop
+  Write-Host "Scoop must be installed first."
+  return
+}
+
 #
 # Install scoop provided packages
 #
