@@ -1,23 +1,32 @@
 # dotfiles
 
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/pirafrank.svg?style=social&label=Follow%20%40pirafrank)](https://twitter.com/pirafrank)
-
 My dotfiles, simple as that.
 
-This repo is a never-ending WIP. It's not meant to be sensible for everybody, or anyone, as YMMV.
+This repo is a never-ending WIP. It's not meant to be sensible for everybody, or anyone, as YMMV. But I hope it may be useful to you somehow.
 
 ## Supported platforms
 
-My daily drivers currently are alacritty+zsh+tmux on:
+My daily drivers currently are ~~alacritty~~ wezterm + zsh + tmux on:
 
-- Ubuntu 20.04 WSL on Windows 10 (20H2)
-- Ubuntu 20.04 desktop
-- Debian 10 server accessed via mosh connection on iPad
+- ~~Ubuntu 20.04 WSL 2 on Windows 10 (20H2)~~, upgraded to Ubuntu 22.04 WSL 2 on Windows 11
+- ~~Ubuntu 20.04 desktop~~, upgraded to Ubuntu 22.04 desktop
+
+These dotfiles are also used on:
+
+- Debian ~~10~~ server accessed via mosh connection on iPad, upgraded to Debian ~~11~~ 12
+- [workspace](https://github.com/pirafrank/workspace) Docker image ([link](https://hub.docker.com/r/pirafrank/workspace))
+- GitHub Codespaces
 - ~~occasionally macOS 10.15 (via iTerm2)~~ I gifted the MacBook to my family!
 
 ## Try it out
 
-Check my [workspace](https://github.com/pirafrank/workspace) project to have a ready to code environment powered by this dotfiles.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/pirafrank/dotfiles?quickstart=1)
+
+or
+
+```sh
+docker run -it pirafrank/workspace:latest
+```
 
 ## Install
 
@@ -27,7 +36,7 @@ First clone the repo to your $HOME.
 cd && git clone https://github.com/pirafrank/dotfiles.git
 ```
 
-Then symlink config you want to use or install them all running `zsh install.sh all`. You can also symlink a specific set of dotfiles by running `zsh install.sh SET_NAME`. Check the script content to know more.
+Then symlink config you want to use or install them all running `zsh install.sh all`. You can also symlink a specific set of dotfiles by running `zsh install.sh SOME_FEATURE`. Check the script content to know more.
 
 `~/.zsh_custom` is automatically sourced if it exists. Create it to add any machine-specific non-interactive (doesn't print to sysout) entries. If you need to add interactive scripts, or scripts that output to sysout, please create `~/.zsh_custom_pre`. It will be loaded in `~/.zshrc` BEFORE Powerlevel10k caching. This is to enable Powerlevel10k instant prompt.
 
