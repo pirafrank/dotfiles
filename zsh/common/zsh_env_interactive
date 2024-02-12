@@ -26,6 +26,12 @@ if [ -f ~/.fzf.zsh ]; then
   elif [ "$(command -v bat)" ]; then
     alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
   fi
+
+  # config fzf function API
+  FZF_API_PATH="${HOME}/dotfiles/fzf/fzf_api.sh"
+  if [ -f "${FZF_API_PATH}" ]; then
+    source "${FZF_API_PATH}"
+  fi
 fi
 
 # custom manpath
