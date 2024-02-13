@@ -16,12 +16,32 @@ _fzf_complete_curl_post() {
   awk '{print $1}' | cut -d ',' -f -1
 }
 
+_fzf_complete_wget() {
+  _fzf_complete --header-lines=6  --prompt="wget> " -- "$@" < <(
+    wget --help
+  )
+}
+
+_fzf_complete_wget_post() {
+  awk '{print $1}' | cut -d ',' -f -1
+}
+
 _fzf_complete_rustc() {
-  _fzf_complete --header-lines=1  --prompt="rustc> " -- "$@" < <(
+  _fzf_complete --header-lines=2  --prompt="rustc> " -- "$@" < <(
     rustc --help -v
   )
 }
 
 _fzf_complete_rustc_post() {
+  awk '{print $1}' | cut -d ',' -f -1
+}
+
+_fzf_complete_deno(){
+    _fzf_complete --header-lines=1  --prompt="deno> " -- "$@" < <(
+        deno --help | awk '/Commands:/,0' | sed '/Environment variables/q' | head -n -1
+    )
+}
+
+_fzf_complete_deno_post() {
   awk '{print $1}' | cut -d ',' -f -1
 }
