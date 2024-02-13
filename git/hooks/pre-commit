@@ -5,7 +5,7 @@
 
 # do not execute this pre-commit check in GitHub Codespaces,
 # it has its own git signing magic.
-if [[ ! -z "$(uname -a | grep -i codespaces)" ]]; then
+if [ ! -z "$(uname -a | grep -i codespaces)" ]; then
   exit 0
 fi
 
