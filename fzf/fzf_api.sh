@@ -26,6 +26,17 @@ _fzf_complete_wget_post() {
   awk '{print $1}' | cut -d ',' -f -1
 }
 
+_fzf_complete_terra() {
+  _fzf_complete --header-lines=1  --prompt="terraform> " -- "$@" < <(
+    subcommand=$(printf "$@" | cut -d' ' -f2)
+    terraform $subcommand -help | awk 'tolower($0) ~ /commands:|options:/,0'
+  )
+}
+
+_fzf_complete_terra_post() {
+  awk '{print $1}' | cut -d ',' -f -1
+}
+
 _fzf_complete_rustc() {
   _fzf_complete --header-lines=2  --prompt="rustc> " -- "$@" < <(
     rustc --help -v
