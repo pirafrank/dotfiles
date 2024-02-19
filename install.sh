@@ -158,7 +158,7 @@ function zpreztoinstall {
       echo "'zpreztoinstall' function is meant to be run by zsh shell. Quitting..."
       exit 1
     fi
-    zsh "${DOTFILES}/zprezto_install.sh"
+    zsh "${DOTFILES}/zsh/zprezto/zprezto_install.sh"
 }
 
 function shellfishinstall {
