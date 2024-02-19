@@ -39,7 +39,12 @@ function makedirs {
     ln -s ${DOTFILES}/bin ${HOME}/bin
     mkdir -p ${HOME}/bin2
     mkdir -p ${HOME}/bin2/man
-    mkdir -p ${HOME}/Code/Workspaces
+
+    mkdir -p ${HOME}/Code/contrib     # contributions
+    mkdir -p ${HOME}/Code/projects    # my projects
+    mkdir -p ${HOME}/Code/Clones      # read-only git clones
+    mkdir -p ${HOME}/Code/Templates   # read-only projects boilerplates
+    mkdir -p ${HOME}/Code/Workspaces  # code-station to try new stuff
 }
 
 function bashinstall {
