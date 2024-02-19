@@ -29,14 +29,9 @@ function usage {
 }
 
 function makedirs {
-    mkdir -p ${USERCONFIG}/lazygit
-    mkdir -p ${USERCONFIG}/htop
-    mkdir -p ${HOME}/.gnupg
-    if [ -e ${HOME}/bin ] || [ -h ${HOME}/bin ]; then
-        echo "WARNING: ${HOME}/bin exists. Moving to .bkp"
-        mv ${HOME}/bin ${HOME}/bin.bkp
-    fi
+    move_if_exists "${HOME}/bin"
     ln -s ${DOTFILES}/bin ${HOME}/bin
+
     mkdir -p ${HOME}/bin2
     mkdir -p ${HOME}/bin2/man
 
@@ -48,31 +43,23 @@ function makedirs {
 }
 
 function bashinstall {
-    if [ -e ${HOME}/.bashrc ] || [ -h ${HOME}/.bashrc ]; then
-        echo "WARNING: ${HOME}/.bashrc exists. Moving to .bkp"
-        mv ${HOME}/.bashrc ${HOME}/.bashrc.bkp
-    fi
+    move_if_exists "${HOME}/.bashrc"
     ln -s ${DOTFILES}/bash/.bashrc ${HOME}/.bashrc
 }
 
 function bash_aliases_install {
-    if [ -e ${HOME}/.bash_aliases ] || [ -h ${HOME}/.bash_aliases ]; then
-        echo "WARNING: ${HOME}/.bash_aliases exists. Moving to .bkp"
-        mv ${HOME}/.bash_aliases ${HOME}/.bash_aliases.bkp
-    fi
+    move_if_exists "${HOME}/.bash_aliases"
     ln -s ${DOTFILES}/bash/.bash_aliases ${HOME}/.bash_aliases
 }
 
 function ctagsinstall {
-  if [ ! -f "${HOME}/.ctags" ]; then
+    move_if_exists "${HOME}/.ctags"
     ln -s "${HOME}/dotfiles/ctags/.ctags" "${HOME}/.ctags"
-    [ $? -eq 0 ] && echo 'Symlink created. Install ok.'
-  else
-    echo "WARNING: ${HOME}/.ctags exists. Skipping."
-  fi
 }
 
 function fzfinstall {
+    move_if_exists "${HOME}/.fzf.zsh"
+    move_if_exists "${HOME}/.fzf.bash"
     ln -s ${DOTFILES}/fzf/.fzf.zsh  ${HOME}/.fzf.zsh
     ln -s ${DOTFILES}/fzf/.fzf.bash ${HOME}/.fzf.bash
     sed -i "s@/home/francesco@${HOME}@g" ${HOME}/.fzf.bash
@@ -80,43 +67,65 @@ function fzfinstall {
 }
 
 function gitinstall {
+    move_if_exists "${HOME}/.gitconfig"
+    move_if_exists "${HOME}/.gitignore_global"
     /bin/bash ${DOTFILES}/git/git_config.sh
     ln -s ${DOTFILES}/git/.gitignore_global ${HOME}/.gitignore_global
 }
 
 function gpginstall {
     mkdir -p ${HOME}/.gnupg
+    move_if_exists "${HOME}/.gnupg/gpg.conf"
+    move_if_exists "${HOME}/.gnupg/gpg-agent.conf"
     ln -s "${DOTFILES}/gnupg/$(uname -s)/gpg.conf" ${HOME}/.gnupg/gpg.conf
     ln -s "${DOTFILES}/gnupg/$(uname -s)/gpg-agent.conf" ${HOME}/.gnupg/gpg-agent.conf
 }
 
 function editorconfiginstall {
+    move_if_exists "${HOME}/.editorconfig"
     ln -s ${DOTFILES}/home/.editorconfig ${HOME}/.editorconfig
 }
 
 function inputrcinstall {
+    move_if_exists "${HOME}/.inputrc"
     ln -s ${DOTFILES}/home/.inputrc ${HOME}/.inputrc
 }
 
 function htoprcinstall {
-    ln -s ${DOTFILES}/htop/htoprc ${HOME}/.config/htop/htoprc
+    mkdir -p "${USERCONFIG}/htop"
+    move_if_exists "${USERCONFIG}/htop/htoprc"
+    ln -s ${DOTFILES}/htop/htoprc ${USERCONFIG}/htop/htoprc
 }
 
 function lazygitinstall {
-    ln -s ${DOTFILES}/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
+    mkdir -p "${USERCONFIG}/lazygit"
+    ln -s ${DOTFILES}/lazygit/config.yml ${USERCONFIG}/lazygit/config.yml
 }
 
 function lfinstall {
-    bash ${DOTFILES}/lf/install.sh
+    mkdir -p "${USERCONFIG}/lf"
+    move_if_exists "${USERCONFIG}/lf/lfrc"
+    move_if_exists "${USERCONFIG}/lf/icons"
+    ln -s "${DOTFILES}/lf/lfrc" "${USERCONFIG}/lf/lfrc"
+    ln -s "${DOTFILES}/lf/icons" "${USERCONFIG}/lf/icons"
 }
 
 function mcinstall {
-    bash ${DOTFILES}/mc/install.sh
+    move_if_exists "${USERCONFIG}/mc"
+    move_if_exists "${HOME}/.local/share/mc/skins"
+    mkdir -p "${USERCONFIG}/mc"
+    mkdir -p "${HOME}/.local/share/mc"
+    ln -s "${DOTFILES}/mc/config" "${USERCONFIG}/mc"
+    ln -s "${DOTFILES}/mc/skins" "${HOME}/.local/share/mc/skins"
 }
 
 function tmuxinstall {
+    move_if_exists "${HOME}/.tmux"
+    mkdir -p "${HOME}/.tmux/plugins"
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
-    ln -s ${DOTFILES}/tmux/.tmux.conf .tmux.conf
+
+    move_if_exists "${HOME}/.tmux.conf"
+    ln -s "${DOTFILES}/tmux/.tmux.conf" "${HOME}/.tmux.conf"
     #tmux start-server
     #tmux new-session -d
     #${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh
@@ -129,12 +138,16 @@ function tmuxinstall {
 }
 
 function viminstall {
+    move_if_exists "${HOME}/.vimrc"
     if [[ ! -z "$1" ]]; then
       ln -s ${DOTFILES}/vim/$1.vimrc ${HOME}/.vimrc
     else
       ln -s ${DOTFILES}/vim/.vimrc ${HOME}/.vimrc
     fi
+
+    move_if_exists "${HOME}/.vim"
     mkdir -p ${HOME}/.vim
+
     ln -s ${DOTFILES}/vim/.vim/colors ${HOME}/.vim/colors
     mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
     mkdir -p ${HOME}/.vim/backups && chmod 700 ${HOME}/.vim/backups
@@ -150,9 +163,12 @@ function vimplugininstall {
 }
 
 function xplrinstall {
-    mkdir -p "$HOME/.config/xplr/plugins"
-    ln -s ${DOTFILES}/xplr/init.lua ${HOME}/.config/xplr/init.lua
-    ln -s ${DOTFILES}/xplr/plugins.lua ${HOME}/.config/xplr/plugins.lua
+    move_if_exists "${USERCONFIG}/xplr"
+    mkdir -p "${USERCONFIG}/xplr/plugins"
+
+    ln -s ${DOTFILES}/xplr/init.lua ${USERCONFIG}/xplr/init.lua
+    ln -s ${DOTFILES}/xplr/plugins.lua ${USERCONFIG}/xplr/plugins.lua
+
     if command -v lua >/dev/null ; then
       lua ${DOTFILES}/xplr/clone_plugins.lua
     else
@@ -170,18 +186,19 @@ function zpreztoinstall {
 }
 
 function shellfishinstall {
+    move_if_exists "${HOME}/.shellfishrc"
     echo "downloading latest version of Secure ShellFish shell integration"
     wget https://gist.github.com/palmin/46c2d0f069d0ba6b009f9295d90e171a/raw/.shellfishrc -O ${HOME}/.shellfishrc
 }
 
 function move_if_exists {
     local target=$1
-    local suffix=".bkp.$(date +'%Y-%m-%d_%H%M%S')"
+    local suffix=".bkp.$(date +'%Y%m%d_%H%M%S')"
     local backup_path="${target}${suffix}"
 
     if [ -e "$target" ]; then
+        echo "$target exists. Moving to $backup_path"
         mv "$target" "$backup_path"
-        echo "Renamed $target to $backup_path"
     fi
 }
 
