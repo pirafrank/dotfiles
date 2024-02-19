@@ -48,7 +48,7 @@ end
 function workspaces.fuzzypi(args)
   -- Set a workspace for fuzzypi on a current project
   -- Top pane is for the editor, bottom pane is for the build tool
-  local project_dir = '~/Code/Rust/fuzzypi/fuzzypi-t2'
+  local project_dir = '~/Code/Workspaces/Rust/fuzzypi/fuzzypi-t2'
   local tab, build_pane, window = mux.spawn_window {
     workspace = 'fuzzypi',
     cwd = project_dir,

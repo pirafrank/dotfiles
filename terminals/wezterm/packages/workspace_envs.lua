@@ -6,12 +6,12 @@ return {
   {
     name = 'fpiracom',
     dirs = {
-      '~/Code/fpiracom',
-      '~/Code/fpiracom/_data',
-      '~/Code/fpiracom/_posts',
-      '~/Code/fpiracom/_drafts',
-      '~/Code/fpiracom/_pages',
-      '~/Code/fpiracom/_includes'
+      '~/Code/projects/fpiracom',
+      '~/Code/projects/fpiracom/_data',
+      '~/Code/projects/fpiracom/_posts',
+      '~/Code/projects/fpiracom/_drafts',
+      '~/Code/projects/fpiracom/_pages',
+      '~/Code/projects/fpiracom/_includes'
     }
   }
 }
