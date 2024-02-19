@@ -106,6 +106,14 @@ function lazygitinstall {
     ln -s ${DOTFILES}/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
 }
 
+function lfinstall {
+    bash ${DOTFILES}/lf/install.sh
+}
+
+function mcinstall {
+    bash ${DOTFILES}/mc/install.sh
+}
+
 function tmuxinstall {
     git clone https://github.com/tmux-plugins/tpm ${HOME}/.tmux/plugins/tpm
     ln -s ${DOTFILES}/tmux/.tmux.conf .tmux.conf
@@ -255,6 +263,8 @@ case "$1" in
         zpreztoinstall
         shellfishinstall
         ctagsinstall
+        lfinstall
+        mcinstall
         ;;
     ctags)
         ctagsinstall
@@ -271,8 +281,14 @@ case "$1" in
     lazygit)
         lazygitinstall
         ;;
+    lf)
+        lfinstall
+        ;;
     makedirs)
         makedirs
+        ;;
+    mc)
+        mcinstall
         ;;
     tmux)
         tmuxinstall
