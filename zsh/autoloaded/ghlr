@@ -3,11 +3,13 @@
 
 # gh cli client, monitor or view last workflow run
 
-RUN_ID=$(gh run list | head -n1 | awk '{print $(NF-2)}')
-WATCH_MSG=$(gh run watch ${RUN_ID})
+RUN_ID=$(gh run list | head -n1 | grep -oE '[0-9]{10}')
+WATCH_MSG=$(gh run view ${RUN_ID})
 
 if printf ${WATCH_MSG} | grep already; then
+  echo "Run ${RUN_ID} has completed."
   gh run view ${RUN_ID}
 else
   gh run watch ${RUN_ID}
 fi
+
