@@ -101,7 +101,7 @@ alias kust='kustomize'
 alias terra='terraform'
 
 # jekyll
-alias jk='jekyll'
+alias jk='bundle exec jekyll'
 alias jkk='$HOME/dotfiles/bin/check_jk_running.sh'
 
 # other
