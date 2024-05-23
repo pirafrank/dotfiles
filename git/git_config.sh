@@ -46,7 +46,7 @@ git config --global alias.ls "log -1 --name-status --show-signature"
 #            "E" if the signature cannot be checked (e.g. missing key)
 #            "N" for no signature
 #
-git config --global alias.ll 'log --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
+git config --global alias.ll '!git log --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" $(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref @{u})'
 git config --global alias.la 'log --all --graph --pretty=format:"%C(yellow)%h%Creset %C(yellow)%G?%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s"'
 git config --global alias.lg 'log --pretty=fuller --show-signature'
 
