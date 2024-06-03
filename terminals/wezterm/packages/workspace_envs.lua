@@ -10,7 +10,7 @@ return {
       '~/Code/projects/fpiracom/_data',
       '~/Code/projects/fpiracom/_posts',
       '~/Code/projects/fpiracom/_drafts',
-      '~/Code/projects/fpiracom/_pages',
+      '~/Code/projects/fpiracom/pages',
       '~/Code/projects/fpiracom/_includes'
     }
   }
