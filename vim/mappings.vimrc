@@ -4,10 +4,19 @@
 " remap ESC btn
 inoremap jj <Esc>
 
+" leaders usually don't last, change leader
+let mapleader = "\<Space>"
+
 " cycle through open buffers
 " press F5 and then choose a buffer number
 " credits: https://vim.fandom.com/wiki/Easier_buffer_switching
-nnoremap <F5> :buffers<CR>:buffer<Space>
+"nnoremap <F5> :buffers<CR>:buffer<Space>
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+
+" easier moving to next/prev buffer
+nnoremap n :bn<CR>
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
 
 " rect / block visual selection
 nnoremap <c-s> <c-v>
