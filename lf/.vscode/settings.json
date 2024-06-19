@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "lfrc": "shellscript",
+    "preview": "shellscript",
+    "icons": "ini"
+  }
+}

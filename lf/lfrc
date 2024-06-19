@@ -131,6 +131,22 @@ cmd mkdir %[ -n "${1}" ] && mkdir -p "$(echo ${@} | tr ' ' '\ ')" || echo "Argum
 
 cmd touch %[ -n "${1}" ] && touch "${@}" || echo "Argument needed"
 
+# list mappings in this file
+cmd mappings ${{
+  set -f
+  clear
+  grep -E '^map' ~/dotfiles/lf/lfrc
+  read -n 1 -s -r
+}}
+
+# list commands in this file
+cmd commands ${{
+  set -f
+  clear
+  grep -E '^cmd' ~/dotfiles/lf/lfrc
+  read -n 1 -s -r
+}}
+
 ############
 # mappings #
 ############
@@ -162,7 +178,7 @@ map X !$f
 map ` !true
 
 # delete mappings
-map d delete 
+map d delete
 map D remove
 # unmap <delete>
 map <delete>
