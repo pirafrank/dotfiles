@@ -147,6 +147,25 @@ cmd commands ${{
   read -n 1 -s -r
 }}
 
+cmd git ${{
+  set -f
+  clear
+  git status -s
+  read -n 1 -s -r
+}}
+
+cmd la ${{
+  set -f
+  clear
+  git la
+}}
+
+cmd lg ${{
+  set -f
+  clear
+  lazygit
+}}
+
 ############
 # mappings #
 ############
