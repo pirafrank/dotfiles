@@ -1,14 +1,15 @@
-version = '0.21.0'
-
 -- NOTE:
 -- you can load any config file using --extra-config or -C.
 -- e.g.: xplr -C some_config.lua
 
--- general settings
-xplr.config.general.enable_mouse = true
-xplr.config.general.show_hidden = false
+-- *** BASIC CONFIG LOADING ***
 
-
+-- load plugin-less config, which is shared with init.lua
+-- to avoid config duplication
+local home = os.getenv("HOME")
+local init_module_path = home .. "/dotfiles/xplr/init_no_plugins.lua"
+package.path = package.path .. ";" .. init_module_path
+require 'init_no_plugins'
 
 -- check if file (file or dir) exists without using any external library
 function folder_exists(path)
@@ -21,12 +22,13 @@ function folder_exists(path)
     end
 end
 
--- setup plugins loading
-local home = os.getenv("HOME")
-package.path = home
-.. "/.config/xplr/plugins/?/init.lua;"
-.. home
-.. "/.config/xplr/plugins/?.lua;"
+
+-- *** PLUGIN LOADING SETUP ***
+
+-- setup env for plugins loading
+package.path =
+home .. "/.config/xplr/plugins/?/init.lua;"
+.. home .. "/.config/xplr/plugins/?.lua;"
 .. package.path
 
 -- load plugins function
@@ -61,9 +63,10 @@ function require_modules(modules)
     end
 end
 
--- *** PLUGINS HERE ***
--- plugins are loader here reading the list from an external file!
--- if you want to add/edit loaded plugins, edit plugins.lua.
+-- *** PLUGINS ***
+
+-- plugins are loaded by reading the list from an external file!
+-- if you want to add/edit loaded plugins, edit 'plugins.lua'.
 local f = assert(loadfile(home .. "/.config/xplr/plugins.lua"))
 local modules = f()
 
