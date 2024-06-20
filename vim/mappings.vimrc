@@ -14,7 +14,6 @@ let mapleader = "\<Space>"
 nnoremap <leader>b :buffers<CR>:buffer<Space>
 
 " easier moving to next/prev buffer
-nnoremap n :bn<CR>
 nnoremap <leader>n :bn<CR>
 nnoremap <leader>p :bp<CR>
 
