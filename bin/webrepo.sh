@@ -20,7 +20,7 @@ if echo "$url" | grep -q "@"; then
         url="https://github.com/$repo_path"
     elif echo "$url" | grep -q "gitlab.com:"; then
         url="https://gitlab.com/$repo_path"
-    elif echo "$url" | grep -q "dev.azure.com:"; then
+    elif echo "$url" | grep -qE "vs-ssh.visualstudio.com:|dev.azure.com:"; then
         last_part=$(basename "$repo_path")
         repo_path="${repo_path%/*}/_git/$last_part"
         # Azure DevOps SSH URLs have an extra 'v3' in the path
