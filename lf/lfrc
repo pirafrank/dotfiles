@@ -209,7 +209,7 @@ map a :push %mkdir<space>
 map i :rename
 
 # copy full path to clipboard
-map y $printf "%s" "$fx" | xclip -selection clipboard
+map Y $printf "%s" "$fx" | xclip -selection clipboard
 
 # fzf integration
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
