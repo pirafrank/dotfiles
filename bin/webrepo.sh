@@ -1,13 +1,21 @@
 #!/bin/sh
 
-# Check if .git folder exists
-if [ ! -d ".git" ]; then
-    echo "Fatal: Not a git repository, quitting."
-    exit 1
+# Check if git is installed
+command -v git > /dev/null
+if [ "$?" -ne 0 ]; then
+    echo "Fatal: git is not installed. Quitting."
+    exit 100
 fi
 
 # Get the SSH URL of the remote repository
 url=$(git config --get remote.origin.url)
+
+# Use exit code to check if this is a git repo.
+# This make the script work in repo subdirs.
+if [ "$?" -ne 0 ]; then
+    echo "Fatal: Not a git repository, quitting."
+    exit 103
+fi
 
 # Check if the URL uses the SSH protocol
 if echo "$url" | grep -q "@"; then
