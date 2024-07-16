@@ -197,10 +197,12 @@ map X !$f
 map ` !true
 
 # delete mappings
-map d delete
-map D remove
+# 'delete' function asks for confirmation, 'remove' function does not
+map D delete
+#map D remove
+
 # unmap <delete>
-map <delete>
+map <delete> delete
 
 # mkdir command. See wiki if you want it to select created dir
 map a :push %mkdir<space>
