@@ -70,12 +70,8 @@ cmd open &{{
     esac
 }}
 
-# make sure trash folder exists
-# %mkdir -p ~/.trash
-
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+# move current file or selected files to trash folder using bin/trash script
+cmd trash %set -f; $HOME/dotfiles/bin/trash $fx
 
 # define a custom 'delete' command
 cmd delete ${{
@@ -202,7 +198,7 @@ map D delete
 #map D remove
 
 # unmap <delete>
-map <delete> delete
+map <delete> trash
 
 # mkdir command. See wiki if you want it to select created dir
 map a :push %mkdir<space>

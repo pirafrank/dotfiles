@@ -1,25 +1,29 @@
-#!/bin/bash
+#!/bin/sh
 
 #########################################################################
 #
-# trash <https://github.com/pirafrank/OSX_utils>
-# move files and folders to trash.
-# Supports macOS. Linux unsupported because of the different locations
-# the bin can be places.
+# trash implementation in POSIX script
 #
-# Francesco Pira <dev@fpira.com>
+# Originally part of <https://github.com/pirafrank/OSX_utils> repo.
+#
+# Author: Francesco Pira <dev@fpira.com>
 #
 #########################################################################
 
-if [[ $(uname -s) != "Darwin" ]]; then
-    echo "Sorry, this utility runs only on macOS."
-    exit 2
-fi
-
-if [[ $# != 1 ]]; then
+if [ "$#" != 1 ]; then
     echo "trash - move files and folders to trash"
     echo "Usage: trash [file | folder]"
     exit 1
 fi
 
-mv -r "$1" ~/.Trash/"$(basename "$1")"+"$(date %F_%X)"
+# respect XDG_DATA_HOME if defined
+if [ "$XDG_DATA_HOME" != "" ]; then
+  TRASH_PATH="$XDG_DATA_HOME/Trash"
+else
+  # fallback for Darwin and more Linux
+  TRASH_PATH="$HOME/.Trash"
+fi
+
+mkdir -p "$TRASH_PATH"
+mv -f "$1" "$TRASH_PATH/$(basename "$1")\+$(date '+%Y-%m-%d_%H%M%S')"
+
