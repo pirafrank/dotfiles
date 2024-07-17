@@ -49,4 +49,5 @@
   "java.jdt.ls.java.home": "/home/francesco/bin2/java/jdk-17.0.6+10",
   "dotnetAcquisitionExtension.enableTelemetry": false,
   "sonarlint.disableTelemetry": true,
+  "continue.telemetryEnabled": false,
 }
