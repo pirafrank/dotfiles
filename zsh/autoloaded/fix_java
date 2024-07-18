@@ -1,0 +1,18 @@
+# vim:syntax=zsh
+# vim:filetype=zsh
+
+# this script file is POSIX sh compliant
+
+if ! command -v jenv > /dev/null ; then
+  echo "jenv is not installed. Quitting."
+fi
+
+if [ -f pom.xml ]; then
+    java_version=$(grep -iE 'java(.?*)vers' pom.xml | grep -oE '[0-9]+')
+    jenv local "$java_version"
+    printf "jenv: Java version $java_version set\n\n"
+    java -version
+else
+    echo "No pom.xml file to extract Java version from"
+fi
+
