@@ -32,8 +32,6 @@
     "gitlens.views.compare.location": "gitlens",
     "gitlens.views.search.location": "gitlens",
     // python
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true,
     "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
@@ -45,7 +43,7 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS NF', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS Nerd Font', 'Droid Sans Mono', 'Droid Sans Fallback', monospace",
     "editor.mouseWheelZoom": true,
     "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
     "auto-close-tag.SublimeText3Mode": true,
@@ -78,7 +76,7 @@
         "vs-kubernetes.crd-code-completion": "disabled"
     },
     "boot-java.rewrite.reconcile": true,
-    "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS NF', 'Meslo LG M', 'Meslo LGS NF', Consolas, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'MesloLGS Nerd Font Mono', 'MesloLGS Nerd Font', 'Meslo LG M', 'Meslo LGS Nerd Font', Consolas, 'Courier New', monospace",
     "[python]": {
         "editor.formatOnType": true
     },
@@ -115,7 +113,8 @@
     ],
     "terminal.external.windowsExec": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
     "gitlens.advanced.messages": {
-        "suppressCommitNotFoundWarning": true
+        "suppressCommitNotFoundWarning": true,
+        "suppressCreatePullRequestPrompt": true
     },
     "workbench.startupEditor": "none",
     "remote.SSH.remotePlatform": {
@@ -135,7 +134,8 @@
     "editor.inlineSuggest.showToolbar": "always",
     "cmake.configureOnOpen": true,
     "aws.suppressPrompts": {
-        "codeWhispererConnectionExpired": true
+        "codeWhispererConnectionExpired": true,
+        "codeWhispererNewWelcomeMessage": true
     },
     "snyk.trustedFolders": [
         "/home/francesco/services",
@@ -147,4 +147,38 @@
     ],
     "go.toolsManagement.autoUpdate": true,
     "powershell.promptToUpdatePowerShell": false,
+    // pre-monaspace
+    //"editor.fontLigatures": false,
+    // after monaspace
+    "editor.fontLigatures": "'ss03', 'ss06', 'ss07', 'ss08', 'calt'",
+    "terminal.integrated.fontWeight": "normal",
+    "terminal.integrated.fontWeightBold": "bold",
+    "cmake.showOptionsMovedNotification": false,
+    "sonarlint.rules": {
+
+    },
+    "dotnetAcquisitionExtension.enableTelemetry": false,
+    "gitlens.telemetry.enabled": false,
+    "sonarlint.disableTelemetry": true,
+    "code-runner.enableAppInsights": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[ruby]": {
+        "editor.defaultFormatter": "Shopify.ruby-lsp",
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "files.trimFinalNewlines": true,
+        "editor.rulers": [
+            120
+        ],
+        "editor.semanticHighlighting.enabled": true
+    },
+    "github.copilot.editor.enableAutoCompletions": true,
+    "telemetry.telemetryLevel": "off",
+    "continue.telemetryEnabled": false,
 }
