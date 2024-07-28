@@ -12,7 +12,7 @@ defaults.win = {}
 -- default to user's shell on *nix, explicitly set on Windows.
 defaults.nix.default_prog = { '/usr/bin/env', 'zsh' }
 defaults.nix.default_domain = 'local'
-defaults.nix.default_cwd = "$HOME"
+defaults.nix.default_cwd = os.getenv('HOME')
 defaults.nix.default_workspace = 'default'
 
 -- Windows entries
