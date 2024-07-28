@@ -40,9 +40,11 @@ config.show_update_window = true
 -- events --
 ------------
 
+--[[
 wezterm.on('window-config-reloaded', function(window, pane)
   window:toast_notification('wezterm', 'Configuration reloaded!', nil, 3000)
 end)
+]]
 
 -- show workspace name in upper right corner of the window
 wezterm.on('update-right-status', function(window, pane)
