@@ -21,6 +21,8 @@
     - ~/.vim             # vim data
     - ~/bin2             # scripts and binaries
     - ~/bin2/man         # man pages
+    - ~/bin2/man/man1    # man pages
+    - ~/bin2/man/man5    # man pages
     - ~/Code/contrib     # contributions
     - ~/Code/projects    # my projects
     - ~/Code/Clones      # read-only git clones
