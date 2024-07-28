@@ -6,12 +6,12 @@ return {
   {
     name = 'fpiracom',
     dirs = {
-      '~/Code/projects/fpiracom',
-      '~/Code/projects/fpiracom/_data',
-      '~/Code/projects/fpiracom/_posts',
-      '~/Code/projects/fpiracom/_drafts',
-      '~/Code/projects/fpiracom/pages',
-      '~/Code/projects/fpiracom/_includes'
+      os.getenv('HOME') .. '/Code/projects/fpiracom',
+      os.getenv('HOME') .. '/Code/projects/fpiracom/_data',
+      os.getenv('HOME') .. '/Code/projects/fpiracom/_posts',
+      os.getenv('HOME') .. '/Code/projects/fpiracom/_drafts',
+      os.getenv('HOME') .. '/Code/projects/fpiracom/pages',
+      os.getenv('HOME') .. '/Code/projects/fpiracom/_includes'
     }
   }
 }
