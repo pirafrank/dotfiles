@@ -11,6 +11,7 @@ Set-Alias k kubectl
 Set-Alias dk docker
 Set-Alias cat bat
 Set-Alias ll ls
+Set-Alias g git
 
 # bat output style
 $env:BAT_STYLE="changes,header,numbers,snip"
@@ -148,3 +149,8 @@ $Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
 Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
     . $_.FullName
 }
+
+# add Windows\bin to $PATH.
+# keep this line at the very bottom.
+$Path = "$env:USERPROFILE\dotfiles\Windows\bin"
+
