@@ -2,16 +2,19 @@
 -- workspaces --
 ----------------
 
+-- set home path so that it works on both Windows and *nix
+local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+
 return {
   {
     name = 'fpiracom',
     dirs = {
-      os.getenv('HOME') .. '/Code/projects/fpiracom',
-      os.getenv('HOME') .. '/Code/projects/fpiracom/_data',
-      os.getenv('HOME') .. '/Code/projects/fpiracom/_posts',
-      os.getenv('HOME') .. '/Code/projects/fpiracom/_drafts',
-      os.getenv('HOME') .. '/Code/projects/fpiracom/pages',
-      os.getenv('HOME') .. '/Code/projects/fpiracom/_includes'
+      home .. '/Code/projects/fpiracom',
+      home .. '/Code/projects/fpiracom/_data',
+      home .. '/Code/projects/fpiracom/_posts',
+      home .. '/Code/projects/fpiracom/_drafts',
+      home .. '/Code/projects/fpiracom/pages',
+      home .. '/Code/projects/fpiracom/_includes'
     }
   }
 }
