@@ -120,5 +120,18 @@
   {
     "key": "ctrl+0 ctrl+0",
     "command": "editor.action.fontZoomReset"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "-cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "continue.quickEdit"
+  },
+  {
+    "key": "ctrl+i",
+    "command": "-continue.quickEdit"
   }
 ]
