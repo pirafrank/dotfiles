@@ -6,6 +6,12 @@ local wezterm = require 'wezterm'
 
 local config = {}
 
+-- Setting the front end to 'OpenGL' will enable GPU rendering
+-- docs: https://wezfurlong.org/wezterm/config/lua/config/front_end.html?h=front_end
+config.front_end = 'OpenGL'
+-- Setting the front end to 'Software' will disable GPU rendering
+--config.front_end = 'Software'
+
 -- config.font = wezterm.font 'MesloLGM Nerd Font'
 config.font = wezterm.font_with_fallback {
   'MesloLGM Nerd Font',
