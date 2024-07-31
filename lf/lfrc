@@ -1,7 +1,7 @@
 # lf file manager configuration file
 
 # interpreter for shell commands
-set shell bash
+set shell zsh
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -10,7 +10,7 @@ set shell bash
 # $fx variables contain names with '*' or '?' characters. However, this option
 # is used selectively within individual commands as it can be limiting at
 # times.
-set shellopts '-eu'
+set shellopts '-euy'
 
 # set internal field separator (IFS) to "\n" for shell commands
 # This is useful to automatically split file names in $fs and $fx properly
@@ -18,6 +18,7 @@ set shellopts '-eu'
 # is newline. You need to consider the values of these options and create your
 # commands accordingly.
 set ifs "\n"
+set filesep "\n"  # default already
 
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
@@ -162,6 +163,21 @@ cmd lg ${{
   lazygit
 }}
 
+# fasd integration
+# https://github.com/gokcehan/lf/wiki/Integrations#fasd
+cmd fasd_dir ${{
+    res="$(fasd -dl | grep -iv cache | fzf 2>/dev/tty)"
+    if [ -n "$res" ]; then
+        if [ -d "$res" ]; then
+            cmd="cd"
+        else
+            cmd="select"
+        fi
+        res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$res\""
+    fi
+}}
+
 ############
 # mappings #
 ############
@@ -211,4 +227,7 @@ map Y $printf "%s" "$fx" | xclip -selection clipboard
 
 # fzf integration
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
+
+# fasd integration
+map go :fasd_dir
 
