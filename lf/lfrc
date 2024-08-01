@@ -178,6 +178,21 @@ cmd fasd_dir ${{
     fi
 }}
 
+# zoxide integration
+cmd z %{{
+    result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+cmd on-cd &{{
+    zoxide add "$PWD"
+}}
+
 ############
 # mappings #
 ############
@@ -230,4 +245,7 @@ map <c-f> $lf -remote "send $id select \"$(fzf)\""
 
 # fasd integration
 map go :fasd_dir
+
+# zoxide integration
+map zi :zi
 

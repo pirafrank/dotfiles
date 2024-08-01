@@ -80,8 +80,11 @@ export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 fi
 
-# fasd to jump around
-if [ $(command -v fasd) ]; then
+# use zoxide to jump around as fasd has been discontinued
+if [ $(command -v zoxide) ]; then
+  eval "$(zoxide init zsh)"
+# legacy fallback: use fasd to jump around
+elif [ $(command -v fasd) ]; then
   eval "$(fasd --init auto)"
 fi
 
