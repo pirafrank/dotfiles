@@ -51,6 +51,7 @@ fi
 
 # kitty terminal app
 alias kittyupdate='curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin'
+
 # pgadmin
 if [[ -z $(command -v pgadmin) ]]; then
   alias pgadmin="docker run -d --net=host --name pgadmin -e PGADMIN_DEFAULT_EMAIL='email@email.com' -e PGADMIN_DEFAULT_PASSWORD=password -e PGADMIN_LISTEN_PORT=54321 dpage/pgadmin4"
@@ -59,6 +60,20 @@ fi
 # cd on exit in xplr file manager
 if [[ $(command -v xplr) ]]; then
   alias xcd='cd "$(xplr --print-pwd-as-result)"'
+fi
+
+# pyenv
+# fix: https://github.com/pyenv/pyenv/issues/1906
+# fix: https://github.com/pyenv/pyenv-virtualenv/issues/390
+if [[ -d $HOME/.pyenv ]]; then
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+  if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init --path)"  # this only sets up the path stuff
+    eval "$(pyenv init -)"       # this makes pyenv work in the shell
+    eval "$(pyenv virtualenv-init -)"
+    alias pyenv='nocorrect pyenv'
+  fi
 fi
 
 # GPG for SSH authentication
