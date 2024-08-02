@@ -157,6 +157,12 @@ cmd la ${{
   git la
 }}
 
+cmd ll ${{
+  set -f
+  clear
+  git ll --
+}}
+
 cmd lg ${{
   set -f
   clear
@@ -179,6 +185,7 @@ cmd fasd_dir ${{
 }}
 
 # zoxide integration
+# https://github.com/gokcehan/lf/wiki/Integrations#zoxide
 cmd z %{{
     result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
     lf -remote "send $id cd \"$result\""
