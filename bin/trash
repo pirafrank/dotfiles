@@ -2,22 +2,23 @@
 
 #########################################################################
 #
-# trash implementation in POSIX script
-#
-# Originally part of <https://github.com/pirafrank/OSX_utils> repo.
+# trash implementation in a POSIX sh shell script
 #
 # Author: Francesco Pira <dev@fpira.com>
 #
 #########################################################################
 
-if [ "$#" != 1 ]; then
-    echo "trash - move files and folders to trash"
-    echo "Usage: trash [file | folder]"
-    exit 1
+# side note:
+# I do know of oberblastmeister/trashy, but it does too much imo.
+
+if [ "$#" -lt 1 ]; then
+  echo "trash - move files and folders to trash"
+  echo "Usage: trash FILE|FOLDER..."
+  exit 1
 fi
 
 # respect XDG_DATA_HOME if defined
-if [ "$XDG_DATA_HOME" != "" ]; then
+if [ -n "$XDG_DATA_HOME" ]; then
   TRASH_PATH="$XDG_DATA_HOME/Trash"
 else
   # fallback for Darwin and more Linux
@@ -25,5 +26,6 @@ else
 fi
 
 mkdir -p "$TRASH_PATH"
-mv -f "$1" "$TRASH_PATH/$(basename "$1")\+$(date '+%Y-%m-%d_%H%M%S')"
-
+for file in "$@"; do
+  mv -f "$file" "$TRASH_PATH/$(basename "$file")_$(date '+%Y-%m-%d_%H%M%S')"
+done
