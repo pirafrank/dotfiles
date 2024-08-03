@@ -39,6 +39,7 @@ ya pack -a 'yazi-rs/plugins#max-preview'
 ya pack -a 'yazi-rs/plugins#smart-filter'
 ya pack -a 'Reledia/glow'
 ya pack -a 'KKV9/command'
+ya pack -a 'pirafrank/what-size'
 
 echo "Listing install plugins..."
 ya pack list
