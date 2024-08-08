@@ -18,7 +18,7 @@ defaults.nix.default_workspace = 'default'
 -- Windows entries
 defaults.win.default_prog = { 'zsh' }
 defaults.win.default_domain = 'WSL:Ubuntu-20.04'
-defaults.win.default_cwd = "$HOME"
+defaults.win.default_cwd = "~"
 defaults.win.default_workspace = 'default'
 
 

@@ -3,7 +3,8 @@
 ----------------
 
 -- set home path so that it works on both Windows and *nix
-local home = os.getenv("HOME") or os.getenv("USERPROFILE")
+local defaults = require 'defaults'
+local home = defaults.default_cwd
 
 return {
   {
