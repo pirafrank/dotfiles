@@ -12,8 +12,11 @@ fi
 # if gpgsign option is not set, do nothing
 [ -z "$( git var -l | grep gpgsign | grep true)" ] && exit 0
 
+# if signing format is ssh, do nothing
+[ "$(git config gpg.format)" = 'ssh' ] && exit 0
+
 # if gpg is not present, do nothing
-[ $(command -v gpg) ] || exit 0
+[ "$(command -v gpg)" ] || exit 0
 
 # get author name
 AUTHOR_NAME=$( git var GIT_AUTHOR_IDENT | awk -vFS='<' '{print $1}' )

@@ -25,7 +25,7 @@
     - ~/bin2/man/man5    # man pages
     - ~/Code/contrib     # contributions
     - ~/Code/projects    # my projects
-    - ~/Code/Clones      # read-only git clones
+    - ~/Code/clones      # read-only git clones
     - ~/Code/Templates   # read-only projects boilerplates
     - ~/Code/Workspaces  # code-station to try new stuff
 
@@ -76,5 +76,6 @@
     - [git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto, Cloning prezto]
     - [(zsh -c 'setopt EXTENDED_GLOB ; export ZPREZTODIR=~/.zprezto ; cd $ZPREZTODIR ; git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib'), Cloning prezto-contrib]
     - [touch ~/.zsh_custom_pre ~/.zsh_custom, Creating zsh custom files]
+    - [/bin/bash ~/dotfiles/yazi/install.sh, Installing Yazi TUI file manager]
     # - [python3 -m pip install --upgrade pynvim, Installing pynvim for vim]
     # - [vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall, Installing vim plugins]

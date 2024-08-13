@@ -2,4 +2,10 @@
 # vim:filetype=zsh
 
 # update dotfiles
-cd ~/dotfiles && git pull --rebase --autostash origin main && cd -
+(
+  cd ~/dotfiles || exit 1
+  [[ "$(git rev-parse --abbrev-ref HEAD)" == 'main' ]] \
+    && git pull --rebase --autostash origin main \
+    || echo "Error: can't update dotfiles repo, not on 'main' branch."
+)
+

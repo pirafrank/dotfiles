@@ -34,10 +34,12 @@ function makedirs {
 
     mkdir -p ${HOME}/bin2
     mkdir -p ${HOME}/bin2/man
+    mkdir -p ${HOME}/bin2/man/man1
+    mkdir -p ${HOME}/bin2/man/man5
 
     mkdir -p ${HOME}/Code/contrib     # contributions
     mkdir -p ${HOME}/Code/projects    # my projects
-    mkdir -p ${HOME}/Code/Clones      # read-only git clones
+    mkdir -p ${HOME}/Code/clones      # read-only git clones
     mkdir -p ${HOME}/Code/Templates   # read-only projects boilerplates
     mkdir -p ${HOME}/Code/Workspaces  # code-station to try new stuff
 }
@@ -176,6 +178,13 @@ function xplrinstall {
     fi
 }
 
+function yazi_install {
+    (
+        cd "${DOTFILES}/yazi" || exit 1
+        ./install.sh
+    )
+}
+
 function zpreztoinstall {
     # check for zsh
     if [[ -z $ZSH_NAME ]]; then
@@ -282,6 +291,8 @@ case "$1" in
         ctagsinstall
         lfinstall
         mcinstall
+        yazi_install
+        xplrinstall
         ;;
     ctags)
         ctagsinstall
@@ -324,6 +335,9 @@ case "$1" in
         ;;
     xplr)
         xplrinstall
+        ;;
+    yazi)
+        yazi_install
         ;;
     zsh)
         zpreztoinstall

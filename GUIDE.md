@@ -2,6 +2,8 @@
 
 Here's a simple getting started for who might be interested in understanding my terminal config, or for my future self.
 
+_Warning: This is absolutely incomplete, and as any WIP it will always be._
+
 ## Notes
 
 I use `less` as pager.
@@ -10,6 +12,7 @@ I use `less` as pager.
 
   - `$HOME/bin2`
   - `$HOME/dotfiles/bin`
+  - `$HOME/.local/bin`
   - `/opt/local/{bin,sbin}`
   - `/usr/local/{bin,sbin}`
   - `$PATH`
@@ -24,11 +27,20 @@ I use dandavision's `delta` as diff tool for git. Settings are declared in `git/
 
 `grep` is aliased to `grep -i` so it's always case-insensitive.
 
-## zsh shortcuts
+## fzf shortcuts
 
 |Name|Action|
 |---|---|
 |`ctrl+t`|open fzf|
+|`**` + <tab>|fzf custom completion API|
+
+## git aliases
+
+|Name|Action|
+|---|---|
+|`git la`|git log with tree, all branches|
+|`git ll`|git log with tree, current branch and its remote, if any|
+|`git ls`|git log, latest commit + signature|
 
 ## zsh functions and aliases
 
@@ -85,7 +97,7 @@ I use dandavision's `delta` as diff tool for git. Settings are declared in `git/
 |Name|Type|Action|
 |---|---|---|
 |`termcolors`|function|print all available terminal colors|
-|`dotfiles`|function|update dotfiles repo|
+|`dotup`|function|update dotfiles repo|
 
 Check content of:
 
@@ -153,3 +165,4 @@ More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
 |---|---|
 |`tat`|list available sessions|
 |`tat SESSION_NAME`|attach to session, create if it doesn't exist|
+

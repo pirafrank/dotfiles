@@ -3,6 +3,9 @@
 # docs:
 # https://yazi-rs.github.io/docs/configuration/overview
 
+# avoid 'ya' not being run because not in PATH.
+export PATH="$PATH:$HOME/.local/bin"
+
 mkdir -p "$HOME/.config/yazi/plugins"
 mkdir -p "$HOME/.config/yazi/flavors"
 
@@ -43,7 +46,7 @@ ya pack -a 'pirafrank/what-size'
 ya pack -a 'Ape/open-with-cmd'
 
 echo "Listing install plugins..."
-ya pack list
+ya pack --list
 
 echo "Done."
 
