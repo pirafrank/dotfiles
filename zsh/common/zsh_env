@@ -36,6 +36,7 @@ typeset -gU cdpath fpath mailpath path
 path=(
   $HOME/bin2
   $HOME/dotfiles/bin
+  $HOME/.local/bin
   /opt/local/{bin,sbin}
   /usr/local/{bin,sbin}
   $path
