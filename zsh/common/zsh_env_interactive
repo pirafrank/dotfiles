@@ -100,6 +100,9 @@ elif [ $(command -v fasd) ]; then
   eval "$(fasd --init auto)"
 fi
 
+# zellij custom config path
+export ZELLIJ_CONFIG_DIR="$HOME/dotfiles/zellij"
+
 # Secure ShellFish iOS app integration
 if [[ -f "$HOME/.shellfishrc" ]]; then
   source $HOME/.shellfishrc
