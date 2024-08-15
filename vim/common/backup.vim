@@ -10,7 +10,6 @@
 "silent !mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo
 
 set swapfile
-set directory^=~/.vim/swap//
 
 " protect against crash-during-write
 set writebackup
@@ -18,13 +17,22 @@ set writebackup
 set nobackup
 " use rename-and-write-new method whenever safe
 set backupcopy=auto
-" patch required to honor double slash at end
-set backupdir^=~/.vim/backups//
 " persist the undo tree for each file
 set undofile
-set undodir^=~/.vim/undo//
+
+if has('nvim')
+  set directory^=~/.local/share/nvim/swap//
+  set backupdir^=~/.local/share/nvim/backups//
+  set undodir^=~/.local/share/nvim/undo//
+else
+  set directory^=~/.vim/swap//
+  " patch required to honor double slash at end
+  set backupdir^=~/.vim/backups//
+  set undodir^=~/.vim/undo//
+endif
 
 """ update time
 " If this many milliseconds nothing is typed the swap file will be written to disk
 " default is 4000 milliseconds
 set updatetime=400
+

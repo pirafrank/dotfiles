@@ -1,7 +1,7 @@
 """ vim settings on iSH for iOS
 
 """ load base vimrc file
-source ~/dotfiles/vim/base.vimrc
+source ~/dotfiles/vim/common/base.vim
 
 """ plugins
 
@@ -109,7 +109,11 @@ call plug#end()
   " editorconfig settings
   let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
   let g:EditorConfig_exclude_patterns = ['scp://.\*']
+  let g:EditorConfig_exclude_patterns = ['oil://.\*']
+  let g:EditorConfig_exclude_patterns = ['oil-ssh://.\*']
   let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
 
-""" mappings
-source ~/dotfiles/vim/mappings.vimrc
+
+""" source config
+source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim

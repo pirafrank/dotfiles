@@ -9,6 +9,11 @@
 # interactive env
 #
 
+# switch to neovim if installed
+if command -v nvim > /dev/null 2>&1 ; then
+  export EDITOR='nvim'
+fi
+
 # load junegunn/fzf if installed
 if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh

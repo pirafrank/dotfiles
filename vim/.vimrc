@@ -1,70 +1,113 @@
+" .vimrc - Francesco Pira <dev@fpira.com>
 
-""" load base vimrc file
-source ~/dotfiles/vim/base.vimrc
+" load basic functions
+source ~/dotfiles/vim/common/require.vim
 
-""" load backup config
-source ~/dotfiles/vim/backup.vimrc
+" Lazy loading
+" From https://github.com/junegunn/vim-plug/wiki/faq#conditional-activation
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
 
-""" load ctags configuration
-source ~/dotfiles/vim/ctags.vimrc
 
 """ plugins
 
-" using vim-plug as plugin manager
-" (https://github.com/junegunn/vim-plug)
 " automatically install vim-plug if it's not
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+if has('nvim')
+  if empty(stdpath('config').'/autoload/plug.vim')
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
+else
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+      \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  endif
 endif
 
-call plug#begin('~/.vim/plugged')
+" using vim-plug as plugin manager
+" (https://github.com/junegunn/vim-plug)
+" partially inspired by https://github.com/threkk/dotfiles/blob/master/dotfiles/config/nvim/init.vim
+call plug#begin($BASE.'/plugged')
 
-  " language pack for syntax highlighting
-  Plug 'sheerun/vim-polyglot'
+  """"""""""""""""""""""""""""""" Editor """""""""""""""""""""""""""""""""""""
 
-  " ale
-  Plug 'dense-analysis/ale'
+  " Deps
+  Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Dependency lib
+  Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Dependency lib
+  Plug 'MunifTanjim/nui.nvim', Cond(is_nvim)          " UI lib
 
-  " use deoplete for smart autocompletion
-  " check requirements: you need to install pynvim module:
-  " python3 -m pip install --user pynvim
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  endif
-  if has('python3')
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  " UI
+  Plug 'luukvbaal/stabilize.nvim', Cond(is_nvim)      " stabilize UI splits
+  Plug 'stevearc/dressing.nvim', Cond(is_nvim)        " better nvim UI
+  Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
+  Plug 'nvim-tree/nvim-web-devicons', Cond(is_nvim)   " Nerd font lua support
+  Plug 'folke/twilight.nvim', Cond(is_nvim)           " dim inactive blocks of code
 
-  " java
-  Plug 'artur-shaik/vim-javacomplete2', {'for': 'java'}
-  "filetype off
-  "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
-  "map <C-]> :YcmCompleter GoToImprecise<CR>
+  " Brackets
+  Plug 'tpope/vim-surround'                   " delete/change/add surroundings
+  Plug 'luochen1990/rainbow'                  " color match bracket pairs
+  Plug 'cohama/lexima.vim'                    " auto-closes parenthesis
+  Plug 'godlygeek/tabular'                    " automatic text alignment
 
-  " python
-  " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
-  Plug 'deoplete-plugins/deoplete-jedi', {'for': 'py'}
+  " File tree
+  Plug 'preservim/nerdtree', Cond(is_vim, { 'on': 'NERDTreeToggle' })
+  Plug 'Xuyuanp/nerdtree-git-plugin', Cond(is_vim)
+  Plug 'nvim-neo-tree/neo-tree.nvim', Cond(is_nvim)
 
-  " golang
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
-  " run :GoInstallBinaries after plugin install
+  " Bufferline
+  " in vim bufferline is provided by airline
 
-  " rust
-  Plug 'rust-lang/rust.vim', {'for': 'rs'}
-  " note: you need to run this first to install the required components
-  " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
+  " Status bar
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
-  " fuzzy everything search
-  " download the plugin from github to .fzf and
-  " make sure to have the latest version of the fzf binary
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
+  " Git
+  Plug 'tpope/vim-fugitive'                   " the almost illegal git wrapper
+  Plug 'mhinz/vim-signify', Cond(is_vim)               " git diff in vim
+  Plug 'lewis6991/gitsigns.nvim', Cond(is_nvim)        " git diff in nvim
 
-  " colorschemas
+  " Search
+  " download from github to .fzf + updates binary to latest version
+  Plug 'junegunn/fzf', Cond(is_vim, { 'dir': '~/.fzf', 'do': { -> fzf#install() } })
+  Plug 'junegunn/fzf.vim', Cond(is_vim)                " fzf + rg + vim integration
+  Plug 'ctrlpvim/ctrlp.vim', Cond(is_vim)              " Moving around in vim
+  "Plug 'mileszs/ack.vim'                               " ACK, AG, RG...
+  Plug 'nvim-telescope/telescope.nvim', Cond(is_nvim)  " Moving around in nvim
+  Plug 'nvim-telescope/telescope-frecency.nvim', Cond(is_nvim)
+
+  " Right sidebar
+  " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
+  "   https://github.com/vim-airline/vim-airline/issues/1313
+  Plug 'preservim/tagbar', Cond(is_vim, { 'on': 'TagbarToggle' })
+  Plug 'liuchengxu/vista.vim', Cond(is_nvim)
+
+  " Terminal
+  Plug 'voldikss/vim-floaterm', Cond(has_terminal)    " vim float term
+
+  " Pasting
+  Plug 'roxma/vim-paste-easy'                         " auto-set paste mode
+  Plug 'ojroques/vim-oscyank'                         " copy-paste through SSH
+
+  " More
+  Plug 'editorconfig/editorconfig-vim'                " editorconfig
+  Plug 'tpope/vim-commentary'                         " toggle comments
+  Plug 'LintaoAmons/bookmarks.nvim', Cond(is_nvim)    " bookmarks handling
+  Plug 'smoka7/hop.nvim', Cond(is_nvim, { 'tag': '*' })
+  Plug 'stevearc/oil.nvim', Cond(is_nvim)             " edit fs like a buffer
+  Plug '2kabhishek/nerdy.nvim', Cond(is_nvim)         " nerd fonts icons list
+
+  " AI
+  "Plug 'github/copilot.vim', Cond(is_nvim)            " GH Copilot (VimL)
+  Plug 'zbirenbaum/copilot.lua', Cond(is_nvim)        " Copilot (Lua)
+  Plug 'zbirenbaum/copilot-cmp', Cond(is_nvim)        " Copilot cmp source
+  Plug 'CopilotC-Nvim/CopilotChat.nvim', Cond(is_nvim, { 'branch': 'canary' })  " Copilot chat
+
+  """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
+
   Plug 'rafi/awesome-vim-colorschemes'
   "Plug 'flazz/vim-colorschemes'
   "Plug 'flrnprz/plastic.vim'
@@ -73,200 +116,100 @@ call plug#begin('~/.vim/plugged')
   "Plug 'noahfrederick/vim-hemisu'
   "Plug 'sainnhe/sonokai'
   "Plug 'hzchirs/vim-material'
+  Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
+  Plug 'ghifarit53/tokyonight-vim', Cond(is_vim)
 
-  "status/tabline light as air
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  """""""""""""""" Language support (syntax, linting, etc.) """"""""""""""""""
 
-  " nerdtree with git integration
-  Plug 'preservim/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'Xuyuanp/nerdtree-git-plugin'
+  " Syntax highlighting
+  Plug 'sheerun/vim-polyglot', Cond(is_vim)              " syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim, {'do': ':TSUpdate'})  " syntax highlighting
 
-  " the almost illegal git wrapper
-  Plug 'tpope/vim-fugitive'
+  " Linters
+  Plug 'dense-analysis/ale', Cond(is_vim)                " linting
 
-  " git diff plugin
-  Plug 'mhinz/vim-signify'
+  " LSP
+  Plug 'williamboman/mason.nvim', Cond(is_nvim)          " manage LSP, DAP, linters, and formatters
+  Plug 'williamboman/mason-lspconfig.nvim',Cond(is_nvim) " mason extensions with lspconfig utils
+  Plug 'neovim/nvim-lspconfig', Cond(is_nvim)            " LSP configuration
+  Plug 'hrsh7th/cmp-nvim-lsp', Cond(is_nvim)             " LSP support
+  Plug 'hrsh7th/cmp-buffer', Cond(is_nvim)               " Buffer support
+  Plug 'hrsh7th/cmp-path', Cond(is_nvim)                 " Path support
+  Plug 'hrsh7th/cmp-cmdline', Cond(is_nvim)              " cmdline support
+  Plug 'hrsh7th/cmp-nvim-lua', Cond(is_nvim)             " Neovim Lua API
+  Plug 'onsails/lspkind-nvim', Cond(is_nvim)             " VSCode-like pictograms
+  Plug 'hrsh7th/nvim-cmp', Cond(is_nvim)                 " Autocomplete
+  Plug 'j-hui/fidget.nvim', Cond(is_nvim)                " show nvim-lsp progress
+  Plug 'L3MON4D3/LuaSnip', Cond(is_nvim, {'tag': 'v2.*', 'do': 'make install_jsregexp'})
+  Plug 'saadparwaiz1/cmp_luasnip', Cond(is_nvim)
 
-  " editorconfig
-  Plug 'editorconfig/editorconfig-vim'
+  " Debugger
+  Plug 'mfussenegger/nvim-dap', Cond(is_nvim)            " Debug Adapter Protocol client
+  Plug 'rcarriga/nvim-dap-ui', Cond(is_nvim)             " Debugger UI
 
-  " toggle comments
-  Plug 'tpope/vim-commentary'
+  " in vim, use deoplete for smart autocompletion
+  " check requirements: you need to install pynvim module:
+  " python3 -m pip install --user pynvim
+  if is_vim && has('python3')
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
 
-  " Most Recently Used (MRU) Vim Plugin
-  Plug 'yegappan/mru'
+  """ java """
+  "filetype off
+  "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
+  "map <C-]> :YcmCompleter GoToImprecise<CR>
+  Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
+  Plug 'mfussenegger/nvim-jdtls'
 
-  " fzf + rg + vim integration
-  Plug 'wookayin/fzf-ripgrep.vim'
+  """ python """
+  " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
+  Plug 'deoplete-plugins/deoplete-jedi', Cond(is_vim, {'for': 'py'})
 
-  " Tagbar
-  " { 'on': 'TagbarToggle' } fixes slow startup when tagbar is used with airline:
-  "   https://github.com/vim-airline/vim-airline/issues/1313
-  " disabling airline integration with tagbar may help too, set it to 0 to disable.
-  "let g:airline#extensions#tagbar#enabled = 0
-  Plug 'preservim/tagbar', { 'on': 'TagbarToggle' }
+  """ golang """
+  " run :GoInstallBinaries after plugin install
+  Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
+
+  """ rust """
+  " note: you need to run this first to install the required components
+  " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
+  Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
+  Plug 'simrat39/rust-tools.nvim', Cond(is_nvim, {'for': 'rs'})
+
+  """ javascript """
+
+  """ markdown """
+  Plug 'ellisonleao/glow.nvim', Cond(is_nvim)
+
+
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#end()
 
 
-""" plugin settings
+" load common config
+source ~/dotfiles/vim/common/base.vim
+source ~/dotfiles/vim/common/backup.vim
+source ~/dotfiles/vim/common/commands.vim
+source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim
+source ~/dotfiles/vim/common/ctags.vim
+source ~/dotfiles/vim/common/gui.vim
 
-  " fzf options
-  " set fzf runtime path
-  set rtp+=~/.fzf
-  " call it via CTRL+P
-  nnoremap <silent> <C-p> :FZF<CR>
-  inoremap <silent> <C-p> :FZF<CR>
-  cnoreabbrev bb Buffers
-  let g:fzf_buffers_jump = 1 " [Buffers] Jump to the existing window if possible
+source ~/dotfiles/vim/plugins/common.vim
+source ~/dotfiles/vim/plugins/colors.vim
 
-  " ale config
-  " shorter error/warning flags
-  let g:ale_echo_msg_error_str = 'E'
-  let g:ale_echo_msg_warning_str = 'W'
-  " custom icons for errors and warnings
-  let g:ale_sign_error = '✘✘'
-  let g:ale_sign_warning = '⚠⚠'
-  " disable loclist at the bottom of vim
-  let g:ale_open_list = 0
-  let g:ale_loclist = 0
-	" Setup compilers for languages
-	let g:ale_linters = {
-				\  'python': ['pylint'],
-				\  'java': ['javac'],
-        \  'go': ['gopls'],
-        \  'rust': ['rls', 'cargo'],
-				\ }
-
-  let g:ale_rust_rls_toolchain = ''
-  let g:ale_rust_rls_executable = 'rust-analyzer'
-
-  " do not enable rustfmt, or :w will become painfully slow
-  " issue: https://github.com/rust-lang/rust.vim/issues/293
-  " let b:ale_fixers = { 'rust': ['rustfmt'] }
-
-  " same as above, due to rustfmt.
-  " format manually by running :RustFmt
-  " set g:rustfmt_autosave = 1, to format on save in rust files
-  let g:rustfmt_autosave = 0
-
-  " enable omnicompletion (disabled by default)
-  filetype plugin indent on
-  set omnifunc=syntaxcomplete#Complete
-
-  " deoplete config
-  " enable deoplete at startup
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_completion_start_length = 2
-  " javacomplete config
-  autocmd FileType java setlocal omnifunc=javacomplete#Complete
-  autocmd FileType java JCEnable " enable by default for .java files
-
-  " golang autocomplete on . keypress
-  au filetype go inoremap <buffer> . .<C-x><C-o>
-  let g:go_fmt_command = "goimports"    " Run goimports along gofmt on each save
-  let g:go_auto_type_info = 1 " Automatically get signature/type info for object under cursor
-
-  " show hidden files in nerdtree by default
-  let NERDTreeShowHidden=1
-  " use ctrl+n to toggle nerdtree
-  map <C-n> :NERDTreeToggle<CR>
-
-  let g:NERDTreeGitStatusUseNerdFonts = 1
-
-  "display all buffers in airline when there's only 1 tab open
-  let g:airline#extensions#tabline#enabled = 1
-
-  " vim-signify settings
-  " default updatetime 4000ms is not good for async update
-  set updatetime=100
-  " sign settings
-  let g:signify_sign_add               = '+'
-  let g:signify_sign_delete            = '-'
-  let g:signify_sign_delete_first_line = '‾'
-  let g:signify_sign_change            = 'M'
-  let g:signify_sign_changedelete      = g:signify_sign_change
-  " show number of edited/deleted lines
-  let g:signify_sign_show_count = 1
-
-  " editorconfig settings
-  let g:EditorConfig_exclude_patterns = ['fugitive://.\*']
-  let g:EditorConfig_exclude_patterns = ['scp://.\*']
-  let g:EditorConfig_disable_rules = ['trim_trailing_whitespace']
-
-
-""" colorscheme settings
-
-  " set colorscheme
-  "color molokai
-  "color dracula
-  silent! color onedark
-
-  " settings to use vim-plastic colorscheme
-  " (live in plastic, it's fantastic)
-  "set background=dark
-  "color plastic
-  "let g:lightline = { 'colorscheme': 'plastic' }
-
-  " sonokai vim colorscheme
-  " The configuration options should be placed before `colorscheme sonokai`.
-  "let g:sonokai_style = 'andromeda'
-  "let g:sonokai_enable_italic = 0
-  "let g:sonokai_disable_italic_comment = 1
-  "color sonokai
-
-  " vim-material colorscheme
-  "let g:material_style='oceanic'
-  "set background=dark
-  "colorscheme vim-material
-
-  " 4-bit colorschemes to get consistency in 16-color terminals
-  " set one of these and customize your terminal theme instead.
-  "color noctu
-  "color dim
-
-  " further theme customization
-  " you can use default theme and customize terminal colors instead
-  "color default
-  " keep line numbers grey
-  highlight LineNr ctermfg=grey
-
-
-""" mappings
-source ~/dotfiles/vim/mappings.vimrc
-
-
-"apply these settings only with GUIs, like MacVim
-if has("gui_running")
-
-  "set highlightning colors
-  colorscheme flatland
-
-  "set window width
-  set columns=140
-
-  "set window height
-  set lines=48
-
-  "enable use of mouse
-  set mouse=a
-
-  "set font for gVim on Windows
-  if has("gui_win32")
-    "set guifont=MesloLGS\ Nerd\ Font\ Mono:h10
-    set guifont=JetBrains\ Mono:h10
-  endif
-
+if is_vim
+  source ~/dotfiles/vim/plugins/vim_only.vim
+elseif is_nvim
+  lua require('treesitter')
+  lua require('filetypes')
+  lua require('plugins')
+  lua require('lsp')
+  lua require('autocomplete')
+  lua require('languages')
+  lua require('commands')
+  lua require('mappings')
+  lua require('autocmds')
 endif
-
-" settings for GUI nvim
-if has('gui_running' && 'nvim')
-
-  " 4-bit colorschemes and settings
-  "set background=light
-  set background=dark
-  colorscheme hemisu
-
-endif
-

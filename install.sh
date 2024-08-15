@@ -32,16 +32,20 @@ function makedirs {
     move_if_exists "${HOME}/bin"
     ln -s ${DOTFILES}/bin ${HOME}/bin
 
+    mkdir -p ${HOME}/.config
+    mkdir -p ${HOME}/.local/share/man/man1
+    mkdir -p ${HOME}/.local/share/man/man5
+
     mkdir -p ${HOME}/bin2
     mkdir -p ${HOME}/bin2/man
     mkdir -p ${HOME}/bin2/man/man1
     mkdir -p ${HOME}/bin2/man/man5
 
-    mkdir -p ${HOME}/Code/contrib     # contributions
-    mkdir -p ${HOME}/Code/projects    # my projects
-    mkdir -p ${HOME}/Code/clones      # read-only git clones
-    mkdir -p ${HOME}/Code/Templates   # read-only projects boilerplates
-    mkdir -p ${HOME}/Code/Workspaces  # code-station to try new stuff
+    mkdir -p ${HOME}/code/contrib     # contributions
+    mkdir -p ${HOME}/code/projects    # my projects
+    mkdir -p ${HOME}/code/clones      # read-only git clones
+    mkdir -p ${HOME}/code/Templates   # read-only projects boilerplates
+    mkdir -p ${HOME}/code/Workspaces  # code-station to try new stuff
 }
 
 function bashinstall {
@@ -160,6 +164,17 @@ function viminstall {
     mkdir -p ${HOME}/.vim/swap && chmod 700 ${HOME}/.vim/swap
     mkdir -p ${HOME}/.vim/backups && chmod 700 ${HOME}/.vim/backups
     mkdir -p ${HOME}/.vim/undo && chmod 700 ${HOME}/.vim/undo
+}
+
+function nviminstall {
+    move_if_exists "${HOME}/.config/nvim"
+    mkdir -p "${HOME}/.config/nvim"
+    ln -s "${DOTFILES}/vim/.vimrc" "${HOME}/.config/nvim/init.vim"
+    ln -s "${DOTFILES}/vim/lua" "${HOME}/.config/nvim/lua"
+
+    mkdir -p ${HOME}/.config/nvim/swap && chmod 700 ${HOME}/.config/nvim/swap
+    mkdir -p ${HOME}/.config/nvim/backups && chmod 700 ${HOME}/.config/nvim/backups
+    mkdir -p ${HOME}/.config/nvim/undo && chmod 700 ${HOME}/.config/nvim/undo
 }
 
 function vimpynviminstall {
@@ -292,6 +307,7 @@ case "$1" in
         viminstall
         vimpynviminstall
         vimplugininstall
+        nviminstall
         zpreztoinstall
         shellfishinstall
         ctagsinstall
@@ -322,11 +338,14 @@ case "$1" in
     makedirs)
         makedirs
         ;;
+    mc)
+        mcinstall
+        ;;
     neofetch)
         neofetchinstall
         ;;
-    mc)
-        mcinstall
+    nvim)
+        nviminstall
         ;;
     tmux)
         tmuxinstall
@@ -363,3 +382,4 @@ case "$1" in
         usage
         exit 1
 esac
+

@@ -19,11 +19,12 @@ if has('win32')
     set shell=pwsh.exe
 endif
 
+" autoload file changes
+" undo loading by pressing 'u'
+set autoread
+
 " search deep in subdirs
 set path+=**
-
-" use system clipboard
-set clipboard=unnamed
 
 " command line completion that makes sense
 set wildmode=longest:full
@@ -31,6 +32,34 @@ set wildmenu
 
 " always show the sidebar used by signify
 set signcolumn=yes
+
+" default updatetime 4000ms is not good for async update
+set updatetime=100
+
+" locks this number of lines while scrolling
+set scrolloff=4
+
+
+""" use system clipboard
+
+" use '*' register for clipboard ops (one way).
+" select in Visual mode and press 'y' to copy to primary clipboard.
+" in Normal mode, press 'p' (or other paste options) to paste from the primary clipboard.
+set clipboard=unnamed
+
+" use both '*' and '+' registers for clipboard ops (two way).
+" select in Visual mode and press 'y' to copy to system clipboard.
+" in Normal mode, press 'p' (or other paste options) to paste from the system clipboard.
+"set clipboard=unnamedplus
+
+
+""" terminal
+
+set termencoding=utf-8
+set termguicolors
+set ttyfast
+set t_Co=256
+
 
 """ search
 
@@ -52,6 +81,10 @@ set wrapscan
 " disable wrapscan
 "set nowrapscan
 
+" start searching before pressing enter
+if has('reltime')
+    set incsearch
+endif
 
 """ syntax
 
@@ -67,7 +100,7 @@ set bs=2
 "always enabled autoindent
 set ai
 
-"enable smart indent
+"enable smartindent
 set si
 
 " set tabstop=4 "4 space tab
@@ -95,12 +128,19 @@ set cursorline
 set cursorcolumn
 
 
-""" paste options
+""" panes
 
-" avoid tab increments while pasting content over ssh connection
-" IMPORTANT : When the 'paste' option is switched on mapping in Insert mode and
-"             Command-line mode is disabled. In other words remaps do NOT work.
-"set paste
-" instead of setting paste ON permanently, toggle it
-" set pastetoggle=<leader>p
-set pastetoggle=<C-y>
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+" choose where to open the new pane
+set splitbelow
+set splitright
+
+
+""" autocomplete
+
+" Shows the longest autcomplete.
+" http://vim.wikia.com/wiki/Make_Vim_completion_popup_menu_work_just_like_in_an_IDE
+set completeopt=longest,menuone,preview
+

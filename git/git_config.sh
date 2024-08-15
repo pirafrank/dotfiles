@@ -8,6 +8,7 @@ echo "Setting git global config..."
 
 # basic aliases
 git config --global alias.co checkout
+git config --global alias.cp cherry-pick
 git config --global alias.st "status -s"
 git config --global alias.br branch
 git config --global alias.cm commit
@@ -80,7 +81,11 @@ git config --global core.autocrlf false
 git config --global core.eol lf
 
 # default editor
-git config --global core.editor vim
+if command -v nvim > /dev/null; then
+  git config --global core.editor nvim
+else
+  git config --global core.editor vim
+fi
 
 ####################
 #  delta config    #

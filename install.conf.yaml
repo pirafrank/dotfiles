@@ -8,26 +8,42 @@
 - clean: ['~']
 
 - create:
-    - ~/.gnupg           # gpg data
-    - ~/.local/share     # local data
-    - ~/.config          # configuration files
-    - ~/.config/htop     # htop config
-    - ~/.config/lazygit  # lazygit config
-    - ~/.config/lf       # lf file manager config and icons
-    - ~/.config/mc       # midnight commander config
-    - ~/.local/share/mc  # midnight commander skins
-    - ~/.tmux/plugins    # tmux plugins
-    - ~/.config/xplr     # xplr file manager config
-    - ~/.vim             # vim data
-    - ~/bin2             # scripts and binaries
-    - ~/bin2/man         # man pages
-    - ~/bin2/man/man1    # man pages
-    - ~/bin2/man/man5    # man pages
-    - ~/Code/contrib     # contributions
-    - ~/Code/projects    # my projects
-    - ~/Code/clones      # read-only git clones
-    - ~/Code/Templates   # read-only projects boilerplates
-    - ~/Code/Workspaces  # code-station to try new stuff
+    - ~/.gnupg                 # gpg data
+    - ~/.local/share           # local data
+    - ~/.config                # configuration files
+    - ~/.config/htop           # htop config
+    - ~/.config/lazygit        # lazygit config
+    - ~/.config/lf             # lf file manager config and icons
+    - ~/.config/mc             # midnight commander config
+    - ~/.local/share/mc        # midnight commander skins
+    - ~/.tmux/plugins          # tmux plugins
+    - ~/.config/xplr           # xplr file manager config
+    - ~/.config/xplr/plugins   # xplr file manager plugins dir
+    - ~/.vim                   # vim data
+    - ~/.vim/swap:
+      mode: 0700
+    - ~/.vim/backups:
+      mode: 0700
+    - ~/.vim/undo:
+      mode: 0700
+    - ~/.config/nvim           # nvim data
+    - ~/.config/nvim/swap:
+      mode: 0700
+    - ~/.config/nvim/backups:
+      mode: 0700
+    - ~/.config/nvim/undo:
+      mode: 0700
+    - ~/bin2                   # scripts and binaries
+    - ~/bin2/man               # man pages
+    - ~/bin2/man/man1          # man pages
+    - ~/bin2/man/man5          # man pages
+    - ~/.local/share/man/man1  # man pages
+    - ~/.local/share/man/man5  # man pages
+    - ~/code/contrib           # contributions
+    - ~/code/projects          # my projects
+    - ~/code/clones            # read-only git clones
+    - ~/code/Templates         # read-only projects boilerplates
+    - ~/code/Workspaces        # code-station to try new stuff
 
 - link:
     ~/.bashrc:
@@ -64,19 +80,19 @@
     ~/.zshrc: zsh/zprezto/runcoms/zshrc
     ~/.zsh_user_themes: zsh/zprezto/zsh_user_themes
     ~/.p10k.zsh: zsh/common/p10k.zsh
+    ~/.config/nvim/init.vim: vim/.vimrc
+    ~/.config/nvim/lua: vim/lua
 
 - shell:
     - [/bin/bash ~/dotfiles/git/git_config.sh, Configuring git]
     - [git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm, Cloning tmux plugin manager]
     - [tmux new-session -d "sleep 1" && sleep 0.1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh, Installing tmux plugins]
-    - [mkdir -p ~/.vim/swap && chmod 700 ~/.vim/swap, Creating swap directory for vim]
-    - [mkdir -p ~/.vim/backups && chmod 700 ~/.vim/backups, Creating backups directory for vim]
-    - [mkdir -p ~/.vim/undo && chmod 700 ~/.vim/undo, Creating undo directory for vim]
-    - [mkdir -p ~/.config/xplr/plugins, Creating plugins directory for xplr]
     - [wget https://gist.github.com/palmin/46c2d0f069d0ba6b009f9295d90e171a/raw/.shellfishrc -O ~/.shellfishrc, Downloading shellfishrc]
+    # zprezto stuff - start
     - [git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto, Cloning prezto]
     - [(zsh -c 'setopt EXTENDED_GLOB ; export ZPREZTODIR=~/.zprezto ; cd $ZPREZTODIR ; git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib'), Cloning prezto-contrib]
     - [touch ~/.zsh_custom_pre ~/.zsh_custom, Creating zsh custom files]
+    # zprezto stuff - end
     - [/bin/bash ~/dotfiles/yazi/install.sh, Installing Yazi TUI file manager]
     # - [python3 -m pip install --upgrade pynvim, Installing pynvim for vim]
     # - [vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall, Installing vim plugins]

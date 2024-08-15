@@ -1,13 +1,19 @@
 """ vim minimal settings, no IDE features, fewer plugins
 
+" load basic functions
+source ~/dotfiles/vim/common/require.vim
+
 """ load base vimrc file
-source ~/dotfiles/vim/base.vimrc
+source ~/dotfiles/vim/common/base.vim
 
 """ load backup config
-source ~/dotfiles/vim/backup.vimrc
+source ~/dotfiles/vim/common/backup.vim
 
 """ picking a color from .vim/colors
 silent! color noctu
+
+" keep line numbers grey
+highlight LineNr ctermfg=grey
 
 """ just in case you want plugins in the future!
 
@@ -30,5 +36,6 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 
-""" mappings
-source ~/dotfiles/vim/mappings.vimrc
+""" source config
+source ~/dotfiles/vim/common/mappings.vim
+source ~/dotfiles/vim/common/languages.vim
