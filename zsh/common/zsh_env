@@ -24,8 +24,7 @@ fi
 # Paths
 #
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
+export DOTFILES="$HOME/dotfiles"
 
 # Set the list of directories that cd searches.
 # cdpath=(
@@ -35,12 +34,27 @@ typeset -gU cdpath fpath mailpath path
 # Set the list of directories that Zsh searches for programs.
 path=(
   $HOME/bin2
-  $HOME/dotfiles/bin
   $HOME/.local/bin
+  $HOME/dotfiles/bin
   /opt/local/{bin,sbin}
   /usr/local/{bin,sbin}
   $path
 )
+
+# Set the list of dirs that Zsh searches for man pages
+manpath=(
+  $HOME/bin2/man
+  $HOME/.local/share/man
+  $(manpath -g)
+)
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path manpath
+
+# XDG Base Directory Spec env vars as per freedesktop.org project
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
 #
 # Less
@@ -57,10 +71,18 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
+#
+# LC
+#
+
 # setting sort order preference
 if [[ "$(uname -s)" == 'Linux' ]]; then
   export LC_COLLATE=en_US.utf8
 fi
+
+#
+# Environments
+#
 
 # pyenv
 # fix: https://github.com/pyenv/pyenv/issues/1906
