@@ -121,6 +121,12 @@ function mcinstall {
     ln -s "${DOTFILES}/mc/skins" "${HOME}/.local/share/mc/skins"
 }
 
+function neofetchinstall {
+    move_if_exists "${USERCONFIG}/neofetch"
+    mkdir -p "${USERCONFIG}/neofetch"
+    ln -s "${DOTFILES}/neofetch/config.conf" "${USERCONFIG}/neofetch/config.conf"
+}
+
 function tmuxinstall {
     move_if_exists "${HOME}/.tmux"
     mkdir -p "${HOME}/.tmux/plugins"
@@ -293,6 +299,7 @@ case "$1" in
         mcinstall
         yazi_install
         xplrinstall
+        neofetchinstall
         ;;
     ctags)
         ctagsinstall
@@ -314,6 +321,9 @@ case "$1" in
         ;;
     makedirs)
         makedirs
+        ;;
+    neofetch)
+        neofetchinstall
         ;;
     mc)
         mcinstall

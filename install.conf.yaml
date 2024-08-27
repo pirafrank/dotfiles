@@ -53,6 +53,7 @@
     ~/.tmux.conf: tmux/.tmux.conf
     ~/.vimrc: vim/.vimrc
     ~/.vim/colors: vim/.vim/colors
+    ~/.config/neofetch/config.conf: neofetch/config.conf
     ~/.config/xplr/init.lua: xplr/init.lua
     ~/.config/xplr/plugins.lua: xplr/plugins.lua
     ~/.zlogin: zsh/zprezto/runcoms/zlogin
