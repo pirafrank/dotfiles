@@ -42,11 +42,11 @@ local function merge_seq_of_tables(win_only, nix)
     end
     for i, v in ipairs(nix) do
         local entry = {}
-        for k, v in pairs(v) do
+        for k, w in pairs(v) do
             if k == "args" then
-                entry[k] = nix_to_wsl_args_entry(wsl_default_args, v)
+                entry[k] = nix_to_wsl_args_entry(wsl_default_args, w)
             else
-                entry[k] = v
+                entry[k] = w
             end
         end
         merged[#win_only + i] = entry

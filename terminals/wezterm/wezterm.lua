@@ -30,6 +30,15 @@ local defaults = require 'defaults'
 -- BELOW THIS LINE is where you actually apply your config choices --
 -- *************************************************************** --
 
+--
+-- keep set to false. set to true only to debug key events in Debug view.
+-- to debug: set to true, reload configuration, press keys, then open Debug view.
+-- docs:
+--   https://wezfurlong.org/wezterm/config/lua/config/debug_key_events.html
+--   https://wezfurlong.org/wezterm/config/keys.html?h=debug_key_events#raw-key-assignments
+--
+config.debug_key_events = false
+
 -- automatically reload config when it changes on disk
 config.automatically_reload_config = true
 

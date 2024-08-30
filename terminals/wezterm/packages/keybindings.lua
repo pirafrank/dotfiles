@@ -46,39 +46,39 @@ return {
     key = 'r',
     mods = 'CTRL|SHIFT',
     action = action.ReloadConfiguration,
-  },  
+  },
   -- CTRL-SHIFT-d activates the (interactive) debug tab
-  { key = 'D', mods = 'CTRL', action = action.ShowDebugOverlay },
+  { key = 'd', mods = 'CTRL|SHIFT', action = action.ShowDebugOverlay },
   -- paste from the clipboard
   { key = 'v', mods = 'CTRL', action = action.PasteFrom 'Clipboard' },
   -- copy to clipboard AND primary selection (X11)
-  { key = 'C', mods = 'CTRL', action = action.CopyTo 'ClipboardAndPrimarySelection' },
+  { key = 'c', mods = 'CTRL|SHIFT', action = action.CopyTo 'ClipboardAndPrimarySelection' },
   -- search
-  { key = 'F', mods = 'CTRL', action = action.Search 'CurrentSelectionOrEmptyString' },
+  { key = 'f', mods = 'CTRL|SHIFT', action = action.Search 'CurrentSelectionOrEmptyString' },
   --
   -- ** WINDOWS (actual windows, not that Windows) **
   --
-  { key = 'n', mods = 'SHIFT|CTRL', action = action.SpawnWindow },
+  { key = 'n', mods = 'CTRL|SHIFT', action = action.SpawnWindow },
   --
   -- ** TABS **
   --
   -- close current tab
   {
-    key = 'W',
-    mods = 'CTRL',
+    key = 'w',
+    mods = 'CTRL|SHIFT',
     action = action.CloseCurrentTab { confirm = true },
   },
   -- open new tab
   {
-    key = 'T',
-    mods = 'CTRL',
+    key = 't',
+    mods = 'CTRL|SHIFT',
     --action = action.SpawnTab 'DefaultDomain',
     action = action.SpawnTab 'CurrentPaneDomain',
   },
   -- rename tab
   {
-    key = 'E',
-    mods = 'CTRL',
+    key = 'e',
+    mods = 'CTRL|SHIFT',
     action = action.PromptInputLine {
       description = wezterm.format {
         { Attribute = { Intensity = 'Bold' } },
@@ -122,29 +122,29 @@ return {
   },
   -- move among panes
   {
-    key = 'LeftArrow',
-    mods = 'CTRL|ALT',
+    key = 'h',
+    mods = 'CTRL|SHIFT',
     action = action.ActivatePaneDirection 'Left',
   },
   {
-    key = 'RightArrow',
-    mods = 'CTRL|ALT',
+    key = 'l',
+    mods = 'CTRL|SHIFT',
     action = action.ActivatePaneDirection 'Right',
   },
   {
-    key = 'UpArrow',
-    mods = 'CTRL|ALT',
+    key = 'k',
+    mods = 'CTRL|SHIFT',
     action = action.ActivatePaneDirection 'Up',
   },
   {
-    key = 'DownArrow',
-    mods = 'CTRL|ALT',
+    key = 'j',
+    mods = 'CTRL|SHIFT',
     action = action.ActivatePaneDirection 'Down',
   },
   -- more keybindings
   {
-    key = 'P',
-    mods = 'CTRL',
+    key = 'p',
+    mods = 'CTRL|SHIFT',
     action = action.ActivateCommandPalette,
   },
   --
@@ -152,19 +152,19 @@ return {
   --
   -- show launcher with workspaces
   {
-    key = 'K',
-    mods = 'CTRL',
+    key = 'm',
+    mods = 'CTRL|SHIFT',
     action = action.ShowLauncherArgs {
       flags = 'FUZZY|LAUNCH_MENU_ITEMS|TABS|WORKSPACES',
       title = 'Launcher',
     }
   },
-  { key = 'm', mods = 'CTRL|ALT', action = action.SwitchWorkspaceRelative(1) },
-  { key = 'n', mods = 'CTRL|ALT', action = action.SwitchWorkspaceRelative(-1) },
+  --{ key = 'm', mods = 'CTRL|ALT', action = action.SwitchWorkspaceRelative(1) },
+  --{ key = 'n', mods = 'CTRL|ALT', action = action.SwitchWorkspaceRelative(-1) },
   -- create named workspaces by asking for workspace name
   {
-    key = 'I',
-    mods = 'CTRL',
+    key = 'i',
+    mods = 'CTRL|SHIFT',
     action = action.PromptInputLine {
       description = wezterm.format {
         { Attribute = { Intensity = 'Bold' } },
@@ -187,8 +187,8 @@ return {
   --       support nested callbacks, thus I cannot PromptInputLine to ask for a workspace name
   --       from inside the callback of the workspace switch (InputSelector).
   {
-    key = 'L',
-    mods = 'CTRL',
+    key = 'o',
+    mods = 'CTRL|SHIFT',
     action = action.InputSelector {
       fuzzy = true,
       title = 'Switch workspace',
