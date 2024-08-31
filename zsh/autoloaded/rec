@@ -1,0 +1,26 @@
+# record a terminal session with asciinema and convert it to a gif
+
+# prepare
+now="$(date '+%Y-%m-%d_%H%M%S')"
+mkdir -p "${HOME}/asciinema"
+
+# check if asciinema is installed
+if ! command -v asciinema &> /dev/null; then
+  echo "asciinema is not installed. Please install it before running this script."
+  exit 1
+fi
+
+# record
+asciinema rec "${HOME}/asciinema/${now}.rec"
+
+# check if agg is installed
+if ! command -v agg &> /dev/null; then
+  echo "agg is not installed. Please install to convert recording to gif."
+  echo "asciinema recording saved to ${HOME}/asciinema/${now}.rec."
+  exit 2
+fi
+
+# convert to gif
+agg --theme monokai "${HOME}/asciinema/${now}.rec" "${HOME}/asciinema/${now}.gif"
+
+echo "asciinema recording saved to ${HOME}/asciinema/${now}.rec and converted to gif."

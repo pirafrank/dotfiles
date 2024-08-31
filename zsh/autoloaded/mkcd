@@ -1,9 +1,13 @@
-# vim:syntax=zsh
-# vim:filetype=zsh
 
-# mkdir && cd
+# mkdir && cd, or fix the last cd if it failed because the directory didn't exist
 if [[ -z "$1" ]]; then
-  echo "Exactly one argument expected"
+  last_cmd="$(fc -ln 0 | tail -n1)"
+  if [[ "$last_cmd" =~ ^cd\ .+ ]]; then
+    dir="$(printf '%s' "${last_cmd}" | sed 's/cd \(.*\)/\1/')"
+    mkdir -p "$dir" && cd "$dir" || exit 1
+  else
+    echo "Exactly one argument expected, or run after a 'cd some_dir' that exited on error for some_dir non existing."
+  fi
 else
-  mkdir -p "$1" && cd "$1"
+  mkdir -p "$1" && cd "$1" || exit 1
 fi
