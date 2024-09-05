@@ -111,4 +111,4 @@ alias lg='lazygit'
 alias ldk='lazydocker'
 alias j='just'
 alias zj='zellij'
-
+alias gama="GITHUB_TOKEN=\"\$(gh auth token)\" gama"

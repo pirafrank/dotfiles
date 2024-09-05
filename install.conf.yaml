@@ -82,6 +82,7 @@
     ~/.p10k.zsh: zsh/common/p10k.zsh
     ~/.config/nvim/init.vim: vim/.vimrc
     ~/.config/nvim/lua: vim/lua
+    ~/.config/gama/config.yaml: gama/config.yaml
 
 - shell:
     - [/bin/bash ~/dotfiles/git/git_config.sh, Configuring git]

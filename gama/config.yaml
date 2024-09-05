@@ -1,0 +1,11 @@
+keys:
+  #switch_tab_right: shift+right
+  switch_tab_right: ctrl+l
+  #switch_tab_left: shift+left
+  switch_tab_left: ctrl+h
+  #quit: ctrl+c
+  quit: q
+  refresh: ctrl+r
+  enter: enter
+  tab: tab
+

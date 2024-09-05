@@ -92,6 +92,12 @@ function editorconfiginstall {
     ln -s ${DOTFILES}/home/.editorconfig ${HOME}/.editorconfig
 }
 
+function gamainstall {
+    move_if_exists "${USERCONFIG}/gama"
+    mkdir -p "${USERCONFIG}/gama"
+    ln -s ${DOTFILES}/gama/config.yaml ${USERCONFIG}/gama/config.yaml
+}
+
 function inputrcinstall {
     move_if_exists "${HOME}/.inputrc"
     ln -s ${DOTFILES}/home/.inputrc ${HOME}/.inputrc
@@ -316,12 +322,16 @@ case "$1" in
         yazi_install
         xplrinstall
         neofetchinstall
+        gamainstall
         ;;
     ctags)
         ctagsinstall
         ;;
     fzf)
         fzfinstall
+        ;;
+    gama)
+        gamainstall
         ;;
     git)
         gitinstall

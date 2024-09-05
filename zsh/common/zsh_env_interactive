@@ -1,6 +1,3 @@
-# vim:syntax=zsh
-# vim:filetype=zsh
-
 # dotfiles/zsh/common/zsh_env is always sourced because
 # it's loaded by dotfiles/zsh/zprezto/runcoms/zshenv.
 # This file is for interactive env, only to be loaded in .zshrc.
