@@ -35,15 +35,16 @@ echo "Installing yazi plugins via ya tool"
 # ya clones and checks out in detached state.
 # plugins names are actually repo/owner on github,
 # e.g. 'https://github.com/' + NAME + '.yazi'
-ya pack -a 'yazi-rs/plugins#chmod'
-ya pack -a 'yazi-rs/plugins#diff'
-ya pack -a 'yazi-rs/plugins#hide-preview'
-ya pack -a 'yazi-rs/plugins#max-preview'
-ya pack -a 'yazi-rs/plugins#smart-filter'
+ya pack -a 'yazi-rs/plugins:chmod'
+ya pack -a 'yazi-rs/plugins:diff'
+ya pack -a 'yazi-rs/plugins:hide-preview'
+ya pack -a 'yazi-rs/plugins:max-preview'
+ya pack -a 'yazi-rs/plugins:smart-filter'
 ya pack -a 'Reledia/glow'
 ya pack -a 'KKV9/command'
 ya pack -a 'pirafrank/what-size'
 ya pack -a 'Ape/open-with-cmd'
+ya pack -a 'yazi-rs/plugins:git'
 
 echo "Listing install plugins..."
 ya pack --list
