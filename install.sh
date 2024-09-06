@@ -89,7 +89,7 @@ function gpginstall {
 
 function editorconfiginstall {
     move_if_exists "${HOME}/.editorconfig"
-    ln -s ${DOTFILES}/home/.editorconfig ${HOME}/.editorconfig
+    ln -s ${DOTFILES}/editorconfig/.editorconfig ${HOME}/.editorconfig
 }
 
 function gamainstall {
@@ -100,7 +100,7 @@ function gamainstall {
 
 function inputrcinstall {
     move_if_exists "${HOME}/.inputrc"
-    ln -s ${DOTFILES}/home/.inputrc ${HOME}/.inputrc
+    ln -s ${DOTFILES}/inputrc/.inputrc ${HOME}/.inputrc
 }
 
 function htoprcinstall {

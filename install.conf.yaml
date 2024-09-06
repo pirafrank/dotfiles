@@ -56,8 +56,8 @@
     ~/.gitignore_global: git/.gitignore_global
     ~/.gnupg/gpg.conf: gnupg/Linux/gpg.conf
     ~/.gnupg/gpg-agent.conf: gnupg/Linux/gpg-agent.conf
-    ~/.editorconfig: home/.editorconfig
-    ~/.inputrc: home/.inputrc
+    ~/.editorconfig: editorconfig/.editorconfig
+    ~/.inputrc: inputrc/.inputrc
     ~/.config/htop/htoprc: htop/htoprc
     ~/.config/lazygit/config.yml: lazygit/config.yml
     ~/.config/lf/lfrc: lf/lfrc
