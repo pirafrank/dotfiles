@@ -6,7 +6,7 @@ $dotfilesPath = "$env:USERPROFILE\dotfiles"
 # functions
 
 function Backup-Item($FileName) {
-    if (Test-Path $FileName) { 
+    if (Test-Path $FileName) {
       Rename-Item -Path $FileName -NewName "$FileName.bak" -Force
     }
 }
@@ -49,7 +49,7 @@ Invoke-Symlink "$dotfilesPath\Windows\WindowsPowerShell\Microsoft.PowerShell_pro
 $powershell7home = "$env:USERPROFILE\Documents\PowerShell"
 New-Folder-If-Not-Exist "$powershell7home"
 Backup-Item "$powershell7home\Profile.ps1"
-Invoke-Symlink "$dotfilesPath\PowerShell\Microsoft.PowerShell_profile.ps1" "$powershell7home\Profile.ps1"
+Invoke-Symlink "$dotfilesPath\PowerShell\Profile.ps1" "$powershell7home\Profile.ps1"
 
 # windows terminal
 $win_term_home = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState"

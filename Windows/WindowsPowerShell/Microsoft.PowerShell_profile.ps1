@@ -6,6 +6,7 @@ Set-Alias -Name l -Value ls -Option AllScope
 Set-Alias which get-command
 Set-Alias lg lazygit
 Set-Alias open Invoke-Item
+Set-Alias touch New-Item
 Set-Alias k kubectl
 Set-Alias dk docker
 

@@ -7,6 +7,8 @@ Set-Alias which get-command
 Set-Alias lg lazygit
 Set-Alias ldk lazydocker
 Set-Alias open Invoke-Item
+Set-Alias touch New-Item
+
 Set-Alias k kubectl
 Set-Alias dk docker
 Set-Alias cat bat
@@ -15,10 +17,6 @@ Set-Alias g git
 
 # bat output style
 $env:BAT_STYLE="changes,header,numbers,snip"
-
-# here alias
-function Invoke-Here() { explorer.exe . }
-Set-Alias here Invoke-Here
 
 # symlink alias
 function Invoke-Symlink($shortcutTarget, $shortcutName) {
@@ -128,29 +126,33 @@ if (Get-Module -ListAvailable -Name Terminal-Icons) { Import-Module -Name Termin
 # install by running: Install-Module -Name ZLocation -Repository PSGallery
 if (Get-Module -ListAvailable -Name ZLocation) { Import-Module -Name ZLocation }
 
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
+#
+# Windows-only scripts
+#
+# PowerShell (!WindowsPowerShell) has been designed to be cross-platform.
+# Although it is very likely I won't run PowerShell on Linux and macOS,
+# I don't like to bind PowerShell config to Windows-specific scripts that
+# won't work on other platforms. Scripts in this file are Windows-only and
+# should not be sourced by PowerShell on platforms other than Windows.
+if ($env:OS -like "*Windows*") {
 
-# import tere
-function Invoke-Tere() {
-    $result = . (Get-Command -CommandType Application tere) $args
-    if ($result) {
-        Set-Location $result
-    }
-}
-Set-Alias tere Invoke-Tere
+  function Invoke-Here() { explorer.exe . }
+  Set-Alias here Invoke-Here
 
-# source dotfiles scripts
-# this sources every powershell script in dir
-$Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
-Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
+  # Chocolatey profile
+  $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+  if (Test-Path($ChocolateyProfile)) {
+    Import-Module "$ChocolateyProfile"
+  }
+
+  # source dotfiles scripts
+  # this sources every powershell script in dir
+  $Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
+  Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
     . $_.FullName
+  }
+
+  # add Windows\bin to $PATH.
+  # keep this line at the very bottom.
+  $Path = "$env:USERPROFILE\dotfiles\Windows\bin"
 }
-
-# add Windows\bin to $PATH.
-# keep this line at the very bottom.
-$Path = "$env:USERPROFILE\dotfiles\Windows\bin"
-
