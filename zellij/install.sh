@@ -3,21 +3,19 @@
 # make plugins dir
 mkdir -p ~/.config/zellij/plugins
 
+# note: wget -O overwrites the file if it exists
+
 # install zellij-forgot
-wget -O ~/.config/zellij/plugins/zellij_forgot.wasm https://github.com/karimould/zellij-forgot/releases/download/0.4.0/zellij_forgot.wasm
+wget -O ~/.config/zellij/plugins/zellij_forgot.wasm https://github.com/karimould/zellij-forgot/releases/latest/download/zellij_forgot.wasm
 
 # install room
-wget -O ~/.config/zellij/plugins/room.wasm https://github.com/rvcas/room/releases/download/v1.0.1/room.wasm
+wget -O ~/.config/zellij/plugins/room.wasm https://github.com/rvcas/room/releases/latest/download/room.wasm
 
-# install zellij-jump-list
-(
-    mkdir -p ~/.local/src
-    git clone https://github.com/blank2121/zellij-jump-list.git ~/.local/src/zellij-jump-list
-    cd ~/.local/src/zellij-jump-list || exit 1
-    rustup target add wasm32-wasi
-    cargo build --release
-    cp -a ./target/wasm32-wasi/release/zellij-jump-list.wasm ~/.config/zellij/plugins/zellij-jump-list.wasm
-)
+# install zellij-jump-list from my fork with built binaries
+wget -O ~/.config/zellij/plugins/zellij-jump-list.wasm https://github.com/pirafrank/zellij-jump-list/releases/latest/download/zellij-jump-list.wasm
+
+# install zellij-what-time
+wget -O ~/.config/zellij/plugins/zellij-what-time.wasm https://github.com/pirafrank/zellij-what-time/releases/latest/download/zellij-what-time.wasm
 
 # remove execution perms for all plugins as they're loaded by zellij itself
 chmod -x ~/.config/zellij/plugins/*

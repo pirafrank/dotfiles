@@ -1,0 +1,7 @@
+if [[ -f .zellij_layout.kdl ]] && [[ "$#" -eq 0 ]]; then
+  zellij --layout .zellij_layout.kdl
+elif [[ -f .zellij-layout.kdl ]] && [[ "$#" -eq 0 ]]; then
+  zellij --layout .zellij-layout.kdl
+else
+  zellij "$@"
+fi

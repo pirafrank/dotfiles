@@ -110,5 +110,5 @@ alias ydl='youtube-dl'
 alias lg='lazygit'
 alias ldk='lazydocker'
 alias j='just'
-alias zj='zellij'
+alias zjdump='zellij action dump-layout > .zellij-layout.kdl'
 alias gama="GITHUB_TOKEN=\"\$(gh auth token)\" gama"
