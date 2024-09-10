@@ -264,6 +264,15 @@ function install_devcontainer_scripts {
     done
 }
 
+function quit_if_no_codespace {
+    if ! uname -a | grep -qi codespaces ; then
+        echo "** STOP! This is not a codespace! **"
+        echo "This script is meant to be run in a GitHub Codespace without params."
+        echo "It is a safety measure to avoid messing up the local dotfiles environment."
+        exit 101
+    fi
+}
+
 ### actual script
 
 echo "
@@ -275,6 +284,7 @@ Check the code to know more.
 # if no args are given, default to bash shell and
 # fewer customizations to provide compatibility with GitHub Codespaces.
 if [ $# -eq 0 ]; then
+  quit_if_no_codespace
   # it may be unset in Codespaces
   USERCONFIG="$HOME/.config"
   DOTFILES="$HOME/dotfiles"
@@ -297,7 +307,7 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-cd
+cd "$HOME"
 case "$1" in
     all)
         makedirs
