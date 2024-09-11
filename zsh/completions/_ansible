@@ -1,7 +1,5 @@
 #compdef _ansible ansible
 
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 # Run something, muting output or redirecting it to the debug stream
 # depending on the value of _ARC_DEBUG.

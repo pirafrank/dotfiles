@@ -1,8 +1,5 @@
 #! /bin/bash
 
-# vim:syntax=bash
-# vim:filetype=bash
-
 _complete_() {
     local options_with_args=$1
     local boolean_options="$2 -h --help"

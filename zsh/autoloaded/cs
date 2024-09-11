@@ -1,5 +1,3 @@
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 # cheat.sh (as bash function)
 if [[ -z "$1" ]]; then

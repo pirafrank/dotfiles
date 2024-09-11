@@ -1,7 +1,5 @@
 #compdef kubectl
 
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 # Copyright 2016 The Kubernetes Authors.
 #

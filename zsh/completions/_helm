@@ -1,7 +1,5 @@
 #compdef _helm helm
 
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 # zsh completion for helm                                 -*- shell-script -*-
 

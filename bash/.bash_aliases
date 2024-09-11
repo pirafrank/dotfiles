@@ -1,5 +1,3 @@
-# vim:syntax=bash
-# vim:filetype=bash
 
 # core
 alias l='ls -lhA'

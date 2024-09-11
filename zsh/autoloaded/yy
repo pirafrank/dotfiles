@@ -1,5 +1,3 @@
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 yazi "$@" --cwd-file="$tmp"

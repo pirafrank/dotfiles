@@ -1,7 +1,5 @@
 #compdef wezterm
 
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 autoload -U is-at-least
 

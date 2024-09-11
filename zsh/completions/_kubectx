@@ -1,7 +1,5 @@
 #compdef kubectx kctx=kubectx
 
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 local KUBECTX="${HOME}/.kube/kubectx"
 PREV=""

@@ -1,5 +1,3 @@
-# vim:syntax=zsh
-# vim:filetype=zsh
 
 # update scw cli tool
 rm -f ~/bin2/scw
