@@ -21,6 +21,7 @@ prepend_keymap = [
   { on   = [ ".", "s" ], run  = "plugin what-size", desc = "Calc size of selection or cwd" },
   { on   = "o", run  = "plugin open-with-cmd --args=block", desc = "Open with command in the terminal" },
   { on   = "1", run  = "shell --block --confirm 'clear ; echo \"$0\" ; git -C \"$0\" status -s ; git -C \"$0\" adog -n 5 ; read y'", desc = "Git info on hovered dir" },
+  { on   = "!", run  = "plugin custom-shell --args='zsh --wait'", desc = "Run a shell command and wait for user" },
 ]
 
 keymap = [

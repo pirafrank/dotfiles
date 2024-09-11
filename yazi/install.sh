@@ -45,6 +45,7 @@ ya pack -a 'KKV9/command'
 ya pack -a 'pirafrank/what-size'
 ya pack -a 'Ape/open-with-cmd'
 ya pack -a 'yazi-rs/plugins:git'
+ya pack -a 'AnirudhG07/custom-shell'
 
 echo "Listing install plugins..."
 ya pack --list
