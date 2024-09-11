@@ -36,6 +36,9 @@ if [ -f ~/.fzf.zsh ]; then
   fi
 fi
 
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/dotfiles/rg/.ripgreprc"
+
 # glow
 alias glow='command glow -p'
 

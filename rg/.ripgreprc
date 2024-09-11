@@ -1,0 +1,24 @@
+# Don't let ripgrep vomit really long lines to my terminal, and show a preview.
+--max-columns=150
+--max-columns-preview
+
+# Keep colored output when pipe to a pager
+# for example with: rg -p sometext | less
+--pretty
+
+# Search among hiddens
+--hidden
+
+# Follow symlinks
+--follow
+
+# Smart case
+--smart-case
+
+# Sort by path
+--sort=path
+
+# Using glob patterns to include/exclude files or folders
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor,.DS_Store}
+--glob=!*.{lock}
+--glob=!{package-lock.json}
