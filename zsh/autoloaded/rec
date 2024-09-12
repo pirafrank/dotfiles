@@ -1,26 +1,94 @@
-# record a terminal session with asciinema and convert it to a gif
+#
+# A thin wrapper around asciinema for easier terminal sessions recording,
+# with default conversion to gif for sharing, e.g. embed them in markdown files.
+# Not meant to be a substitute or to wrap all functions of asciinema binary.
+#
+# Requires asciinema and agg to be installed.
+#
+# author: @pirafrank
+#
+
+# Default values
+format=''
+filename="$(date '+%Y-%m-%d_%H%M%S')"
+convert_to_gif='false'
+
+# Parse options
+while getopts ":hvf:" opt; do
+  case $opt in
+    h)
+      echo "Usage: $0 [OPTIONS] [FILENAME]"
+      echo "Options:"
+      echo "  -h              Show help"
+      echo "  -v              Show version"
+      echo "  -f <FORMAT>     Specify format options [possible values: asciicast, raw, txt, gif]"
+      exit 0
+      ;;
+    v)
+      echo "Version 0.1.1"
+      exit 0
+      ;;
+    f)
+      format="$OPTARG"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG"
+      exit 1
+      ;;
+  esac
+done
+
+# Shift the options so that $1 refers to the first non-option argument
+shift $((OPTIND - 1))
+
+# Get the argument if provided
+if [ $# -gt 0 ]; then
+  filename="$1"
+fi
 
 # prepare
-now="$(date '+%Y-%m-%d_%H%M%S')"
 mkdir -p "${HOME}/asciinema"
 
 # check if asciinema is installed
 if ! command -v asciinema &> /dev/null; then
   echo "asciinema is not installed. Please install it before running this script."
-  exit 1
+  exit 2
+fi
+
+# check params, if gif record as asciicast and convert later
+if [ "${format}" = 'gif' ] || [ -z "${format}" ]; then
+  format="asciicast"
+  convert_to_gif='true'
 fi
 
 # record
-asciinema rec "${HOME}/asciinema/${now}.rec"
+extension="$(printf '%s' "${format}" | sed 's/ascii//g')"
+asciinema rec --format "${format}" "${HOME}/asciinema/${filename}.${extension}"
+
+if [ "$?" != 0 ]; then
+  exit "$?"
+fi
+
+msg="asciinema recording saved to ${HOME}/asciinema/${filename}.${extension}"
+
+# if gif output format is wanted, convert screencast
+if [ "${convert_to_gif}" = 'false' ]; then
+  # we're done here. quitting.
+  printf '\n%s\n' "${msg}."
+  exit 0
+fi
 
 # check if agg is installed
 if ! command -v agg &> /dev/null; then
   echo "agg is not installed. Please install to convert recording to gif."
-  echo "asciinema recording saved to ${HOME}/asciinema/${now}.rec."
-  exit 2
+  exit 3
 fi
 
 # convert to gif
-agg --theme monokai "${HOME}/asciinema/${now}.rec" "${HOME}/asciinema/${now}.gif"
+agg --theme monokai "${HOME}/asciinema/${filename}.${extension}" "${HOME}/asciinema/${filename}.gif"
 
-echo "asciinema recording saved to ${HOME}/asciinema/${now}.rec and converted to gif."
+if [ "$?" = 0 ]; then
+  printf '\n%s\n' "${msg} and converted to gif (${HOME}/asciinema/${filename}.gif)."
+else
+  exit "$?"
+fi
