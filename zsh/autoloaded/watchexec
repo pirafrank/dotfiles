@@ -1,0 +1,64 @@
+
+run_java() {
+    if [ ! -f "pom.xml" ]; then
+        echo "It looks like a Java project, but I can't find a pom.xml file."
+        echo "Please run this script from the root of your Maven project. Only Maven projects are supported at this time."
+        exit 1
+    elif grep -q spring-boot-starter-parent pom.xml; then
+        echo "It looks like a Spring Boot project. Running with Maven..."
+        command watchexec -r -w src -e java,properties,xml -- mvn spring-boot:run
+    else
+        echo "It looks like a Java project. Running with Maven..."
+        command watchexec -r -w src -e java,properties,xml -- mvn compile exec:java
+    fi
+}
+
+run_rust() {
+    echo "It looks like a Rust project. Running with Cargo..."
+    command watchexec -r -w src -e rs,toml,conf -- cargo run
+}
+
+run_golang() {
+    echo "It looks like a Go project. Running with Go..."
+    command watchexec -r -w . -e go,mod -- go run .
+}
+
+run_python() {
+    local file="main.py"
+    if [ ! -f "$file" ]; then
+        file=$(find . -maxdepth 1 -type f -name '*.lua' -print -quit)
+    fi
+    echo "It looks like a Python project. Remember watchexec wrapper does not load virtualenvs!"
+    echo "Running $file file..."
+    command watchexec -r -w . -e py,ini,txt -- python "$file"
+}
+
+run_lua() {
+    file=$(find . -maxdepth 1 -type f -name '*.lua' -print -quit)
+    echo "It looks like a Lua project. Running $file file..."
+    command watchexec -r -w . -e lua,conf -- lua "$file"
+}
+
+run_watchexec() {
+    if [ -n "$(find . -name '*.java' -print -quit)" ]; then
+      run_java
+    elif [ -n "$(find . -name '*.go' -print -quit)" ]; then
+      run_golang
+    elif [ -n "$(find . -name '*.rs' -print -quit)" ]; then
+      run_rust
+    elif [ -n "$(find . -name '*.py' -print -quit)" ]; then
+      run_python
+    elif [ -n "$(find . -name '*.lua' -print -quit)" ]; then
+      run_lua
+    fi
+}
+
+### main script ###
+
+if [ $# -gt 0 ]; then
+  # you choose
+  command watchexec "$@"
+else
+  # start guessing
+  run_watchexec
+fi
