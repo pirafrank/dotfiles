@@ -150,31 +150,31 @@ call plug#begin($BASE.'/plugged')
   " in vim, use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
   " python3 -m pip install --user pynvim
-  if is_vim && has('python3')
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
-  endif
+  "if is_vim && has('python3')
+  "  Plug 'Shougo/deoplete.nvim'
+  "  Plug 'roxma/nvim-yarp'
+  "  Plug 'roxma/vim-hug-neovim-rpc'
+  "endif
 
   """ java """
   "filetype off
   "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
   "map <C-]> :YcmCompleter GoToImprecise<CR>
-  Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
+  "Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
   Plug 'mfussenegger/nvim-jdtls'
 
   """ python """
   " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
-  Plug 'deoplete-plugins/deoplete-jedi', Cond(is_vim, {'for': 'py'})
+  "Plug 'deoplete-plugins/deoplete-jedi', Cond(is_vim, {'for': 'py'})
 
   """ golang """
   " run :GoInstallBinaries after plugin install
-  Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
+  "Plug 'fatih/vim-go', Cond(is_vim, { 'do': ':GoUpdateBinaries', 'for': 'go' })
 
   """ rust """
   " note: you need to run this first to install the required components
   " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
-  Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
+  "Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
   Plug 'simrat39/rust-tools.nvim', Cond(is_nvim, {'for': 'rs'})
 
   """ javascript """
