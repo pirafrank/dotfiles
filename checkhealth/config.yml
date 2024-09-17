@@ -1,0 +1,73 @@
+commands:
+  # shell setup
+  - zsh
+  - bash
+  - fzf
+  - git
+  - lazygit
+  - rg
+  - fd
+  - batcat
+  - gpg
+  - neofetch
+  # editors
+  - vim
+  - nvim
+  - code
+  # monitoring tools
+  - htop
+  - atop
+  # network tools
+  - curl
+  - wcurl
+  - wget
+  # file tools
+  - jq
+  - yq
+  - tar
+  - zip
+  - unzip
+  - rsync
+  # session tools
+  - zellij
+  - tmux
+  - ssh
+  - mosh
+  # TUI file explorers
+  - mc
+  - yazi
+  - lf
+  - xplr
+  # TUI utils
+  - gama
+  # version managers
+  - nvm
+  - pyenv
+  - jenv
+  - rustup
+  - goenv
+  - rvm
+  # languages
+  - node
+  - python
+  - java
+  - rustc
+  - cargo
+  - go
+  - ruby
+  - lua
+  # Language servers
+  #- typescript-language-server
+  #- tsserver
+  #- pyls
+  #- black
+  - gopls
+  # Additional development tools
+  - docker
+  - kubectl
+  - kubectx
+  - kubens
+  - stern
+  - helm
+  - kdash
+  #- prettier
