@@ -33,6 +33,7 @@ function makedirs {
     ln -s ${DOTFILES}/bin ${HOME}/bin
 
     mkdir -p ${HOME}/.config
+    mkdir -p ${HOME}/.local/bin
     mkdir -p ${HOME}/.local/share/man/man1
     mkdir -p ${HOME}/.local/share/man/man5
 
@@ -212,6 +213,13 @@ function yazi_install {
     )
 }
 
+function zellij_install {
+    (
+        cd "${DOTFILES}/zellij" || exit 1
+        ./install.sh
+    )
+}
+
 function zpreztoinstall {
     # check for zsh
     if [[ -z $ZSH_NAME ]]; then
@@ -245,17 +253,30 @@ function do_codespace_symlinks {
 
 function do_codespace_ohmyzsh_install {
     move_if_exists "$HOME/.zprofile"
-    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zprofile" "$HOME/.zprofile"
+    ln -s "${DOTFILES}/.codespaces/zsh/oh-my-zsh/.zprofile" "$HOME/.zprofile"
 
     move_if_exists "$HOME/.zshenv"
-    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshenv" "$HOME/.zshenv"
+    ln -s "${DOTFILES}/.codespaces/zsh/oh-my-zsh/.zshenv" "$HOME/.zshenv"
 
     move_if_exists "$HOME/.zshrc"
-    ln -s "${DOTFILES}/.devcontainer/zsh/oh-my-zsh/.zshrc" "$HOME/.zshrc"
+    ln -s "${DOTFILES}/.codespaces/zsh/oh-my-zsh/.zshrc" "$HOME/.zshrc"
 }
 
-function install_devcontainer_scripts {
-    local scripts_dir="${DOTFILES}/.devcontainer/scripts"
+function do_codespace_setup_scripts {
+    (
+        cd "${DOTFILES}/setups" || exit 1
+        ./bat.sh
+        ./delta.sh
+        ./fzf.sh
+        ./lazygit.sh
+        ./yq2.sh
+        ./version_managers.sh
+        ./zoxide.sh
+    )
+}
+
+function run_all_setup_scripts {
+    local scripts_dir="${DOTFILES}/setups"
     # execute all scripts in the scripts dir
     for script in "$scripts_dir"/*.sh; do
         if [ -f "$script" ] && [ -x "$script" ]; then
@@ -291,14 +312,17 @@ if [ $# -eq 0 ]; then
   # prepare codespace env by symlink dotfiles folder.
   # this isn't cloned in the Codespace $HOME by the Codespace creation process
   do_codespace_symlinks
-
+  # create directories before calling install functions
   makedirs
   # install just aliases, because .bashrc is populated with Codespaces specific stuff
   bash_aliases_install
   do_codespace_ohmyzsh_install
+  editorconfiginstall
+  fzfinstall
   gitinstall
   lazygitinstall
-  install_devcontainer_scripts
+  shellfishinstall
+  do_codespace_setup_scripts
   exit 0;
 fi
 
@@ -307,8 +331,11 @@ if [ $# -ne 1 ]; then
     exit 1
 fi
 
-cd "$HOME"
+cd "$HOME" || exit 1
 case "$1" in
+    binaries)
+        run_all_setup_scripts
+        ;;
     all)
         makedirs
         bashinstall
@@ -331,11 +358,15 @@ case "$1" in
         mcinstall
         yazi_install
         xplrinstall
+        zellij_install
         neofetchinstall
         gamainstall
         ;;
     ctags)
         ctagsinstall
+        ;;
+    editorconfig)
+        editorconfiginstall
         ;;
     fzf)
         fzfinstall
@@ -348,6 +379,12 @@ case "$1" in
         ;;
     gpg)
         gpginstall
+        ;;
+    htoprc)
+        htoprcinstall
+        ;;
+    inputrc)
+        inputrcinstall
         ;;
     lazygit)
         lazygitinstall
@@ -387,6 +424,9 @@ case "$1" in
         ;;
     yazi)
         yazi_install
+        ;;
+    zellij)
+        zellij_install
         ;;
     zsh)
         zpreztoinstall

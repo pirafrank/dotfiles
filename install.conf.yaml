@@ -37,6 +37,7 @@
     - ~/bin2/man               # man pages
     - ~/bin2/man/man1          # man pages
     - ~/bin2/man/man5          # man pages
+    - ~/.local/bin             # binaries
     - ~/.local/share/man/man1  # man pages
     - ~/.local/share/man/man5  # man pages
     - ~/code/contrib           # contributions
