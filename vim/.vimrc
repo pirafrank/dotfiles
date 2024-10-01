@@ -117,8 +117,8 @@ call plug#begin($BASE.'/plugged')
   "Plug 'noahfrederick/vim-hemisu'
   "Plug 'sainnhe/sonokai'
   "Plug 'hzchirs/vim-material'
-  Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
-  Plug 'ghifarit53/tokyonight-vim', Cond(is_vim)
+  "Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
+  "Plug 'ghifarit53/tokyonight-vim', Cond(is_vim)
 
   """""""""""""""" Language support (syntax, linting, etc.) """"""""""""""""""
 
@@ -162,7 +162,7 @@ call plug#begin($BASE.'/plugged')
   "Plug 'ycm-core/YouCompleteMe', {'for': 'java'}
   "map <C-]> :YcmCompleter GoToImprecise<CR>
   "Plug 'artur-shaik/vim-javacomplete2', Cond(is_vim, {'for': 'java'})
-  Plug 'mfussenegger/nvim-jdtls'
+  Plug 'mfussenegger/nvim-jdtls', Cond(is_nvim, {'for': 'java'})
 
   """ python """
   " (jedi needed! run 'pip3 install --user jedi --upgrade' before!)
