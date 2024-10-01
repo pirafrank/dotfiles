@@ -1,6 +1,6 @@
 /**/*.code-workspace
 /**/*.docker
-
+/**/*.log
 
 # Local Netlify folder
 .netlify
