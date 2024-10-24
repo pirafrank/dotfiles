@@ -1,5 +1,6 @@
 # shell not specified, going with user's default one
 
+[general]
 import = [
   # import common config
   "~/dotfiles/terminals/alacritty/common.toml",

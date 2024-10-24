@@ -1,3 +1,4 @@
+[general]
 import = [
   # import common config
   "~\\dotfiles\\terminals\\alacritty\\common.toml",
@@ -6,5 +7,7 @@ import = [
   "~\\dotfiles\\terminals\\alacritty\\themes\\one-dark-by-themer-dot-dev.toml"
 ]
 
-[shell]
+[terminal]
+
+[terminal.shell]
 program = "C:\\Windows\\System32\\wsl.exe"

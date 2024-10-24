@@ -1,3 +1,4 @@
+[general]
 import = [
   # import common config
   "~\\dotfiles\\terminals\\alacritty\\common.toml",
@@ -6,5 +7,7 @@ import = [
   "~\\dotfiles\\terminals\\alacritty\\themes\\paprika-by-pirafrank.toml"
 ]
 
-[shell]
+[terminal]
+
+[terminal.shell]
 program = 'pwsh.exe'
