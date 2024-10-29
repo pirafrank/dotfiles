@@ -21,14 +21,28 @@ set backupcopy=auto
 set undofile
 
 if has('nvim')
-  set directory^=~/.local/share/nvim/swap//
-  set backupdir^=~/.local/share/nvim/backups//
-  set undodir^=~/.local/share/nvim/undo//
+" this is neovim
+  if has('win32') || has('win64')
+    set directory^=$USERPROFILE/AppData/Local/nvim/swap//
+    set backupdir^=$USERPROFILE/AppData/Local/nvim/backups//
+    set undodir^=$USERPROFILE/AppData/Local/nvim/undo//
+  else
+    set directory^=~/.local/share/nvim/swap//
+    set backupdir^=~/.local/share/nvim/backups//
+    set undodir^=~/.local/share/nvim/undo//
+  endif
 else
-  set directory^=~/.vim/swap//
-  " patch required to honor double slash at end
-  set backupdir^=~/.vim/backups//
-  set undodir^=~/.vim/undo//
+" this is vim
+  if has('win32') || has('win64')
+    set directory^=$USERPROFILE/vimfiles/swap//
+    set backupdir^=$USERPROFILE/vimfiles/backups//
+    set undodir^=$USERPROFILE/vimfiles/undo//
+  else
+    set directory^=~/.vim/swap//
+    " patch required to honor double slash at end
+    set backupdir^=~/.vim/backups//
+    set undodir^=~/.vim/undo//
+  endif
 endif
 
 """ update time

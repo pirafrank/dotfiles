@@ -92,6 +92,11 @@ Backup-Item "$wezterm_home\.wezterm.lua"
 Invoke-Symlink "$dotfilesPath\terminals\wezterm\.wezterm.lua" "$wezterm_home\.wezterm.lua"
 
 # vim setup
+
+# vim
+# help runtimepath
+# $env:USERPROFILE\vimfiles
+
 # backup vim folders and files
 Backup-Item "$env:USERPROFILE\vimfiles"
 Backup-Item "$env:USERPROFILE\.vim"
@@ -101,15 +106,42 @@ New-Item "$env:USERPROFILE\vimfiles\swap" -itemType Directory -Force
 New-Item "$env:USERPROFILE\vimfiles\backups" -itemType Directory -Force
 New-Item "$env:USERPROFILE\vimfiles\undo" -itemType Directory -Force
 # symlinking colors dir
-New-Item -itemtype symboliclink -path "$env:USERPROFILE\vimfiles" -name colors -value "$env:USERPROFILE\dotfiles\vim\.vim\colors"
+New-Item -itemtype symboliclink -path "$env:USERPROFILE\vimfiles" -name colors -value "$dotfilesPath\vim\.vim\colors"
 # symlinking .vim to vimfiles (practical, to have it as *nix)
 New-Item -itemtype symboliclink -path "$env:USERPROFILE" -name .vim -value "$env:USERPROFILE\vimfiles"
 # symlinking .vimrc
-New-Item -itemtype symboliclink -path "$env:USERPROFILE" -name .vimrc -value "$env:USERPROFILE\dotfiles\vim\.vimrc"
+New-Item -itemtype symboliclink -path "$env:USERPROFILE" -name .vimrc -value "$dotfilesPath\vim\.vimrc"
 # install vim-plug
 if (!(Test-Path "$env:USERPROFILE\vimfiles\autoload\plug.vim")) {
   Invoke-WebRequest -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
       New-Item "$env:USERPROFILE\vimfiles\autoload\plug.vim" -Force
 }
 
+# nvim setup
+
+# nvim
+# help runtimepath
+# $env:USERPROFILE\AppData\Local\nvim
+
+# backup bvim folders and files
+Backup-Item "$env:LocalAppData\nvim\lua"
+Backup-Item "$env:LocalAppData\nvim\init.vim"
+# creating nvim folders
+New-Item "$env:LocalAppData\nvim\swap" -itemType Directory -Force
+New-Item "$env:LocalAppData\nvim\backups" -itemType Directory -Force
+New-Item "$env:LocalAppData\nvim\undo" -itemType Directory -Force
+# symlinking colors dir
+Invoke-Symlink "$dotfilesPath\vim\.vim\colors" "$env:LocalAppData\nvim\colors"
+# symlinking lua requires dir
+Invoke-Symlink "$dotfilesPath\dotfiles\vim\lua" "$env:LocalAppData\nvim\lua"
+# symlinking .vimrc
+Invoke-Symlink "$dotfilesPath\dotfiles\vim\.vimrc" "$env:LocalAppData\nvim\init.vim"
+# install vim-plug
+if (!(Test-Path "$env:LocalAppData\nvim\autoload\plug.vim")) {
+  Invoke-WebRequest -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
+    New-Item "$env:LocalAppData\nvim\autoload\plug.vim" -Force
+}
+
+
+# done
 Write-Output "Done."
