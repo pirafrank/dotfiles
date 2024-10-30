@@ -15,23 +15,6 @@ else
     export AWS_SECRET_ACCESS_KEY="$(printf "$RES" | jq -r '.Credentials.SecretAccessKey')"
     export AWS_SESSION_TOKEN="$(printf "$RES" | jq -r '.Credentials.SessionToken')"
 
-    # if we are in WSL, update session token in Windows too
-    if grep -qi microsoft /proc/version ; then
-      echo "Tokens refreshed on WSL"
-
-      TARGET="/mnt/c/Users/${USER}/.aws/credentials"
-      if [ -f ${TARGET} ]; then
-        mv ${TARGET} "${TARGET}.bkp"
-      fi
-      cat <<EOF > ${TARGET}
-[mfa]
-aws_access_key_id = "${AWS_ACCESS_KEY_ID}"
-aws_secret_access_key = "${AWS_SECRET_ACCESS_KEY}"
-aws_session_token = "${AWS_SESSION_TOKEN}"
-EOF
-      echo "Tokens refreshed on Windows"
-    else
-      echo "Tokens refreshed"
-    fi
+    echo "Tokens refreshed"
   fi
 fi
