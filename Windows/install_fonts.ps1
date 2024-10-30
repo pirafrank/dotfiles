@@ -8,4 +8,4 @@ scoop bucket add nerd-fonts
 scoop install sudo
 
 # Font installation only works when installing font for all users.
-sudo scoop install -g Meslo-NF Meslo-NF-Mono JetBrainsMono-NF Hack-NF
+sudo scoop install -g Meslo-NF Meslo-NF-Mono JetBrainsMono-NF JetBrainsMono-NF-Mono Hack-NF
