@@ -18,20 +18,9 @@
         {
             "command": 
             {
-                "action": "newWindow"
-            },
-            "id": "User.newWindow.5DEADB41"
-        },
-        {
-            "command": 
-            {
                 "action": "prevTab"
             },
             "id": "User.prevTab.0"
-        },
-        {
-            "command": "duplicateTab",
-            "id": "User.duplicateTab"
         },
         {
             "command": 
@@ -40,6 +29,17 @@
                 "direction": "left"
             },
             "id": "User.moveFocus.2A0DA8E0"
+        },
+        {
+            "command": "duplicateTab",
+            "id": "User.duplicateTab"
+        },
+        {
+            "command": 
+            {
+                "action": "newWindow"
+            },
+            "id": "User.newWindow.5DEADB41"
         },
         {
             "command": 
@@ -60,6 +60,13 @@
                 "singleLine": false
             },
             "id": "User.copy.644BA8F2"
+        },
+        {
+            "command": 
+            {
+                "action": "searchWeb"
+            },
+            "id": "User.searchWeb.C5EEC4D3"
         },
         {
             "command": 
@@ -104,16 +111,16 @@
             "id": "User.closeTab.0"
         },
         {
-            "command": "toggleFullscreen",
-            "id": "User.toggleFullscreen"
-        },
-        {
             "command": 
             {
                 "action": "moveFocus",
                 "direction": "down"
             },
             "id": "User.moveFocus.F747588A"
+        },
+        {
+            "command": "toggleFullscreen",
+            "id": "User.toggleFullscreen"
         }
     ],
     "copyFormatting": "none",
@@ -125,48 +132,48 @@
     "keybindings": 
     [
         {
-            "id": "User.paste",
-            "keys": "ctrl+v"
+            "id": null,
+            "keys": "ctrl+comma"
         },
         {
             "id": "User.find",
             "keys": "ctrl+shift+f"
         },
         {
-            "id": "User.openTabRenamer",
-            "keys": "ctrl+shift+e"
+            "id": "User.paste",
+            "keys": "ctrl+v"
         },
         {
-            "id": "User.newWindow.5DEADB41",
-            "keys": "ctrl+shift+n"
+            "id": "User.openTabRenamer",
+            "keys": "ctrl+shift+e"
         },
         {
             "id": null,
             "keys": "ctrl+f11"
         },
         {
+            "id": "User.newWindow.5DEADB41",
+            "keys": "ctrl+shift+n"
+        },
+        {
             "id": "User.duplicateTab",
             "keys": "ctrl+shift+d"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+shift+tab"
-        },
-        {
-            "id": null,
-            "keys": "ctrl+c"
         },
         {
             "id": "User.moveFocus.6CD791B",
             "keys": "ctrl+shift+k"
         },
         {
-            "id": "User.prevTab.0",
-            "keys": "ctrl+shift+left"
+            "id": null,
+            "keys": "ctrl+c"
         },
         {
-            "id": "User.tabSearch",
-            "keys": "ctrl+shift+space"
+            "id": null,
+            "keys": "ctrl+shift+tab"
+        },
+        {
+            "id": "User.prevTab.0",
+            "keys": "ctrl+shift+left"
         },
         {
             "id": "User.nextTab.0",
@@ -209,7 +216,7 @@
             "keys": "alt+up"
         },
         {
-            "id": null,
+            "id": "User.toggleFullscreen",
             "keys": "f11"
         },
         {
@@ -241,8 +248,16 @@
             "keys": "ctrl+shift+h"
         },
         {
-            "id": "User.toggleFullscreen",
-            "keys": "ctrl+shift+f11"
+            "id": null,
+            "keys": "ctrl+insert"
+        },
+        {
+            "id": "User.tabSearch",
+            "keys": "ctrl+shift+o"
+        },
+        {
+            "id": "User.searchWeb.C5EEC4D3",
+            "keys": "ctrl+shift+q"
         }
     ],
     "newTabMenu": 
@@ -341,7 +356,7 @@
                 "icon": "C:/msys64/ucrt64.ico",
                 "intenseTextStyle": "bold",
                 "name": "MSYS2 UCRT64",
-                "startingDirectory": "C:/msys64/home/%USERNAME%",
+                "startingDirectory": "C:/msys64/home/%USERNAME%"
             },
             {
                 "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -msys",
@@ -350,7 +365,7 @@
                 "icon": "C:/msys64/msys2.ico",
                 "intenseTextStyle": "bold",
                 "name": "MSYS2 MSYS",
-                "startingDirectory": "C:/msys64/home/%USERNAME%",
+                "startingDirectory": "C:/msys64/home/%USERNAME%"
             },
             {
                 "colorScheme": "One Half Dark",
@@ -451,6 +466,18 @@
                 "intenseTextStyle": "bold",
                 "name": "wtf",
                 "startingDirectory": "~"
+            },
+            {
+                "guid": "{47302f9c-1ac4-566c-aa3e-8cf29889d6ab}",
+                "hidden": false,
+                "name": "Nushell",
+                "source": "nu"
+            },
+            {
+                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+                "hidden": false,
+                "name": "Git Bash",
+                "source": "Git"
             }
         ]
     },
