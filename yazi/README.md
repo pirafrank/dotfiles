@@ -24,8 +24,21 @@
     - https://github.com/sxyazi/yazi/releases/tag/v0.3.0
         - https://github.com/sxyazi/yazi/issues/1046
         - https://github.com/sxyazi/yazi/issues/914
+- Breaking changes since v0.4.0
+    - https://github.com/sxyazi/yazi/releases/tag/v0.4.0
+        - https://github.com/sxyazi/yazi/issues/1772
+        - https://github.com/sxyazi/yazi/pull/1966
 - Related software:
     - https://github.com/yazi-rs/
 
-Notes: config in these dotfiles is for version `0.3.0`.
+### Plugins
+
+Plugins paths:
+
+- `~/.config/yazi/plugins/`
+- `C:\Users\USERNAME\AppData\Roaming\yazi\config\plugins\`
+
+### Compatibility
+
+Config in these dotfiles is for version `0.4.2+`.
 
