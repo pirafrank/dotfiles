@@ -17,9 +17,6 @@ ln -s "$HOME/dotfiles/yazi/yazi.toml"  "$HOME/.config/yazi/yazi.toml"
 ln -s "$HOME/dotfiles/yazi/keymap.toml" "$HOME/.config/yazi/keymap.toml"
 ln -s "$HOME/dotfiles/yazi/theme.toml" "$HOME/.config/yazi/theme.toml"
 
-# symlink plugins not installed via 'ya' cli tool
-ln -s "$HOME/dotfiles/yazi/plugins/smart-enter.yazi" "$HOME/.config/yazi/plugins/smart-enter.yazi"
-
 # clone tokyo-night theme
 git clone https://github.com/BennyOe/tokyo-night.yazi.git \
 	"$HOME/.config/yazi/flavors/tokyo-night.yazi"
@@ -40,6 +37,7 @@ ya pack -a 'yazi-rs/plugins:diff'
 ya pack -a 'yazi-rs/plugins:hide-preview'
 ya pack -a 'yazi-rs/plugins:max-preview'
 ya pack -a 'yazi-rs/plugins:smart-filter'
+ya pack -a 'yazi-rs/plugins:smart-enter'
 ya pack -a 'Reledia/glow'
 ya pack -a 'KKV9/command'
 ya pack -a 'pirafrank/what-size'

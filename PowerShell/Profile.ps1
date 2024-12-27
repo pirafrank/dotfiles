@@ -156,3 +156,13 @@ if ($env:OS -like "*Windows*") {
   # keep this line at the very bottom.
   $Path = "$env:USERPROFILE\dotfiles\Windows\bin"
 }
+
+function yy {
+  $tmp = [System.IO.Path]::GetTempFileName()
+  yazi $args --cwd-file="$tmp"
+  $cwd = Get-Content -Path $tmp
+  if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+    Set-Location -LiteralPath $cwd
+  }
+  Remove-Item -Path $tmp
+}
