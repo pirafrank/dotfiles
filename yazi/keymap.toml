@@ -16,7 +16,8 @@ prepend_keymap = [
   # https://github.com/KKV9/command.yazi
   { on   = [ ":", ":" ], run  = "plugin command", desc = "Yazi command prompt" },
   # use custom trasher
-  { on = "d",         run = '''shell '~/dotfiles/bin/trash "$@"' ''', desc = "Trash selected files" },
+  { on   = [ "d", "t" ], run = '''shell '~/dotfiles/bin/trash "$@"' ''', desc = "Trash selected files" },
+  { on   = [ "d", "d" ], run = "yank --cut", desc = "Yank selected files (cut)" },
   # show size of folder
   { on   = [ ".", "s" ], run  = "plugin what-size", desc = "Calc size of selection or cwd" },
   { on   = "o", run  = "plugin open-with-cmd --args=block", desc = "Open with command in the terminal" },
@@ -88,7 +89,7 @@ keymap = [
   { on = "_",         run = "link --relative",             desc = "Symlink the relative path of yanked files" },
   { on = "Y",         run = "unyank",                      desc = "Cancel the yank status" },
   { on = "X",         run = "unyank",                      desc = "Cancel the yank status" },
-  { on = "d",         run = "remove",                      desc = "Trash selected files" },
+  #{ on = "d",         run = "remove",                      desc = "Trash selected files" },
   { on = "D",         run = "remove --permanently",        desc = "Permanently delete selected files" },
   { on = "a",         run = "create",                      desc = "Create a file (ends with / for directories)" },
   { on = "i",         run = "rename --cursor=before_ext",  desc = "Rename selected file(s)" },
