@@ -17,5 +17,23 @@ return {
       home .. '/Code/projects/fpiracom/pages',
       home .. '/Code/projects/fpiracom/_includes'
     }
+  },
+  {
+    name = 'dotfiles',
+    dirs = {
+      home .. '/dotfiles',
+      home .. '/dotfiles',
+      home .. '/dotfiles'
+    }
+  },
+  {
+    name = 'yazi',
+    dirs = {
+      home .. '/Code/projects/what-size.yazi',
+      home .. '/dotfiles/yazi',
+      home .. '/.config/yazi',
+      home .. '/.config/yazi/plugins',
+      home .. '/dotfiles/yazi'
+    }
   }
 }
