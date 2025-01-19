@@ -1,7 +1,13 @@
+# I consider .zellij_layout.kdl to be the default name for a zellij layout file
+# If it exists, use it. Otherwise, use the some-tabs layout defined among the
+# default layouts in dotfiles/zellij/layouts.
+# The last case allows this function be act as a wrapper of zellij, passing all
+# arguments to it.
+
 if [[ -f .zellij_layout.kdl ]] && [[ "$#" -eq 0 ]]; then
   zellij --layout .zellij_layout.kdl
-elif [[ -f .zellij-layout.kdl ]] && [[ "$#" -eq 0 ]]; then
-  zellij --layout .zellij-layout.kdl
+elif [[ ! -f .zellij-layout.kdl ]] && [[ "$#" -eq 0 ]]; then
+  zellij --layout some-tabs
 else
   zellij "$@"
 fi
