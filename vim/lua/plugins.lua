@@ -122,9 +122,9 @@ require('copilot').setup({
 require('copilot_cmp').setup()
 -- Copilot Chat
 -- note: nvim-cmp integration must be required before CopilotChat.
-require("CopilotChat.integrations.cmp").setup()
 require("CopilotChat").setup {
   debug = false, -- Enable debugging
+  chat_autocomplete = true,  -- Enable chat autocomplete
   window = {
     layout = 'vertical',   -- 'vertical', 'horizontal', 'float', 'replace'
     width = 0.3,           -- fractional width of parent, or absolute width in columns when > 1

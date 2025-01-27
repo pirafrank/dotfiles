@@ -96,6 +96,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'editorconfig/editorconfig-vim'                " editorconfig
   Plug 'tpope/vim-commentary'                         " toggle comments
   Plug 'LintaoAmons/bookmarks.nvim', Cond(is_nvim)    " bookmarks handling
+  Plug 'kkharji/sqlite.lua', Cond(is_nvim)            " sqlite3 dep for bookmarks
   Plug 'smoka7/hop.nvim', Cond(is_nvim, { 'tag': '*' })
   Plug 'stevearc/oil.nvim', Cond(is_nvim)             " edit fs like a buffer
   Plug '2kabhishek/nerdy.nvim', Cond(is_nvim)         " nerd fonts icons list
@@ -104,7 +105,7 @@ call plug#begin($BASE.'/plugged')
   "Plug 'github/copilot.vim', Cond(is_nvim)            " GH Copilot (VimL)
   Plug 'zbirenbaum/copilot.lua', Cond(is_nvim)        " Copilot (Lua)
   Plug 'zbirenbaum/copilot-cmp', Cond(is_nvim)        " Copilot cmp source
-  Plug 'CopilotC-Nvim/CopilotChat.nvim', Cond(is_nvim, { 'branch': 'canary' })  " Copilot chat
+  Plug 'CopilotC-Nvim/CopilotChat.nvim', Cond(is_nvim, { 'branch': 'main' })  " Copilot chat
 
   """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
 
