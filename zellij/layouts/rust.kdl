@@ -1,10 +1,16 @@
 layout {
 
-    cwd "~/code/projects"
+    //cwd "~/code/projects"
+    cwd "."
 
     default_tab_template {
-        pane size=1 borderless=true {
-            plugin location="zellij:tab-bar"
+        pane size=2 split_direction="vertical" {
+            pane size="70%" borderless=true {
+                plugin location="zellij:tab-bar"
+            }
+            pane size="30%" borderless=true {
+                plugin location="file:~/.config/zellij/plugins/zellij-what-time.wasm"
+            }
         }
         children
         pane size=2 borderless=true {
@@ -25,19 +31,30 @@ layout {
 
     tab name="Dev" focus=true {
         pane split_direction="horizontal" {
-            pane name="nv" size="75%" focus=true
-            pane name="cargo run" size="25%"
+            pane name="nvim" size="75%" command="nvim" focus=true
+            pane name="cargo run" size="25%" command="cargo" {
+                args "run"
+            }
         }
     }
 
-    tab name="Tab 2" {
+    tab name="Test" {
         pane split_direction="vertical" {
-            pane name="nv2" size="50%"
-            pane name="cargo test" size="50%"
+            pane name="cargo test" size="65%" focus=true
+            pane name="nv2" size="35%"
         }
     }
 
-    tab name="Tab 3" {
+    tab name="Git" {
+        pane split_direction="vertical" {
+            pane size="50%" command="lazygit" name="lazygit"
+            pane size="50%" command="git" name="Git la" {
+                args "la"
+            }
+        }
+    }
+
+    tab name="shell" {
         pane
     }
 }

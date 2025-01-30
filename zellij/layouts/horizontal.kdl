@@ -1,6 +1,6 @@
 layout {
 
-    cwd "~"
+    cwd "."
 
     default_tab_template {
         pane size=2 split_direction="vertical" {
@@ -28,31 +28,28 @@ layout {
         }
     }
 
-    tab name="Dev" focus=true {
-        pane focus=true cwd="dotfiles" command="nvim"
-    }
-
-    tab name="3-split" {
-        pane split_direction="vertical" {
-            pane
-            pane split_direction="horizontal" {
-                pane
-                pane
-            }
+    tab name="Split" focus=true {
+        pane split_direction="horizontal" {
+            pane size="65%" focus=true
+            pane size="35%"
         }
     }
 
     tab name="Git" {
         pane split_direction="vertical" {
-            pane size="50%" name="lazygit" cwd="dotfiles" command="lazygit" {
+            pane size="50%" name="lazygit" command="lazygit" {
             }
-            pane size="50%" name="Git la" cwd="dotfiles" command="git" {
+            pane size="50%" name="Git la" command="git" {
                 args "la"
             }
         }
     }
 
     tab name="shell" {
+        pane
+    }
+
+    tab name="Tab 4" {
         pane
     }
 
