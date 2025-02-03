@@ -46,6 +46,7 @@ map('n', '<leader>r', tsb.oldfiles, ns, "Recent files")
 -- vim commands and keymaps
 map('n', '<leader>hh', tsb.help_tags, ns, "Help tags")
 map('n', '<leader>hk', tsb.keymaps, ns, "Keymaps")
+map('n', '<leader>hc', tsb.commands, ns, "Commands")
 
 -- git pickers --
 map('n', '<leader>gl', tsb.git_commits, ns, "Git commits")
@@ -101,6 +102,28 @@ map("n", "<C-t>", vim.cmd.Term, ns, "Open terminal")
 map("t", "jj", "<C-\\><C-n>", ns, "Exit insert mode in terminal")
 -- use '<C-t>' to exit insert mode and close terminal split, this way C-t works like a toggle
 map("t", "<C-t>", "<C-\\><C-n><cmd>q<CR>", ns, "Exit insert mode and close terminal split")
+
+--
+-- Floaterm
+--
+
+map('n', '<C-t><C-n>', ':FloatermNew<CR>', ns, 'Open a new Floaterm')
+map('t', '<C-t><C-n>', '<C-\\><C-n>:FloatermNew<CR>', ns, 'Open a new Floaterm (terminal mode)')
+
+map('n', '<C-t><C-t>', ':FloatermToggle<CR>', ns, 'Toggle Floaterm')
+map('t', '<C-t><C-t>', '<C-\\><C-n>:FloatermToggle<CR>', ns, 'Toggle Floaterm (terminal mode)')
+
+map('n', '<C-t><C-k>', ':FloatermKill<CR>', ns, 'Kill Floaterm')
+map('t', '<C-t><C-k>', '<C-\\><C-n>:FloatermKill<CR>', ns, 'Kill Floaterm (terminal mode)')
+
+map('n', '<F10>', ':FloatermPrev<CR>', ns, 'Switch to previous Floaterm')
+map('t', '<F10>', '<C-\\><C-n>:FloatermPrev<CR>', ns, 'Switch to previous Floaterm (terminal mode)')
+
+map('n', '<F11>', ':FloatermNext<CR>', ns, 'Switch to next Floaterm')
+map('t', '<F11>', '<C-\\><C-n>:FloatermNext<CR>', ns, 'Switch to next Floaterm (terminal mode)')
+
+map('n', '<F12>', ':FloatermToggle<CR>', ns, 'Toggle Floaterm')
+map('t', '<F12>', '<C-\\><C-n>:FloatermToggle<CR>', ns, 'Toggle Floaterm (terminal mode)')
 
 --
 -- Copilot

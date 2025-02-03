@@ -1,3 +1,9 @@
+-- helper function
+local function command(alias, cmd, opts, desc)
+  opts.desc = desc
+  vim.api.nvim_create_user_command(alias, cmd, opts)
+end
+
 --
 -- *** Terminal ***
 --
@@ -50,6 +56,14 @@ local function frequent_files()
 end
 
 vim.api.nvim_create_user_command('FrequentFiles', frequent_files, {})
+
+--
+-- *** Floaterm ***
+--
+command('Lg', 'FloatermNew lazygit', {}, 'lazygit')
+command('Yazi', 'FloatermNew yazi', {}, 'yazi')
+command('Xplr', 'FloatermNew xplr', {}, 'xplr')
+command('Lf', 'FloatermNew lf', {}, 'lf')
 
 --
 -- *** Copilot Chat ***

@@ -86,7 +86,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'liuchengxu/vista.vim', Cond(is_nvim)
 
   " Terminal
-  Plug 'voldikss/vim-floaterm', Cond(has_terminal)    " vim float term
+  Plug 'voldikss/vim-floaterm', Cond(is_nvim)         " vim float term
 
   " Pasting
   Plug 'roxma/vim-paste-easy'                         " auto-set paste mode

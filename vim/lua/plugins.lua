@@ -111,6 +111,16 @@ end
 vim.g.vista_default_executive = 'nvim_lsp'
 vim.g.vista_icon_indent = { "╰─▸ ", "├─▸ " }
 
+-- Floaterm
+vim.g.floaterm_giteditor = 1
+vim.g.floaterm_wintype = 'float'
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.85
+vim.g.floaterm_position = 'center'
+vim.g.floaterm_autoclose = 0
+vim.g.floaterm_opener = 'tabe'
+vim.g.floaterm_autohide = 1
+
 -- Copilot
 require('copilot').setup({
   -- disable copilot.lua suggestions and panel modules, as they can interfere
