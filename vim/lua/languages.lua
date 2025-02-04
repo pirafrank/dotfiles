@@ -31,17 +31,17 @@ local on_attach = function(client, bufnr)
   -- Organize imports
   vim.api.nvim_create_user_command('LspOrganizeImports', function()
     jdtls.organize_imports()
-  end, {})
+  end, { desc = "Lsp: Organize imports" })
 
   -- Extract variable
   vim.api.nvim_create_user_command('LspExtractVariable', function()
     jdtls.extract_variable()
-  end, {})
+  end, { desc = "Lsp: Extract variable" })
 
   -- Extract method
   vim.api.nvim_create_user_command('LspExtractMethod', function()
     jdtls.extract_method()
-  end, {})
+  end, { desc = "Lsp: Extract method" })
 
 end
 
@@ -70,11 +70,11 @@ rt.setup({
       -- Hover actions
       vim.api.nvim_create_user_command("RustHoverActions", function()
         rt.hover_actions.hover_actions()
-      end, {})
+      end, { desc = "Rust: Hover Actions" })
       -- Code action groups
       vim.api.nvim_create_user_command("RustCodeActionGroup", function()
         rt.code_action_group.code_action_group()
-      end, {})
+      end, { desc = "Rust: Code Action groups" })
     end,
   },
 })

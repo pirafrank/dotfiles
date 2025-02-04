@@ -10,7 +10,7 @@ end
 
 -- open terminal in bottom split like in vim
 -- every time you run :Terminal it will open a new terminal as bottom split
-vim.api.nvim_create_user_command('Terminal', 'botright split | terminal', {})
+command('Terminal', 'botright split | terminal', {}, 'Open terminal in bottom split')
 
 -- credits: https://gist.github.com/shivamashtikar/16a4d7b83b743c9619e29b47a66138e0
 --
@@ -38,9 +38,7 @@ local function Term()
   vim.cmd.startinsert()
 end
 
-vim.api.nvim_create_user_command("Term", Term, {
-  desc = "Open terminal window",
-})
+command("Term", Term, {}, "Open terminal window")
 
 --
 -- *** Frecency ***
@@ -55,7 +53,7 @@ local function frequent_files()
   }))
 end
 
-vim.api.nvim_create_user_command('FrequentFiles', frequent_files, {})
+command('FrequentFiles', frequent_files, {}, "Get frequent files (Frecency)")
 
 --
 -- *** Floaterm ***
@@ -73,19 +71,19 @@ local copilotchat = require("CopilotChat")
 local copilotchat_actions = require("CopilotChat.actions")
 local copilotchat_telescope = require("CopilotChat.integrations.telescope")
 
-vim.api.nvim_create_user_command('CopilotChatWithBuffer', (function()
+command('CopilotChatWithBuffer', (function()
   local input = vim.fn.input("Quick Chat: ")
   if input ~= "" then
     copilotchat.ask(input, { selection = require("CopilotChat.select").buffer })
   end
-end), {})
+end), {}, "Copilot: Chat with current Buffer")
 
 -- Show help actions with telescope
-vim.api.nvim_create_user_command('CopilotChatHelp', (function()
+command('CopilotChatHelp', (function()
   copilotchat_telescope.pick(copilotchat_actions.help_actions())
-end), {})
+end), {}, "Copilot: Show help actions")
 
 -- Show prompts actions with telescope
-vim.api.nvim_create_user_command('CopilotChatPrompts', (function()
+command('CopilotChatPrompts', (function()
   copilotchat_telescope.pick(copilotchat_actions.prompt_actions())
-end), {})
+end), {}, "Copilot: Show prompt actions")
