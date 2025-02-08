@@ -46,7 +46,17 @@ That's part of it, there is no real how-to actually. For more info just look at 
 
 ## Getting started
 
-[`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) file will (hopefully) help.
+[`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) may (hopefully) help, yet it will forever be incomplete.
+
+## Utilities
+
+Little utilities are provided in different forms in the following dirs:
+
+- `bin`, as scripts with the dir itself being added to `$PATH`;
+- `zsh/autoloaded`, as zsh functions automatically loaded at shell start;
+- `zsh/common/zsh_aliases`, as shell aliases.
+
+Many of the files and scripts in the `bin` folder come from some other repos of mine and here are gathered. Although those repositories are publicly available on GitHub, I am going to only maintain them in this repo.
 
 ## Credits
 
@@ -64,8 +74,6 @@ Those without *pirafrank* in their name come from the web, credits go to their c
 - *themerdev*-prefixed themes come from [themer.dev](https://themer.dev/).
 
 ## License
-
-Many of the files and scripts in the `bin` folder come from some other repos of mine and here are gathered. Although those repositories are publicly available on GitHub, I am going to only maintain them in this repo.
 
 Code in this repo is given away for free, as-is and with NO WARRANTY as per the MIT license.
 
