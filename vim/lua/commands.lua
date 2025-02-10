@@ -5,6 +5,35 @@ local function command(alias, cmd, opts, desc)
 end
 
 --
+-- *** Helpers ***
+--
+
+local function get_current_buffer_absolute_path()
+  local abs_path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', abs_path)
+  vim.notify(abs_path .. " copied to clipboard")
+end
+
+command('PathAbsolute', get_current_buffer_absolute_path, {}, 'Copy buffer absolute path')
+
+-- Get current buffer path relative to git root
+local function get_current_buffer_relative_path()
+  local current_file = vim.fn.expand('%:p')
+  local git_root = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+
+  if vim.v.shell_error ~= 0 then
+    vim.notify("Not in a git repository", vim.log.levels.ERROR)
+    return
+  end
+
+  local relative_path = string.sub(current_file, string.len(git_root) + 2)
+  vim.fn.setreg('+', relative_path)
+  vim.notify(relative_path .. " copied to clipboard")
+end
+
+command('PathRelative', get_current_buffer_relative_path, {}, 'Copy buffer path relative to git root')
+
+--
 -- *** Terminal ***
 --
 
