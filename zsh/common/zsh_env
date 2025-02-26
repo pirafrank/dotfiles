@@ -167,6 +167,12 @@ if [[ -d "$HOME/.deno" ]]; then
   export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
+# Bun JS runtime and toolkit
+if [[ -d "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
 # terraform (tfenv)
 export PATH="$HOME/.tfenv/bin:$PATH"
 
