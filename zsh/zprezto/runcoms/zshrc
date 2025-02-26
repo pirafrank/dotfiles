@@ -21,16 +21,15 @@ fi
 #
 # Executes commands at the start of an interactive session.
 #
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# Customize to your needs...
+#
+# Prompt and theme
+#
 
 # overrides theme set in .zpreztorc
 prompt powerlevel10k
@@ -47,12 +46,20 @@ if [[ CUSTOM_THEMES_ENABLED -eq 1 && -d $HOME/.zsh_user_themes ]]; then
   prompt sorinEdit
 fi
 
+#
+# Options
+#
+
 # custom history size
 export HISTSIZE=20000
 # save history after logout
 export SAVEHIST=20000
 # history file
 export HISTFILE=~/.zsh_history
+
+#
+# Load modules
+#
 
 autoload zmv
 
@@ -61,7 +68,7 @@ autoload -Uz bashcompinit
 bashcompinit
 for file in $HOME/dotfiles/bash/completions/*(.); source $file
 
-# autocompletion
+# zsh autocompletion
 if [ -d $HOME/dotfiles/zsh/completions ]; then fpath=($HOME/dotfiles/zsh/completions $fpath); fi
 autoload -Uz compinit
 compinit
@@ -95,13 +102,17 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
-source "$HOME/dotfiles/zsh/common/chpwd.zsh"
 
-# run every time to cd into a directory
+# load function to run every time to cd into a directory
+source "$HOME/dotfiles/zsh/common/chpwd.zsh"
+# this runs every time to cd into a directory
 function chpwd {
   # things to do each time you change directory. Zsh will call this.
   _chpwd_run_all
 }
-
-# run these for every new shell
+# also, run these for every new shell
 _chpwd_run_all
+
+# quickly start zsh with p10k instant prompt, but avoid prompt flickering
+(( ! ${+functions[p10k]} )) || p10k finalize
+
