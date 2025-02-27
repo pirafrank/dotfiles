@@ -98,10 +98,10 @@ gpgconf --launch gpg-agent
 fi
 
 # use zoxide to jump around as fasd has been discontinued
-if [ $(command -v zoxide) ]; then
+if [ "$(command -v zoxide)" ]; then
   eval "$(zoxide init zsh)"
 # legacy fallback: use fasd to jump around
-elif [ $(command -v fasd) ]; then
+elif [ "$(command -v fasd)" ]; then
   eval "$(fasd --init auto)"
 fi
 
@@ -116,28 +116,5 @@ fi
 # Added by serverless binary installer
 if [ -d "$HOME/.serverless/bin" ]; then
   export PATH="$HOME/.serverless/bin:$PATH"
-fi
-
-#
-# Linux-only aliases
-#
-if [[ "$(uname -s)" == 'Linux' ]]; then
-  alias xclip="xclip -selection c"
-  alias open='xdg-open'
-
-  # custom sublime text habits are hard to die...
-  if [[ $(command -v subl) ]]; then
-    alias st=subl
-  fi
-fi
-
-#
-# macOS-only aliases
-#
-if [[ "$(uname -s)" == 'Darwin' ]]; then
-alias st='open -a Sublime\ Text'
-alias vscode='open -a Visual\ Studio\ Code'
-alias fork='open -a /Applications/Fork.app'
-alias listen='lsof -iTCP -sTCP:LISTEN -n -P'
 fi
 

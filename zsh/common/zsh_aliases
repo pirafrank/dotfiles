@@ -112,3 +112,26 @@ alias ldk='lazydocker'
 alias j='just'
 alias zjdump='zellij action dump-layout > .zellij-layout.kdl'
 alias gama="GITHUB_TOKEN=\"\$(gh auth token)\" gama"
+
+#
+# Linux-only aliases
+#
+if [[ "$(uname -s)" == 'Linux' ]]; then
+  alias xclip="xclip -selection c"
+  alias open='xdg-open'
+
+  # custom sublime text habits are hard to die...
+  if [[ $(command -v subl) ]]; then
+    alias st=subl
+  fi
+fi
+
+#
+# macOS-only aliases
+#
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+alias st='open -a Sublime\ Text'
+alias vscode='open -a Visual\ Studio\ Code'
+alias fork='open -a /Applications/Fork.app'
+alias listen='lsof -iTCP -sTCP:LISTEN -n -P'
+fi

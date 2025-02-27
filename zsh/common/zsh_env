@@ -167,6 +167,11 @@ if [[ -d "$HOME/.deno" ]]; then
   export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
+# serverless framework
+if [ -d "$HOME/.serverless/bin" ]; then
+  export PATH="$HOME/.serverless/bin:$PATH"
+fi
+
 # Bun JS runtime and toolkit
 if [[ -d "$HOME/.bun" ]]; then
   export BUN_INSTALL="$HOME/.bun"
