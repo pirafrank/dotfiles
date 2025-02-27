@@ -1,9 +1,11 @@
 
+export ZPLUG_HOME=$HOME/.zplug
+source $ZPLUG_HOME/init.zsh
+
 # startup speed benchmarks
 # https://htr3n.github.io/2018/07/faster-zsh/
 # uncomment the line below, then source .zshrc and run zprof.
 #zmodload zsh/zprof
-
 
 # Load custom/env specific stuff that needs to be loaded BEFORE Powerlevel10k.
 # This is needed to enable Powerlevel10k instant prompt. Do this only if file exists.
@@ -26,6 +28,11 @@ fi
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
+
+# zplug
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'wfxr/forgit'
+zplug "k4rthik/git-cal", as:command, frozen:1
 
 #
 # Prompt and theme
@@ -102,6 +109,8 @@ fi
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
+# Load zplug
+zplug load
 
 # load function to run every time to cd into a directory
 source "$HOME/dotfiles/zsh/common/chpwd.zsh"

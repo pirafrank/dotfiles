@@ -229,6 +229,15 @@ function zpreztoinstall {
     zsh "${DOTFILES}/zsh/zprezto/zprezto_install.sh"
 }
 
+function zpluginstall {
+    # check for zsh
+    if [[ -z $ZSH_NAME ]]; then
+      echo "'zpluginstall' function is meant to be run by zsh shell. Quitting..."
+      exit 1
+    fi
+    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+}
+
 function shellfishinstall {
     move_if_exists "${HOME}/.shellfishrc"
     echo "downloading latest version of Secure ShellFish shell integration"
@@ -352,6 +361,7 @@ case "$1" in
         vimplugininstall
         nviminstall
         zpreztoinstall
+        zpluginstall
         shellfishinstall
         ctagsinstall
         lfinstall
@@ -430,6 +440,7 @@ case "$1" in
         ;;
     zsh)
         zpreztoinstall
+        zpluginstall
         ;;
     shellfish)
         shellfishinstall
