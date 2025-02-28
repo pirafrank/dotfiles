@@ -7,13 +7,14 @@
 // custom settings, run `zed: open default settings` from the
 // command palette
 {
+  "icon_theme": "VSCode Icons (Dark)",
   "outline_panel": {
     "dock": "right"
   },
   "assistant": {
     "default_model": {
       "provider": "copilot_chat",
-      "model": "gpt-4o"
+      "model": "claude-3.7-sonnet"
     },
     "version": "2"
   },
@@ -28,7 +29,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "VSCode Dark Modern"
   },
   // "terminal": {
   //   "shell": {
