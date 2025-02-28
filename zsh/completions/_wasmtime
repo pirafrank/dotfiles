@@ -1,0 +1,456 @@
+#compdef wasmtime
+
+autoload -U is-at-least
+
+_wasmtime() {
+    typeset -A opt_args
+    typeset -a _arguments_options
+    local ret=1
+
+    if is-at-least 5.2; then
+        _arguments_options=(-s -S -C)
+    else
+        _arguments_options=(-s -C)
+    fi
+
+    local context curcontext="$curcontext" state line
+    _arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'--profile=[Profiling strategy (valid options are\: perfmap, jitdump, vtune, guest)]:STRATEGY: ' \
+'*--dir=[Grant access of a host directory to a guest]:HOST_DIR[::GUEST_DIR]: ' \
+'*--env=[Pass an environment variable to the program]:NAME[=VAL]: ' \
+'--invoke=[The name of the function to run]:FUNCTION: ' \
+'*--preload=[Load the given WebAssembly module before the main module]:NAME=MODULE_PATH: ' \
+'--argv0=[Override the value of \`argv\[0\]\`, typically the name of the executable of the application being run]:ARGV0: ' \
+'--allow-precompiled[Allow executing precompiled WebAssembly modules as \`*.cwasm\` files]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':module_and_args -- The WebAssembly module to run and arguments to pass to it:' \
+":: :_wasmtime_commands" \
+"*::: :->wasmtime" \
+&& ret=0
+    case $state in
+    (wasmtime)
+        words=($line[2] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:wasmtime-command-$line[2]:"
+        case $line[2] in
+            (run)
+_arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'--profile=[Profiling strategy (valid options are\: perfmap, jitdump, vtune, guest)]:STRATEGY: ' \
+'*--dir=[Grant access of a host directory to a guest]:HOST_DIR[::GUEST_DIR]: ' \
+'*--env=[Pass an environment variable to the program]:NAME[=VAL]: ' \
+'--invoke=[The name of the function to run]:FUNCTION: ' \
+'*--preload=[Load the given WebAssembly module before the main module]:NAME=MODULE_PATH: ' \
+'--argv0=[Override the value of \`argv\[0\]\`, typically the name of the executable of the application being run]:ARGV0: ' \
+'--allow-precompiled[Allow executing precompiled WebAssembly modules as \`*.cwasm\` files]' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::module_and_args -- The WebAssembly module to run and arguments to pass to it:' \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+":: :_wasmtime__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:wasmtime-config-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+'::path -- The path of the new configuration file:' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_wasmtime__config__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:wasmtime-config-help-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+;;
+(compile)
+_arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'-o+[The path of the output compiled module; defaults to \`<MODULE>.cwasm\`]:OUTPUT:_files' \
+'--output=[The path of the output compiled module; defaults to \`<MODULE>.cwasm\`]:OUTPUT:_files' \
+'--emit-clif=[The directory path to write clif files into, one clif file per wasm function]:PATH:_files' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'-V[Print version]' \
+'--version[Print version]' \
+':module -- The path of the WebAssembly to compile:_files' \
+&& ret=0
+;;
+(explore)
+_arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'-o+[The path of the explorer output (derived from the MODULE name if none provided)]:OUTPUT:_files' \
+'--output=[The path of the explorer output (derived from the MODULE name if none provided)]:OUTPUT:_files' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':module -- The path of the WebAssembly module to compile:_files' \
+&& ret=0
+;;
+(serve)
+_arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'--profile=[Profiling strategy (valid options are\: perfmap, jitdump, vtune, guest)]:STRATEGY: ' \
+'*--dir=[Grant access of a host directory to a guest]:HOST_DIR[::GUEST_DIR]: ' \
+'*--env=[Pass an environment variable to the program]:NAME[=VAL]: ' \
+'--addr=[Socket address for the web server to bind to]:SOCKADDR: ' \
+'--allow-precompiled[Allow executing precompiled WebAssembly modules as \`*.cwasm\` files]' \
+'--no-logging-prefix[Disable log prefixes of wasi-http handlers. if unspecified, logs will be prefixed with '\''stdout|stderr \[{req_id}\] \:\: '\'']' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+':component -- The WebAssembly component to run:_files' \
+&& ret=0
+;;
+(settings)
+_arguments "${_arguments_options[@]}" : \
+'--target=[The target triple to get the settings for; defaults to the host triple]:TARGET: ' \
+'--json[Switch output format to JSON]' \
+'-h[Print help]' \
+'--help[Print help]' \
+&& ret=0
+;;
+(wast)
+_arguments "${_arguments_options[@]}" : \
+'*-O+[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--optimize=[Optimization and tuning related options for wasm performance, \`-O help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-C+[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--codegen=[Codegen-related configuration options, \`-C help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-D+[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--debug=[Debug-related configuration options, \`-D help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-W+[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasm=[Options for configuring semantic execution of WebAssembly, \`-W help\` to see all]:KEY[=VAL[,..]]: ' \
+'*-S+[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'*--wasi=[Options for configuring WASI and its proposals, \`-S help\` to see all]:KEY[=VAL[,..]]: ' \
+'--target=[The target triple; default is the host triple]:TARGET: ' \
+'--config=[Use the specified TOML configuration file. This TOML configuration file can provide same configuration options as the \`--optimize\`, \`--codgen\`, \`--debug\`, \`--wasm\`, \`--wasi\` CLI options, with a couple exceptions]:FILE:_files' \
+'-h[Print help (see more with '\''--help'\'')]' \
+'--help[Print help (see more with '\''--help'\'')]' \
+'*::scripts -- The path of the WebAssembly test script to run:_files' \
+&& ret=0
+;;
+(completion)
+_arguments "${_arguments_options[@]}" : \
+'-h[Print help]' \
+'--help[Print help]' \
+':shell -- The shell to generate completions for:(bash elvish fish powershell zsh)' \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+":: :_wasmtime__help_commands" \
+"*::: :->help" \
+&& ret=0
+
+    case $state in
+    (help)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:wasmtime-help-command-$line[1]:"
+        case $line[1] in
+            (run)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(config)
+_arguments "${_arguments_options[@]}" : \
+":: :_wasmtime__help__config_commands" \
+"*::: :->config" \
+&& ret=0
+
+    case $state in
+    (config)
+        words=($line[1] "${words[@]}")
+        (( CURRENT += 1 ))
+        curcontext="${curcontext%:*:*}:wasmtime-help-config-command-$line[1]:"
+        case $line[1] in
+            (new)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+(compile)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(explore)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(serve)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(settings)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(wast)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(completion)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+(help)
+_arguments "${_arguments_options[@]}" : \
+&& ret=0
+;;
+        esac
+    ;;
+esac
+;;
+        esac
+    ;;
+esac
+}
+
+(( $+functions[_wasmtime_commands] )) ||
+_wasmtime_commands() {
+    local commands; commands=(
+'run:Runs a WebAssembly module' \
+'config:Controls Wasmtime configuration settings' \
+'compile:Compiles a WebAssembly module' \
+'explore:Explore the compilation of a WebAssembly module to native code' \
+'serve:Serves requests from a wasi-http proxy component' \
+'settings:Displays available Cranelift settings for a target' \
+'wast:Runs a WebAssembly test script file' \
+'completion:Generate shell completions for the \`wasmtime\` CLI' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'wasmtime commands' commands "$@"
+}
+(( $+functions[_wasmtime__compile_commands] )) ||
+_wasmtime__compile_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime compile commands' commands "$@"
+}
+(( $+functions[_wasmtime__completion_commands] )) ||
+_wasmtime__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime completion commands' commands "$@"
+}
+(( $+functions[_wasmtime__config_commands] )) ||
+_wasmtime__config_commands() {
+    local commands; commands=(
+'new:Creates a new Wasmtime configuration file' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'wasmtime config commands' commands "$@"
+}
+(( $+functions[_wasmtime__config__help_commands] )) ||
+_wasmtime__config__help_commands() {
+    local commands; commands=(
+'new:Creates a new Wasmtime configuration file' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'wasmtime config help commands' commands "$@"
+}
+(( $+functions[_wasmtime__config__help__help_commands] )) ||
+_wasmtime__config__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime config help help commands' commands "$@"
+}
+(( $+functions[_wasmtime__config__help__new_commands] )) ||
+_wasmtime__config__help__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime config help new commands' commands "$@"
+}
+(( $+functions[_wasmtime__config__new_commands] )) ||
+_wasmtime__config__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime config new commands' commands "$@"
+}
+(( $+functions[_wasmtime__explore_commands] )) ||
+_wasmtime__explore_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime explore commands' commands "$@"
+}
+(( $+functions[_wasmtime__help_commands] )) ||
+_wasmtime__help_commands() {
+    local commands; commands=(
+'run:Runs a WebAssembly module' \
+'config:Controls Wasmtime configuration settings' \
+'compile:Compiles a WebAssembly module' \
+'explore:Explore the compilation of a WebAssembly module to native code' \
+'serve:Serves requests from a wasi-http proxy component' \
+'settings:Displays available Cranelift settings for a target' \
+'wast:Runs a WebAssembly test script file' \
+'completion:Generate shell completions for the \`wasmtime\` CLI' \
+'help:Print this message or the help of the given subcommand(s)' \
+    )
+    _describe -t commands 'wasmtime help commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__compile_commands] )) ||
+_wasmtime__help__compile_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help compile commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__completion_commands] )) ||
+_wasmtime__help__completion_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help completion commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__config_commands] )) ||
+_wasmtime__help__config_commands() {
+    local commands; commands=(
+'new:Creates a new Wasmtime configuration file' \
+    )
+    _describe -t commands 'wasmtime help config commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__config__new_commands] )) ||
+_wasmtime__help__config__new_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help config new commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__explore_commands] )) ||
+_wasmtime__help__explore_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help explore commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__help_commands] )) ||
+_wasmtime__help__help_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help help commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__run_commands] )) ||
+_wasmtime__help__run_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help run commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__serve_commands] )) ||
+_wasmtime__help__serve_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help serve commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__settings_commands] )) ||
+_wasmtime__help__settings_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help settings commands' commands "$@"
+}
+(( $+functions[_wasmtime__help__wast_commands] )) ||
+_wasmtime__help__wast_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime help wast commands' commands "$@"
+}
+(( $+functions[_wasmtime__run_commands] )) ||
+_wasmtime__run_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime run commands' commands "$@"
+}
+(( $+functions[_wasmtime__serve_commands] )) ||
+_wasmtime__serve_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime serve commands' commands "$@"
+}
+(( $+functions[_wasmtime__settings_commands] )) ||
+_wasmtime__settings_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime settings commands' commands "$@"
+}
+(( $+functions[_wasmtime__wast_commands] )) ||
+_wasmtime__wast_commands() {
+    local commands; commands=()
+    _describe -t commands 'wasmtime wast commands' commands "$@"
+}
+
+if [ "$funcstack[1]" = "_wasmtime" ]; then
+    _wasmtime "$@"
+else
+    compdef _wasmtime wasmtime
+fi
