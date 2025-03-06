@@ -8,6 +8,10 @@ if (!(Get-Command scoop)){
   $env:Path += ";$env:USERPROFILE\scoop\shims"
 }
 
+#
+# buckets
+#
+
 # Add main bucket
 scoop bucket add main
 # Add the extras bucket
@@ -16,6 +20,24 @@ scoop bucket add extras
 scoop bucket add versions
 # Add Java bucket
 scoop bucket add java
+# Add Nirsoft bucket
+scoop bucket add nirsoft https://github.com/kodybrown/scoop-nirsoft
+# Add nerd-fonts bucket
+scoop bucket add nerd-fonts https://github.com/matthewjberger/scoop-nerd-fonts
+# Add bucket of non-portable software
+scoop bucket add nonportable https://github.com/ScoopInstaller/Nonportable
+# Add imgcat (https://github.com/danielgatis/imgcat) bucket
+scoop bucket add scoop-imgcat https://github.com/danielgatis/scoop-imgcat.git
+# Add bucket of unofficial distribution of Zed
+scoop bucket add zed-unofficial https://github.com/pirafrank/zed_unofficial_win_builds.git
+
+Write-Host "Currently installed the following buckets"
+scoop bucket list
+
+
+#
+# software
+#
 
 # essential cli tools
 scoop install `
