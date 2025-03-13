@@ -10,6 +10,10 @@ function! Cond(cond, ...)
   return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
 endfunction
 
+" Additional dependencies to call before loading the plugins
+if is_windows && is_nvim
+  let g:sqlite_clib_path = stdpath('config').'/sqlite3.dll'
+endif
 
 """ plugins
 

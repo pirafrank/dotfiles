@@ -121,6 +121,9 @@ vim.g.floaterm_autoclose = 0
 vim.g.floaterm_opener = 'tabe'
 vim.g.floaterm_autohide = 1
 
+-- Bookmarks
+require("bookmarks").setup({})
+
 -- Copilot
 require('copilot').setup({
   -- disable copilot.lua suggestions and panel modules, as they can interfere

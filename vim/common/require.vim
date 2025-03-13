@@ -11,3 +11,5 @@ if is_nvim
 elseif is_vim
   let $BASE = '$HOME/.vim'
 endif
+
+let is_windows = has('win32') || has('win64') || has('win16') || has('win95')
