@@ -39,6 +39,12 @@ Set-Location "$env:USERPROFILE\dotfiles\Windows"
 .\install_dotfiles.ps1
 ```
 
+## Fonts
+
+User-space fonts lives in `%LOCALAPPDATA%\Microsoft\Windows\Fonts` dir.
+
+To install fonts via `scoop` both Admin rights and the `sudo` tool are required.
+
 ## Locations
 
 Powershell user profile
@@ -57,6 +63,12 @@ Windows Terminal Preview
 
 ```txt
 %USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState
+```
+
+Windows Terminal Canary
+
+```txt
+%USERPROFILE%\AppData\Local\Packages\Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe\LocalState
 ```
 
 VS Code settings

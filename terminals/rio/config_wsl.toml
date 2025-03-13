@@ -20,6 +20,8 @@ hide-cursor-when-typing = true
 #
 # Example:
 # theme = "dracula"
+theme = "dracula"
+#theme = "GitHub Dark"
 
 # Padding-x
 #
@@ -34,7 +36,7 @@ hide-cursor-when-typing = true
 # (default is [0, 0])
 #
 # Example:
-padding-y = [5, 0]
+padding-y = [5, 5]
 
 # Option as Alt
 #
@@ -137,6 +139,8 @@ args = []
 # blur = false
 # decorations = "enabled"
 [window]
+width = 960
+height = 600
 opacity = 0.95
 blur = false
 mode = "windowed"
@@ -231,6 +235,8 @@ decorations = "enabled"
 size = 14
 family = "JetBrainsMono Nerd Font"
 features = ["ss03", "ss06", "ss07", "ss08", "calt"]
+#extras = [{ family = "Fira Code" }]
+#extras = [{ family = "MesloLGS Nerd Font" }, { family = "Hack Nerd Font" }]
 
 # Scroll
 #

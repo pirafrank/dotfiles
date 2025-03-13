@@ -53,6 +53,7 @@ scoop install `
   bat `
   tere `
   jq `
+  jid `
   yq `
   less `
   rclone

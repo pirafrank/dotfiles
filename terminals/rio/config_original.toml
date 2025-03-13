@@ -3,7 +3,7 @@
 #
 # Default is `false`
 #
-# hide-cursor-when-typing = false
+hide-cursor-when-typing = true
 
 # Ignore theme selection foreground color
 #
@@ -20,6 +20,8 @@
 #
 # Example:
 # theme = "dracula"
+theme = "dracula"
+#theme = "GitHub Dark"
 
 # Padding-x
 #
@@ -34,7 +36,7 @@
 # (default is [0, 0])
 #
 # Example:
-# padding-y = [30, 10]
+padding-y = [5, 5]
 
 # Option as Alt
 #
@@ -51,6 +53,7 @@
 #
 # Example:
 # line-height = 1.2
+line-height = 1.0
 
 # Startup directory
 #
@@ -61,6 +64,8 @@
 #
 # Example:
 # working-dir = "/Users/raphael/Documents/"
+
+# note: \\wsl$\ paths do not work here!
 
 # Environment variables
 #
@@ -94,6 +99,7 @@
 # shape = 'block'
 # blinking = false
 # blinking-interval = 800
+blinking = false
 
 # Editor
 #
@@ -101,9 +107,9 @@
 #
 # Whenever the key binding `OpenConfigEditor` is triggered it will
 # use the value of the editor along with the rio configuration path.
-# [editor]
-# program = "vi"
-# args = []
+[editor]
+program = "nvim"
+args = []
 
 # Window configuration
 #
@@ -132,6 +138,13 @@
 # opacity = 1.0
 # blur = false
 # decorations = "enabled"
+[window]
+width = 960
+height = 600
+opacity = 0.95
+blur = false
+mode = "windowed"
+decorations = "enabled"
 
 # Renderer
 #
@@ -218,6 +231,12 @@
 # family = "cascadiamono"
 # style = "italic"
 # weight = 800
+[fonts]
+size = 14
+family = "JetBrainsMono Nerd Font"
+features = ["ss03", "ss06", "ss07", "ss08", "calt"]
+#extras = [{ family = "Fira Code" }]
+#extras = [{ family = "MesloLGS Nerd Font" }, { family = "Hack Nerd Font" }]
 
 # Scroll
 #
@@ -256,6 +275,11 @@
 # hide-if-single = true
 # use-current-path = false
 # color-automation = []
+[navigation]
+mode = "TopTab"
+clickable = true
+hide-if-single = true
+use-current-path = true
 
 # Shell
 #
