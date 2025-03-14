@@ -157,6 +157,9 @@ if ($env:OS -like "*Windows*") {
   $Path = "$env:USERPROFILE\dotfiles\Windows\bin"
 }
 
+# fnm set node env on cd
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+
 function yy {
   $tmp = [System.IO.Path]::GetTempFileName()
   yazi $args --cwd-file="$tmp"
