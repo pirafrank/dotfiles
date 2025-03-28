@@ -55,7 +55,6 @@ set clipboard=unnamed
 
 """ terminal
 
-set termencoding=utf-8
 set termguicolors
 set ttyfast
 set t_Co=256

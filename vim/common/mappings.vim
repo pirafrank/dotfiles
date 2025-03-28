@@ -55,5 +55,5 @@ nnoremap <silent> <leader>tl :ToggleNumAndSignColumns<CR>
 "             Command-line mode is disabled. In other words remaps do NOT work.
 "set paste
 " instead of setting paste ON permanently, toggle it
-set pastetoggle=<leader>y
+nnoremap <leader>y :set paste!<CR>
 
