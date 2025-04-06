@@ -91,6 +91,18 @@ $wezterm_home = "$env:USERPROFILE"
 Backup-Item "$wezterm_home\.wezterm.lua"
 Invoke-Symlink "$dotfilesPath\terminals\wezterm\.wezterm.lua" "$wezterm_home\.wezterm.lua"
 
+# yazi config
+$yazi_home = "$env:APPDATA\yazi"
+New-Folder-If-Not-Exist "$yazi_home"
+Backup-Item "$yazi_home\init.lua"
+Backup-Item "$yazi_home\yazi.toml"
+Backup-Item "$yazi_home\keymap.toml"
+Backup-Item "$yazi_home\theme.toml"
+Invoke-Symlink "$dotfilesPath\yazi\init.lua" "$yazi_home\init.lua"
+Invoke-Symlink "$dotfilesPath\yazi\yazi.yml" "$yazi_home\yazi.yml"
+Invoke-Symlink "$dotfilesPath\yazi\keymap.yml" "$yazi_home\keymap.yml"
+Invoke-Symlink "$dotfilesPath\yazi\theme.yml" "$yazi_home\theme.yml"
+
 # vim setup
 
 # vim

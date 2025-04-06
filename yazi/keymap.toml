@@ -20,6 +20,7 @@ prepend_keymap = [
   { on   = [ "d", "d" ], run = "yank --cut", desc = "Yank selected files (cut)" },
   # show size of folder
   { on   = [ ".", "s" ], run  = "plugin what-size", desc = "Calc size of selection or cwd" },
+  { on   = [ ".", "y" ], run  = "plugin what-size -- '-c'", desc = "Calc size of selection or cwd" },
   { on   = "o", run  = "plugin open-with-cmd --args=block", desc = "Open with command in the terminal" },
   { on   = "1", run  = "shell --block 'clear ; echo \"$0\" ; git -C \"$0\" status -s ; git -C \"$0\" adog -n 5 ; read y'", desc = "Git info on hovered dir" },
   { on   = [ ":", "s" ], run  = 'shell "$SHELL" --block', desc = "Run a shell" },
@@ -53,8 +54,8 @@ keymap = [
   { on = "<PageUp>",     run = "arrow -100%", desc = "Move cursor up one page" },
   { on = "<PageDown>",   run = "arrow 100%",  desc = "Move cursor down one page" },
 
-  { on = [ "g", "g" ], run = "arrow -99999999", desc = "Move cursor to the top" },
-  { on = "G",          run = "arrow 99999999",  desc = "Move cursor to the bottom" },
+  { on = [ "g", "g" ], run = "arrow top", desc = "Move cursor to the top" },
+  { on = "G",          run = "arrow bot",  desc = "Move cursor to the bottom" },
 
   # Navigation
   { on = "h", run = "leave", desc = "Go back to the parent directory" },
@@ -290,7 +291,7 @@ keymap = [
   { on = "<F1>", run = "help", desc = "Open help" },
 ]
 
-[completion]
+[cmp]
 
 keymap = [
   { on = "<C-c>",   run = "close",                                      desc = "Cancel completion" },
