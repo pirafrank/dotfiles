@@ -6,16 +6,17 @@ This repo is a never-ending WIP. It's not meant to be sensible for everybody, or
 
 ## Supported platforms
 
-My daily drivers currently are ~~alacritty~~ wezterm + zsh + tmux on:
+My daily drivers currently are wezterm/rio/alacritty + zsh + zellij on:
 
-- ~~Ubuntu 20.04 WSL 2 on Windows 10 (20H2)~~, upgraded to Ubuntu 22.04 WSL 2 on Windows 11
-- ~~Ubuntu 20.04 desktop~~, upgraded to Ubuntu 22.04 desktop
+- Ubuntu 24.04 WSL 2 on Windows 11 (was Ubuntu 20.04, was Ubuntu 22.04)
+- Ubuntu 22.04 desktop
+- GitHub Codespaces (`install.sh` defaults to this if no args are given)
+- PowerShell 7 on Windows 11 (24H2)
 
 These dotfiles are also used on:
 
-- Debian ~~10~~ server accessed via mosh connection on iPad, upgraded to Debian ~~11~~ 12
+- Debian server accessed via mosh connection on iPad, upgraded to Debian ~~10~~ ~~11~~ 12
 - [workspace](https://github.com/pirafrank/workspace) Docker image ([link](https://hub.docker.com/r/pirafrank/workspace))
-- GitHub Codespaces
 - ~~occasionally macOS 10.15 (via iTerm2)~~ I gifted the MacBook to my family!
 
 ## Try it out
@@ -30,7 +31,7 @@ docker run -it pirafrank/workspace:latest
 
 ## Install
 
-First clone the repo to your $HOME.
+First clone the repo to your `$HOME`:
 
 ```sh
 cd && git clone https://github.com/pirafrank/dotfiles.git
@@ -38,13 +39,19 @@ cd && git clone https://github.com/pirafrank/dotfiles.git
 
 Then symlink config you want to use or install them all running `zsh install.sh all`. You can also symlink a specific set of dotfiles by running `zsh install.sh SOME_FEATURE`. Check the script content to know more.
 
-`~/.zsh_custom` is automatically sourced if it exists. Create it to add any machine-specific non-interactive (doesn't print to sysout) entries. If you need to add interactive scripts, or scripts that output to sysout, please create `~/.zsh_custom_pre`. It will be loaded in `~/.zshrc` BEFORE Powerlevel10k caching. This is to enable Powerlevel10k instant prompt.
+If no arguments are provided, `install.sh` defaults to a GitHub Codespaces installation mode, [as required by GitHub](https://docs.github.com/en/codespaces/setting-your-user-preferences/personalizing-github-codespaces-for-your-account#dotfiles). It automatically detects whether it’s running inside a Codespace. If it is not and no arguments are given, the script will quit.
 
-`~/bin2` is automatically added to `$PATH`, if it exists. It is not part of the repo. Create it to add your-own or machine-specific executables.
+## Config customization
+
+- `~/.zsh_custom` is automatically sourced if it exists. Create it to add any machine-specific non-interactive (doesn't print to sysout) entries.
+
+- `~/.zsh_custom_pre` is automatically sourced if it exists. Create it if you need to add interactive scripts, or scripts that output to sysout. It will be loaded in `~/.zshrc` BEFORE Powerlevel10k caching. This is to enable Powerlevel10k instant prompt.
+
+Also, `~/bin2` directory is automatically added to `$PATH`, if it exists. It is not part of the repository and it is designed to add your-own or machine-specific executables.
 
 That's part of it, there is no real how-to actually. For more info just look at the code.
 
-## Getting started
+## Shortcuts, Commands, Aliases & Functions
 
 [`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) may (hopefully) help, yet it will forever be incomplete.
 
