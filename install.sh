@@ -25,7 +25,46 @@ esac
 ### functions
 
 function usage {
-  echo "./$0 [all|FEATURE_NAME|custom]"
+  echo "./$0 [all|FEATURE_NAME|custom|--help|-h]"
+}
+
+function show_help {
+  echo "Dotfiles installation script"
+  echo ""
+  echo "Usage: $0 [COMMAND]"
+  echo ""
+  echo "Available commands:"
+  echo "  all           - Install all dotfile configurations"
+  echo "  binaries      - Run all setup scripts for binary installations"
+  echo "  ctags         - Install ctags configuration"
+  echo "  custom        - Custom installation (edit script to add functions)"
+  echo "  editorconfig  - Install editorconfig"
+  echo "  fzf           - Install fzf configuration"
+  echo "  gama          - Install gama configuration"
+  echo "  git           - Install git configuration"
+  echo "  gpg           - Install GPG configuration"
+  echo "  htoprc        - Install htop configuration"
+  echo "  inputrc       - Install inputrc configuration"
+  echo "  lazygit       - Install lazygit configuration"
+  echo "  lf            - Install lf file manager configuration"
+  echo "  makedirs      - Create necessary directories"
+  echo "  mc            - Install Midnight Commander configuration"
+  echo "  neofetch      - Install neofetch configuration"
+  echo "  nvim          - Install Neovim configuration"
+  echo "  shellfish     - Install Shellfish configuration"
+  echo "  tmux          - Install tmux configuration"
+  echo "  vim           - Install Vim configuration with plugins"
+  echo "  vim-minimal   - Install minimal Vim configuration"
+  echo "  vim-noplugins - Install Vim configuration without plugins"
+  echo "  xplr          - Install xplr file manager configuration"
+  echo "  yazi          - Install yazi file manager configuration"
+  echo "  zellij        - Install zellij terminal multiplexer configuration"
+  echo "  zsh           - Install Zsh configuration (prezto + zplug)"
+  echo ""
+  echo "Options:"
+  echo "  --help, -h    - Show this help message"
+  echo ""
+  echo "Note: Running without arguments defaults to GitHub Codespaces mode."
 }
 
 function makedirs {
@@ -333,6 +372,12 @@ if [ $# -eq 0 ]; then
   shellfishinstall
   do_codespace_setup_scripts
   exit 0;
+fi
+
+# check for help before validating argument count
+if [ "$1" = "--help" ] || [ "$1" = "-h" ]; then
+    show_help
+    exit 0
 fi
 
 if [ $# -ne 1 ]; then
