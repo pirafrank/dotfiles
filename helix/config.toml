@@ -1,0 +1,167 @@
+# Helix Editor Configuration
+# Based on Francesco's Neovim configuration
+# Optimized for Rust, Python, Lua, Java, JavaScript, and Bash development
+
+theme = "dark_plus"
+#theme = "onedark"
+
+[editor]
+# Line numbers - matching nvim preference for line numbers
+line-number = "relative"
+# Cursor line highlight - matching nvim cursorline
+cursorline = true
+# Cursor column highlight - matching nvim cursorcolumn
+cursorcolumn = true
+# Auto pairs - matching nvim lexima.vim behavior
+auto-pairs = true
+# Auto completion - matching nvim completion behavior
+auto-completion = true
+# Auto format on save
+auto-format = true
+# Auto save
+auto-save = true
+# Scrolloff - matching nvim scrolloff=4
+scrolloff = 4
+# Mouse support (can be toggled)
+mouse = true
+# Color column
+rulers = [80, 120]
+# Buffer line
+bufferline = "multiple"
+# Soft wrap
+soft-wrap.enable = true
+
+[editor.statusline]
+left = ["mode", "spacer", "version-control", "file-name", "file-modification-indicator"]
+center = []
+right = ["diagnostics", "selections", "register", "position", "file-encoding"]
+
+[editor.lsp]
+# Enable LSP
+enable = true
+# Display LSP progress
+display-messages = true
+# Auto signature help
+auto-signature-help = true
+# Display inlay hints
+display-inlay-hints = true
+# Snippets support
+snippets = true
+
+[editor.cursor-shape]
+# Cursor shapes for different modes - matching vim behavior
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+# Show hidden files - matching telescope behavior
+hidden = false
+# Show parents
+parents = true
+# Show ignored files
+ignore = false
+# Follow symlinks
+follow-symlinks = true
+# Git ignore
+git-ignore = true
+# Git global
+git-global = true
+
+[editor.search]
+# Smart case search - matching nvim smartcase behavior
+smart-case = true
+# Wrap around
+wrap-around = true
+
+[editor.whitespace]
+render = "all"
+
+[editor.indent-guides]
+render = true
+character = "│"
+skip-levels = 1
+
+# Key mappings - based on your Neovim configuration
+[keys.normal]
+# Buffer navigation - matching nvim <leader>< and <leader>>
+">" = "goto_next_buffer"
+"<" = "goto_previous_buffer"
+
+# Window management - matching nvim split navigation
+"C-A-j" = "jump_view_down"
+"C-A-k" = "jump_view_up"
+"C-A-l" = "jump_view_right"
+"C-A-h" = "jump_view_left"
+
+# File operations - matching telescope Ctrl+P
+"C-p" = "file_picker"
+
+# Sidebar toggle - matching NERDTree/Neotree Ctrl+N
+"C-n" = "file_picker"
+
+# Terminal - matching floaterm Ctrl+T
+"C-t" = ":sh"
+
+# Space leader key mappings (matching nvim space leader)
+[keys.normal.space]
+# Note: Helix doesn't need :nohl equivalent - search doesn't persist highlighting like vim
+# Buffer picker - matching nvim <leader>b
+b = "buffer_picker"
+# File picker - matching telescope <leader>p
+p = "file_picker_in_current_directory"
+# Recent files - matching telescope <leader>r
+r = "file_picker"
+# Buffer search - matching telescope <leader>/
+"/" = "search"
+# Line number toggle - matching nvim <leader>1
+"1" = ":toggle line-number"
+# Jump to word - matching hop.nvim <leader>j
+j = "goto_word"
+
+# LSP mappings under space-g (matching nvim <leader>g*)
+[keys.normal.space.g]
+# Go to definition - matching nvim <leader>gd
+d = "goto_definition"
+# Go to declaration - matching nvim <leader>gc
+c = "goto_declaration"
+# Go to type definition - matching nvim <leader>gt
+t = "goto_type_definition"
+# Go to implementation - matching nvim <leader>gi
+i = "goto_implementation"
+
+# LSP mappings under space-l (matching nvim <leader>l*)
+[keys.normal.space.l]
+# Document symbols - matching nvim <leader>ll
+l = "symbol_picker"
+# Find references - matching nvim <leader>lf
+#f = "references"
+# Workspace symbols - matching nvim <leader>lw
+w = "workspace_symbol_picker"
+# Diagnostics - matching nvim <leader>ld
+d = "diagnostics_picker"
+# Previous diagnostic - matching nvim <leader>l[
+"[" = "goto_prev_diag"
+# Next diagnostic - matching nvim <leader>l]
+"]" = "goto_next_diag"
+# Code actions - matching nvim <leader>la
+a = "code_action"
+# Rename symbol - matching nvim <leader>lr
+r = "rename_symbol"
+# Show documentation - matching nvim <leader>ls
+s = "hover"
+
+[keys.insert]
+# ESC alternative - matching nvim 'jj' mapping
+j = { j = "normal_mode" }
+
+# Basic movement in insert mode
+"C-h" = "move_char_left"
+"C-l" = "move_char_right"
+
+[keys.select]
+# Copy to system clipboard in visual mode
+y = ["yank", ":clipboard-yank", "normal_mode"]
+
+# Comment toggle in visual mode - matching vim-commentary
+"C-_" = "toggle_comments"

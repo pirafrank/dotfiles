@@ -1,0 +1,75 @@
+# Language server settings for each language
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+# Rust analyzer specific config
+checkOnSave = { command = "clippy" }
+cargo = { features = "all" }
+procMacro = { enable = true }
+
+[language-server.pylsp]
+command = "pylsp"
+
+[language-server.pylsp.config.pylsp]
+plugins = { pycodestyle = { enabled = false }, mccabe = { enabled = false }, pyflakes = { enabled = false } }
+
+[language-server.pyright]
+command = "pyright-langserver"
+args = ["--stdio"]
+
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.jdtls]
+command = "jdtls"
+
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language-server.bash-language-server]
+command = "bash-language-server"
+args = ["start"]
+
+# Language specific configurations
+[[language]]
+name = "rust"
+language-servers = ["rust-analyzer"]
+auto-format = true
+formatter = { command = "rustfmt" }
+
+[[language]]
+name = "python"
+language-servers = ["pyright", "pylsp"]
+auto-format = true
+formatter = { command = "black", args = ["--quiet", "-"] }
+
+[[language]]
+name = "lua"
+language-servers = ["lua-language-server"]
+auto-format = true
+formatter = { command = "stylua", args = ["-"] }
+
+[[language]]
+name = "java"
+language-servers = ["jdtls"]
+auto-format = true
+
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "javascript"] }
+
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server"]
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+
+[[language]]
+name = "bash"
+language-servers = ["bash-language-server"]
+auto-format = true
+formatter = { command = "shfmt", args = ["-i", "2"] }
