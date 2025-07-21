@@ -1,0 +1,11 @@
+[metadata]
+name = "config"
+description = "A channel to select from your user's .config"
+requirements = [ "fd", "batcat",]
+
+[source]
+command = "fd -t f . $HOME/.config"
+
+[preview]
+command = "batcat -n --color=always '{}'"
+
