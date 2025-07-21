@@ -8,6 +8,7 @@
 // command palette
 {
   "icon_theme": "VSCode Icons (Dark)",
+  "base_keymap": "VSCode",
   "outline_panel": {
     "dock": "right"
   },
@@ -22,14 +23,22 @@
     "diagnostics": false,
     "metrics": false
   },
-  "ui_font_size": 14,
+  "ui_font_size": 16,
   "buffer_font_size": 13,
   "buffer_font_family": "JetBrainsMono Nerd Font",
   "buffer_font_fallbacks": ["Zed Plex Mono", "Consolas", "Courier New"],
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "VSCode Dark Modern"
+    "dark": "One Dark - Darkened"
+  },
+  "project_panel": {
+    "default_locations": [
+      "C:\\Users\\francesco\\Code\\projects",
+      "\\\\wsl$\\Ubuntu-20.04\\home\\francesco\\Code\\projects"
+    ],
+    "git_scan": true,
+    "recent_projects_limit": 15
   },
   // "terminal": {
   //   "shell": {

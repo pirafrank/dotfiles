@@ -10,12 +10,18 @@
     "context": "Workspace",
     "bindings": {
       // "shift shift": "file_finder::Toggle"
+      "secondary `": "workspace::ToggleBottomDock"
     }
   },
   {
     "context": "Editor",
     "bindings": {
       // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "bindings": {
+      //"secondary `": "workspace::ToggleBottomDock"
     }
   }
 ]
