@@ -9,3 +9,6 @@ command = "fd -t f . $HOME/dotfiles"
 [preview]
 command = "batcat -n --color=always '{}'"
 
+[keybindings]
+shortcut = "f4"
+

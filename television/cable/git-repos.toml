@@ -1,12 +1,19 @@
 [metadata]
-name = "git-repos"
+name = "repo"
 requirements = [ "fd", "git",]
 description = "A channel to select from git repositories on your local machine.\n\nThis channel uses `fd` to find directories that contain a `.git` subdirectory, and then allows you to preview the git log of the selected repository.\n"
 
 [source]
-command = "fd -g .git -HL -t d -d 10 --prune ~ -E 'Library' -E 'Application Support' --exec dirname '{}'"
+command = "fd -g .git -HL -t d -d 10 --prune ~/code -E 'Library' -E 'Application Support' --exec dirname '{}'"
 display = "{split:/:-1}"
 
+[ui]
+preview_panel = { "size" = 70, "scrollbar" = true }
+
 [preview]
-command = "cd '{}'; git log -n 200 --pretty=medium --all --graph --color"
+#command = "cd '{}'; git log -n 200 --pretty=medium --all --graph --color"
+command = "cd '{}'; git la -n 200 --color"
+
+[keybindings]
+shortcut = "f5"
 
