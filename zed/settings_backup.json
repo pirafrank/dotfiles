@@ -12,11 +12,12 @@
   "outline_panel": {
     "dock": "right"
   },
-  "agent": {
+  "assistant": {
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-3.7-sonnet"
     },
+    "version": "2"
   },
   "telemetry": {
     "diagnostics": false,
