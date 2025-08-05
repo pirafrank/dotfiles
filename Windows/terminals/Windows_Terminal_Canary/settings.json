@@ -4,12 +4,12 @@
     "actions": 
     [
         {
-            "command": "tabSearch",
-            "id": "User.tabSearch"
-        },
-        {
             "command": "openTabRenamer",
             "id": "User.openTabRenamer"
+        },
+        {
+            "command": "tabSearch",
+            "id": "User.tabSearch"
         },
         {
             "command": "resetFontSize",
@@ -39,10 +39,6 @@
     "keybindings": 
     [
         {
-            "id": "Terminal.CopyToClipboard",
-            "keys": "enter"
-        },
-        {
             "id": null,
             "keys": "ctrl+comma"
         },
@@ -51,8 +47,8 @@
             "keys": "ctrl+v"
         },
         {
-            "id": "Terminal.MoveFocusDown",
-            "keys": "ctrl+shift+j"
+            "id": "Terminal.CopyToClipboard",
+            "keys": "enter"
         },
         {
             "id": "User.terminalChat",
@@ -61,6 +57,10 @@
         {
             "id": "Terminal.DuplicatePaneAuto",
             "keys": "alt+shift+d"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "ctrl+shift+j"
         },
         {
             "id": null,
@@ -87,12 +87,12 @@
             "keys": "alt+right"
         },
         {
-            "id": "Terminal.MoveFocusUp",
-            "keys": "ctrl+shift+k"
-        },
-        {
             "id": null,
             "keys": "ctrl+shift+tab"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "ctrl+shift+k"
         },
         {
             "id": null,
@@ -171,6 +171,7 @@
             },
             "historySize": 10000,
             "intenseTextStyle": "bold",
+            "opacity": 85,
             "padding": "6",
             "showMarksOnScrollbar": true,
             "useAcrylic": true
@@ -181,6 +182,7 @@
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell 7",
+                "opacity": 85,
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
@@ -246,6 +248,6 @@
     "schemes": [],
     "searchWebDefaultQueryUrl": "https://www.google.com/search?q=%22%s%22",
     "themes": [],
-    "useAcrylicInTabRow": false,
+    "useAcrylicInTabRow": true,
     "windowingBehavior": "useAnyExisting"
 }
