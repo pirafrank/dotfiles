@@ -10,7 +10,6 @@
     "terminal.integrated.shell.linux": "/usr/bin/zsh",
     "window.openFilesInNewWindow": "on",
     "window.restoreWindows": "all",
-    "window.zoomLevel": 0,
     "window.newWindowDimensions": "inherit",
     "workbench.colorCustomizations": {
         "editorError.foreground": "#ffa500",
@@ -18,7 +17,6 @@
     },
     "workbench.colorTheme": "Plastic",
     "workbench.editor.enablePreview": false,
-    "workbench.iconTheme": "vscode-icons",
     "breadcrumbs.enabled": true,
     "typescript.referencesCodeLens.enabled": true,
     "vsicons.projectDetection.disableDetect": true,
@@ -35,7 +33,7 @@
     "python.jediEnabled": false,
     // java world
     "java.errors.incompleteClasspath.severity": "ignore",
-    "java.home": "/usr/local/lib/jdk11",
+    "java.jdt.ls.java.home": "C:\\Java\\jdk17",
     "maven.executable.options": "",
     "files.exclude": {
         "**/.classpath": true,
@@ -43,9 +41,9 @@
         "**/.settings": true,
         "**/.factorypath": true
     },
-    "editor.fontFamily": "'JetBrains Mono', 'Meslo LGS Nerd Font', 'Droid Sans Mono', 'Droid Sans Fallback', monospace",
+    "editor.fontFamily": "'JetBrainsMono Nerd Font', 'MesloLGS Nerd Font', 'JetBrains Mono', 'Droid Sans Mono', 'Droid Sans Fallback', monospace",
     "editor.mouseWheelZoom": true,
-    "sonarlint.ls.javaHome": "/usr/local/lib/jdk11",
+    "sonarlint.ls.javaHome": "C:\\Java\\jdk17",
     "auto-close-tag.SublimeText3Mode": true,
     "editor.fontSize": 13,
     "java.semanticHighlighting.enabled": true,
@@ -67,7 +65,7 @@
     "tabnine.experimentalAutoImports": true,
     "editor.acceptSuggestionOnEnter": "smart",
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "sonarlint.pathToNodeExecutable": "/home/francesco/.nvm/versions/node/v18.15.0/bin/node",
+    "sonarlint.pathToNodeExecutable": "C:\\Users\\francesco\\AppData\\Roaming\\nvm\\v16.18.1\\node.exe",
     "python.languageServer": "Default",
     "json.schemas": [],
     "redhat.telemetry.enabled": false,
@@ -119,7 +117,8 @@
     "workbench.startupEditor": "none",
     "remote.SSH.remotePlatform": {
         "pfshell.westeurope.azurecontainer.io": "linux",
-        "dimora-gi": "linux"
+        "dimora-gi": "linux",
+        "simtreni": "linux"
     },
     "git.openRepositoryInParentFolders": "always",
     "editor.inlineSuggest.enabled": true,
@@ -138,12 +137,6 @@
         "codeWhispererNewWelcomeMessage": true
     },
     "snyk.trustedFolders": [
-        "/home/francesco/services",
-        "c:\\Users\\francesco\\Code\\leonardo-code\\cdp\\ETD-HCA-PCA-CDP-SOA12Migration",
-        "c:\\Users\\francesco\\Code\\leonardo-code\\CSDCC-website-fe\\Custom Policy Azure B2C",
-        "c:\\Users\\francesco\\Code\\leonardo-code\\Avvocatura_Scrivania\\Avvocatura\\Source\\AvvocaturaScrivania.API.QW",
-        "c:\\Users\\francesco\\Code\\leonardo-code\\Avvocatura_Scrivania\\Avvocatura\\Source\\Frontend",
-        "C:\\Users\\francesco\\AppData\\Local\\Programs\\Microsoft VS Code\\vsls:"
     ],
     "go.toolsManagement.autoUpdate": true,
     "powershell.promptToUpdatePowerShell": false,
@@ -151,11 +144,17 @@
     //"editor.fontLigatures": false,
     // after monaspace
     "editor.fontLigatures": "'ss03', 'ss06', 'ss07', 'ss08', 'calt'",
+    "python.defaultInterpreterPath": "C:\\Users\\francesco\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
     "terminal.integrated.fontWeight": "normal",
     "terminal.integrated.fontWeightBold": "bold",
     "cmake.showOptionsMovedNotification": false,
     "sonarlint.rules": {
-
+        "java:S6813": {
+            "level": "off"
+        },
+        "javascript:S905": {
+            "level": "off"
+        }
     },
     "dotnetAcquisitionExtension.enableTelemetry": false,
     "gitlens.telemetry.enabled": false,
@@ -181,4 +180,27 @@
     "github.copilot.editor.enableAutoCompletions": true,
     "telemetry.telemetryLevel": "off",
     "continue.telemetryEnabled": false,
+    "remote.autoForwardPortsSource": "hybrid",
+    "codeviz.analyticsEnabled": true,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "java.configuration.runtimes": [],
+    "vsicons.dontShowNewVersionMessage": true,
+    "zig.zls.enabled": "on",
+    "@azure.argTenant": "",
+    "github.copilot.chat.codeGeneration.instructions": [
+        {
+            "text": "- @azure Rule - Use Azure Best Practices: When generating code for Azure, running terminal commands for Azure, or performing operations related to Azure, invoke your `azure_development-get_best_practices` tool if available."
+        }
+    ],
+    "snyk.folderConfigs": [
+        {
+            "folderPath": "c:\\Users\\francesco\\Code\\clones\\lwa_fm",
+            "baseBranch": "main",
+            "localBranches": [
+                "main"
+            ]
+        }
+    ],
 }

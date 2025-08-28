@@ -12,7 +12,7 @@ symlink `settings.json` to:
 For example:
 
 ```sh
-ln -s /home/francesco/.vscode-server/data/Machine/settings.json /home/francesco/dotfiles/vs-code/settings_sb3_wsl.json
+ln -s /home/francesco/.vscode-server/data/Machine/settings.json /home/francesco/dotfiles/vs-code/settings_wsl.json
 ```
 
 Same target folder for `keybindings.json`.

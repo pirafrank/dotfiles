@@ -2,9 +2,9 @@
 
 file="$1"
 if [[ -z $file ]]; then
-  echo "Please add output filename as argument"
+  echo "Please add file suffix as argument"
   exit 1
 fi
 
-cp -a ${HOME}/.vscode-server/data/Machine/settings.json "${file}"
+cp -a ${HOME}/.vscode-server/data/Machine/settings.json "settings_{file}.json"
 
