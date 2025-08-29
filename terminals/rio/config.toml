@@ -344,6 +344,11 @@ use-current-path = true
 #   # Bytes[27, 91, 53, 126] is equivalent to "\x1b[5~"
 #   { key = "home", with = "super | shift", bytes = [27, 91, 53, 126] }
 # ]
+[bindings]
+keys = [
+    { key = "v", with = "control", action = "Paste" },
+    { key = "v", with = "control | shift", action = "none" },
+]
 
 # Log level
 #
@@ -353,4 +358,3 @@ use-current-path = true
 # [developer]
 # log-level = "OFF"
 # enable-log-file = false
-
