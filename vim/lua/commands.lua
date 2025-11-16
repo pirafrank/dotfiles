@@ -97,8 +97,8 @@ command('Lf', 'FloatermNew lf', {}, 'lf')
 --
 
 local copilotchat = require("CopilotChat")
-local copilotchat_actions = require("CopilotChat.actions")
-local copilotchat_telescope = require("CopilotChat.integrations.telescope")
+--local copilotchat_actions = require("CopilotChat.actions")
+--local copilotchat_telescope = require("CopilotChat.integrations.telescope")
 
 command('CopilotChatWithBuffer', (function()
   local input = vim.fn.input("Quick Chat: ")
@@ -108,11 +108,15 @@ command('CopilotChatWithBuffer', (function()
 end), {}, "Copilot: Chat with current Buffer")
 
 -- Show help actions with telescope
+--[[
 command('CopilotChatHelp', (function()
   copilotchat_telescope.pick(copilotchat_actions.help_actions())
 end), {}, "Copilot: Show help actions")
+]]
 
 -- Show prompts actions with telescope
+--[[
 command('CopilotChatPrompts', (function()
   copilotchat_telescope.pick(copilotchat_actions.prompt_actions())
 end), {}, "Copilot: Show prompt actions")
+]]
