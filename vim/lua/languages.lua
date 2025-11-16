@@ -1,12 +1,13 @@
--- import lspconfig
-local lspconfig = require('lspconfig')
-capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- Get capabilities for nvim-cmp
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 --
 -- *** Lua ***
 --
 
-lspconfig.lua_ls.setup({
+vim.lsp.config('lua_ls', {
+  cmd = { 'lua-language-server' },
+  root_markers = { '.luarc.json', '.luarc.jsonc', '.luacheckrc', '.stylua.toml', 'stylua.toml', 'selene.toml', 'selene.yml', '.git' },
   capabilities = capabilities,
   settings = {
     Lua = {
@@ -17,13 +18,13 @@ lspconfig.lua_ls.setup({
   }
 })
 
+vim.lsp.enable('lua_ls')
+
 --
 -- *** Java ***
 --
 
 local on_attach = function(client, bufnr)
-  --local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  --local opts = { noremap = true, silent = true }
   local jdtls = require('jdtls')
 
   -- *** Additional commands specific to jdtls ***
@@ -45,26 +46,25 @@ local on_attach = function(client, bufnr)
 
 end
 
-lspconfig.jdtls.setup({
+vim.lsp.config('jdtls', {
+  cmd = { 'jdtls' },
+  root_markers = { 'gradlew', 'mvnw', '.git' },
   on_attach = on_attach,
   capabilities = capabilities,
 })
 
 vim.cmd [[
   autocmd FileType java setlocal shiftwidth=4 tabstop=4
-  autocmd FileType java lua require('jdtls').start_or_attach({cmd = {'jdtls'}})
+  autocmd FileType java lua vim.lsp.enable('jdtls')
 ]]
 
 --
 -- *** Rust ***
 --
 
-lspconfig.rust_analyzer.setup({})
-
 -- This plugin automatically sets up nvim-lspconfig for rust_analyzer for you,
 -- so don't do that manually, as it causes conflicts.
-local rt = require("rust-tools")
-rt.setup({
+vim.lsp.config('rust-tools', {
   server = {
     on_attach = function(_, bufnr)
       -- Hover actions
@@ -83,9 +83,11 @@ rt.setup({
 -- *** Go ***
 --
 
-lspconfig.gopls.setup({
+vim.lsp.config('gopls', {
+  cmd = { "gopls" },
+  root_markers = { 'go.work', 'go.mod', '.git' },
+  capabilities = capabilities,
   settings = {
-    cmd = { "gopls" },
     gopls = {
       analyses = {
         unusedparams = true,
@@ -93,52 +95,85 @@ lspconfig.gopls.setup({
       staticcheck = true,
     },
   },
-  capabilities = capabilities,
 })
+
+vim.lsp.enable('gopls')
 
 --
 -- *** Python ***
 --
 
-lspconfig.basedpyright.setup({
+vim.lsp.config('basedpyright', {
+  cmd = { 'basedpyright-langserver', '--stdio' },
+  root_markers = { 'pyproject.toml', 'setup.py', 'setup.cfg', 'requirements.txt', 'Pipfile', '.git' },
   capabilities = capabilities,
 })
 
-lspconfig.ruff.setup({
+vim.lsp.enable('basedpyright')
+
+vim.lsp.config('ruff', {
+  cmd = { 'ruff', 'server' },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
   capabilities = capabilities,
 })
+
+vim.lsp.enable('ruff')
 
 --
 -- *** Ruby ***
 --
 
-lspconfig.ruby_lsp.setup({
+vim.lsp.config('ruby_lsp', {
+  cmd = { 'ruby-lsp' },
+  root_markers = { 'Gemfile', '.git' },
   capabilities = capabilities,
 })
+
+vim.lsp.enable('ruby_lsp')
 
 --
 -- *** Other ***
 --
 
-lspconfig.bashls.setup({
+vim.lsp.config('bashls', {
+  cmd = { 'bash-language-server', 'start' },
+  root_markers = { '.git' },
   capabilities = capabilities,
 })
 
-lspconfig.dockerls.setup({
+vim.lsp.enable('bashls')
+
+vim.lsp.config('dockerls', {
+  cmd = { 'docker-langserver', '--stdio' },
+  root_markers = { 'Dockerfile', '.git' },
   capabilities = capabilities,
 })
 
-lspconfig.sqlls.setup({
+vim.lsp.enable('dockerls')
+
+vim.lsp.config('sqlls', {
+  cmd = { 'sql-language-server', 'up', '--method', 'stdio' },
+  root_markers = { '.git' },
   capabilities = capabilities,
 })
 
-lspconfig.terraformls.setup({
+vim.lsp.enable('sqlls')
+
+vim.lsp.config('terraformls', {
+  cmd = { 'terraform-ls', 'serve' },
+  root_markers = { '.terraform', '.git' },
   capabilities = capabilities,
 })
 
-lspconfig.yamlls.setup({
+vim.lsp.enable('terraformls')
+
+vim.lsp.config('yamlls', {
+  cmd = { 'yaml-language-server', '--stdio' },
+  root_markers = { '.git' },
   capabilities = capabilities,
 })
+
+vim.lsp.enable('yamlls')
 
 -- *** Markdown ***
 require('glow').setup({
