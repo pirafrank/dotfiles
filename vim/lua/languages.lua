@@ -64,20 +64,23 @@ vim.cmd [[
 
 -- This plugin automatically sets up nvim-lspconfig for rust_analyzer for you,
 -- so don't do that manually, as it causes conflicts.
-vim.lsp.config('rust-tools', {
+vim.g.rustaceanvim = {
   server = {
-    on_attach = function(_, bufnr)
+    on_attach = function(client, bufnr)
       -- Hover actions
       vim.api.nvim_create_user_command("RustHoverActions", function()
-        rt.hover_actions.hover_actions()
+        vim.cmd.RustLsp({ 'hover', 'actions' })
       end, { desc = "Rust: Hover Actions" })
       -- Code action groups
       vim.api.nvim_create_user_command("RustCodeActionGroup", function()
-        rt.code_action_group.code_action_group()
+        vim.cmd.RustLsp('codeAction')
       end, { desc = "Rust: Code Action groups" })
     end,
+    default_settings = {
+      ['rust-analyzer'] = {},
+    },
   },
-})
+}
 
 --
 -- *** Go ***

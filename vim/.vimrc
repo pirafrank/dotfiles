@@ -180,7 +180,7 @@ call plug#begin($BASE.'/plugged')
   " note: you need to run this first to install the required components
   " rustup component add rls rust-analysis rust-src rustfmt rust-analyzer
   "Plug 'rust-lang/rust.vim', Cond(is_vim, {'for': 'rs'})
-  Plug 'simrat39/rust-tools.nvim', Cond(is_nvim, {'for': 'rs'})
+  Plug 'mrcjkb/rustaceanvim', Cond(is_nvim, {'for': 'rs'})
 
   """ javascript """
 
