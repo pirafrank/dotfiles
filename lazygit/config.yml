@@ -5,23 +5,22 @@ notARepository: 'skip'
 disableStartupPopups: true
 promptToReturnFromSubprocess: false
 git:
-    branchLogCmd: 'git log --color=always --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" {{branchName}}'
-    pull:
-        mode: 'rebase'
+  branchLogCmd: 'git log --color=always --graph --pretty=format:"%C(yellow)%h%Creset%C(cyan)%C(bold)%d%Creset %C(cyan)(%ad)%Creset %C(green)%an%Creset %s" {{branchName}}'
+  pull:
+    mode: 'rebase'
 gui:
-    mainPanelSplitMode: 'vertical'
-    showRandomTip: false
-    showCommandLog: false
-    showFileTree: false
+  mainPanelSplitMode: 'vertical'
+  showRandomTip: false
+  showCommandLog: false
+  showFileTree: false
 customCommands:
   - key: '<c-f>'
     command: "{{if .SelectedFile.HasUnstagedChanges}} git diff -b {{.SelectedFile.Name}} && read -s -n1 key {{end}}"
     context: 'files'
     description: 'diff --ignore-space-change'
-    subprocess: true
+    output: terminal
   - key: '<c-l>'
     command: "git la"
     context: 'global'
     description: 'git la'
-    subprocess: true
-
+    output: terminal
