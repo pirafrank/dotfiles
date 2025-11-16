@@ -1,3 +1,4 @@
 #!/bin/bash
 
-wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test500.zip
+wget --output-document=/dev/null https://ash-speed.hetzner.com/1GB.bin
+
