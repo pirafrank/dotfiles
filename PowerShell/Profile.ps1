@@ -170,10 +170,13 @@ function yy {
   Remove-Item -Path $tmp
 }
 
-#region conda initialize
-# !! Contents within this block are managed by 'conda init' !!
-If (Test-Path "C:\Users\francesco\anaconda3\Scripts\conda.exe") {
-    (& "C:\Users\francesco\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+# only initialize conda if no virtualenv is active and python is not managed by pyenv-win
+if (-not $env:VIRTUAL_ENV) {
+    $pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
+    if ($pythonPath -and $pythonPath -notlike "*pyenv-win*") {
+      If (Test-Path "C:\Users\francesco\anaconda3\Scripts\conda.exe") {
+          (& "C:\Users\francesco\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+      }
+    }
 }
-#endregion
 
