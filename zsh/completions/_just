@@ -1,0 +1,58 @@
+#compdef just
+
+# Zsh completion for just command runner
+# Dynamically completes recipes from justfile/Justfile in the current directory
+
+_just() {
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+    local ret=1
+
+    # Find justfile in current directory (case-insensitive)
+    local justfile=""
+    if [[ -f "justfile" ]]; then
+        justfile="justfile"
+    elif [[ -f "Justfile" ]]; then
+        justfile="Justfile"
+    elif [[ -f ".justfile" ]]; then
+        justfile=".justfile"
+    fi
+
+    # Parse recipes from justfile if it exists
+    local -a recipes
+    if [[ -n "$justfile" ]]; then
+        # Extract recipe names (lines that start with a word character followed by optional parameters and a colon)
+        # Excludes comment lines, variable assignments, and aliases
+        recipes=(${(f)"$(grep -E '^[a-zA-Z0-9_-]+.*:' "$justfile" 2>/dev/null | \
+            grep -v '^\s*#' | \
+            sed -E 's/^([a-zA-Z0-9_-]+).*:.*/\1/' | \
+            sort -u)"})
+
+        # Also try using `just --summary` if available for more accurate parsing
+        if command -v just &>/dev/null; then
+            local summary_recipes
+            summary_recipes=(${(f)"$(just --summary 2>/dev/null | tr ' ' '\n')"})
+            if [[ ${#summary_recipes[@]} -gt 0 ]]; then
+                recipes=($summary_recipes)
+            fi
+        fi
+    fi
+
+    _arguments -C \
+        '*::recipe:->recipes' \
+        && ret=0
+
+    case $state in
+        recipes)
+            if [[ ${#recipes[@]} -gt 0 ]]; then
+                _describe -t recipes 'available recipes' recipes && ret=0
+            else
+                _message 'no recipes found (no justfile in current directory)' && ret=1
+            fi
+            ;;
+    esac
+
+    return ret
+}
+
+_just "$@"
