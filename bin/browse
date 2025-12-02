@@ -1,0 +1,42 @@
+#!/bin/bash
+
+if [ "$#" -eq 0 ]; then
+    echo "Usage: $0 <url>"
+    exit 1
+fi
+
+weburl="$1"
+
+check_url() {
+    if ! echo "$1" | grep -qE "^https?://"; then
+        echo "Error - this doesn't look like a URL: $1"
+        exit 1
+    fi
+}
+
+open_in_default_browser() {
+    # Determine the operating system and open the URL in a web browser
+    os="$(uname)"
+    weburl="$1"
+
+    # Open the URL in a web browser
+    case "$os" in
+        "Linux")
+            # Check if 'xdg-open' is installed
+            if command -v xdg-open > /dev/null; then
+                xdg-open "$weburl"
+            else
+                x-www-browser "$weburl"
+            fi
+            ;;
+        "Darwin"|"FreeBSD"|"OpenBSD")
+            open "$weburl"
+            ;;
+        *)
+            echo "Unsupported operating system: $os"
+            ;;
+    esac
+}
+
+check_url "$weburl"
+open_in_default_browser "$weburl"
