@@ -18,6 +18,12 @@ Config sets Vim as an advanced editor, Neovim as IDE-like.
 - Windows `%USERPROFILE%\vimfiles\`
 - macOS `~/.vim/`
 
+### Plugins (`vim-plug`)
+
+- Linux `~/.vim/plugged`
+- Windows `%USERPROFILE%\vimfiles\plugged`
+- macOS `~/.vim/plugged`
+
 ## Neovim
 
 ### Configuration
@@ -33,6 +39,12 @@ Config sets Vim as an advanced editor, Neovim as IDE-like.
 - Linux `~/.config/nvim`
 - Windows `%AppData%\Local\nvim`
 - macOS `~/.config/nvim`
+
+### Plugins (`vim-plug`)
+
+- Linux `~/.config/nvim/plugged`
+- Windows `%AppData%\Local\nvim\plugged`
+- macOS `~/.config/nvim/plugged`
 
 ### GUI app
 
