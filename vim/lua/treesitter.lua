@@ -1,6 +1,6 @@
 
 -- Syntax highlighting
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   -- listed parsers that MUST always be installed
   ensure_installed = {
     'bash',
