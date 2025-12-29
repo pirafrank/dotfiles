@@ -338,7 +338,7 @@ args = ["-d", "Ubuntu-20.04", "sh -c 'cd $HOME;exec $SHELL'"]
 # Bindings
 #
 # Create custom Key bindings for Rio terminal
-# More information in: https://raphamorim.io/rio/docs/config/bindings
+# More information in: https://rioterm.com/docs/key-bindings#default
 #
 # Example:
 # [bindings]
@@ -349,8 +349,20 @@ args = ["-d", "Ubuntu-20.04", "sh -c 'cd $HOME;exec $SHELL'"]
 # ]
 [bindings]
 keys = [
+    # DO NOT override default key bindings to avoid bugs!
     { key = "v", with = "control", action = "Paste" },
-    { key = "v", with = "control | shift", action = "none" },
+    #{ key = "v", with = "control | shift", action = "none" },
+    { key = "c", with = "control | shift", action = "Copy" },
+    { key = "left", with = "control | shift", action = "SelectNextTab" },
+    { key = "right", with = "control | shift", action = "SelectPrevTab" },
+    { key = "n", with = "control | shift", action = "CreateWindow" },
+    # commented due to bug: it's a default and if written here it opens/closes two tabs at once.
+    #{ key = "t", with = "control | shift", action = "CreateTab" },
+    #{ key = "w", with = "control | shift", action = "CloseTab" },
+    { key = "v", with = "control | shift", action = "SplitRight" },
+    { key = "h", with = "control | shift", action = "SplitDown" },
+    # commented due to bug: it's default and it won't work if overridden
+    #{ key = "space", with = "control | shift", action = "ToggleVIMode" },
 ]
 
 # Log level
