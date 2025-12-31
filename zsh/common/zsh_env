@@ -36,6 +36,7 @@ path=(
   $HOME/dotfiles/bin
   /opt/local/{bin,sbin}
   /usr/local/{bin,sbin}
+  /usr/{bin,sbin}
   $path
 )
 
