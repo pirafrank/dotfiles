@@ -1,21 +1,14 @@
 -- override this function to show symlink target in bottom status bar
-function Status:name()
-	local h = self._tab.current.hovered
-	if not h then
-		return ui.Line {}
+-- lines below from taken from here and edited to work:
+-- https://yazi-rs.github.io/docs/tips#symlink-in-status
+Status:children_add(function(self)
+	local h = self._current.hovered
+	if h and h.link_to then
+		return " -> " .. tostring(h.link_to)
+	else
+		return ""
 	end
-
-  -- commented because of lines below
-	--return ui.Line(" " .. h.name)
-
-  -- lines below from taken from here and edited to work:
-  -- https://yazi-rs.github.io/docs/tips#symlink-in-status
-  local linked = ""
-  if h.link_to ~= nil then
-    linked = " -> " .. tostring(h.link_to)
-  end
-  return ui.Line(" " .. h.name .. linked)
-end
+end, 3300, Status.LEFT)
 
 -- additional function to show permissions in status bar (right side)
 Status:children_add(function()
@@ -33,5 +26,5 @@ Status:children_add(function()
 end, 500, Status.RIGHT)
 
 -- git integration
-require("git"):setup()
+--require("git"):setup()
 
