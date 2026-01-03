@@ -25,6 +25,13 @@ Status:children_add(function()
 	}
 end, 500, Status.RIGHT)
 
+-- what-size integration
+require("what-size"):setup({
+    priority = 400,
+    LEFT = "",
+    RIGHT = " ",
+})
+
 -- git integration
 --require("git"):setup()
 
