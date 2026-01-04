@@ -19,6 +19,7 @@ function _bw {
   case $state in
     cmnds)
       commands=(
+        "sdk-version:Print the SDK version."
         "login:Log into a user account."
         "logout:Log out of the current user account."
         "lock:Lock the vault and destroy active session keys."
@@ -30,7 +31,6 @@ function _bw {
         "update:Check for updates."
         "completion:Generate shell completions."
         "status:Show server, last sync, user information, and vault status."
-        "serve:Start a RESTful API webserver."
         "list:List an array of objects from the vault."
         "get:Get an object from the vault."
         "create:Create an object in the vault."
@@ -40,16 +40,21 @@ function _bw {
         "move:Move an item to an organization."
         "confirm:Confirm an object to the organization."
         "import:Import vault data from a file."
-        "export:Export vault data to a CSV or JSON file."
+        "export:Export vault data to a CSV, JSON or ZIP file."
         "share:--DEPRECATED-- Move an item to an organization."
         "send:Work with Bitwarden sends. A Send can be quickly created using this command or subcommands can be used to fine-tune the Send"
         "receive:Access a Bitwarden Send from a url"
+        "device-approval:Manage device approval requests sent to organizations that use SSO with trusted devices."
+        "serve:Start a RESTful API webserver."
       )
       _describe "command" commands
       ;;
   esac
 
   case "$words[1]" in
+    sdk-version)
+      _bw_sdk-version
+      ;;
     login)
       _bw_login
       ;;
@@ -82,9 +87,6 @@ function _bw {
       ;;
     status)
       _bw_status
-      ;;
-    serve)
-      _bw_serve
       ;;
     list)
       _bw_list
@@ -125,14 +127,24 @@ function _bw {
     receive)
       _bw_receive
       ;;
+    device-approval)
+      _bw_device-approval
+      ;;
+    serve)
+      _bw_serve
+      ;;
   esac
+}
+
+function _bw_sdk-version {
+  
 }
 
 function _bw_login {
   _arguments -C \
     '--method[Two-step login method.]' \
     '--code[Two-step login code.]' \
-    '--sso[Log in with Single-Sign On.]' \
+    '--sso[Log in with Single-Sign On with optional organization identifier.]' \
     '--apikey[Log in with an Api Key.]' \
     '--passwordenv[Environment variable storing your password]' \
     '--passwordfile[Path to a file containing your password as its first line]' \
@@ -175,9 +187,12 @@ function _bw_generate {
     '(-p --passphrase)'{-p,--passphrase}'[Generate a passphrase.]' \
     '--length[Length of the password.]' \
     '--words[Number of words.]' \
+    '--minNumber[Minimum number of numeric characters.]' \
+    '--minSpecial[Minimum number of special characters.]' \
     '--separator[Word separator.]' \
     '(-c --capitalize)'{-c,--capitalize}'[Title case passphrase.]' \
     '--includeNumber[Passphrase includes number.]' \
+    '--ambiguous[Avoid ambiguous characters.]' \
     '(-h --help)'{-h,--help}'[output usage information]' \
     "*::arg:->args"
 }
@@ -212,15 +227,6 @@ function _bw_completion {
 
 function _bw_status {
   
-}
-
-function _bw_serve {
-  _arguments -C \
-    '--hostname[The hostname to bind your API webserver to.]' \
-    '--port[The port to run your API webserver on.]' \
-    '--disable-origin-protection[If set, allows requests with origin header. Warning, this option exists for backwards compatibility reasons and exposes your environment to known CSRF attacks.]' \
-    '(-h --help)'{-h,--help}'[output usage information]' \
-    "*::arg:->args"
 }
 
 function _bw_list {
@@ -312,6 +318,8 @@ function _bw_send {
   _arguments -C \
     '(-f --file)'{-f,--file}'[Specifies that <data> is a filepath]' \
     '(-d --deleteInDays)'{-d,--deleteInDays}'[The number of days in the future to set deletion date, defaults to 7]' \
+    '--password[optional password to access this Send. Can also be specified in JSON.]' \
+    '--email[optional emails to access this Send. Can also be specified in JSON.]' \
     '(-a --maxAccessCount)'{-a,--maxAccessCount}'[The amount of max possible accesses.]' \
     '--hidden[Hide <data> in web by default. Valid only if --file is not set.]' \
     '(-n --name)'{-n,--name}'[The name of the Send. Defaults to a guid for text Sends and the filename for files.]' \
@@ -397,7 +405,6 @@ function _bw_send_create {
     '--file[file to Send. Can also be specified in parent'"'"'s JSON.]' \
     '--text[text to Send. Can also be specified in parent'"'"'s JSON.]' \
     '--hidden[text hidden flag. Valid only with the --text option.]' \
-    '--password[optional password to access this Send. Can also be specified in JSON]' \
     '(-h --help)'{-h,--help}'[output usage information]' \
     "*::arg:->args"
 }
@@ -424,6 +431,85 @@ function _bw_receive {
     '--passwordfile[Path to a file containing the Sends password as its first line]' \
     '--obj[Return the Send'"'"'s json object rather than the Send's content]' \
     '--output[Specify a file path to save a File-type Send to]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_device-approval {
+  local -a commands
+
+  case $state in
+    cmnds)
+      commands=(
+        "list:List all pending requests for an organization"
+        "approve:Approve a pending request"
+        "approve-all:Approve all pending requests for an organization"
+        "deny:Deny a pending request"
+        "deny-all:Deny all pending requests for an organization"
+      )
+      _describe "command" commands
+      ;;
+  esac
+
+  case "$words[1]" in
+    list)
+      _bw_device-approval_list
+      ;;
+    approve)
+      _bw_device-approval_approve
+      ;;
+    approve-all)
+      _bw_device-approval_approve-all
+      ;;
+    deny)
+      _bw_device-approval_deny
+      ;;
+    deny-all)
+      _bw_device-approval_deny-all
+      ;;
+  esac
+}
+
+function _bw_device-approval_list {
+  _arguments -C \
+    '--organizationid[The organization id (required)]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_device-approval_approve {
+  _arguments -C \
+    '--organizationid[The organization id (required)]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_device-approval_approve-all {
+  _arguments -C \
+    '--organizationid[The organization id (required)]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_device-approval_deny {
+  _arguments -C \
+    '--organizationid[The organization id (required)]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_device-approval_deny-all {
+  _arguments -C \
+    '--organizationid[The organization id (required)]' \
+    '(-h --help)'{-h,--help}'[output usage information]' \
+    "*::arg:->args"
+}
+
+function _bw_serve {
+  _arguments -C \
+    '--hostname[The hostname to bind your API webserver to.]' \
+    '--port[The port to run your API webserver on.]' \
+    '--disable-origin-protection[If set, allows requests with origin header. Warning, this option exists for backwards compatibility reasons and exposes your environment to known CSRF attacks.]' \
     '(-h --help)'{-h,--help}'[output usage information]' \
     "*::arg:->args"
 }
