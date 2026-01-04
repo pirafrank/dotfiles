@@ -105,6 +105,10 @@ elif [ "$(command -v fasd)" ]; then
   eval "$(fasd --init auto)"
 fi
 
+if [ "$(command -v direnv)" ]; then
+  eval "$(direnv hook zsh)"
+fi
+
 # zellij custom config path
 export ZELLIJ_CONFIG_DIR="$HOME/dotfiles/zellij"
 
