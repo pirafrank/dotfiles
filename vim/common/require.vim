@@ -13,3 +13,5 @@ elseif is_vim
 endif
 
 let is_windows = has('win32') || has('win64') || has('win16') || has('win95')
+let is_macos = has('mac')
+

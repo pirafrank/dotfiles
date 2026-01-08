@@ -13,6 +13,9 @@ endfunction
 " Additional dependencies to call before loading the plugins
 if is_windows && is_nvim
   let g:sqlite_clib_path = stdpath('config').'/sqlite3.dll'
+elseif is_macos && is_nvim
+  " we use macports path
+  let g:sqlite_clib_path = '/opt/local/lib/libsqlite3.dylib'
 endif
 
 """ plugins
