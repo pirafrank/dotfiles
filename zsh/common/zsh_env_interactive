@@ -105,6 +105,7 @@ elif [ "$(command -v fasd)" ]; then
   eval "$(fasd --init auto)"
 fi
 
+# direnv hook for zsh
 if [ "$(command -v direnv)" ]; then
   eval "$(direnv hook zsh)"
 fi
@@ -115,6 +116,11 @@ export ZELLIJ_CONFIG_DIR="$HOME/dotfiles/zellij"
 # Secure ShellFish iOS app integration
 if [[ -f "$HOME/.shellfishrc" ]]; then
   source $HOME/.shellfishrc
+fi
+
+# opencode cli
+if [ -d "$HOME/.opencode/bin" ]; then
+  export PATH="$HOME/.opencode/bin:$PATH"
 fi
 
 # Added by serverless binary installer
