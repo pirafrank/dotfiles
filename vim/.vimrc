@@ -128,7 +128,7 @@ call plug#begin($BASE.'/plugged')
 
   " Syntax highlighting
   Plug 'sheerun/vim-polyglot', Cond(is_vim)              " syntax highlighting
-  Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim, {'do': ':TSUpdate'})  " syntax highlighting
+  Plug 'nvim-treesitter/nvim-treesitter', Cond(is_nvim, {'branch': 'master', 'do': ':TSUpdate'})  " syntax highlighting
 
   " Linters
   Plug 'dense-analysis/ale', Cond(is_vim)                " linting
