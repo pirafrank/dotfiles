@@ -35,9 +35,10 @@ augroup javaconf
   autocmd FileType java set expandtab
   autocmd FileType java set softtabstop=4
   autocmd FileType java set wrap
-  autocmd FileType java set foldmethod=indent
-  autocmd FileType java set foldlevel=99
-  autocmd FileType java set foldenable
+  " Folding is handled by treesitter in nvim
+  " autocmd FileType java set foldmethod=indent
+  " autocmd FileType java set foldlevel=99
+  " autocmd FileType java set foldenable
   autocmd FileType java set encoding=utf-8
   " auto-close HTML tags
   autocmd FileType java set matchpairs+=<:>
@@ -57,7 +58,8 @@ augroup pyconf
   autocmd FileType python set smarttab
   autocmd FileType python set expandtab
   autocmd FileType python set softtabstop=4
-  autocmd FileType python setlocal foldmethod=syntax
+  " Folding is handled by treesitter in nvim
+  " autocmd FileType python setlocal foldmethod=syntax
   " 'cinwords' Defines keywords that start an extra indent in the next line
   autocmd FileType python setlocal cinwords=if,elif,else,for,while,try,except,finally,def,class,with
   " run code by pressing Ctrl+r in normal mode

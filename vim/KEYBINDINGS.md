@@ -26,6 +26,13 @@ These keybindings work in both Vim and Neovim.
 |Keybinding|Mode|Action|
 |---|---|---|
 |`<leader>z`|Normal|Toggle fold under cursor|
+|`za`|Normal|Toggle fold under cursor|
+|`zc`|Normal|Close fold under cursor|
+|`zo`|Normal|Open fold under cursor|
+|`zM`|Normal|Close all folds|
+|`zR`|Normal|Open all folds|
+|`zj`|Normal|Move to next fold|
+|`zk`|Normal|Move to previous fold|
 
 ### Search & Highlighting
 
