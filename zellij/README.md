@@ -13,7 +13,11 @@
 - <https://zellij.dev/documentation/configuration.html>
 - <https://github.com/zellij-org/zellij/tree/main/example>
 
-## Setup
+## Keybindings
+
+Check the [KEYBINDINGS](./KEYBINDINGS.md) file.
+
+## How to setup
 
 Symlink config
 

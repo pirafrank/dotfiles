@@ -10,6 +10,7 @@ I use `less` as pager.
 
 `PATH` is populated as follows (in order):
 
+  - `$HOME/.local/share/poof/bin`
   - `$HOME/bin2`
   - `$HOME/dotfiles/bin`
   - `$HOME/.local/bin`
@@ -104,60 +105,9 @@ Check content of:
 - `zsh/common/zsh_aliases` file for a full list of aliases.
 - `zsh/autoloaded` dir for all available functions
 
-## VIM
+## Neovim (and VIM)
 
-### Configuration paths
-
-|Editor|Item|Platform|Path|
-|---|---|---|---|
-|vim|config|*nix|`$HOME/.vimrc`|
-|vim|dir|*nix|`$HOME/.vim`|
-|vim|config|Win|`$env:USERPROFILE\.vimrc`|
-|vim|dir|Win|`$env:USERPROFILE\vimfiles`|
-|nvim|config|*nix|`$XDG_CONFIG_HOME/nvim/init.vim`|
-|nvim|dir|*nix|`$XDG_CONFIG_HOME/nvim`|
-|nvim|config|Win|`$env:USERPROFILE\AppData\Local\nvim\init.vim`|
-|nvim|dir|Win|`$env:USERPROFILE\AppData\Local\nvim`|
-
-`XDG_CONFIG_HOME` is usually set to: `$HOME/.config`.
-
-### Mappings
-
-|Name|Action|
-|---|---|
-|`jj`|`Esc`|
-|`ctrl+s`|rectangular selection|
-|`ctrl+t`|toggle number and sign column|
-|`ctrl+y`|toggle paste mode (avoid tab increments while pasting content)|
-|`F9`|open tagbar|
-
-### Splits
-
-|Name|Action|
-|---|---|
-|`:split` or `:sp`|create horizontal split|
-|`:vsplit` or `:vs`|create vertical split|
-|`:q`|close focused split|
-|`ctrl+w` `ctrl+w`|cycle between open splits|
-|`ctrl+shift+j`|move to left split|
-|`ctrl+w` then `ctrl+j`|move to left split (default)|
-|`ctrl+shift+k`|move to top split|
-|`ctrl+w` then `ctrl+k`|move to top split (default)|
-|`ctrl+shift+l`|move to right split|
-|`ctrl+w` then `ctrl+l`|move to right split (default)|
-|`ctrl+shift+h`|move to bottom split|
-|`ctrl+w` then `ctrl+h`|move to bottom split (default)|
-|`ctrl+w >`|resize a vertical split to the right by a column|
-|`ctrl+w 5<`|resize a vertical split to the left by 5 columns|
-|`ctrl+w 5>`|resize a vertical split to the right by 5 columns|
-|`ctrl+w <`|resize a vertical split to the left by a column|
-|`ctrl+w +`|resize an horizontal split by one line|
-|`ctrl+w -`|resize an horizontal split by one line|
-|`ctrl+w 5+`|resize an horizontal split by 5 lines|
-|`ctrl+w 5-`|resize an horizontal split by 5 lines|
-|`ctrl+w =`|resize to equal dimensions|
-
-More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
+Check the VIM/Neovim [README](vim/README.md) for detailed information about Vim and Neovim configurations, commands, and keybindings.
 
 ## tmux
 
@@ -166,3 +116,6 @@ More about splits [here](https://linuxhandbook.com/split-vim-workspace/).
 |`tat`|list available sessions|
 |`tat SESSION_NAME`|attach to session, create if it doesn't exist|
 
+## zellij
+
+Check [README](zellij/README.md) and [KEYBINDINGS](zellij/KEYBINDINGS.md) files.
