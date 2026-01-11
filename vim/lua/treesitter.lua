@@ -1,62 +1,53 @@
+-- Treesitter configuration for the latest nvim-treesitter API
+-- This configuration is compatible with nvim-treesitter v2.0+
 
--- Syntax highlighting
-require('nvim-treesitter.configs').setup {
-  -- listed parsers that MUST always be installed
-  ensure_installed = {
-    'bash',
-    'c',
-    'css',
-    'dockerfile',
-    'go',
-    'gomod',
-    'graphql',
-    'html',
-    'kdl',
-    'java',
-    'javascript',
-    'markdown',
-    'regex',
-    'json',
-    'lua',
-    'python',
-    'rust',
-    'scss',
-    'tsx',
-    'typescript',
-    'vim',
-    'vue',
-    'yaml',
-  },
+local ts = require('nvim-treesitter')
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Setup nvim-treesitter (optional, only needed if you want to change install_dir)
+-- Default install_dir is vim.fn.stdpath('data') .. '/site'
+ts.setup({
+  -- Directory to install parsers and queries to
+  -- install_dir = vim.fn.stdpath('data') .. '/site',
+})
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have 'tree-sitter' CLI installed locally
-  auto_install = true,
-
-  ignore_install = {},
-
-  highlight = {
-    enable = true,
-    disable = {},
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` ifou depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow downour editor, andou may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-
-  -- Incremental selection based on the named nodes from the grammar
-  incremental_selection = {
-    enable = true,
-  },
-
-  -- Indentation based on treesitter for the = operator.
-  -- NOTE: This is an experimental feature.
-  indent = {
-    enable = true,
-  },
-
+-- List of parsers to install
+local parsers = {
+  'bash',
+  'c',
+  'css',
+  'dockerfile',
+  'go',
+  'gomod',
+  'graphql',
+  'html',
+  'java',
+  'javascript',
+  'json',
+  'kdl',
+  'lua',
+  'markdown',
+  'markdown_inline',
+  'python',
+  'query',
+  'regex',
+  'rust',
+  'scss',
+  'tsx',
+  'typescript',
+  'vim',
+  'vimdoc',
+  'vue',
+  'yaml',
 }
 
+-- Install parsers asynchronously
+-- This will only install parsers that are not already installed
+ts.install(parsers)
+
+-- Enable treesitter-based folding
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldenable = false  -- Start with folds open
+
+vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo[0][0].foldmethod = 'expr'
