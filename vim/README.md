@@ -176,8 +176,18 @@ Neovim autocomplete draws from these sources (in priority order):
 
 ## Debug
 
+### Startup times
+
 ```sh
 go install github.com/rhysd/vim-startuptime@latest
 vim-startuptime
 vim-startuptime -vimpath nvim
+```
+
+### CopilotChat config
+
+Debug CopilotChat config and model in use.
+
+```lua
+:lua print(vim.inspect(require("CopilotChat.config")))
 ```
