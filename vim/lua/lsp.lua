@@ -21,13 +21,19 @@ require("mason-lspconfig").setup({
 
 -- vim diagnostics
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
 -- disable in-line diagnostics
 -- we have icons in the gutter and floating pane for cursor over line
-vim.diagnostic.config({virtual_text = false})
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.Error,
+      [vim.diagnostic.severity.WARN] = signs.Warn,
+      [vim.diagnostic.severity.HINT] = signs.Hint,
+      [vim.diagnostic.severity.INFO] = signs.Info,
+    }
+  }
+})
 
 -- After setting up mason-lspconfig you may set up servers via lspconfig,
 -- so this file needs to be required before setting up language servers.
