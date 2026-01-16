@@ -14,8 +14,9 @@ config.front_end = 'OpenGL'
 
 -- config.font = wezterm.font 'MesloLGM Nerd Font'
 config.font = wezterm.font_with_fallback {
-  'MesloLGM Nerd Font',
+  'JetBrainsMono Nerd Font',
   'JetBrains Mono',
+  'MesloLGM Nerd Font',
   'Courier New'
 }
 config.font_size = 10.0
@@ -23,13 +24,26 @@ config.font_size = 10.0
 -- change the color scheme:
 -- list of color schemes available here:
 --   https://wezfurlong.org/wezterm/colorschemes/index.html
-config.color_scheme = 'OneHalfDark'
+--config.color_scheme = 'OneHalfDark'
+config.color_scheme = 'Dracula'
 
-config.window_background_opacity = 0.95
+--config.window_background_opacity = 0.95
+config.window_background_opacity = 1.0
 
--- Set the initial window size
-config.initial_cols = 150
-config.initial_rows = 38
+-- Window padding (matching Rio's padding-y = [5, 5])
+config.window_padding = {
+  left = 5,
+  right = 5,
+  top = 5,
+  bottom = 5,
+}
+
+-- Set the initial window size (Rio uses 960x600)
+config.initial_cols = 130
+config.initial_rows = 34
+
+-- Disable cursor blinking
+config.default_cursor_style = 'SteadyBlock'
 
 -- config and use only visual bell
 config.audible_bell = "Disabled"

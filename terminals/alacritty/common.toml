@@ -10,11 +10,16 @@
 
 [window]
 # windows.opacity since version 0.10.0
-opacity = 0.95
+opacity = 1.0
+
+# Padding matching Rio's padding-y = [5, 5]
+[window.padding]
+x = 5
+y = 5
 
 [window.dimensions]
-columns = 140
-lines = 48
+columns = 130
+lines = 34
 
 #
 # Fonts
@@ -22,17 +27,29 @@ lines = 48
 
 [font]
 size = 10
+# use a custom built-in font for box drawing characters
+builtin_box_drawing = true
+
+# Font offset for better spacing
+[font.offset]
+x = 1
+y = 0
+
+# Glyph offset for better spacing
+[font.glyph_offset]
+x = 0
+y = 0
 
 [font.bold]
-family = "MesloLGS Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "MesloLGS Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "MesloLGS Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 #

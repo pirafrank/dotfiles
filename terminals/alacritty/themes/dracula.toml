@@ -1,0 +1,45 @@
+
+# Dracula theme
+# Official Dracula color scheme: https://draculatheme.com/
+
+[colors.primary]
+background = "#282a36"
+foreground = "#f8f8f2"
+
+[colors.cursor]
+text = "#282a36"
+cursor = "#f8f8f2"
+
+[colors.selection]
+text = "#f8f8f2"
+background = "#44475a"
+
+[colors.normal]
+black = "#000000"
+red = "#ff5555"
+green = "#50fa7b"
+yellow = "#f1fa8c"
+blue = "#bd93f9"
+magenta = "#ff79c6"
+cyan = "#8be9fd"
+white = "#bbbbbb"
+
+[colors.bright]
+black = "#555555"
+red = "#ff6e67"
+green = "#5af78e"
+yellow = "#f4f99d"
+blue = "#caa9fa"
+magenta = "#ff92d0"
+cyan = "#9aedfe"
+white = "#ffffff"
+
+[colors.dim]
+black = "#000000"
+red = "#c93f3f"
+green = "#3ec470"
+yellow = "#c0c76f"
+blue = "#9478c7"
+magenta = "#c960a0"
+cyan = "#6fb9ca"
+white = "#949494"
