@@ -1,5 +1,15 @@
 """ colorscheme settings
 
+" you can use default theme and customize terminal colors instead.
+" just be sure to disabled termguicolors.
+"color default
+
+" enable 24-bit color support instead of 256 color palette.
+" do not enable this if you want to use 16-color terminal schemes.
+set termguicolors
+" fallback for terminals which do not support true colors, use 256 colors instead of 16
+set t_Co=256
+
 " set colorscheme
 "color molokai
 "color dracula
@@ -8,8 +18,8 @@ silent! color onedark
 " my 2nd fav color scheme
 "let g:tokyonight_style = 'storm' " available: night, storm
 "let g:tokyonight_enable_italic = 1
+"let g:airline_theme = 'onedark'
 "color tokyonight
-
 
 " settings to use vim-plastic colorscheme
 " (live in plastic, it's fantastic)
@@ -33,10 +43,6 @@ silent! color onedark
 " set one of these and customize your terminal theme instead.
 "color noctu
 "color dim
-
-" further theme customization
-" you can use default theme and customize terminal colors instead
-"color default
 
 " keep line numbers grey
 highlight LineNr ctermfg=grey

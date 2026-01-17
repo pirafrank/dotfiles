@@ -55,9 +55,8 @@ set clipboard=unnamed
 
 """ terminal
 
-set termguicolors
+" smoother scrolling and screen redrawing
 set ttyfast
-set t_Co=256
 
 
 """ search

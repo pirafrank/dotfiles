@@ -121,7 +121,7 @@ call plug#begin($BASE.'/plugged')
   "Plug 'noahfrederick/vim-hemisu'
   "Plug 'sainnhe/sonokai'
   "Plug 'hzchirs/vim-material'
-  "Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
+  Plug 'folke/tokyonight.nvim', Cond(is_nvim, { 'branch': 'main' })
   "Plug 'ghifarit53/tokyonight-vim', Cond(is_vim)
 
   """""""""""""""" Language support (syntax, linting, etc.) """"""""""""""""""
@@ -203,11 +203,12 @@ source ~/dotfiles/vim/common/ctags.vim
 source ~/dotfiles/vim/common/gui.vim
 
 source ~/dotfiles/vim/plugins/common.vim
-source ~/dotfiles/vim/plugins/colors.vim
 
 if is_vim
+  source ~/dotfiles/vim/plugins/colors.vim
   source ~/dotfiles/vim/plugins/vim_only.vim
 elseif is_nvim
+  lua require('colors')
   lua require('treesitter')
   lua require('filetypes')
   lua require('plugins')
