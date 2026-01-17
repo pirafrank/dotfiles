@@ -1,6 +1,11 @@
 
 """ vim-only plugin settings and mappings """
 
+""" airline
+"display all buffers in airline when there's only 1 tab open
+let g:airline#extensions#tabline#enabled = 1
+
+
 """ fzf config
 " set fzf runtime path
 set rtp+=~/.fzf

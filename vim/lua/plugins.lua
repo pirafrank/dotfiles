@@ -24,6 +24,10 @@ require('gitsigns').setup()
 -- Dressing UI improvements
 require("dressing").setup()
 
+-- Lualine
+local lualine_config = require('lualine_config')
+require('lualine').setup(lualine_config)
+
 -- Neo-tree
 require('neo-tree').setup {
   filesystem = {

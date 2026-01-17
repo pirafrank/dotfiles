@@ -65,9 +65,10 @@ call plug#begin($BASE.'/plugged')
   " Bufferline
   " in vim bufferline is provided by airline
 
-  " Status bar
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  " Status line
+  Plug 'vim-airline/vim-airline', Cond(is_vim)
+  Plug 'vim-airline/vim-airline-themes', Cond(is_vim)
+  Plug 'nvim-lualine/lualine.nvim', Cond(is_nvim)
 
   " Git
   Plug 'tpope/vim-fugitive'                   " the almost illegal git wrapper
