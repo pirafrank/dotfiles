@@ -1,0 +1,44 @@
+# Challenger Deep iTerm2 theme for Alacritty (TOML format)
+# Exact port matching the official challenger-deep-theme colors
+
+[colors.primary]
+background = "#1e1c31"
+foreground = "#cbe3e7"
+
+[colors.cursor]
+text = "#1e1c31"
+cursor = "#fbfcfc"
+
+[colors.selection]
+text = "#cbe3e7"
+background = "#100e23"
+
+[colors.normal]
+black   = "#100e23"
+red     = "#ff8080"
+green   = "#95ffa4"
+yellow  = "#ffe9aa"
+blue    = "#91ddff"
+magenta = "#c991e1"
+cyan    = "#aaffe4"
+white   = "#cbe3e7"
+
+[colors.bright]
+black   = "#565575"
+red     = "#ff8080"
+green   = "#95ffa4"
+yellow  = "#ffe9aa"
+blue    = "#91ddff"
+magenta = "#c991e1"
+cyan    = "#aaffe4"
+white   = "#fbfcfc"
+
+[colors.dim]
+black   = "#100e23"
+red     = "#b33636"
+green   = "#6bb378"
+yellow  = "#b3a577"
+blue    = "#659cb3"
+magenta = "#8d67a0"
+cyan    = "#77b3a0"
+white   = "#8b9cad"

@@ -26,6 +26,7 @@ config.font_size = 10.0
 --   https://wezfurlong.org/wezterm/colorschemes/index.html
 --config.color_scheme = 'OneHalfDark'
 config.color_scheme = 'Dracula'
+--config.color_scheme = 'ChallengerDeep'
 
 --config.window_background_opacity = 0.95
 config.window_background_opacity = 1.0

@@ -4,7 +4,8 @@ import = [
   "~\\dotfiles\\terminals\\alacritty\\common.toml",
   "~\\dotfiles\\terminals\\alacritty\\keybindings.toml",
   # import themes
-  "~\\dotfiles\\terminals\\alacritty\\themes\\dracula.toml"
+  #"~\\dotfiles\\terminals\\alacritty\\themes\\dracula.toml"
+  "~\\dotfiles\\terminals\\alacritty\\themes\\challenger_deep.toml"
 ]
 
 [terminal]
