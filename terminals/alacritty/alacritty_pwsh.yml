@@ -1,8 +1,0 @@
-shell:
-    program: "pwsh.exe"
-
-import:
-    # import common config
-    - ~\\dotfiles\\terminals\\alacritty\\common.yml
-    # import themes
-    - "~\\dotfiles\\terminals\\alacritty\\themes\\paprika-by-pirafrank.yml"
