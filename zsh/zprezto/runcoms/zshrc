@@ -7,6 +7,18 @@ source $ZPLUG_HOME/init.zsh
 # uncomment the line below, then source .zshrc and run zprof.
 #zmodload zsh/zprof
 
+# Fix for dirty escape sequences when TUI apps exit (lazygit, etc.)
+# Disable ZLE enhanced keyboard protocol to prevent escape sequences
+# from being echoed when TUI applications exit
+# This stops ^[[81;16;113;0;0;1_% sequences from appearing
+if [[ -o interactive ]]; then
+  # Query and consume any pending terminal responses
+  stty -echo 2>/dev/null
+  while read -t 0.001 -k 1 __discard 2>/dev/null; do :; done
+  stty echo 2>/dev/null
+  unset __discard
+fi
+
 # Load custom/env specific stuff that needs to be loaded BEFORE Powerlevel10k.
 # This is needed to enable Powerlevel10k instant prompt. Do this only if file exists.
 if [[ -a $HOME/.zsh_custom_pre ]]; then
@@ -111,6 +123,16 @@ fi
 
 # Load zplug
 zplug load
+
+# Fix for dirty escape sequences after TUI apps (lazygit, etc.) exit
+# This prevents keyboard protocol query responses from being echoed
+function _fix_terminal_quirks() {
+  # Consume any lingering escape sequences from stdin
+  while read -t 0.001 -k 1 2>/dev/null; do :; done
+}
+# Run after every command to clean up terminal state
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _fix_terminal_quirks
 
 # load function to run every time to cd into a directory
 source "$HOME/dotfiles/zsh/common/chpwd.zsh"
