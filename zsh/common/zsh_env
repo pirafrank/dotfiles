@@ -31,7 +31,6 @@ export DOTFILES="$HOME/dotfiles"
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/.local/share/poof/bin
   $HOME/bin2
   $HOME/.local/bin
   $HOME/dotfiles/bin
@@ -200,4 +199,12 @@ if [[ -d "$HOME/.rvm" ]]; then
 elif [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
   source /usr/local/rvm/scripts/rvm
 fi
+
+# poof init
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+  export POOF_ROOT="$HOME/Library/Application Support/poof"
+elif [[ "$(uname -s)" == 'Linux' ]]; then
+  export POOF_ROOT="$HOME/.local/share/poof"
+fi
+export PATH="$POOF_ROOT/bin:$PATH"
 
