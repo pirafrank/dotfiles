@@ -29,9 +29,16 @@ export DOTFILES="$HOME/dotfiles"
 #   $cdpath
 # )
 
+# poof root
+if [[ "$(uname -s)" == 'Darwin' ]]; then
+  export POOF_ROOT="$HOME/Library/Application Support/poof"
+elif [[ "$(uname -s)" == 'Linux' ]]; then
+  export POOF_ROOT="$HOME/.local/share/poof"
+fi
+
 # Set the list of directories that Zsh searches for programs.
 path=(
-  $HOME/.local/share/poof/bin
+  $POOF_ROOT/bin
   $HOME/bin2
   $HOME/.local/bin
   $HOME/dotfiles/bin
