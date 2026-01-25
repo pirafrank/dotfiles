@@ -113,10 +113,17 @@ dap.adapters.codelldb = {
 }
 --]]
 
--- *** LLDB Adapter Alias ***
+-- *** LLDB Adapter Configuration ***
 -- Many launch.json files use "type": "lldb" instead of "type": "codelldb"
--- Create an alias so both work
-dap.adapters.lldb = dap.adapters.codelldb
+-- Define lldb adapter explicitly to use codelldb
+dap.adapters.lldb = {
+  type = 'server',
+  port = "${port}",
+  executable = {
+    command = vim.fn.stdpath("data") .. '/mason/bin/codelldb',
+    args = {"--port", "${port}"},
+  }
+}
 
 -- *** Rust DAP Configuration ***
 -- Rustaceanvim provides better integration with rust-analyzer
