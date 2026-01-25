@@ -130,22 +130,45 @@ dap.adapters.lldb = {
 -- and sets up DAP automatically, so we don't configure it here manually.
 -- The configuration is in languages.lua where Rustaceanvim is set up.
 
--- However, if you want to add custom configurations for Rust, you can do it like this:
---[[
+-- Additional manual configurations for Rust debugging with custom arguments
 dap.configurations.rust = {
   {
-    name = 'Launch',
-    type = 'codelldb',
+    name = 'Launch with arguments',
+    type = 'lldb',
     request = 'launch',
     program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+      -- Get the cargo workspace root
+      local cargo_toml = vim.fn.findfile('Cargo.toml', '.;')
+      if cargo_toml == '' then
+        vim.notify('Cargo.toml not found', vim.log.levels.ERROR)
+        return nil
+      end
+
+      local workspace_root = vim.fn.fnamemodify(cargo_toml, ':h')
+      local package_name = vim.fn.fnamemodify(workspace_root, ':t')
+
+      return vim.fn.input('Path to executable: ', workspace_root .. '/target/debug/' .. package_name, 'file')
+    end,
+    args = function()
+      local args_string = vim.fn.input('Program arguments: ')
+      return vim.split(args_string, ' ')
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
-    args = {},
+    runInTerminal = false,
+  },
+  {
+    name = 'Attach to process',
+    type = 'lldb',
+    request = 'attach',
+    pid = function()
+      local output = vim.fn.system('ps aux | grep -v grep | grep target/debug')
+      print(output)
+      return tonumber(vim.fn.input('Process ID: '))
+    end,
+    cwd = '${workspaceFolder}',
   },
 }
---]]
 
 -- *** DAP Signs (Breakpoint Icons) ***
 -- Set icons for breakpoints in the sign column
