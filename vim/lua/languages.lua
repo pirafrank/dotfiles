@@ -64,11 +64,14 @@ vim.cmd [[
 
 -- This plugin automatically sets up nvim-lspconfig for rust_analyzer for you,
 -- so don't do that manually, as it causes conflicts.
+--
+-- config notes: https://github.com/LunarVim/starter.lvim/blob/rust-ide/config.lua
+--
 vim.g.rustaceanvim = {
   -- DAP (Debugger) configuration
   dap = {
     adapter = require('rustaceanvim.config').get_codelldb_adapter(
-      vim.fn.stdpath("data") .. "/mason/bin/codelldb",
+      vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/adapter/codelldb",
       vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/lldb/lib/liblldb.so"
     ),
   },
