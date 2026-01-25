@@ -116,11 +116,11 @@ map('t', '<C-t><C-t>', '<C-\\><C-n>:FloatermToggle<CR>', ns, 'Toggle Floaterm (t
 map('n', '<C-t><C-k>', ':FloatermKill<CR>', ns, 'Kill Floaterm')
 map('t', '<C-t><C-k>', '<C-\\><C-n>:FloatermKill<CR>', ns, 'Kill Floaterm (terminal mode)')
 
-map('n', '<F10>', ':FloatermPrev<CR>', ns, 'Switch to previous Floaterm')
-map('t', '<F10>', '<C-\\><C-n>:FloatermPrev<CR>', ns, 'Switch to previous Floaterm (terminal mode)')
+--map('n', '<F9>', ':FloatermPrev<CR>', ns, 'Switch to previous Floaterm')
+map('t', '<F9>', '<C-\\><C-n>:FloatermPrev<CR>', ns, 'Switch to previous Floaterm (terminal mode)')
 
-map('n', '<F11>', ':FloatermNext<CR>', ns, 'Switch to next Floaterm')
-map('t', '<F11>', '<C-\\><C-n>:FloatermNext<CR>', ns, 'Switch to next Floaterm (terminal mode)')
+--map('n', '<F10>', ':FloatermNext<CR>', ns, 'Switch to next Floaterm')
+map('t', '<F10>', '<C-\\><C-n>:FloatermNext<CR>', ns, 'Switch to next Floaterm (terminal mode)')
 
 map('n', '<F12>', ':FloatermToggle<CR>', ns, 'Toggle Floaterm')
 map('t', '<F12>', '<C-\\><C-n>:FloatermToggle<CR>', ns, 'Toggle Floaterm (terminal mode)')
