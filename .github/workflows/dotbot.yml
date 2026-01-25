@@ -18,6 +18,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Symlink dotfiles
+        run: |
+          ln -s /home/runner/work/dotfiles/dotfiles ~/dotfiles
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
