@@ -19,6 +19,14 @@
     - ~/.tmux/plugins          # tmux plugins
     - ~/.config/xplr           # xplr file manager config
     - ~/.config/xplr/plugins   # xplr file manager plugins dir
+    - ~/.config/yazi           # yazi file manager config
+    - ~/.config/yazi/plugins   # yazi file manager plugins
+    - ~/.config/yazi/flavors   # yazi file manager flavors
+    - ~/.config/zellij         # zellij terminal multiplexer config
+    - ~/.config/zellij/plugins # zellij plugins
+    - ~/.config/helix          # helix editor config
+    - ~/.config/television     # television launcher config
+    - ~/.config/television/cable # television cable configs
     - ~/.vim                   # vim data
     - ~/.vim/swap:
       mode: 0700
@@ -73,6 +81,14 @@
     ~/.config/neofetch/config.conf: neofetch/config.conf
     ~/.config/xplr/init.lua: xplr/init.lua
     ~/.config/xplr/plugins.lua: xplr/plugins.lua
+    ~/.config/yazi/init.lua: yazi/init.lua
+    ~/.config/yazi/yazi.toml: yazi/yazi.toml
+    ~/.config/yazi/keymap.toml: yazi/keymap.toml
+    ~/.config/yazi/theme.toml: yazi/theme.toml
+    ~/.config/zellij/config.kdl: zellij/config.kdl
+    ~/.config/helix/config.toml: helix/config.toml
+    ~/.config/helix/languages.toml: helix/languages.toml
+    ~/.config/television/config.toml: television/config.toml
     ~/.zlogin: zsh/zprezto/runcoms/zlogin
     ~/.zlogout: zsh/zprezto/runcoms/zlogout
     ~/.zpreztorc: zsh/zprezto/runcoms/zpreztorc
@@ -86,15 +102,37 @@
     ~/.config/gama/config.yaml: gama/config.yaml
 
 - shell:
-    - [/bin/bash ~/dotfiles/git/git_config.sh, Configuring git]
-    - [git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm, Cloning tmux plugin manager]
-    - [tmux new-session -d "sleep 1" && sleep 0.1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh, Installing tmux plugins]
-    - [wget https://gist.github.com/palmin/46c2d0f069d0ba6b009f9295d90e171a/raw/.shellfishrc -O ~/.shellfishrc, Downloading shellfishrc]
+    # zsh setup
+    - [/bin/bash ~/dotfiles/setups/zprezto.sh, Installing zprezto]
     # zprezto stuff - start
     - [git clone --recursive https://github.com/sorin-ionescu/prezto.git ~/.zprezto, Cloning prezto]
     - [(zsh -c 'setopt EXTENDED_GLOB ; export ZPREZTODIR=~/.zprezto ; cd $ZPREZTODIR ; git clone --recurse-submodules https://github.com/belak/prezto-contrib contrib'), Cloning prezto-contrib]
     - [touch ~/.zsh_custom_pre ~/.zsh_custom, Creating zsh custom files]
     # zprezto stuff - end
-    - [/bin/bash ~/dotfiles/yazi/install.sh, Installing Yazi TUI file manager]
+    # git config
+    - [/bin/bash ~/dotfiles/git/git_config.sh, Configuring git]
+    # tmux stuff - start
+    #- [git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm, Cloning tmux plugin manager]
+    #- [tmux new-session -d "sleep 1" && sleep 0.1 && ~/.tmux/plugins/tpm/scripts/install_plugins.sh, Installing tmux plugins]
+    # tmux stuff - end
+    # shellfishrc
+    - [wget https://gist.github.com/palmin/46c2d0f069d0ba6b009f9295d90e171a/raw/.shellfishrc -O ~/.shellfishrc, Downloading shellfishrc]
+    # setup scripts - start
+    - [/bin/bash ~/dotfiles/setups/bat.sh, Installing bat]
+    - [/bin/bash ~/dotfiles/setups/delta.sh, Installing delta]
+    - [/bin/bash ~/dotfiles/setups/fzf.sh, Installing fzf]
+    - [/bin/bash ~/dotfiles/setups/lazygit.sh, Installing lazygit]
+    - [/bin/bash ~/dotfiles/setups/neovim.sh, Installing neovim]
+    - [/bin/bash ~/dotfiles/setups/yq2.sh, Installing yq2]
+    - [/bin/bash ~/dotfiles/setups/zoxide.sh, Installing zoxide]
+    - [/bin/bash ~/dotfiles/setups/zellij.sh, Installing zellij]
+    # setup scripts - end
+    # yazi themes and plugins installations - start
+    - [git clone https://github.com/BennyOe/tokyo-night.yazi.git ~/.config/yazi/flavors/tokyo-night.yazi, Cloning yazi tokyo-night theme]
+    - [command -v ya >/dev/null && /bin/bash ~/dotfiles/yazi/install_plugins.sh, Installing Yazi TUI file manager plugins]
+    # yazi themes and plugins installations - end
+    - [/bin/bash ~/dotfiles/zellij/install.sh, Installing Zellij plugins]
+    #- [command -v lua >/dev/null && lua ~/dotfiles/xplr/clone_plugins.lua || echo "lua not installed, skipping xplr plugins", Installing xplr plugins]
+    # plugin installations - end
     # - [python3 -m pip install --upgrade pynvim, Installing pynvim for vim]
     # - [vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall, Installing vim plugins]

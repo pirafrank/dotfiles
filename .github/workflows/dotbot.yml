@@ -1,0 +1,32 @@
+name: Dotbot config test
+# Test configuration for Dotbot (https://github.com/anishathalye/dotbot)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'install.conf.yaml'
+      - '.github/workflows/dotbot.yml'
+  workflow_dispatch:
+
+jobs:
+  test-dotbot-config:
+    name: Dotbot Configuration Test
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Dotbot
+        run: |
+          python3 -m pip install pyyaml dotbot
+
+      - name: Test Dotbot configuration
+        run: |
+          dotbot -c install.conf.yaml -d $(pwd)
