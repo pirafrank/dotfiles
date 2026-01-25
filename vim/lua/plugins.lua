@@ -162,3 +162,7 @@ require("CopilotChat").setup {
 require('hop').setup{
     keys = 'etovxqpdygfblzhckisuran'
 }
+
+-- DAP (Debug Adapter Protocol)
+require('dap_config')
+

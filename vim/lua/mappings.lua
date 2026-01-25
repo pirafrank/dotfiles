@@ -41,7 +41,7 @@ map('n', '<leader>gg', tsb.live_grep, ns, "Git grep")
 -- vim pickers --
 map('n', '<leader>/', tsb.current_buffer_fuzzy_find, ns, "Fuzzy find in buffer")
 map('n', '<leader>b', tsb.buffers, ns, "Buffers")
-map('n', '<leader>r', tsb.oldfiles, ns, "Recent files")
+map('n', '<leader>re', tsb.oldfiles, ns, "Recent files")
 
 -- vim commands and keymaps
 map('n', '<leader>hh', tsb.help_tags, ns, "Help tags")
@@ -141,3 +141,55 @@ map('v', '<leader>ccf', ':CopilotChatFix<CR>', ns, "Copilot Chat fix")
 -- copilot chat explain
 map('n', '<leader>cce', ':CopilotChatExplain<CR>', ns, "Copilot Chat explain")
 map('v', '<leader>cce', ':CopilotChatExplain<CR>', ns, "Copilot Chat explain")
+
+--
+-- DAP (Debugger)
+--
+
+-- Start/Continue debugging (F5 like VSCode)
+map('n', '<F5>', ':DapContinue<CR>', ns, "Start/Continue debugging")
+map('n', '<leader>dc', ':DapContinue<CR>', ns, "Start/Continue debugging")
+
+-- Step over (F10 like VSCode)
+map('n', '<F10>', ':DapStepOver<CR>', ns, "Step over")
+map('n', '<leader>dv', ':DapStepOver<CR>', ns, "Step over")
+
+-- Step into (F11 like VSCode)
+map('n', '<F11>', ':DapStepInto<CR>', ns, "Step into")
+map('n', '<leader>di', ':DapStepInto<CR>', ns, "Step into")
+
+-- Step out (Shift+F11 like VSCode)
+map('n', '<S-F11>', ':DapStepOut<CR>', ns, "Step out")
+map('n', '<leader>do', ':DapStepOut<CR>', ns, "Step out")
+
+-- Toggle breakpoint (F9 like VSCode)
+map('n', '<F9>', ':DapToggleBreakpoint<CR>', ns, "Toggle breakpoint")
+map('n', '<leader>db', ':DapToggleBreakpoint<CR>', ns, "Toggle breakpoint")
+
+-- Set conditional breakpoint
+map('n', '<leader>dB', ':DapSetConditionalBreakpoint<CR>', ns, "Set conditional breakpoint")
+
+-- Set log point
+map('n', '<leader>dl', ':DapSetLogPoint<CR>', ns, "Set log point")
+
+-- Terminate debugging (Shift+F5 like VSCode)
+map('n', '<S-F5>', ':DapTerminate<CR>', ns, "Terminate debugging")
+map('n', '<leader>dt', ':DapTerminate<CR>', ns, "Terminate debugging")
+
+-- Toggle REPL
+map('n', '<leader>dr', ':DapToggleRepl<CR>', ns, "Toggle REPL")
+
+-- Run last debug configuration
+map('n', '<leader>dL', ':DapRunLast<CR>', ns, "Run last debug configuration")
+
+-- Toggle DAP UI
+map('n', '<leader>du', ':DapUIToggle<CR>', ns, "Toggle DAP UI")
+
+-- Evaluate expression under cursor or selection
+map('n', '<leader>de', ':DapUIEval<CR>', ns, "Evaluate expression")
+map('v', '<leader>de', ':DapUIEval<CR>', ns, "Evaluate expression")
+
+-- Rust-specific debug commands
+map('n', '<leader>rd', ':RustDebuggables<CR>', ns, "Rust: Show debuggable targets")
+map('n', '<leader>rr', ':RustRunnables<CR>', ns, "Rust: Show runnable targets")
+map('n', '<leader>rD', ':RustDebugLast<CR>', ns, "Rust: Debug last target")

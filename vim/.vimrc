@@ -151,7 +151,9 @@ call plug#begin($BASE.'/plugged')
 
   " Debugger
   Plug 'mfussenegger/nvim-dap', Cond(is_nvim)            " Debug Adapter Protocol client
+  Plug 'nvim-neotest/nvim-nio', Cond(is_nvim)            " Async IO library for DAP
   Plug 'rcarriga/nvim-dap-ui', Cond(is_nvim)             " Debugger UI
+  Plug 'jay-babu/mason-nvim-dap.nvim', Cond(is_nvim)     " Mason integration for DAP
 
   " in vim, use deoplete for smart autocompletion
   " check requirements: you need to install pynvim module:
