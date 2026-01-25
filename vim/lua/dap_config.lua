@@ -198,6 +198,17 @@ vim.api.nvim_create_user_command('DapUIFloat', function()
   require('dapui').float_element()
 end, { desc = "DAP UI: Open floating window" })
 
+-- *** VSCode Launch File Support ***
+-- Load launch.json configurations if present
+local load_vscode_launch = function()
+  require('dap.ext.vscode').load_launchjs(nil, { codelldb = { 'lldb', 'rust', 'c', 'cpp' } })
+  print("DAP: Loaded launch.json configurations")
+end
+load_vscode_launch()
+
+-- Create command to reload launch.json (in case it's edited while Neovim is open)
+vim.api.nvim_create_user_command('DapLoadLaunchJSON', load_vscode_launch, {})
+
 -- *** Rust-specific Commands ***
 -- These integrate with Rustaceanvim
 
