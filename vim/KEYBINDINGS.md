@@ -5,9 +5,59 @@ This document lists all available keybindings for both Vim and Neovim configurat
 > [!IMPORTANT]
 > This reference is for commands defined in the `vim/` configuration directory of this repo. Not Vim/Neovim defaults.
 
+## Table of Contents
+
+- [Legend](#legend)
+- [Common Keybindings](#common-keybindings)
+  - [Basic Navigation](#basic-navigation)
+  - [Folding](#folding)
+  - [Search & Highlighting](#search--highlighting)
+  - [Buffer Management](#buffer-management)
+  - [Visual Selection](#visual-selection)
+  - [Window/Split Management](#windowsplit-management)
+  - [Line Numbers](#line-numbers)
+  - [Paste Mode](#paste-mode)
+- [Vim-Only Keybindings](#vim-only-keybindings)
+  - [File Navigation](#file-navigation)
+  - [File Tree](#file-tree)
+  - [Tags/Symbols](#tagssymbols)
+  - [Language-Specific (Vim)](#language-specific-vim)
+- [Neovim-Only Keybindings](#neovim-only-keybindings)
+  - [Basic Remappings](#basic-remappings)
+  - [Jumping Around](#jumping-around)
+  - [File Navigation (Telescope)](#file-navigation-telescope)
+  - [Buffer & File Management](#buffer--file-management)
+  - [Help & Documentation](#help--documentation)
+  - [Git Integration](#git-integration)
+  - [File Tree](#file-tree-1)
+  - [Sidebar (Vista)](#sidebar-vista)
+  - [Bookmarks](#bookmarks)
+  - [LSP (Language Server Protocol)](#lsp-language-server-protocol)
+  - [Terminal](#terminal)
+  - [Floaterm (Floating Terminal)](#floaterm-floating-terminal)
+  - [Copilot & AI](#copilot--ai)
+  - [Autocomplete (nvim-cmp)](#autocomplete-nvim-cmp)
+  - [Telescope Popup (when active)](#telescope-popup-when-active)
+  - [Telescope fzf Actions (on selected item)](#telescope-fzf-actions-on-selected-item)
+- [Plugin-Specific Notes](#plugin-specific-notes)
+  - [vim-surround](#vim-surround)
+  - [vim-commentary](#vim-commentary)
+  - [vim-paste-easy](#vim-paste-easy)
+  - [vim-oscyank](#vim-oscyank)
+  - [Rainbow Brackets](#rainbow-brackets)
+  - [Lexima](#lexima)
+  - [Hop (Neovim)](#hop-neovim)
+  - [Oil.nvim (Neovim)](#oilnvim-neovim)
+
 ## Legend
 
-- **Mode**: `n` = Normal, `i` = Insert, `v` = Visual, `x` = Visual block, `t` = Terminal, `!` = Insert and Command-line
+- **Mode abbreviations**:
+  - `n` = Normal
+  - `i` = Insert
+  - `v` = Visual
+  - `x` = Visual block
+  - `t` = Terminal
+  - `!` = Insert and Command-line
 - **Leader key**: `<Space>`
 
 ## Common Keybindings
@@ -327,6 +377,7 @@ These override default fzf keybindings in Telescope:
 This plugin provides keybindings for managing surrounding characters (quotes, brackets, tags, etc.).
 
 Common operations:
+
 - `cs"'` - change surrounding `"` to `'`
 - `ds"` - delete surrounding `"`
 - `ysiw"` - add `"` around current word
@@ -345,6 +396,7 @@ Automatically detects paste operations and sets paste mode.
 ### vim-oscyank
 
 For copying to system clipboard over SSH:
+
 - Select text in visual mode and `:OSCYank` to copy
 
 ### Rainbow Brackets
@@ -362,4 +414,3 @@ Provides `<leader>j` for quick jumping to any word on screen.
 ### Oil.nvim (Neovim)
 
 Edit filesystem like a buffer (no specific keybindings, use `:Oil` command).
-

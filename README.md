@@ -6,18 +6,29 @@ This repo is a never-ending WIP. It's not meant to be sensible for everybody, or
 
 ## Supported platforms
 
-My daily drivers currently are wezterm/rio/alacritty + zsh + zellij on:
+Linux, macOS and Windows are supported.
+
+Debian-based distros and macOS 13+ are preferred. Designed to run ZSH in modern terminals (24-bit colors, ligatures, GPU rendering, etc.) with Nerd Fonts.
+
+### Tested on
+
+My daily drivers currently are Wezterm/Rio/Alacritty + ZSH running on:
 
 - Ubuntu 24.04 WSL 2 on Windows 11 (was Ubuntu 20.04, was Ubuntu 22.04)
-- Ubuntu 22.04 desktop
-- GitHub Codespaces (`install.sh` defaults to this if no args are given)
+- Debian 13 (trixie) 'devbox' LXC container (via SSH)
+- macOS 14 (Sonoma) via SSH
 - PowerShell 7 on Windows 11 (24H2)
 
-These dotfiles are also used on:
+I also less frequently use:
 
-- Debian server accessed via mosh connection on iPad, upgraded to Debian ~~10~~ ~~11~~ 12
-- [workspace](https://github.com/pirafrank/workspace) Docker image ([link](https://hub.docker.com/r/pirafrank/workspace))
-- ~~occasionally macOS 10.15 (via iTerm2)~~ I gifted the MacBook to my family!
+- Debian 12 (bookworm) mini pc
+- Ubuntu 22.04 desktop
+- macOS 13 (Ventura) MacBook Air (Intel)
+- GitHub Codespaces (`install.sh` defaults to this if no args are given)
+
+I usually connect to the above headless installs from iPhone/iPad via [Blink Shell](https://blink.sh/) terminal, using Tailscale if I am not at home.
+
+These dotfiles are also made to run in [workspace](https://github.com/pirafrank/workspace) Docker [image](https://hub.docker.com/r/pirafrank/workspace).
 
 ## Try it out
 
@@ -29,7 +40,7 @@ or
 docker run -it pirafrank/workspace:latest
 ```
 
-## Install
+## Installation
 
 First clone the repo to your `$HOME`:
 
@@ -37,9 +48,33 @@ First clone the repo to your `$HOME`:
 cd && git clone https://github.com/pirafrank/dotfiles.git
 ```
 
-Then symlink config you want to use or install them all running `zsh install.sh all`. You can also symlink a specific set of dotfiles by running `zsh install.sh SOME_FEATURE`. Check the script content to know more.
+Then symlink config you want to use or install them all running:
+
+```sh
+zsh install.sh all
+```
+
+You can also symlink a specific set of dotfiles by running `zsh install.sh SOME_FEATURE`. Check [the script](https://github.com/pirafrank/dotfiles/blob/main/install.sh) to know more.
+
+### GitHub Codespaces
 
 If no arguments are provided, `install.sh` defaults to a GitHub Codespaces installation mode, [as required by GitHub](https://docs.github.com/en/codespaces/setting-your-user-preferences/personalizing-github-codespaces-for-your-account#dotfiles). It automatically detects whether it’s running inside a Codespace. If it is not and no arguments are given, the script will quit.
+
+### Dotbot
+
+Alternatively, you can use [dotbot](https://github.com/anishathalye/dotbot) to manage symlinks and automate dotfiles installation. The configuration is defined in `install.conf.yaml`.
+
+To install via Dotbot, run:
+
+```sh
+dotbot -d ~/dotfiles -c ~/dotfiles/install.conf.yaml
+```
+
+## Usage
+
+[`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) serves as entrypoint of some sort of documentation. Please note that it may be incomplete or not as up-to-date as the committed configuration.
+
+`README` files are provided in each subdir with specifics for that tool.
 
 ## Config customization
 
@@ -51,11 +86,15 @@ Also, `~/bin2` directory is automatically added to `$PATH`, if it exists. It is 
 
 That's part of it, there is no real how-to actually. For more info just look at the code.
 
-## Shortcuts, Commands, Aliases & Functions
+## Features
 
-[`GUIDE.md`](https://github.com/pirafrank/dotfiles/blob/main/GUIDE.md) may (hopefully) help, yet it will forever be incomplete.
+### Pager
 
-## Utilities
+`less` is used as pager.
+
+[batcat](https://github.com/sharkdp/bat) in place of `cat`.
+
+### Utilities
 
 Little utilities are provided in different forms in the following dirs:
 
@@ -64,6 +103,37 @@ Little utilities are provided in different forms in the following dirs:
 - `zsh/common/zsh_aliases`, as shell aliases.
 
 Many of the files and scripts in the `bin` folder come from some other repos of mine and here are gathered. Although those repositories are publicly available on GitHub, I am going to only maintain them in this repo.
+
+### Fonts
+
+In terminal clients and IDEs, these fonts are used (ordered by preference):
+
+- [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.zip)
+- [MesloLGS Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/Meslo.zip)
+
+with fallbacks to:
+
+```txt
+'JetBrains Mono', 'Droid Sans Mono', Consolas, 'Courier New', monospace
+```
+
+[icons.txt](https://github.com/pirafrank/dotfiles/tree/main/icons.txt) is used to check terminal render of Nerd Fonts.
+
+### Vim/Neovim
+
+I use Neovim more than Vim. The first is configured to be a full-fledged IDE, while the latter to be an advanced text editor. Common configuration is shared for a seamless experience.
+
+This allows me to have a slimmer experience the times I don't need to code in an environment and don't want to setup IDE-like tooling in the terminal.
+
+Configuration details and more are available in [README](https://github.com/pirafrank/dotfiles/blob/main/vim/README.md).
+
+### AI integration
+
+AI integration is provided via:
+
+- [CopilotChat](https://github.com/CopilotC-Nvim/CopilotChat.nvim) in Neovim
+- [opencode](https://opencode.ai/) loading
+- [Cursor](https://github.com/pirafrank/dotfiles/blob/main/cursor) config and MCP servers
 
 ## Credits
 

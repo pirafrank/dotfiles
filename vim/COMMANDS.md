@@ -5,9 +5,51 @@ This document lists all available custom commands for both Vim and Neovim config
 > [!IMPORTANT]
 > This reference is for commands defined in the `vim/` configuration directory of this repo. Not Vim/Neovim defaults.
 
+## Table of Contents
+
+- [Common Commands](#common-commands)
+  - [vim-plug (Plugin Manager)](#vim-plug-plugin-manager)
+  - [Window Management](#window-management)
+  - [Editor Information](#editor-information)
+  - [File Type](#file-type)
+  - [Line Numbers](#line-numbers)
+  - [Tags (ctags)](#tags-ctags)
+- [Vim-Only Commands](#vim-only-commands)
+  - [File Navigation](#file-navigation)
+  - [NERDTree](#nerdtree)
+  - [Tagbar](#tagbar)
+  - [ALE (Asynchronous Lint Engine)](#ale-asynchronous-lint-engine)
+- [Neovim-Only Commands](#neovim-only-commands)
+  - [File & Path Management](#file--path-management)
+  - [Terminal](#terminal)
+  - [File Navigation (Telescope)](#file-navigation-telescope)
+  - [Floaterm](#floaterm)
+  - [Neo-tree](#neo-tree)
+  - [Vista](#vista)
+  - [Oil.nvim](#oilnvim)
+  - [Bookmarks](#bookmarks)
+  - [LSP (Language Server Protocol)](#lsp-language-server-protocol)
+  - [Language-Specific LSP Commands](#language-specific-lsp-commands)
+  - [Mason (LSP/DAP/Linter Manager)](#mason-lspdaplinter-manager)
+  - [Treesitter](#treesitter)
+  - [Copilot](#copilot)
+  - [Glow (Markdown Preview)](#glow-markdown-preview)
+  - [Hop (Quick Jump)](#hop-quick-jump)
+
 ## Common Commands
 
 These commands work in both Vim and Neovim.
+
+### vim-plug (Plugin Manager)
+
+|Command|Action|
+|---|---|
+|`:PlugInstall`|Install plugins|
+|`:PlugUpdate`|Update plugins|
+|`:PlugClean`|Remove unused plugins|
+|`:PlugUpgrade`|Upgrade vim-plug itself|
+|`:PlugStatus`|Check plugin status|
+|`:PlugDiff`|Review changes from last update|
 
 ### Window Management
 
@@ -73,40 +115,11 @@ These commands are specific to Vim (not Neovim).
 ### ALE (Asynchronous Lint Engine)
 
 ALE runs automatically. Configured linters:
+
 - **Python**: `pylint`
 - **Java**: `javac`
 - **Go**: `gopls`
 - **Rust**: `rls`, `cargo`
-
-Settings:
-- Max line length for Python: 88 characters
-- Rust analyzer used instead of RLS
-- Auto-formatting disabled for Rust (use `:RustFmt` manually)
-
-### Language-Specific
-
-#### Java
-
-|Command|Action|
-|---|---|
-|`:JCEnable`|Enable javacomplete (auto-enabled for `.java` files)|
-
-#### Rust
-
-|Command|Action|
-|---|---|
-|`:RustFmt`|Format Rust code with rustfmt|
-
-### vim-plug (Plugin Manager)
-
-|Command|Action|
-|---|---|
-|`:PlugInstall`|Install plugins|
-|`:PlugUpdate`|Update plugins|
-|`:PlugClean`|Remove unused plugins|
-|`:PlugUpgrade`|Upgrade vim-plug itself|
-|`:PlugStatus`|Check plugin status|
-|`:PlugDiff`|Review changes from last update|
 
 ## Neovim-Only Commands
 
@@ -127,6 +140,7 @@ These commands are specific to Neovim (not Vim).
 |`:Term`|Toggle terminal window (smart behavior)|
 
 The `:Term` command has smart behavior:
+
 1. If terminal is open in split, it closes the window
 2. If terminal is open in buffer, it moves to split window
 3. If no terminal is running, it opens a new one in split
@@ -303,14 +317,3 @@ The `:Term` command has smart behavior:
 |`:HopChar2`|Jump to any two-character combination on screen|
 |`:HopLine`|Jump to any line on screen|
 |`:HopPattern`|Jump to any pattern match on screen|
-
-### vim-plug (Plugin Manager)
-
-|Command|Action|
-|---|---|
-|`:PlugInstall`|Install plugins|
-|`:PlugUpdate`|Update plugins|
-|`:PlugClean`|Remove unused plugins|
-|`:PlugUpgrade`|Upgrade vim-plug itself|
-|`:PlugStatus`|Check plugin status|
-|`:PlugDiff`|Review changes from last update|

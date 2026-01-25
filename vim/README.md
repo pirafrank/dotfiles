@@ -2,6 +2,28 @@
 
 Config sets Vim as an advanced editor, Neovim as IDE-like.
 
+## Table of Contents
+
+- [Editor Configuration](#editor-configuration)
+  - [Basic Settings](#basic-settings)
+  - [Keybindings](#keybindings)
+  - [Commands](#commands)
+  - [Configuration Paths](#configuration-paths)
+  - [Backup & Swap Files](#backup--swap-files)
+- [Plugins](#plugins)
+  - [Plugins Paths (`vim-plug`)](#plugins-paths-vim-plug)
+- [Neovim GUI (neovim-qt)](#neovim-gui-neovim-qt)
+  - [GUI configuration](#gui-configuration)
+  - [GUI Settings (gVim/neovim-qt)](#gui-settings-gvimneovim-qt)
+- [Language Server Protocol (LSP) Support](#language-server-protocol-lsp-support)
+  - [Enabled Languages in Neovim](#enabled-languages-in-neovim)
+  - [Mason Packages](#mason-packages)
+- [Treesitter Parsers](#treesitter-parsers)
+- [Autocomplete Sources (nvim-cmp)](#autocomplete-sources-nvim-cmp)
+- [Debug](#debug)
+  - [Startup times](#startup-times)
+  - [CopilotChat config](#copilotchat-config)
+
 ## Editor Configuration
 
 ### Basic Settings
