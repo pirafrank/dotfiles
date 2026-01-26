@@ -1,0 +1,8 @@
+# Fish shell generated files
+fish_variables
+
+# Completion cache
+completions/
+
+# Fish history (if you don't want to sync it)
+# fish_history
