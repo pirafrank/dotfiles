@@ -21,7 +21,7 @@ while getopts ":hvf:" opt; do
       echo "Options:"
       echo "  -h              Show help"
       echo "  -v              Show version"
-      echo "  -f <FORMAT>     Specify format options [possible values: asciicast, raw, txt, gif]"
+      echo "  -f <FORMAT>     Specify format options [possible values: asciicast-v3, asciicast-v2, raw, txt, gif]"
       exit 0
       ;;
     v)
@@ -56,14 +56,15 @@ if ! command -v asciinema &> /dev/null; then
 fi
 
 # check params, if gif record as asciicast and convert later
-if [ "${format}" = 'gif' ] || [ -z "${format}" ]; then
-  format="asciicast"
+if [[ "${format}" == 'gif' ]] || [[ -z "${format}" ]]; then
+  # default to v2 because agg is compatible only with v2
+  format="asciicast-v2"
   convert_to_gif='true'
 fi
 
 # record
-extension="$(printf '%s' "${format}" | sed 's/ascii//g')"
-asciinema rec --format "${format}" "${HOME}/asciinema/${filename}.${extension}"
+extension="$(printf '%s' "${format%%-*}" | sed 's/ascii//g')"
+asciinema rec -f "${format}" "${HOME}/asciinema/${filename}.${extension}"
 
 if [ "$?" != 0 ]; then
   exit "$?"
@@ -72,7 +73,7 @@ fi
 msg="asciinema recording saved to ${HOME}/asciinema/${filename}.${extension}"
 
 # if gif output format is wanted, convert screencast
-if [ "${convert_to_gif}" = 'false' ]; then
+if [[ "${convert_to_gif}" == 'false' ]]; then
   # we're done here. quitting.
   printf '\n%s\n' "${msg}."
   exit 0
@@ -92,3 +93,4 @@ if [ "$?" = 0 ]; then
 else
   exit "$?"
 fi
+
