@@ -26,6 +26,30 @@ alias grep="grep -i"
 alias gg='git grep -i'
 alias gitc='git-crypt'
 
+# Usage: gwa <branch-name>
+gwa() {
+  local branch_name="$1"
+  local append="$(printf '%s' "$branch_name" | tr '/' '_')"
+	local repo_name=$(basename "$(git rev-parse --show-toplevel)")
+	git worktree add "../${repo_name}-${append}" "${branch_name}"
+}
+# Usage: gwj (then pick from the list)
+# Note: this should stay in autoloaded functions, but keeping it here for clarity
+gwj() {
+  local target=$(git worktree list | fzf | awk '{print $1}')
+  [ -n "$target" ] && cd "$target"
+}
+# Usage: gwb <branch-name> <path>
+alias gwb='git worktree add -b'
+# Usage: gwr <path> (to remove a worktree both its dir on disk and its metadata)
+alias gwr='git worktree remove'
+# Usage: gwl (to list only branch names)
+alias gwl='git worktree list --porcelain | grep "^branch" | cut -d " " -f 2 | sed s@refs/heads/@@g'
+# Usage: gwp <path> (worktree gone? forget it!)
+alias gwp='git worktree prune'
+# Usage: gwre (to repair worktree metadata)
+alias gwre='git worktree repair'
+
 # tmux
 alias main='tmux attach -t main || tmux new -s main'
 alias work='tmux attach -t work || tmux new -s work'

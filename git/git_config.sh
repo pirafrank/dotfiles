@@ -15,6 +15,7 @@ git config --global alias.rb rebase
 git config --global alias.cm commit
 git config --global alias.pl pull
 git config --global alias.ps push
+git config --global alias.wt worktree
 git config --global alias.unstage 'reset HEAD --'
 git config --global alias.refresh 'remote update origin --prune'
 git config --global alias.rename 'branch -m' # oldname newname
