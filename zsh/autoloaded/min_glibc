@@ -1,0 +1,8 @@
+
+# show minimum glibc version required by an executable
+if [[ $# -eq 1 ]] && [[ "$1" != --* ]]; then
+  readelf -V "$1" | grep -oP '\(GLIBC[^)]*\)' | grep -oE '[0-9]{1,}\.[0-9]{1,}(\.[0-9]{1,})?' | sort | uniq | sort -rV | head -n1
+else
+  echo "Usage: min_glibc <executable>"
+fi
+
