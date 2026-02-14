@@ -11,9 +11,49 @@ Set-Alias touch New-Item
 
 Set-Alias k kubectl
 Set-Alias dk docker
+
+# override 'cat' alias to use 'bat' instead.
+# removal is necessary because 'cat' is a built-in alias for Get-Content in pwsh
+Remove-Item alias:cat -Force
 Set-Alias cat bat
+
 Set-Alias ll ls
 Set-Alias g git
+Set-Alias j just
+
+# NOTE: do not set 'nv' as an alias for nvim,
+#       because it conflicts with pwsh nv -> New-Variable built-in alias.
+
+# additional aliases from zsh config
+Set-Alias gitc git-crypt
+Set-Alias ydl youtube-dl
+Set-Alias py python
+Set-Alias py3 python3
+
+# git aliases
+function gg { git grep -i @args }
+
+# git worktree aliases
+Set-Alias gwb 'git worktree add -b'
+Set-Alias gwr 'git worktree remove'
+function gwl { git worktree list --porcelain | Select-String "^branch" | ForEach-Object { $_ -replace "branch ", "" -replace "refs/heads/", "" } }
+Set-Alias gwp 'git worktree prune'
+Set-Alias gwre 'git worktree repair'
+
+# date utilities
+function epoch { [int][double]::Parse((Get-Date -UFormat %s)) }
+function today { Get-Date -Format "yyyyMMdd" }
+function now { Get-Date -Format "yyyy-MM-dd HH:mm:ss" }
+
+# network
+function myip { curl.exe ipinfo.io/json | ConvertFrom-Json }
+
+# python
+function serve { python -m http.server @args }
+
+# npm
+function npmlist { npm list --depth=0 @args }
+function npmlistg { npm list -g --depth=0 @args }
 
 # bat output style
 $env:BAT_STYLE="changes,header,numbers,snip"
@@ -173,7 +213,7 @@ function yy {
 # only initialize conda if no virtualenv is active and python is not managed by pyenv-win
 if (-not $env:VIRTUAL_ENV) {
     $pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
-    if ($pythonPath -and $pythonPath -notlike "*pyenv-win*") {
+    if ($pythonPath -and $pythonPath -like "*AppData\Local\Programs\Python*") {
       If (Test-Path "C:\Users\francesco\anaconda3\Scripts\conda.exe") {
           (& "C:\Users\francesco\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
       }

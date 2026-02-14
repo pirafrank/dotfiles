@@ -5,10 +5,16 @@ Set-Alias -Name dir -Value Get-ChildItem -Option AllScope
 Set-Alias -Name l -Value ls -Option AllScope
 Set-Alias which get-command
 Set-Alias lg lazygit
+Set-Alias ldk lazydocker
 Set-Alias open Invoke-Item
 Set-Alias touch New-Item
+
 Set-Alias k kubectl
 Set-Alias dk docker
+Set-Alias cat bat
+Set-Alias ll ls
+Set-Alias g git
+Set-Alias j just
 
 $OutputEncoding = [console]::InputEncoding = [console]::OutputEncoding = New-Object System.Text.UTF8Encoding
 
