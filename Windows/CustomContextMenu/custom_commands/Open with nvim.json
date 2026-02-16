@@ -1,1 +1,15 @@
-{"title":"Open with neovim","exe":"\"C:\\Program Files\\Neovim\\bin\\nvim.exe\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\neovim.png\"","iconDark":"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":2}
+{
+  "title": "Open with neovim",
+  "index": 2,
+  "exe": "\"C:\\Program Files\\Neovim\\bin\\nvim.exe\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\neovim.png\"",
+  "iconDark": "",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptExts": "",
+  "acceptMultipleFilesFlag": 0,
+  "pathDelimiter": "",
+  "paramForMultipleFiles": "",
+  "showWindowFlag": 0
+}

@@ -1,1 +1,14 @@
-{"title":"Open in Cursor","exe":"\"C:\\Users\\francesco\\AppData\\Local\\Programs\\cursor\\Cursor.exe\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\AppData\\Local\\Programs\\cursor\\Cursor.exe\"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":4,"showWindowFlag":0}
+{
+  "title": "Open in Cursor",
+  "index": 4,
+  "exe": "\"C:\\Users\\francesco\\AppData\\Local\\Programs\\cursor\\Cursor.exe\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\AppData\\Local\\Programs\\cursor\\Cursor.exe\"",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptExts": "",
+  "acceptMultipleFilesFlag": 0,
+  "pathDelimiter": "",
+  "paramForMultipleFiles": "",
+  "showWindowFlag": 0
+}

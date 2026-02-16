@@ -1,1 +1,14 @@
-{"title":"Open with neovim-qt","exe":"\"C:\\Users\\francesco\\scoop\\apps\\neovim-qt\\current\\bin\\nvim-qt.exe\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\scoop\\apps\\neovim-qt\\current\\bin\\nvim-qt.exe\"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":1,"showWindowFlag":0}
+{
+  "title": "Open with neovim-qt",
+  "index": 1,
+  "exe": "\"C:\\Users\\francesco\\scoop\\apps\\neovim-qt\\current\\bin\\nvim-qt.exe\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\scoop\\apps\\neovim-qt\\current\\bin\\nvim-qt.exe\"",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptExts": "",
+  "acceptMultipleFilesFlag": 0,
+  "pathDelimiter": "",
+  "paramForMultipleFiles": "",
+  "showWindowFlag": 0
+}

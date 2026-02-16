@@ -1,1 +1,14 @@
-{"title":"Open with gVim","exe":"\"gvim\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\gvim.png\"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":4}
+{
+  "title": "Open with gVim",
+  "index": 4,
+  "exe": "\"gvim\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\gvim.png\"",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptExts": "",
+  "acceptMultipleFilesFlag": 0,
+  "pathDelimiter": "",
+  "paramForMultipleFiles": "",
+  "showWindowFlag": 0
+}

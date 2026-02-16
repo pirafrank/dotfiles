@@ -1,1 +1,11 @@
-{"title":"Open in Zed Preview","exe":"\"C:\\Users\\francesco\\scoop\\apps\\zed-preview\\current\\zed.exe\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\scoop\\apps\\zed-preview\\current\\zed.exe\"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":6,"showWindowFlag":0}
+{
+  "title": "Open in Zed",
+  "index": 4,
+  "exe": "\"C:\\Users\\francesco\\AppData\\Local\\Programs\\Zed\\Zed.exe\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\AppData\\Local\\Programs\\Zed\\Zed.exe\"",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptMultipleFilesFlag": 1,
+  "showWindowFlag": 0
+}

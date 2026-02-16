@@ -1,1 +1,11 @@
-{"title":"Open in WSL","exe":"\"C:\\Users\\francesco\\dotfiles\\Windows\\CustomContextMenu\\scripts\\Open_in_WSL\\open_in_wsl.bat\"","param":"\"{path}\"","icon":"\"C:\\Windows\\System32\\wsl.exe\",0","acceptDirectory":false,"acceptDirectoryFlag":7,"acceptFile":false,"acceptFileFlag":0,"acceptMultipleFilesFlag":0,"index":0}
+{
+  "title": "Open in WSL",
+  "index": 0,
+  "exe": "\"C:\\Users\\francesco\\dotfiles\\Windows\\CustomContextMenu\\scripts\\Open_in_WSL\\open_in_wsl.bat\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Windows\\System32\\wsl.exe\",0",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 0,
+  "acceptMultipleFilesFlag": 0,
+  "showWindowFlag": 0
+}

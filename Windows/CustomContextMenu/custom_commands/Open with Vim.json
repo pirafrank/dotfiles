@@ -1,1 +1,14 @@
-{"title":"Open with Vim","exe":"\"vim\"","param":"\"{path}\"","icon":"\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\vim.png\"","acceptDirectory":true,"acceptDirectoryFlag":7,"acceptFile":true,"acceptFileFlag":1,"acceptExts":"","acceptMultipleFilesFlag":0,"pathDelimiter":"","paramForMultipleFiles":"","index":5}
+{
+  "title": "Open with Vim",
+  "index": 5,
+  "exe": "\"vim\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\vim.png\"",
+  "acceptDirectoryFlag": 7,
+  "acceptFileFlag": 1,
+  "acceptExts": "",
+  "acceptMultipleFilesFlag": 0,
+  "pathDelimiter": "",
+  "paramForMultipleFiles": "",
+  "showWindowFlag": 0
+}
