@@ -64,20 +64,6 @@ if [[ $(command -v xplr) ]]; then
   alias xcd='cd "$(xplr --print-pwd-as-result)"'
 fi
 
-# pyenv
-# fix: https://github.com/pyenv/pyenv/issues/1906
-# fix: https://github.com/pyenv/pyenv-virtualenv/issues/390
-if [[ -d $HOME/.pyenv ]]; then
-  export PYENV_ROOT="$HOME/.pyenv"
-  export PATH="$PYENV_ROOT/bin:$PATH"
-  if command -v pyenv 1>/dev/null 2>&1; then
-    eval "$(pyenv init --path)"  # this only sets up the path stuff
-    eval "$(pyenv init -)"       # this makes pyenv work in the shell
-    eval "$(pyenv virtualenv-init -)"
-    alias pyenv='nocorrect pyenv'
-  fi
-fi
-
 # GPG for SSH authentication
 # do it only if there's TTY
 # -- look for macOS
@@ -122,9 +108,3 @@ fi
 if [ -d "$HOME/.opencode/bin" ]; then
   export PATH="$HOME/.opencode/bin:$PATH"
 fi
-
-# Added by serverless binary installer
-if [ -d "$HOME/.serverless/bin" ]; then
-  export PATH="$HOME/.serverless/bin:$PATH"
-fi
-
