@@ -224,7 +224,8 @@ def main():
         '--ext',
         nargs='+',
         default=['.py', '.js', '.java', '.c', '.cpp', '.h', '.hpp', '.cs', '.go',
-                 '.rs', '.rb', '.php', '.ts', '.tsx', '.jsx', '.sh', '.bash', 'fish'],
+                 '.rs', '.rb', '.php', '.ts', '.tsx', '.jsx', '.sh', '.bash', 'fish',
+                 '.zsh', '.md', '.txt'],
         help='File extensions to process (default: common code file extensions)'
     )
     parser.add_argument(
