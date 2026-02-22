@@ -2,6 +2,8 @@
 
 The primary source of truth for PATH configuration is [zsh/common/zsh_env](../common/zsh_env), which runs for all shell types.
 
+> **Performance note**: `zsh_env` contains **no subprocess calls** (`eval "$(X init ...)"` etc.). Only static variable assignments and path array mutations run here, keeping non-interactive shell startup near-instant. Lazy shell integrations live in [zsh/common/zsh_env_interactive](../common/zsh_env_interactive).
+
 ## Base PATH (all shells)
 
 Set in [zsh/common/zsh_env](../common/zsh_env):
@@ -18,194 +20,184 @@ Set in [zsh/common/zsh_env](../common/zsh_env):
 
 Source: [zsh/common/zsh_env](../common/zsh_env). Each tool is added if its expected directory exists.
 
-| Tool | PATH Addition | Condition |
-|------|--------------|-----------|
-| Pyenv | `$PYENV_ROOT/bin` + pyenv init | `~/.pyenv` exists |
-| jenv | `~/.jenv/bin` + jenv init | `~/.jenv` exists |
-| Maven | `~/bin2/maven/bin` | Always |
-| Golang (goenv) | `$GOENV_ROOT/bin`, `$GOROOT/bin`, `$GOPATH/bin` | goenv exists |
-| Golang (system) | `/usr/local/go/bin`, `$GOPATH/bin` | system go exists |
-| Golang (custom) | `~/bin2/go/bin`, `$GOPATH/bin` | custom go exists |
-| Swift | `/opt/swift/usr/bin` | Linux + `/opt/swift` exists |
-| NVM | PATH modified by nvm.sh | `~/.nvm` exists |
-| Cargo/Rust | `~/.cargo/bin` | `~/.cargo/bin` exists |
-| Krew | `$KREW_ROOT/bin` (default: `~/.krew/bin`) | krew dir exists |
-| Wasmer | PATH modified by wasmer.sh | wasmer installed |
-| Wasmtime | `$WASMTIME_HOME/bin` | `~/.wasmtime` exists |
-| Deno | `$DENO_INSTALL/bin` | `~/.deno` exists |
-| Serverless | `~/.serverless/bin` | serverless bin exists |
-| PNPM | `$PNPM_HOME` | `~/.local/share/pnpm` exists |
-| Bun | `$BUN_INSTALL/bin` | `~/.bun` exists |
-| TFEnv | `~/.tfenv/bin` | Always |
-| RVM (user) | PATH modified by rvm script + `~/.rvm/bin` | `~/.rvm` exists |
-| RVM (system) | PATH modified by system rvm script | `/usr/local/rvm` exists |
-| poof | `$POOF_ROOT/bin` | Always |
+| Tool | PATH Addition | How binaries are available | Condition |
+|------|--------------|---------------------------|-----------|
+| Pyenv | `$PYENV_ROOT/bin` + `$PYENV_ROOT/shims` | Shims pre-generated on disk | `~/.pyenv` exists |
+| jenv | `~/.jenv/bin` + `~/.jenv/shims` | Shims pre-generated on disk | `~/.jenv` exists |
+| Maven | `~/bin2/maven/bin` | Direct binary | Always |
+| Golang (goenv) | `$GOENV_ROOT/bin` + `$GOENV_ROOT/shims`, `$GOPATH/bin` | Shims pre-generated on disk | goenv exists |
+| Golang (system) | `/usr/local/go/bin`, `$GOPATH/bin` | Direct binaries | system go exists |
+| Golang (custom) | `~/bin2/go/bin`, `$GOPATH/bin` | Direct binaries | custom go exists |
+| Swift | `/opt/swift/usr/bin` | Direct binary | Linux + `/opt/swift` exists |
+| NVM | `NVM_DIR` exported only | Via `_nvm_load_once` precmd | `~/.nvm` exists |
+| Cargo/Rust | `~/.cargo/bin` | Direct binaries | `~/.cargo/bin` exists |
+| Krew | `$KREW_ROOT/bin` (default: `~/.krew/bin`) | Direct binaries | krew dir exists |
+| Wasmer | PATH modified by `wasmer.sh` | wasmer init | wasmer installed |
+| Wasmtime | `$WASMTIME_HOME/bin` | Direct binary | `~/.wasmtime` exists |
+| Deno | `$DENO_INSTALL/bin` | Direct binary | `~/.deno` exists |
+| Serverless | `~/.serverless/bin` | Direct binary | serverless bin exists |
+| PNPM | `$PNPM_HOME` | Direct binaries | `~/.local/share/pnpm` exists |
+| Bun | `$BUN_INSTALL/bin` | Direct binary | `~/.bun` exists |
+| TFEnv | `~/.tfenv/bin` | Direct binary | Always |
+| RVM (user) | `~/.rvm/bin` | Via `_rvm_load_once` precmd | `~/.rvm` exists |
+| RVM (system) | - | Via `_rvm_load_once` precmd | `/usr/local/rvm` exists |
+| poof | `$POOF_ROOT/bin` | Direct binary | Always |
 
-## Interactive-Only Additions
+## Lazy Shell Integrations (interactive shells)
 
-Source: [zsh/common/zsh_env_interactive](../common/zsh_env_interactive)
+Source: [zsh/common/zsh_env_interactive](../common/zsh_env_interactive).
 
-| Tool | PATH Addition | Condition |
-|------|--------------|-----------|
-| FZF | PATH modified by fzf.zsh | `~/.fzf.zsh` exists |
-| FZF API | Sourced | fzf_api.sh exists |
-| Zoxide | Init hook | zoxide installed |
-| Fasd | Init hook (legacy) | fasd installed |
-| Direnv | Init hook | direnv installed |
-| OpenCode | `~/.opencode/bin` | `~/.opencode/bin` exists |
-| Serverless | `~/.serverless/bin` (duplicate) | serverless bin exists |
+These are `eval "$(X init ...)"` calls that set up shell functions, completions, and hooks for version managers. They are deferred to avoid subprocess cost at startup.
+
+### Shim-based managers - lazy CLI integration only
+
+For pyenv, jenv, and goenv, binaries are already available via shims in PATH (see table above). The lazy stub below loads the *shell integration* (virtualenv hooks, completions, shell function override) on the first explicit call to the manager CLI.
+
+| Manager | Lazy trigger | What fires |
+|---------|-------------|-----------|
+| `pyenv` | First call to `pyenv` | `eval "$(pyenv init -)"` + `eval "$(pyenv virtualenv-init -)"` |
+| `jenv` | First call to `jenv` | `eval "$(jenv init -)"` |
+| `goenv` | First call to `goenv` | `eval "$(goenv init -)"` |
+
+### PATH-manipulation managers - precmd one-shot hook
+
+nvm and rvm have no shims directory, they modify PATH directly when sourced. They are loaded by a one-shot `precmd` hook that fires once before the first prompt is drawn, then removes itself. This makes all managed binaries available from the first prompt without affecting `time zsh -i -c exit` (no prompt is drawn during the benchmark).
+
+| Manager | Hook | Loads |
+|---------|------|-------|
+| nvm | `_nvm_load_once` | `nvm.sh` → node, npm, npx, yarn, corepack, … |
+| rvm | `_rvm_load_once` | `rvm/scripts/rvm` → ruby, gem, bundle, irb, rake, … |
+
+## Interactive-Only PATH Additions
+
+Added in `zshrc` or `zsh_env_interactive` - only present in interactive shells.
+
+| Tool | Source file | Addition | Condition |
+|------|-------------|----------|-----------|
+| zplug command plugins (git-cal) | `zshrc` | `$ZPLUG_HOME/bin` | `~/.zplug/bin` exists |
+| FZF | `zsh_env_interactive` | PATH modified by `~/.fzf.zsh` | `~/.fzf.zsh` exists |
+| Zoxide | `zsh_env_interactive` | Init hook | zoxide installed |
+| Fasd | `zsh_env_interactive` | Init hook (legacy fallback) | fasd installed |
+| Direnv | `zsh_env_interactive` | Init hook | direnv installed |
+| OpenCode | `zsh_env_interactive` | `~/.opencode/bin` | `~/.opencode/bin` exists |
 
 ## Fpath Modifications (completion paths)
 
 Source: [zsh/zprezto/runcoms/zshrc](../zprezto/runcoms/zshrc)
 
+Custom fpath entries are added **before** `source prezto/init.zsh` so that prezto's `completion` module picks them up during its single `compinit` call.
+
 | Path | Condition |
 |------|-----------|
-| `~/.zsh_user_themes` | `CUSTOM_THEMES_ENABLED=1` |
-| `~/dotfiles/zsh/completions` | Directory exists |
+| `~/dotfiles/zsh/completions` | Always (if directory exists) |
 | `~/dotfiles/zsh/autoloaded` | Always |
+| `~/.zsh_user_themes` | `CUSTOM_THEMES_ENABLED=1` only |
 
-## PATH Environment Variable Modifications Diagram
-
-The PATH variable is built up through multiple configuration files, with earlier additions taking priority. The diagram shows the order and conditional logic:
+## PATH Build-Up Diagram
 
 ```mermaid
 flowchart TD
-    Start([Shell Starts]) --> BaseInit[Initialize Base PATH Array<br/>zsh_env lines 33-42]
+    Start([Shell Starts]) --> BaseInit["Initialize Base PATH Array\nzsh_env"]
 
-    BaseInit --> BasePaths["Priority paths:<br/>1. ~/bin2<br/>2. ~/.local/bin<br/>3. ~/dotfiles/bin<br/>4. /opt/local/bin,sbin<br/>5. /usr/local/bin,sbin<br/>6. /usr/bin,sbin<br/>7. existing $path"]
+    BaseInit --> BasePaths["Priority paths:\n1. ~/bin2\n2. ~/.local/bin\n3. ~/dotfiles/bin\n4. /opt/local/bin,sbin\n5. /usr/local/bin,sbin\n6. /usr/bin,sbin\n7. existing $path"]
 
-    BasePaths --> Pyenv{pyenv exists?<br/>~/.pyenv}
+    BasePaths --> Pyenv{pyenv exists?\n~/.pyenv}
 
-    %% Pyenv
-    Pyenv -->|Yes| PyenvAdd[Add $PYENV_ROOT/bin<br/>Run: pyenv init --path<br/>zsh_env line 90-92]
+    Pyenv -->|Yes| PyenvAdd["Add $PYENV_ROOT/bin\n+ $PYENV_ROOT/shims\n(static, no subprocess)"]
     Pyenv -->|No| Jenv
     PyenvAdd --> Jenv
 
-    %% Jenv
-    Jenv{jenv exists?<br/>~/.jenv} -->|Yes| JenvAdd[Add ~/.jenv/bin<br/>Run: jenv init -<br/>zsh_env line 100-101]
+    Jenv{jenv exists?\n~/.jenv} -->|Yes| JenvAdd["Add ~/.jenv/bin\n+ ~/.jenv/shims\n(static, no subprocess)"]
     Jenv -->|No| Maven
     JenvAdd --> Maven
 
-    %% Maven
-    Maven[Add ~/bin2/maven/bin<br/>zsh_env line 105] --> Golang
+    Maven["Add ~/bin2/maven/bin"] --> Golang
 
-    %% Golang
-    Golang{Golang?} -->|goenv exists| GoenvPath[Add $GOENV_ROOT/bin<br/>Run: goenv init -<br/>Add $GOROOT/bin<br/>Add $GOPATH/bin<br/>zsh_env lines 111-115]
-    Golang -->|system go exists| SystemGoPath[Add /usr/local/go/bin<br/>Add $GOPATH/bin<br/>zsh_env lines 118-120]
-    Golang -->|custom go| CustomGoPath[Add ~/bin2/go/bin<br/>Add $GOPATH/bin<br/>zsh_env lines 123-125]
+    Golang{Golang?} -->|goenv exists| GoenvPath["Add $GOENV_ROOT/bin\n+ $GOENV_ROOT/shims\n+ $GOPATH/bin\n(static, no subprocess)"]
+    Golang -->|system go exists| SystemGoPath["Add /usr/local/go/bin\nAdd $GOPATH/bin"]
+    Golang -->|custom go| CustomGoPath["Add ~/bin2/go/bin\nAdd $GOPATH/bin"]
     GoenvPath --> Swift
     SystemGoPath --> Swift
     CustomGoPath --> Swift
 
-    %% Swift
-    Swift{Swift exists?<br/>Linux + /opt/swift} -->|Yes| SwiftAdd[Add /opt/swift/usr/bin<br/>zsh_env line 131]
+    Swift{Swift exists?\nLinux + /opt/swift} -->|Yes| SwiftAdd["Add /opt/swift/usr/bin"]
     Swift -->|No| NVM
     SwiftAdd --> NVM
 
-    %% NVM
-    NVM{NVM exists?<br/>~/.nvm} -->|Yes| NVMAdd[Source nvm.sh<br/>modifies PATH<br/>zsh_env line 137]
+    NVM{NVM exists?\n~/.nvm} -->|Yes| NVMAdd["Export NVM_DIR only\nnvm.sh loaded via precmd\n_nvm_load_once hook"]
     NVM -->|No| Cargo
     NVMAdd --> Cargo
 
-    %% Cargo/Rust
-    Cargo{Cargo exists?<br/>~/.cargo} -->|Yes| CargoAdd[Add ~/.cargo/bin<br/>zsh_env line 143]
+    Cargo{Cargo exists?\n~/.cargo} -->|Yes| CargoAdd["Add ~/.cargo/bin"]
     Cargo -->|No| Krew
     CargoAdd --> Krew
 
-    %% Krew
-    Krew{Krew exists?} -->|Yes| KrewAdd[Add $KREW_ROOT/bin<br/>zsh_env line 148]
+    Krew{Krew exists?} -->|Yes| KrewAdd["Add $KREW_ROOT/bin"]
     Krew -->|No| Wasmer
     KrewAdd --> Wasmer
 
-    %% Wasmer
-    Wasmer{Wasmer exists?} -->|Yes| WasmerAdd[Source wasmer.sh<br/>zsh_env line 155]
+    Wasmer{Wasmer exists?} -->|Yes| WasmerAdd["Source wasmer.sh"]
     Wasmer -->|No| Wasmtime
     WasmerAdd --> Wasmtime
 
-    %% Wasmtime
-    Wasmtime{Wasmtime exists?<br/>~/.wasmtime} -->|Yes| WasmtimeAdd[Add $WASMTIME_HOME/bin<br/>zsh_env line 160]
+    Wasmtime{Wasmtime exists?\n~/.wasmtime} -->|Yes| WasmtimeAdd["Add $WASMTIME_HOME/bin"]
     Wasmtime -->|No| Deno
     WasmtimeAdd --> Deno
 
-    %% Deno
-    Deno{Deno exists?<br/>~/.deno} -->|Yes| DenoAdd[Add $DENO_INSTALL/bin<br/>zsh_env line 168]
+    Deno{Deno exists?\n~/.deno} -->|Yes| DenoAdd["Add $DENO_INSTALL/bin"]
     Deno -->|No| Serverless
     DenoAdd --> Serverless
 
-    %% Serverless
-    Serverless{Serverless exists?} -->|Yes| ServerlessAdd[Add ~/.serverless/bin<br/>zsh_env line 173]
+    Serverless{Serverless exists?} -->|Yes| ServerlessAdd["Add ~/.serverless/bin"]
     Serverless -->|No| PNPM
     ServerlessAdd --> PNPM
 
-    %% PNPM
-    PNPM{PNPM exists?} -->|Yes| PNPMAdd[Add $PNPM_HOME<br/>zsh_env line 178]
+    PNPM{PNPM exists?} -->|Yes| PNPMAdd["Add $PNPM_HOME"]
     PNPM -->|No| Bun
     PNPMAdd --> Bun
 
-    %% Bun
-    Bun{Bun exists?<br/>~/.bun} -->|Yes| BunAdd[Add $BUN_INSTALL/bin<br/>zsh_env line 185]
+    Bun{Bun exists?\n~/.bun} -->|Yes| BunAdd["Add $BUN_INSTALL/bin"]
     Bun -->|No| TFEnv
     BunAdd --> TFEnv
 
-    %% TFEnv
-    TFEnv[Add ~/.tfenv/bin<br/>zsh_env line 189] --> RVM
+    TFEnv["Add ~/.tfenv/bin"] --> RVM
 
-    %% RVM
-    RVM{RVM exists?} -->|~/.rvm| UserRVM[Source ~/.rvm/scripts/rvm<br/>Add ~/.rvm/bin<br/>zsh_env lines 196-197]
-    RVM -->|system /usr/local/rvm| SystemRVM[Source system rvm script<br/>zsh_env line 200]
+    RVM{RVM exists?} -->|"~/.rvm"| UserRVM["Add ~/.rvm/bin\nfull init via precmd\n_rvm_load_once hook"]
+    RVM -->|"system /usr/local/rvm"| SystemRVM["full init via precmd\n_rvm_load_once hook"]
     RVM -->|No| Poof
     UserRVM --> Poof
     SystemRVM --> Poof
 
-    %% Poof
-    Poof[Add $POOF_ROOT/bin<br/>zsh_env line 210] --> ShellCheck
+    Poof["Add $POOF_ROOT/bin"] --> ShellCheck
 
-    %% Check if interactive
-    ShellCheck{Interactive<br/>Shell?} -->|No| NonIntEnd([Non-Interactive:<br/>PATH Complete])
-    ShellCheck -->|Yes| FZF
+    ShellCheck{Interactive\nShell?} -->|No| NonIntEnd([Non-Interactive:\nPATH Complete])
+    ShellCheck -->|Yes| Zplug
 
-    %% Interactive-only additions from zsh_env_interactive
-    %% FZF
-    FZF{FZF exists?} -->|Yes| FZFAdd[Source ~/.fzf.zsh<br/>may modify PATH<br/>zsh_env_interactive line 16]
-    FZF -->|No| FZFApi
-    FZFAdd --> FZFApi
+    Zplug{~/.zplug/bin\nexists?} -->|Yes| ZplugAdd["Add $ZPLUG_HOME/bin\n(git-cal, etc. - immediate)"]
+    Zplug -->|No| FZF
+    ZplugAdd --> FZF
 
-    %% FZF API
-    FZFApi[Source fzf_api.sh<br/>zsh_env_interactive line 35] --> Zoxide
+    FZF{FZF exists?} -->|Yes| FZFAdd["Source ~/.fzf.zsh\nmay modify PATH"]
+    FZF -->|No| Zoxide
+    FZFAdd --> Zoxide
 
-    %% Zoxide
-    Zoxide{zoxide installed?} -->|Yes| ZoxideAdd[Run: zoxide init zsh<br/>zsh_env_interactive line 102]
+    Zoxide{zoxide installed?} -->|Yes| ZoxideAdd["Run: zoxide init zsh"]
     Zoxide -->|No| Fasd
     ZoxideAdd --> Fasd
 
-    %% Fasd
-    Fasd{fasd installed?} -->|Yes| FasdAdd[Run: fasd --init auto<br/>zsh_env_interactive line 105]
+    Fasd{fasd installed?} -->|Yes| FasdAdd["Run: fasd --init auto"]
     Fasd -->|No| Direnv
     FasdAdd --> Direnv
 
-    %% Direnv
-    Direnv{direnv installed?} -->|Yes| DirenvAdd[Run: direnv hook zsh<br/>zsh_env_interactive line 110]
+    Direnv{direnv installed?} -->|Yes| DirenvAdd["Run: direnv hook zsh"]
     Direnv -->|No| OpenCode
     DirenvAdd --> OpenCode
 
-    %% OpenCode
-    OpenCode{opencode exists?} -->|Yes| OpenCodeAdd[Add ~/.opencode/bin<br/>zsh_env_interactive line 123]
-    OpenCode -->|No| IntServerless
-    OpenCodeAdd --> IntServerless
+    OpenCode{opencode exists?} -->|Yes| OpenCodeAdd["Add ~/.opencode/bin"]
+    OpenCode -->|No| PrecmdHooks
+    OpenCodeAdd --> PrecmdHooks
 
-    %% Serverless duplicate
-    IntServerless{serverless exists?} -->|Yes| IntServerlessAdd[Add ~/.serverless/bin<br/>duplicate check<br/>zsh_env_interactive line 128]
-    IntServerless -->|No| FpathMods
-    IntServerlessAdd --> FpathMods
+    PrecmdHooks["Precmd one-shot hooks registered\n_zplug_load_once (forgit plugin)\n_nvm_load_once\n_rvm_load_once\n_defer_chpwd_startup"] --> IntEnd
 
-    %% Fpath modifications
-    FpathMods[Fpath modifications:<br/>1. ~/.zsh_user_themes<br/>2. ~/dotfiles/zsh/completions<br/>3. ~/dotfiles/zsh/autoloaded<br/>zshrc lines 62, 91, 102] --> IntEnd
-
-    IntEnd([Interactive:<br/>PATH Complete])
-
-    style BasePaths fill:#e3f2fd
-    style NonIntEnd fill:#e1f5e1
-    style IntEnd fill:#e1f5e1
-    style PyenvAdd fill:#fff4e6
-    style IntPyenvAdd fill:#fff4e6
+    IntEnd([Interactive:\nPATH Complete\nTools available at first prompt])
+```

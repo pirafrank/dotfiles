@@ -1,7 +1,4 @@
 
-export ZPLUG_HOME=$HOME/.zplug
-source $ZPLUG_HOME/init.zsh
-
 # startup speed benchmarks
 # https://htr3n.github.io/2018/07/faster-zsh/
 # uncomment the line below, then source .zshrc and run zprof.
@@ -12,7 +9,6 @@ source $ZPLUG_HOME/init.zsh
 # from being echoed when TUI applications exit
 # This stops ^[[81;16;113;0;0;1_% sequences from appearing
 if [[ -o interactive ]]; then
-  # Query and consume any pending terminal responses
   stty -echo 2>/dev/null
   while read -t 0.001 -k 1 __discard 2>/dev/null; do :; done
   stty echo 2>/dev/null
@@ -36,15 +32,58 @@ fi
 # Executes commands at the start of an interactive session.
 #
 
-# Source Prezto.
+# Add custom completions to fpath BEFORE prezto loads so its compinit picks them up.
+# This avoids a second compinit call later.
+if [[ -d $HOME/dotfiles/zsh/completions ]]; then
+  fpath=($HOME/dotfiles/zsh/completions $fpath)
+fi
+
+# Source Prezto (handles compinit via its completion module).
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-# zplug
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
-zplug 'wfxr/forgit'
-zplug "k4rthik/git-cal", as:command, frozen:1
+#
+# Plugins (zplug-managed: forgit, git-cal)
+#
+export ZPLUG_HOME=$HOME/.zplug
+
+if [[ -d "$ZPLUG_HOME" ]]; then
+  # zplug bin dir in PATH immediately (git-cal and other command plugins live here)
+  [[ -d "$ZPLUG_HOME/bin" ]] && export PATH="$ZPLUG_HOME/bin:$PATH"
+
+  # Source plugin files directly before first prompt via a one-shot precmd hook.
+  # Deliberately avoids calling `zplug 'user/repo'` declarations here because
+  # those always print "[zplug] X: already managed" to stdout, which p10k
+  # instant prompt detects as console output during initialization → warning.
+  # Plugin files are sourced straight from their installed repo paths instead.
+  # On a fresh machine run `zplug_init` once to install, then this works.
+  _zplug_load_once() {
+    add-zsh-hook -d precmd _zplug_load_once
+    [[ -f "$ZPLUG_HOME/repos/wfxr/forgit/forgit.plugin.zsh" ]] && \
+      source "$ZPLUG_HOME/repos/wfxr/forgit/forgit.plugin.zsh"
+  }
+  add-zsh-hook precmd _zplug_load_once
+
+  # zplug CLI - lazy-load on first use for management (update, status, etc.)
+  zplug() {
+    unfunction zplug
+    source "$ZPLUG_HOME/init.zsh"
+    zplug "$@"
+  }
+fi
+
+# Install or update all zplug plugins. Run this on a fresh machine or to update.
+# When adding a new plugin: add it here AND add a source line in _zplug_load_once.
+zplug_init() {
+  unfunction zplug 2>/dev/null
+  source "$ZPLUG_HOME/init.zsh"
+  zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+  zplug 'wfxr/forgit'
+  zplug "k4rthik/git-cal", as:command, frozen:1
+  zplug install
+  zplug load
+}
 
 #
 # Prompt and theme
@@ -80,17 +119,12 @@ export HISTFILE=~/.zsh_history
 # Load modules
 #
 
-autoload zmv
+# zmv is already loaded via zpreztorc: zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 
 # bash autocompletion
 autoload -Uz bashcompinit
 bashcompinit
 for file in $HOME/dotfiles/bash/completions/*(.); source $file
-
-# zsh autocompletion
-if [ -d $HOME/dotfiles/zsh/completions ]; then fpath=($HOME/dotfiles/zsh/completions $fpath); fi
-autoload -Uz compinit
-compinit
 
 # load interactive env
 source $HOME/dotfiles/zsh/common/zsh_env_interactive
@@ -100,29 +134,26 @@ source $HOME/dotfiles/zsh/common/zsh_aliases
 
 # lazy-load functions
 fpath=($fpath ~/dotfiles/zsh/autoloaded)
-for file in $(ls -1 ~/dotfiles/zsh/autoloaded); do
+for file in ~/dotfiles/zsh/autoloaded/*(N:t); do
   autoload -Uz $file
 done
 
 # load custom/env specific stuff, but only if file exists
 if [[ -a $HOME/.zsh_custom ]]; then
-source $HOME/.zsh_custom
+  source $HOME/.zsh_custom
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # aws-cli autocomplete
-if [ ! -z $(command -v aws_completer) ]; then
+if [[ -n $(command -v aws_completer) ]]; then
   complete -C 'aws_completer' aws
 fi
 
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
-
-# Load zplug
-zplug load
 
 # Fix for dirty escape sequences after TUI apps (lazygit, etc.) exit
 # This prevents keyboard protocol query responses from being echoed
@@ -141,9 +172,15 @@ function chpwd {
   # things to do each time you change directory. Zsh will call this.
   _chpwd_run_all
 }
-# also, run these for every new shell
-_chpwd_run_all
+
+# Defer first-run chpwd to before the first prompt draw (not during rc parsing).
+# This prevents the P10k "[WARNING]: Console output during zsh initialization
+# detected." warning caused by prompt_oscseq emitting OSC sequences during init.
+_defer_chpwd_startup() {
+  _chpwd_run_all
+  add-zsh-hook -d precmd _defer_chpwd_startup
+}
+add-zsh-hook precmd _defer_chpwd_startup
 
 # quickly start zsh with p10k instant prompt, but avoid prompt flickering
 (( ! ${+functions[p10k]} )) || p10k finalize
-

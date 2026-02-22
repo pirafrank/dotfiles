@@ -1,9 +1,10 @@
 # Description: Functions to run at dir change and at shell start.
 
 check_nvmrc() {
-  if [[ -f .nvmrc ]] && [[ "$(cat .nvmrc)" != "$(node --version)" ]]; then
-    nvm use
-  fi
+  [[ -f .nvmrc ]] || return
+  # node --version may fail if nvm hasn't been loaded yet and no static PATH default
+  # was found; nvm use triggers the lazy-loader if nvm is defined as a function.
+  [[ "$(cat .nvmrc)" != "$(node --version 2>/dev/null)" ]] && nvm use
 }
 
 prompt_oscseq() {

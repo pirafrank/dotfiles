@@ -3,6 +3,74 @@
 # This file is for interactive env, only to be loaded in .zshrc.
 
 #
+# Lazy shell integrations for env managers
+# (eval "$(X init -)" calls deferred to first use to avoid ~1s startup cost)
+#
+
+# pyenv - full shell integration on first call (shims PATH already set in zsh_env)
+# Use `function` keyword (not `name()` syntax) to avoid alias/function name conflict:
+# zsh_env sets `alias pyenv='nocorrect pyenv'` and zsh parses `name()` before
+# any unalias can run, causing a parse error. `function name {}` bypasses this.
+if [[ -d $HOME/.pyenv ]]; then
+  function pyenv {
+    unfunction pyenv
+    unalias pyenv 2>/dev/null
+    eval "$(command pyenv init -)"
+    eval "$(command pyenv virtualenv-init -)"
+    pyenv "$@"
+  }
+fi
+
+# jenv - shell integration on first call (bin PATH already set in zsh_env)
+if [[ -d $HOME/.jenv ]]; then
+  jenv() {
+    unfunction jenv
+    eval "$(command jenv init -)"
+    jenv "$@"
+  }
+fi
+
+# goenv - shell integration on first call (bin PATH already set in zsh_env)
+if [[ -d $HOME/.goenv ]]; then
+  goenv() {
+    unfunction goenv
+    eval "$(command goenv init -)"
+    # goenv init sets GOROOT/GOPATH; update PATH accordingly
+    export PATH="$GOROOT/bin:$PATH"
+    export PATH="$PATH:$GOPATH/bin"
+    goenv "$@"
+  }
+fi
+
+# nvm - load fully before first prompt via a one-shot precmd hook.
+# This avoids listing managed binaries (fragile, maintenance burden) and alias
+# conflicts entirely. precmd never runs during `zsh -i -c exit` so the startup
+# benchmark is unaffected. Hook registers before _defer_chpwd_startup so nvm
+# is fully loaded when check_nvmrc runs.
+if [[ -d "$HOME/.nvm" ]]; then
+  _nvm_load_once() {
+    add-zsh-hook -d precmd _nvm_load_once
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+  }
+  add-zsh-hook precmd _nvm_load_once
+fi
+
+# rvm - same one-shot precmd pattern as nvm.
+# Output is suppressed (>/dev/null) because rvm prints decorative load messages
+# that would appear before the first prompt and look like errors.
+if [[ -d "$HOME/.rvm" ]] || [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
+  _rvm_load_once() {
+    add-zsh-hook -d precmd _rvm_load_once
+    if [[ -s "$HOME/.rvm/scripts/rvm" ]]; then
+      source "$HOME/.rvm/scripts/rvm" >/dev/null 2>&1
+    elif [[ -s "/usr/local/rvm/scripts/rvm" ]]; then
+      source "/usr/local/rvm/scripts/rvm" >/dev/null 2>&1
+    fi
+  }
+  add-zsh-hook precmd _rvm_load_once
+fi
+
+#
 # interactive env
 #
 
@@ -80,7 +148,7 @@ fi
 if [[ $(command -v tty) ]] && [[ "$(uname -s)" == 'Linux' ]] && [[ -z "$(uname -a | grep -i wsl)" ]] && [[ -z "$(uname -a | grep -i codespaces)" ]]; then
 export GPG_TTY=$TTY
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+gpgconf --launch gpg-agent >/dev/null 2>&1
 fi
 
 # use zoxide to jump around as fasd has been discontinued
