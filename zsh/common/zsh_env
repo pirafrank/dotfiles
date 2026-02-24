@@ -40,11 +40,24 @@ path=(
   $path
 )
 
+# Set manpath variable depending on the underlying OS
+case "$(uname -s)" in
+  'Linux')
+    MAN_ADD=$(manpath -g)
+    ;;
+  'Darwin')
+    MAN_ADD=$(manpath)
+    ;;
+  *)
+    # do not add anything
+    ;;
+esac
+
 # Set the list of dirs that Zsh searches for man pages
 manpath=(
   $HOME/bin2/man
   $HOME/.local/share/man
-  $(manpath -g)
+  $MAN_ADD
 )
 
 # Ensure path arrays do not contain duplicates.
