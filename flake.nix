@@ -1,5 +1,5 @@
 {
-  description = "Francesco's dotfiles as a home-manager module";
+  description = "pirafrank's dotfiles as a home-manager module";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -17,22 +17,22 @@
     in
     {
       # The main home-manager module
-      homeManagerModules.default = import ./home.nix;
+      homeManagerModules.default = import ./nix/home.nix;
 
       # Alternative name for convenience
       homeManagerModules.dotfiles = self.homeManagerModules.default;
 
-      # Example home-manager configuration for testing
+      # Sample home-manager configuration for testing
       homeConfigurations = forAllSystems (system:
         home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.${system};
           modules = [
             self.homeManagerModules.default
             {
-              home.username = "example";
+              home.username = "francesco";
               home.homeDirectory = if nixpkgs.lib.hasPrefix "darwin" system
-                then "/Users/example"
-                else "/home/example";
+                then "/Users/francesco"
+                else "/home/francesco";
               home.stateVersion = "24.05";
 
               # Enable all dotfiles
