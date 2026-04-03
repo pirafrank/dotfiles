@@ -46,6 +46,8 @@ call plug#begin($BASE.'/plugged')
   Plug 'nvim-lua/plenary.nvim', Cond(is_nvim)         " Dependency lib
   Plug 'nvim-lua/popup.nvim', Cond(is_nvim)           " Dependency lib
   Plug 'MunifTanjim/nui.nvim', Cond(is_nvim)          " UI lib
+  Plug 'MeanderingProgrammer/render-markdown.nvim', Cond(is_nvim) " Render markdown in nvim
+  Plug 'HakonHarnes/img-clip.nvim', Cond(is_nvim)     " Embed images into any markup language
 
   " UI
   Plug 'luukvbaal/stabilize.nvim', Cond(is_nvim)      " stabilize UI splits
@@ -53,6 +55,7 @@ call plug#begin($BASE.'/plugged')
   Plug 'ryanoasis/vim-devicons', Cond(is_vim)         " Nerd font viml support
   Plug 'nvim-tree/nvim-web-devicons', Cond(is_nvim)   " Nerd font lua support
   Plug 'folke/twilight.nvim', Cond(is_nvim)           " dim inactive blocks of code
+  Plug 'folke/snacks.nvim', Cond(is_nvim)             " modern input UI
 
   " Brackets
   Plug 'tpope/vim-surround'                   " delete/change/add surroundings
@@ -112,8 +115,9 @@ call plug#begin($BASE.'/plugged')
   " AI
   "Plug 'github/copilot.vim', Cond(is_nvim)            " GH Copilot (VimL)
   Plug 'zbirenbaum/copilot.lua', Cond(is_nvim)        " Copilot (Lua)
-  Plug 'zbirenbaum/copilot-cmp', Cond(is_nvim)        " Copilot cmp source
-  Plug 'CopilotC-Nvim/CopilotChat.nvim', Cond(is_nvim, { 'branch': 'main' })  " Copilot chat
+  "Plug 'zbirenbaum/copilot-cmp', Cond(is_nvim)        " Copilot cmp source
+  Plug 'CopilotC-Nvim/CopilotChat.nvim', Cond(is_nvim, { 'branch': 'main' })   " Copilot chat
+  Plug 'yetone/avante.nvim', Cond(is_nvim, { 'branch': 'main', 'do': 'make' }) " Cursor-like features
 
   """""""""""""""""""""""""""""" colorschemas """"""""""""""""""""""""""""""""
 

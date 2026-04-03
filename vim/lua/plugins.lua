@@ -136,12 +136,12 @@ require('copilot').setup({
   panel = { enabled = false },
 })
 -- Copilot as nvim-cmp source
-require('copilot_cmp').setup()
+--require('copilot_cmp').setup()
 -- Copilot Chat
 -- note: nvim-cmp integration must be required before CopilotChat.
 require("CopilotChat").setup {
   debug = false, -- Enable debugging
-  model = "claude-sonnet-4.5",
+  model = "claude-sonnet-4.6",
   agent = "copilot",
   chat_autocomplete = true,  -- Enable chat autocomplete
   window = {
@@ -157,6 +157,16 @@ require("CopilotChat").setup {
     },
   },
 }
+
+-- Avante (Cursor-like AI features)
+require('avante').setup({
+  provider = 'copilot',
+  providers = {
+    copilot = {
+      model = 'claude-sonnet-4.6',
+    },
+  },
+})
 
 -- Hop
 require('hop').setup{
