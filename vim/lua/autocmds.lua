@@ -13,16 +13,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
--- Define the autocmd
-vim.api.nvim_create_autocmd("BufRead", {
-  group = lsp_group,
-  pattern = "*",
-  callback = function()
-    if vim.fn.mode() == 'n' then
-      vim.cmd("LspStart")
-    end
-  end,
-})
 
 -- Enable treesitter-based folding for supported languages
 -- This uses the newer Neovim built-in vim.treesitter.foldexpr()
