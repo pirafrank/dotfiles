@@ -276,7 +276,7 @@ features = ["ss03", "ss06", "ss07", "ss08", "calt"]
 # use-current-path = false
 # color-automation = []
 [navigation]
-mode = "TopTab"
+mode = "Tab"
 clickable = true
 hide-if-single = true
 use-current-path = true
