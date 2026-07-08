@@ -167,7 +167,7 @@ require('copilot_cmp').setup({
 -- note: nvim-cmp integration must be required before CopilotChat.
 require("CopilotChat").setup {
   debug = false, -- Enable debugging
-  model = "claude-sonnet-4.5",
+  model = "gpt-5.5",
   agent = "copilot",
   chat_autocomplete = true,  -- Enable chat autocomplete
   window = {
