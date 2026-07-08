@@ -136,7 +136,33 @@ require('copilot').setup({
   panel = { enabled = false },
 })
 -- Copilot as nvim-cmp source
-require('copilot_cmp').setup()
+local copilot_cmp_source = require('copilot_cmp.source')
+copilot_cmp_source.is_available = function(self)
+  if vim.lsp.client_is_stopped and vim.lsp.client_is_stopped(self.client.id) then
+    return false
+  end
+
+  if not vim.lsp.client_is_stopped and self.client.is_stopped() then
+    return false
+  end
+
+  if self.client.name ~= "copilot" then
+    return false
+  end
+
+  local clients = vim.lsp.get_clients({
+    bufnr = vim.api.nvim_get_current_buf(),
+    id = self.client.id
+  })
+
+  return next(clients) ~= nil
+end
+
+require('copilot_cmp').setup({
+  -- Avoid copilot-cmp's LspAttach path, which calls a deprecated Neovim 0.12
+  -- client.is_stopped compatibility method before completion is needed.
+  event = { "InsertEnter" },
+})
 -- Copilot Chat
 -- note: nvim-cmp integration must be required before CopilotChat.
 require("CopilotChat").setup {
