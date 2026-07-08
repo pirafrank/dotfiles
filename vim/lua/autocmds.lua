@@ -13,17 +13,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end,
 })
 
--- Define the autocmd
-vim.api.nvim_create_autocmd("BufRead", {
-  group = lsp_group,
-  pattern = "*",
-  callback = function()
-    if vim.fn.mode() == 'n' then
-      vim.cmd("LspStart")
-    end
-  end,
-})
-
 -- Enable treesitter-based folding for supported languages
 -- This uses the newer Neovim built-in vim.treesitter.foldexpr()
 vim.api.nvim_create_autocmd({"FileType", "BufEnter", "BufWinEnter"}, {
@@ -34,9 +23,8 @@ vim.api.nvim_create_autocmd({"FileType", "BufEnter", "BufWinEnter"}, {
     "rust", "scss", "tsx", "typescript", "vim", "vue", "yaml"
   },
   callback = function()
-    -- Check if treesitter parser is available for this filetype
-    local ok, parsers = pcall(require, 'nvim-treesitter.parsers')
-    if ok and parsers.has_parser() then
+    -- Check if a parser can be created without depending on nvim-treesitter internals.
+    if pcall(vim.treesitter.get_parser, 0) then
       vim.opt_local.foldmethod = "expr"
       -- Use Neovim's built-in treesitter foldexpr
       vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"

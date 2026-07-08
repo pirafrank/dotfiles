@@ -1,62 +1,85 @@
-
--- Syntax highlighting
-require('nvim-treesitter.configs').setup {
-  -- listed parsers that MUST always be installed
-  ensure_installed = {
-    'bash',
-    'c',
-    'css',
-    'dockerfile',
-    'go',
-    'gomod',
-    'graphql',
-    'html',
-    'kdl',
-    'java',
-    'javascript',
-    'markdown',
-    'regex',
-    'json',
-    'lua',
-    'python',
-    'rust',
-    'scss',
-    'tsx',
-    'typescript',
-    'vim',
-    'vue',
-    'yaml',
-  },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have 'tree-sitter' CLI installed locally
-  auto_install = true,
-
-  ignore_install = {},
-
-  highlight = {
-    enable = true,
-    disable = {},
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` ifou depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow downour editor, andou may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-
-  -- Incremental selection based on the named nodes from the grammar
-  incremental_selection = {
-    enable = true,
-  },
-
-  -- Indentation based on treesitter for the = operator.
-  -- NOTE: This is an experimental feature.
-  indent = {
-    enable = true,
-  },
-
+local parsers = {
+  'bash',
+  'c',
+  'css',
+  'dockerfile',
+  'go',
+  'gomod',
+  'graphql',
+  'html',
+  'kdl',
+  'java',
+  'javascript',
+  'markdown',
+  'markdown_inline',
+  'regex',
+  'json',
+  'lua',
+  'python',
+  'rust',
+  'scss',
+  'tsx',
+  'typescript',
+  'vim',
+  'vue',
+  'yaml',
 }
 
+local filetypes = {
+  'bash',
+  'c',
+  'cpp',
+  'css',
+  'dockerfile',
+  'go',
+  'graphql',
+  'html',
+  'java',
+  'javascript',
+  'javascriptreact',
+  'json',
+  'lua',
+  'markdown',
+  'python',
+  'rust',
+  'scss',
+  'typescript',
+  'typescriptreact',
+  'vim',
+  'vue',
+  'yaml',
+}
+
+local ok, treesitter = pcall(require, 'nvim-treesitter')
+
+if ok and type(treesitter.install) == 'function' then
+  -- nvim-treesitter main branch for Neovim 0.12+: parsers and queries only.
+  treesitter.setup()
+
+  vim.api.nvim_create_autocmd('FileType', {
+    group = vim.api.nvim_create_augroup('TreesitterHighlight', { clear = true }),
+    pattern = filetypes,
+    callback = function(args)
+      pcall(vim.treesitter.start, args.buf)
+    end,
+  })
+else
+  -- Backward-compatible path for the legacy master branch during plugin updates.
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = parsers,
+    sync_install = false,
+    auto_install = true,
+    ignore_install = {},
+    highlight = {
+      enable = true,
+      disable = {},
+      additional_vim_regex_highlighting = false,
+    },
+    incremental_selection = {
+      enable = true,
+    },
+    indent = {
+      enable = true,
+    },
+  }
+end
