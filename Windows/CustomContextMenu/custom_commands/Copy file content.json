@@ -1,0 +1,16 @@
+{
+  "title": "Copy content to clipboard",
+  "index": 8,
+  "exe": "\"C:\\Users\\francesco\\dotfiles\\Windows\\CustomContextMenu\\scripts\\Copy_file_content\\copy.bat\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\dotfiles\\Windows\\icons\\fileinfo.png\"",
+  "iconDark": "",
+  "acceptDirectoryFlag": 0,
+  "acceptFileFlag": 1,
+  "acceptMultipleFilesFlag": 0,
+  "acceptMultipleFilesRuleFlag": 0,
+  "pathDelimiter": ",",
+  "paramForMultipleFiles": "\"{path}\"",
+  "showWindowFlag": 0,
+  "runAsFlag": 0
+}
