@@ -1,0 +1,34 @@
+paste-image() {
+    # Do nothing on non-WSL2 systems
+    if [[ ! -r /proc/sys/kernel/osrelease ]] ||
+       [[ "${$(</proc/sys/kernel/osrelease):l}" != *microsoft* ]] ||
+       [[ "${$(</proc/sys/kernel/osrelease):l}" != *wsl2* ]]; then
+        print -u2 -- "paste-image: this function is available only on WSL2."
+        return 1
+    fi
+
+    # Variables
+    local output="${1:-clipboard.png}"
+    local windows_path
+
+    windows_path="$(wslpath -w "$output")" || return 1
+
+    # We use absolute path to powershell.exe to avoid issues with PATH in WSL2
+    /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -Command "
+        Add-Type -AssemblyName System.Windows.Forms
+        Add-Type -AssemblyName System.Drawing
+
+        \$image = [System.Windows.Forms.Clipboard]::GetImage()
+
+        if (\$null -eq \$image) {
+            Write-Error 'Clipboard does not contain an image.'
+            exit 1
+        }
+
+        \$image.Save(
+            '$windows_path',
+            [System.Drawing.Imaging.ImageFormat]::Png
+        )
+    "
+}
+
