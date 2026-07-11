@@ -1,0 +1,9 @@
+if ! command -v magick &> /dev/null; then
+  echo "ImageMagick is not installed. Please install it to use this script."
+  return 1
+fi
+
+for f in *.png; do
+  magick "$f" -resize '1200x>' -quality 90 "${f%.png}.jpg"
+done
+
