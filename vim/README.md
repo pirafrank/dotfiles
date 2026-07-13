@@ -196,6 +196,19 @@ Neovim autocomplete draws from these sources (in priority order):
 5. **Path** - File path completions
 6. **Buffer** - Words from current buffer
 
+### Shared snippets (LuaSnip)
+
+Personal snippets are loaded from `~/dotfiles/lua/luasnippets`, which keeps
+them under version control and makes them available across systems. Snippets in
+`all.lua` apply to every filetype; use files such as `python.lua`, `rust.lua`,
+or `<filetype>/*.lua` for filetype-specific snippets.
+
+Type a snippet trigger and press `<Tab>` to expand it. Use `<Tab>` and
+`<S-Tab>` to move between placeholders, and `<C-e>` to change an active choice.
+The included global `date` snippet inserts the current local date in
+`YYYY-MM-DD` format. Use `:LuaSnipEdit` to select and edit a loaded snippet
+file, or `:LuaSnipListAvailable` to inspect snippets for the current buffer.
+
 ## Debug
 
 ### Startup times

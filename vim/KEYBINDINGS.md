@@ -37,6 +37,7 @@ This document lists all available keybindings for both Vim and Neovim configurat
   - [Floaterm (Floating Terminal)](#floaterm-floating-terminal)
   - [Copilot & AI](#copilot--ai)
   - [Autocomplete (nvim-cmp)](#autocomplete-nvim-cmp)
+  - [Snippets (LuaSnip)](#snippets-luasnip)
   - [Telescope Popup (when active)](#telescope-popup-when-active)
   - [Telescope fzf Actions (on selected item)](#telescope-fzf-actions-on-selected-item)
 - [Plugin-Specific Notes](#plugin-specific-notes)
@@ -350,8 +351,20 @@ When the autocomplete menu is visible:
 |`<Up>`|Insert|Select previous item|
 |`<C-d>`|Insert|Scroll documentation down|
 |`<C-u>`|Insert|Scroll documentation up|
-|`<Tab>`|Insert|Select next item|
-|`<S-Tab>`|Insert|Select previous item|
+|`<Tab>`|Insert/Select|Select next item; otherwise expand a LuaSnip snippet or jump to its next placeholder|
+|`<S-Tab>`|Insert/Select|Select previous item; otherwise jump to the previous LuaSnip placeholder|
+
+### Snippets (LuaSnip)
+
+LuaSnip expands snippet-formatted completion items accepted from `nvim-cmp`.
+The snippet keys apply when the completion menu is closed; completion-menu
+navigation takes priority while it is visible.
+
+|Keybinding|Mode|Action|
+|---|---|---|
+|`<Tab>`|Insert/Select|Expand the snippet before the cursor, or jump to its next placeholder|
+|`<S-Tab>`|Insert/Select|Jump to the previous placeholder in the active snippet|
+|`<C-e>`|Insert/Select|Select the next alternative in an active LuaSnip choice node|
 
 ### Telescope Popup (when active)
 

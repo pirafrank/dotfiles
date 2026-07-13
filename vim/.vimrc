@@ -218,6 +218,7 @@ elseif is_nvim
   lua require('plugins')
   lua require('lsp')
   lua require('autocomplete')
+  lua require('snippets')
   lua require('languages')
   lua require('commands')
   lua require('mappings')

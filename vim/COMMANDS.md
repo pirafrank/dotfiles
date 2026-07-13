@@ -32,6 +32,7 @@ This document lists all available custom commands for both Vim and Neovim config
   - [Language-Specific LSP Commands](#language-specific-lsp-commands)
   - [Mason (LSP/DAP/Linter Manager)](#mason-lspdaplinter-manager)
   - [Treesitter](#treesitter)
+  - [LuaSnip](#luasnip)
   - [Copilot](#copilot)
   - [Glow (Markdown Preview)](#glow-markdown-preview)
   - [Hop (Quick Jump)](#hop-quick-jump)
@@ -291,6 +292,15 @@ The `:Term` command has smart behavior:
 |`:TSUninstall <language>`|Uninstall Treesitter parser|
 |`:TSBufEnable <module>`|Enable Treesitter module for current buffer|
 |`:TSBufDisable <module>`|Disable Treesitter module for current buffer|
+
+### LuaSnip
+
+|Command|Action|
+|---|---|
+|`:LuaSnipEdit`|Select and edit a shared snippet file for the current filetype|
+|`:LuaSnipListAvailable`|Print the snippets available for the current buffer's filetype|
+|`:LuaSnipUnlinkCurrent`|Leave and unlink the active snippet if its jump state becomes stuck|
+|`:help luasnip`|Open LuaSnip's complete help documentation|
 
 ### Copilot
 
