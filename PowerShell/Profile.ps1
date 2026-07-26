@@ -3,11 +3,11 @@
 Set-Alias -Name man -Value Get-Help -Option AllScope
 Set-Alias -Name dir -Value Get-ChildItem -Option AllScope
 Set-Alias -Name l -Value ls -Option AllScope
-Set-Alias which get-command
+Set-Alias -Name which -Value get-command -Option AllScope
 Set-Alias lg lazygit
 Set-Alias ldk lazydocker
-Set-Alias open Invoke-Item
-Set-Alias touch New-Item
+Set-Alias -Name open -Value Invoke-Item -Option AllScope
+Set-Alias -Name touch -Value New-Item -Option AllScope
 
 Set-Alias k kubectl
 Set-Alias dk docker
@@ -15,7 +15,7 @@ Set-Alias dk docker
 # override 'cat' alias to use 'bat' instead.
 # removal is necessary because 'cat' is a built-in alias for Get-Content in pwsh
 Remove-Item alias:cat -Force
-Set-Alias cat bat
+Set-Alias -Name cat -Value bat -Option AllScope -Force
 
 Set-Alias ll ls
 Set-Alias g git
