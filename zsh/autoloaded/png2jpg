@@ -3,7 +3,16 @@ if ! command -v magick &> /dev/null; then
   return 1
 fi
 
-for f in *.png; do
+if (( $# == 0 )); then
+  echo "Usage: png2jpg FILE.png ..." >&2
+  return 1
+fi
+
+for f in "$@"; do
+  if [[ ! -f "$f" ]]; then
+    echo "png2jpg: file does not exist: $f" >&2
+    return 1
+  fi
+
   magick "$f" -resize '1200x>' -quality 90 "${f%.png}.jpg"
 done
-
