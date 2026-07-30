@@ -24,6 +24,8 @@ theme = "dracula"
 #theme = "ChallengerDeep"
 #theme = "GitHub Dark"
 
+copy-on-select = true
+
 # Padding-x
 #
 # define x axis padding (default is 0)
@@ -144,8 +146,8 @@ width = 960
 height = 600
 opacity = 1.00
 blur = false
-mode = "windowed"
-decorations = "enabled"
+mode = "Windowed"
+decorations = "Enabled"
 
 # Renderer
 #
