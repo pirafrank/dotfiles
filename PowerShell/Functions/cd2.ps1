@@ -2,7 +2,10 @@
 # https://stackoverflow.com/questions/7236594/cdpath-functionality-in-powershell
 function cd2 {
     param($path)
-    if (-not $path) { return }
+    if (-not $path) {
+        Set-Location $HOME
+        return
+    }
 
     if ((Test-Path $path) -or (-not $env:CDPATH)) {
         Set-Location $path
