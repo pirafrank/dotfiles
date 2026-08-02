@@ -151,6 +151,22 @@
     [
         {
             "type": "remainingProfiles"
+        },
+        {
+            "allowEmpty": false,
+            "entries":
+            [
+                {
+                    "commandline": null,
+                    "name": null,
+                    "source": "Windows.Terminal.SSH",
+                    "type": "matchProfiles"
+                }
+            ],
+            "icon": "\ue969",
+            "inline": "auto",
+            "name": "SSH",
+            "type": "folder"
         }
     ],
     "profiles": 
@@ -186,12 +202,44 @@
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
+                "commandline": "C:\\Program Files\\PowerShell\\7\\pwsh.exe -NoProfile",
+                "startingDirectory": "C:\\Users\\francesco",
+                "guid": "{574e775e-4f2a-5b96-ac2e-a2962a402338}",
+                "hidden": false,
+                "name": "PowerShell 7 (No Profile)",
+                "opacity": 85
+            },
+            {
                 "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d Ubuntu-20.04 sh -c \"cd $HOME;exec $SHELL\"",
                 "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
                 "hidden": false,
                 "icon": "C:/Users/francesco/AppData/Roaming/tux_color.png",
                 "name": "WSL",
                 "source": "Windows.Terminal.Wsl",
+                "startingDirectory": null
+            },
+            {
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d Ubuntu-20.04 sh -c \"cd $HOME;exec /usr/bin/fish\"",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c272}",
+                "hidden": false,
+                "icon": "C:/Users/francesco/AppData/Roaming/fish.png",
+                "name": "Fish",
+                "startingDirectory": null
+            },
+            {
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d archlinux",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c274}",
+                "hidden": false,
+                "icon": "C:/Users/francesco/AppData/Roaming/archlinux.png",
+                "name": "WSL (archlinux)",
+                "startingDirectory": null
+            },
+            {
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d Debian",
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c275}",
+                "hidden": false,
+                "icon": "C:/Users/francesco/AppData/Roaming/debian.png",
+                "name": "WSL (Debian)",
                 "startingDirectory": null
             },
             {
@@ -211,12 +259,6 @@
                 "hidden": false,
                 "name": "Developer PowerShell for VS 2022",
                 "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{47302f9c-1ac4-566c-aa3e-8cf29889d6ab}",
-                "hidden": false,
-                "name": "Nushell",
-                "source": "nu"
             },
             {
                 "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
@@ -242,6 +284,30 @@
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
+            },
+            {
+                "commandline": "C:\\WINDOWS\\system32\\wsl.exe -d NixOS",
+                "guid": "{31e7990f-71f9-425b-8a2a-ddc6bcf061c3}",
+                "hidden": true,
+                "icon": "C:/Users/francesco/AppData/Roaming/nix.png",
+                "name": "NixOS",
+                "startingDirectory": null
+            },
+            {
+                "guid": "{32743f95-e953-5446-87e9-2461ef4fa279}",
+                "hidden": false,
+                "name": "NixOS",
+                "source": "Microsoft.WSL"
+            },
+            {
+                "commandline": "C:/msys64/msys2_shell.cmd -defterm -here -no-start -ucrt64",
+                "guid": "{81957ea6-f800-4b27-9c6f-2b3d3cda2476}",
+                "hidden": false,
+                "icon": "C:/msys64/ucrt64.ico",
+                "name": "MSYS2 UCRT64",
+                "pathTranslationStyle": "wsl",
+                "startingDirectory": "%USERPROFILE%",
+                "tabTitle": null
             }
         ]
     },

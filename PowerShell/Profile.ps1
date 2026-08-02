@@ -250,16 +250,16 @@ if ($env:OS -like "*Windows*")
         }
     }
 
-    # source dotfiles scripts
-    # this sources every powershell script in dir
-    $Path = "$env:USERPROFILE\dotfiles\Windows\scripts"
-    Get-ChildItem -Path $Path -Filter *.ps1 | ForEach-Object {
+        # source dotfiles scripts
+        # this sources every powershell script in the scripts dir only
+        $windowsScriptsPath = "$env:USERPROFILE\dotfiles\Windows\scripts"
+        Get-ChildItem -Path $windowsScriptsPath -Filter *.ps1 | ForEach-Object {
         . $_.FullName
     }
 
     # add Windows\bin to $PATH.
     # keep this line at the very bottom.
-    $Path = "$env:USERPROFILE\dotfiles\Windows\bin"
+    $env:Path = "$env:USERPROFILE\dotfiles\Windows\bin"
 }
 
 # fnm set node env on cd
@@ -281,14 +281,11 @@ function yy
 }
 
 # only initialize conda if no virtualenv is active and python is not managed by pyenv-win
-if ($IsWindows -and -not $env:VIRTUAL_ENV) {
-    $pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
-    if ($pythonPath -and $pythonPath -like "*AppData\Local\Programs\Python*") {
-      If (Test-Path "C:\Users\francesco\anaconda3\Scripts\conda.exe") {
-          (& "C:\Users\francesco\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
-      }
-    }
-}
-
-
-
+# if ($IsWindows -and -not $env:VIRTUAL_ENV) {
+#     $pythonPath = (Get-Command python -ErrorAction SilentlyContinue).Source
+#     if ($pythonPath -and $pythonPath -like "*AppData\Local\Programs\Python*") {
+#       If (Test-Path "C:\Users\francesco\anaconda3\Scripts\conda.exe") {
+#           (& "C:\Users\francesco\anaconda3\Scripts\conda.exe" "shell.powershell" "hook") | Out-String | ?{$_} | Invoke-Expression
+#       }
+#     }
+# }
