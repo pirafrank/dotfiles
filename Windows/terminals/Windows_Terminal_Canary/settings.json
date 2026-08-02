@@ -1,7 +1,7 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://raw.githubusercontent.com/microsoft/terminal/main/doc/cascadia/profiles.schema.json",
-    "actions": 
+    "actions":
     [
         {
             "command": "openTabRenamer",
@@ -16,7 +16,7 @@
             "id": "User.resetFontSize"
         },
         {
-            "command": 
+            "command":
             {
                 "action": "searchWeb"
             },
@@ -27,7 +27,7 @@
             "id": "User.terminalChat"
         }
     ],
-    "aiConfig": 
+    "aiConfig":
     {
         "activeProvider": "githubCopilot"
     },
@@ -36,7 +36,7 @@
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "initialCols": 140,
     "initialRows": 40,
-    "keybindings": 
+    "keybindings":
     [
         {
             "id": null,
@@ -147,7 +147,7 @@
             "keys": "ctrl+shift+q"
         }
     ],
-    "newTabMenu": 
+    "newTabMenu":
     [
         {
             "type": "remainingProfiles"
@@ -169,18 +169,18 @@
             "type": "folder"
         }
     ],
-    "profiles": 
+    "profiles":
     {
-        "defaults": 
+        "defaults":
         {
-            "bellStyle": 
+            "bellStyle":
             [
                 "window",
                 "taskbar"
             ],
             "closeOnExit": "graceful",
             "colorScheme": "Dark+",
-            "font": 
+            "font":
             {
                 "face": "JetBrainsMono Nerd Font Mono",
                 "size": 10
@@ -192,7 +192,7 @@
             "showMarksOnScrollbar": true,
             "useAcrylic": true
         },
-        "list": 
+        "list":
         [
             {
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
@@ -308,6 +308,446 @@
                 "pathTranslationStyle": "wsl",
                 "startingDirectory": "%USERPROFILE%",
                 "tabTitle": null
+            },
+            {
+                "guid": "{7938ef91-fc40-5eae-9c80-51c1bb53fe77}",
+                "hidden": false,
+                "name": "SSH - ssh.dev.azure.com",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{38fce648-f5c2-5062-8cca-1815b5ea10d1}",
+                "hidden": false,
+                "name": "SSH - gitlab.com",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9628bc99-bec4-5d8e-acd9-18abc2bf9207}",
+                "hidden": false,
+                "name": "SSH - heroku.personal",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{b7211c28-6aa8-5c00-ba96-7c1e117f83ee}",
+                "hidden": false,
+                "name": "SSH - wsl",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{135c9e17-63cb-5709-83c5-2911b4113907}",
+                "hidden": false,
+                "name": "SSH - dimora-gi-zt1",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{281e1387-bdaf-5e93-8f64-419e331fe882}",
+                "hidden": false,
+                "name": "SSH - dimora-gi",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{16b7bd3d-32af-5a82-b859-a663c4acb9ed}",
+                "hidden": false,
+                "name": "SSH - sam",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{e096486b-7b50-5479-a575-9cc8a6e0fbe0}",
+                "hidden": false,
+                "name": "SSH - dnas",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{e4313792-4fa8-5429-826f-55dd5f3037ba}",
+                "hidden": false,
+                "name": "SSH - d2",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{af94eb45-c3f1-51f5-8715-c377dbd658a8}",
+                "hidden": false,
+                "name": "SSH - d2f",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{3d3dc79a-b2e4-529e-8206-82668dee264c}",
+                "hidden": false,
+                "name": "SSH - ethz",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{17892505-89a3-59da-bff0-71b0c92f936a}",
+                "hidden": false,
+                "name": "SSH - fs1",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{c531e28e-7933-53a3-a5ee-a9eac6e6b3f8}",
+                "hidden": false,
+                "name": "SSH - lisa",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{4e811139-59d2-504f-bc5e-b5268069cad9}",
+                "hidden": false,
+                "name": "SSH - giromangiando",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{37268b64-f812-5156-90ef-01407508170f}",
+                "hidden": false,
+                "name": "SSH - giromangiandonew",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{11db879e-e676-5748-8bf0-76b5561cfcde}",
+                "hidden": false,
+                "name": "SSH - pirafrank.visualstudio.com",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{64ac7068-8879-5382-bf45-3219562cdfaf}",
+                "hidden": false,
+                "name": "SSH - vs-ssh.visualstudio.com",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{f950cdbd-d337-52af-80f9-d128e981a7ac}",
+                "hidden": false,
+                "name": "SSH - amlroot",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{fb94d32b-c95b-5fa6-929a-440da1422e34}",
+                "hidden": false,
+                "name": "SSH - leia",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{921ad14c-1bfc-56f5-9707-983c685ecd5e}",
+                "hidden": false,
+                "name": "SSH - luna",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{effb65b5-95e5-50b6-ad04-510b0371e1ff}",
+                "hidden": false,
+                "name": "SSH - hl1",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{ae63490d-b830-5d22-8ff7-87b58c55c3bf}",
+                "hidden": false,
+                "name": "SSH - hl1r",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9a35ce64-ea2a-595d-94f7-cb8914f2a893}",
+                "hidden": false,
+                "name": "SSH - git.fpira.com",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{64c1d74a-75c8-57dd-a2b6-51e496f02c56}",
+                "hidden": false,
+                "name": "SSH - xubuntubridgevm",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{85e5e340-4c13-504e-9ef1-1465aed80b5e}",
+                "hidden": false,
+                "name": "SSH - portalfe",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{08769860-7d18-5a3d-b690-349a90ec3ad3}",
+                "hidden": false,
+                "name": "SSH - portalfe2",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{044d9d90-3f0e-5504-b4c2-5ce153f25c9c}",
+                "hidden": false,
+                "name": "SSH - portalfe3",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{d628dc70-0a6f-5db9-8b75-f30e7f3573ea}",
+                "hidden": false,
+                "name": "SSH - portalbe01",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{b03905f9-e2f3-53fe-aed8-706dd6bbc26a}",
+                "hidden": false,
+                "name": "SSH - portalbe02",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{1df989b9-eeb4-5d95-ad6a-02c24bc77454}",
+                "hidden": false,
+                "name": "SSH - portalcollfe",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9f9d3685-73fa-5771-b3d1-7d527349d1ab}",
+                "hidden": false,
+                "name": "SSH - portalcollbe01",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{07d5d9b9-4a7a-5df9-9f49-ff41ed686216}",
+                "hidden": false,
+                "name": "SSH - portalcollbe02",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{50cbe493-ac9c-50e5-9f73-37fa078a49fd}",
+                "hidden": false,
+                "name": "SSH - portalcollbe03",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{99f584ec-8f6d-5386-b081-38b2c1e0626d}",
+                "hidden": false,
+                "name": "SSH - portalprodfe",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{cdb7dba3-b63a-5228-80d2-01a2fe974919}",
+                "hidden": false,
+                "name": "SSH - portalprodbe01",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{ee9f904f-1d7c-54a4-9675-04589d17d541}",
+                "hidden": false,
+                "name": "SSH - portalprodbe02",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{4d8e1620-336b-5737-92d1-28551abf9017}",
+                "hidden": false,
+                "name": "SSH - portalprodbe03",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{b69e1dea-e87a-5a6b-8a74-9727ca0cf871}",
+                "hidden": false,
+                "name": "SSH - portalprodbe04",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{29a5f26f-57d6-5380-936f-00ef04cb6033}",
+                "hidden": false,
+                "name": "SSH - safefe",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{c9603f1e-dcd6-564c-ac1b-cec6f406502f}",
+                "hidden": false,
+                "name": "SSH - safebe",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{e9c500e0-7667-597d-90ec-3774065ae354}",
+                "hidden": false,
+                "name": "SSH - safeprod2",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{f2568834-9cb8-5285-a1a5-7aa58b791756}",
+                "hidden": false,
+                "name": "SSH - safeprod3",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{1c5c89c1-5e08-57d2-a90f-1ec4c2782fe1}",
+                "hidden": false,
+                "name": "SSH - safeprod4",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{0e18fc8e-45f3-5139-b11e-ddeded743c50}",
+                "hidden": false,
+                "name": "SSH - safecoll2",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{8cbf0d4c-6b4e-5dea-8953-916d1116369c}",
+                "hidden": false,
+                "name": "SSH - safecoll3",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{b385fc33-8deb-5d11-8645-50fbce503dfd}",
+                "hidden": false,
+                "name": "SSH - isfazure",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9dabc569-f2fd-5563-8715-5e67a63accbe}",
+                "hidden": false,
+                "name": "SSH - isf-devel-01",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{1adcb485-b662-5153-96d0-af2c4e2baf09}",
+                "hidden": false,
+                "name": "SSH - isf-develop-03",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{b4cdac7b-0d1a-575f-9076-8e16ee910c7d}",
+                "hidden": false,
+                "name": "SSH - isfprod111",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{1cc41fee-6f82-515b-8518-0bb703ec7d73}",
+                "hidden": false,
+                "name": "SSH - isfvm",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{20494a59-c5ff-5da1-b123-54c05f7139eb}",
+                "hidden": false,
+                "name": "SSH - ternapumaazure",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{e764e92e-888a-53c2-9fcc-00003bd46868}",
+                "hidden": false,
+                "name": "SSH - x2030_master_penultimo",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{a31098fa-a707-5ee9-b1ba-5170d51b2946}",
+                "hidden": false,
+                "name": "SSH - x2030_master_ultimo",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{aef85dd8-de16-55d5-a171-30d5b24779ca}",
+                "hidden": false,
+                "name": "SSH - x2030_esxi",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{44e79646-5f2e-5aa7-b09f-8886385f5122}",
+                "hidden": false,
+                "name": "SSH - sighup",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{635c3659-5b2d-5222-88c0-d72543aedd51}",
+                "hidden": false,
+                "name": "SSH - worker158",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{ffb6295c-0e9d-5a44-9711-64e907406ca1}",
+                "hidden": false,
+                "name": "SSH - worker125",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{c085bce2-c039-5068-9154-171762e62f06}",
+                "hidden": false,
+                "name": "SSH - worker189",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{0ec6dc10-7745-540f-a427-bfcda5a1ca1f}",
+                "hidden": false,
+                "name": "SSH - exphubdev01",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{1c583c0f-ecc3-5952-9f2c-b97655a22a52}",
+                "hidden": false,
+                "name": "SSH - sftpexphub",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{79221387-7d9b-541b-8e9a-b727549be4cb}",
+                "hidden": false,
+                "name": "SSH - exphubkafkadev",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{be6ec6c2-a0e1-5362-aedb-4192532e1d76}",
+                "hidden": false,
+                "name": "SSH - simtreni",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{27ef8bab-1b62-5083-b8c5-7f70e766145a}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 2022 (2)",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{2dca3565-ec5d-57da-ae1e-8dd8c02932a9}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 2022 (2)",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "commandline": "C:\\Users\\francesco\\AppData\\Local\\Microsoft\\WindowsApps\\foundry.exe",
+                "guid": "{d4e9422f-8cb1-4c75-ae7b-7a2f969eb618}",
+                "hidden": false,
+                "icon": "\ud83d\udcbb",
+                "name": "Foundry Local"
+            },
+            {
+                "commandline": "C:\\Users\\francesco\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+                "guid": "{493eec2b-6dbf-4895-b605-100145dbb143}",
+                "hidden": false,
+                "icon": "\ud83d\udc0d",
+                "name": "Python 3.11"
+            },
+            {
+                "guid": "{90125819-9f69-5844-bb77-1b4154395bd9}",
+                "hidden": false,
+                "name": "SSH - portalcollbe05",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9d0c9bae-47d1-5a73-9d3a-95b093eccd8a}",
+                "hidden": false,
+                "name": "SSH - biancavilla",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{116b749e-3e65-569b-a49e-7d3c01b87cc0}",
+                "hidden": false,
+                "name": "SSH - macos14",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{7ef4fe15-f0c2-5793-b0e6-a423c7731001}",
+                "hidden": false,
+                "name": "SSH - node2",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{8f094251-8856-5020-96ff-a037cf47d4bd}",
+                "hidden": false,
+                "name": "SSH - devbox",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{9bafa7dc-bd5d-5a9f-b6ab-d2efeb43c5c0}",
+                "hidden": false,
+                "name": "SSH - gitserver",
+                "source": "Windows.Terminal.SSH"
+            },
+            {
+                "guid": "{c529f538-b357-5e71-9e45-249085ffb343}",
+                "hidden": false,
+                "name": "SSH - 10.21.18.102",
+                "source": "Windows.Terminal.SSH"
             }
         ]
     },
