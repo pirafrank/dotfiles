@@ -1,0 +1,172 @@
+wtf:
+  colors:
+    border:
+      focusable: darkslateblue
+      focused: orange
+      normal: gray
+  refreshInterval: 1
+  exitMessage:
+    display: false
+  mods:
+    module0:
+      title: resourceusage
+      type: resourceusage
+      enabled: true
+      position:
+        top: 0
+        left: 72
+        width: 43
+        height: 8
+      cpuCombined: false
+      refreshInterval: 1s
+      showCPU: true
+      showMem: true
+      showSwp: true
+    module1:
+      title: Time
+      type: clocks
+      enabled: true
+      position:
+        top: 8
+        left: 108
+        width: 32
+        height: 7
+      colors:
+        rows:
+          even: lightblue
+          odd: white
+      locations:
+        UTC: Etc/UTC
+        Rome: Europe/Rome
+        New York: America/New York
+      refreshInterval: 15
+      sort: alphabetical
+    module2:
+      title: fpira.com latest blog posts
+      type: feedreader
+      enabled: true
+      position:
+        top: 19
+        left: 0
+        width: 72
+        height: 7
+      feeds:
+        - https://fpira.com/feed.xml
+      feedLimit: 10
+      refreshInterval: 12h
+    module3:
+      title: hackernews
+      type: hackernews
+      enabled: true
+      position:
+        top: 15
+        left: 72
+        width: 68
+        height: 12
+      numberOfStories: 10
+      storyType: top
+      refreshInterval: 15m
+    module4:
+      title: ipinfo
+      type: ipinfo
+      enabled: true
+      position:
+        top: 8
+        left: 72
+        width: 36
+        height: 7
+      colors:
+        name: lightblue
+        value: white
+      refreshInterval: 150
+    module5:
+      title: uptime
+      type: cmdrunner
+      enabled: true
+      position:
+        top: 0
+        left: 115
+        width: 25
+        height: 8
+      cmd: uptime
+      refreshInterval: 30
+    module6:
+      title: Agenda - Next Up
+      type: cmdrunner
+      enabled: true
+      position:
+        top: 8
+        left: 0
+        width: 72
+        height: 11
+      args:
+        - -c
+        - "ntn datasources query 'https://app.notion.com/p/user/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"Next Up\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($name) — due \\($due)\" end\n  '\n"
+      cmd: /bin/sh
+      maxLines: 100
+      refreshInterval: 5m
+    module7:
+      title: Agenda - In Progress
+      type: cmdrunner
+      enabled: true
+      position:
+        top: 0
+        left: 0
+        width: 72
+        height: 8
+      args:
+        - -c
+        - "ntn datasources query 'https://app.notion.com/p/pirafrank/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"In progress\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($name) — due \\($due)\" end\n  '\n"
+      cmd: /bin/sh
+      maxLines: 100
+      refreshInterval: 5m
+    module8:
+      title: Repos
+      type: git
+      enabled: true
+      position:
+        top: 26
+        left: 0
+        width: 72
+        height: 15
+      commitCount: 5
+      commitFormat: "[forestgreen]%h [grey]%cd [white]%s [grey]%an[white]"
+      dateFormat: "%H:%M %d %b %y"
+      refreshInterval: 8
+      repositories:
+        - ~/poof
+        - ~/vault-conductor
+        - ~/rust-cli-boilerplate
+        - ~/profile-avatar-maker
+        - ~/jekyll-scheduler
+        - ~/headroom
+        - ~/notion-to-jekyll
+        - ~/homebrew-tap
+        - ~/aura
+        - ~/pkg.fpira.com
+    module9:
+      title: Github
+      type: github
+      enabled: true
+      position:
+        top: 27
+        left: 72
+        width: 68
+        height: 14
+      apiKey: ~
+      baseURL: ""
+      customQueries:
+        othersPRs:
+          title: Others Pull Requests
+          filter: is:open is:pr -author:wtfutil
+      enableStatus: true
+      refreshInterval: 300
+      repositories:
+        - pirafrank/poof
+        - pirafrank/vault-conductor
+        - pirafrank/what-size.yazi
+      uploadURL: ""
+      username: pirafrank
+  grid:
+    columns: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    rows: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
