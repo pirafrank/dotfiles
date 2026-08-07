@@ -1,0 +1,14 @@
+{
+  "title": "Open in Eden Explorer",
+  "index": -1,
+  "exe": "\"C:\\Users\\francesco\\bin2\\EdenExplorer.exe\"",
+  "param": "\"{path}\"",
+  "icon": "\"C:\\Users\\francesco\\bin2\\EdenExplorer.exe\"",
+  "iconDark": "\"C:\\Users\\francesco\\bin2\\EdenExplorer.exe\"",
+  "acceptDirectoryFlag": 3,
+  "acceptFileFlag": 0,
+  "acceptMultipleFilesFlag": 0,
+  "acceptMultipleFilesRuleFlag": 0,
+  "showWindowFlag": 0,
+  "runAsFlag": 0
+}
