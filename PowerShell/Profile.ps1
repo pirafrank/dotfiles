@@ -118,19 +118,18 @@ if (-not $script:PsFzfHandlersRegistered) {
     Set-PSReadLineKeyHandler -Key Tab      -ScriptBlock { _InitPsFzf; Invoke-FzfTabCompletion }
 }
 
-# Lazy-load ZLocation on first use of 'z'.
-# install by running: Install-Module -Name ZLocation -Repository PSGallery
-# Saves ~635ms at startup; one-time delay on first 'z' call.
-function z {
-    Remove-Item function:z -ErrorAction SilentlyContinue
-    Import-Module ZLocation -ErrorAction SilentlyContinue
-    z @args
+# Initialize zoxide (installed via scoop).
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+    Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 
 #
 # Windows-only
 #
 if ($env:OS -like "*Windows*") {
+
+    Set-Alias -Name eden -Value 'EdenExplorer.exe' -Option AllScope -Force
+
     Register-LazyCommand -Name Invoke-Here -SourceFile 'Invoke-Here.ps1'
     Set-Alias here Invoke-Here
 
