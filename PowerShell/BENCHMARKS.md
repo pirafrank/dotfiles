@@ -8,17 +8,6 @@ Run these commands from this directory in PowerShell 7 (`pwsh`). Close other
 PowerShell-heavy applications first, and keep the shell, working directory, and
 environment the same for both measurements.
 
-## Install PSProfiler
-
-Install the requested version once:
-
-```powershell
-Install-Module PSProfiler -RequiredVersion 1.0.5.0 -Scope CurrentUser
-```
-
-PSProfiler provides `Measure-Script`, which reports the statements that consume
-the most execution time inside a script.
-
 ## Compare `-NoProfile` with the default profile
 
 The first command measures the PowerShell baseline. The second measures the
@@ -64,7 +53,45 @@ For a less noisy run, execute the whole block at least three times and compare
 the averages rather than relying on a single run. The first run may also be
 affected by module and file-system caches.
 
-## Profile the profile with PSProfiler
+### Reading the results
+
+- `NoProfileAverageMs` is the host/runtime baseline.
+- `ProfileAverageMs` is baseline plus profile loading.
+- `ProfileOverheadMs` is the estimated cost of this profile.
+- Use the PSProfiler output to find hotspots, then re-run the startup benchmark
+  after each meaningful change.
+
+The PowerShell optimization article cited among References specifically uses a
+100-iteration loop to reduce the effect of machine variance. It also cautions
+that micro-optimizing a profile may trade readability for very small gains;
+deferring interactive-only work is usually more meaningful.
+
+### Current results
+
+As of today commit ([424cb9a07c0e](https://github.com/pirafrank/dotfiles/commit/424cb9a07c0e)):
+
+```txt
+
+NoProfileAverageMs ProfileAverageMs ProfileOverheadMs
+------------------ ---------------- -----------------
+            334,60           996,15            661,55
+
+```
+
+## Profile the Profile.ps1 script
+
+### Requirements
+
+Install PSProfiler first:
+
+```powershell
+Install-Module PSProfiler -RequiredVersion 1.0.5.0 -Scope CurrentUser
+```
+
+PSProfiler provides `Measure-Script`, which reports the statements that consume
+the most execution time inside a script.
+
+### Profile with PSProfiler
 
 This profiles the profile script itself, rather than a new `pwsh` process. It
 helps identify hot statements such as module imports, command discovery, path
@@ -96,19 +123,6 @@ Measure-Script {
 Run this several times and focus optimization work on consistently expensive
 statements. A profiler run adds measurement overhead, so use the startup
 benchmark above for the actual user-visible cost.
-
-## Reading the results
-
-- `NoProfileAverageMs` is the host/runtime baseline.
-- `ProfileAverageMs` is baseline plus profile loading.
-- `ProfileOverheadMs` is the estimated cost of this profile.
-- Use the PSProfiler output to find hotspots, then re-run the startup benchmark
-  after each meaningful change.
-
-The PowerShell optimization article specifically uses a 100-iteration loop to
-reduce the effect of machine variance. It also cautions that micro-optimizing a
-profile may trade readability for very small gains; deferring interactive-only
-work is usually more meaningful.
 
 ## References
 
