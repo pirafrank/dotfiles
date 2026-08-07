@@ -1,0 +1,6 @@
+# Copy this file to Nushell's config directory as custom.nu for machine-local
+# settings.  It is loaded after the managed config.nu.
+
+# Example:
+# $env.EDITOR = "nvim"
+# alias work = cd ~/code/projects/my-project
