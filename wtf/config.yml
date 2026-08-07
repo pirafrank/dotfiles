@@ -8,29 +8,44 @@ wtf:
   exitMessage:
     display: false
   mods:
-    module0:
-      title: resourceusage
-      type: resourceusage
+    module11:
+      title: Mastodon @pirafrank
+      type: cmdrunner
       enabled: true
       position:
-        top: 0
+        top: 8
         left: 72
-        width: 43
-        height: 8
-      cpuCombined: false
-      refreshInterval: 1s
-      showCPU: true
-      showMem: true
-      showSwp: true
+        width: 67
+        height: 7
+      args:
+        - -c
+        - |
+          feed=$(curl -sSL https://mastodon.social/@pirafrank.rss) || exit 1
+          count=$(printf '%s' "$feed" | xq -x '//item/pubDate' | wc -l)
+          item=1
+          while [ "$item" -le "$count" ]; do
+            pub_date=$(printf '%s' "$feed" | xq -x "//item[$item]/pubDate")
+            description=$(printf '%s' "$feed" | xq -x "//item[$item]/description")
+            date=$(date -d "$pub_date" '+%Y-%m-%d %H:%M')
+            epoch=$(date -d "$pub_date" '+%s')
+            paragraph=$(printf '%s' "$description" | grep -oE '<p[^>]*>[^<]*</p>' | head -n 1 | sed -E 's#<p[^>]*>##; s#</p>##' | python3 -c 'import html, sys; print(html.unescape(sys.stdin.read()), end="")')
+            if [ -n "$paragraph" ]; then
+              printf '%s\t%s | %s\n' "$epoch" "$date" "$paragraph"
+            fi
+            item=$((item + 1))
+          done | sort -nr | head -n 5 | cut -f2-
+      cmd: /bin/sh
+      maxLines: 5
+      refreshInterval: 6h
     module1:
       title: Time
       type: clocks
       enabled: true
       position:
-        top: 8
+        top: 0
         left: 108
         width: 32
-        height: 7
+        height: 5
       colors:
         rows:
           even: lightblue
@@ -43,16 +58,18 @@ wtf:
       sort: alphabetical
     module2:
       title: fpira.com latest blog posts
-      type: feedreader
+      type: cmdrunner
       enabled: true
       position:
-        top: 19
+        top: 20
         left: 0
         width: 72
-        height: 7
-      feeds:
-        - https://fpira.com/feed.xml
-      feedLimit: 10
+        height: 6
+      args:
+        - -c
+        - curl -sSL https://fpira.com/feed.json | jq -r '.items[:5][] | "\(.date_published[0:10]) - \(.title)"'
+      cmd: /bin/sh
+      maxLines: 5
       refreshInterval: 12h
     module3:
       title: hackernews
@@ -62,7 +79,7 @@ wtf:
         top: 15
         left: 72
         width: 68
-        height: 12
+        height: 11
       numberOfStories: 10
       storyType: top
       refreshInterval: 15m
@@ -71,10 +88,10 @@ wtf:
       type: ipinfo
       enabled: true
       position:
-        top: 8
+        top: 0
         left: 72
         width: 36
-        height: 7
+        height: 8
       colors:
         name: lightblue
         value: white
@@ -84,10 +101,10 @@ wtf:
       type: cmdrunner
       enabled: true
       position:
-        top: 0
-        left: 115
-        width: 25
-        height: 8
+        top: 5
+        left: 108
+        width: 32
+        height: 3
       cmd: uptime
       refreshInterval: 30
     module6:
@@ -98,10 +115,10 @@ wtf:
         top: 8
         left: 0
         width: 72
-        height: 11
+        height: 7
       args:
         - -c
-        - "ntn datasources query 'https://app.notion.com/p/user/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"Next Up\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($name) — due \\($due)\" end\n  '\n"
+        - "ntn datasources query 'https://app.notion.com/p/pirafrank/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"Next Up\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($due) | \\($name)\" end\n  '\n"
       cmd: /bin/sh
       maxLines: 100
       refreshInterval: 5m
@@ -116,7 +133,7 @@ wtf:
         height: 8
       args:
         - -c
-        - "ntn datasources query 'https://app.notion.com/p/pirafrank/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"In progress\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($name) — due \\($due)\" end\n  '\n"
+        - "ntn datasources query 'https://app.notion.com/p/pirafrank/123?v=456&source=copy_link' --limit 100 --filter '{\"property\":\"Status\",\"status\":{\"equals\":\"In progress\"}}' --json |\n  jq -r '\n    def task_name:\n      [.properties.Name.title[]?.plain_text] | join(\"\");\n    .results[] |\n    (task_name) as $name |\n    (.properties[\"Due Date\"].date.start // \"\") as $due |\n    if $due == \"\" then $name else \"\\($due) | \\($name)\" end\n  '\n"
       cmd: /bin/sh
       maxLines: 100
       refreshInterval: 5m
@@ -133,6 +150,8 @@ wtf:
       commitFormat: "[forestgreen]%h [grey]%cd [white]%s [grey]%an[white]"
       dateFormat: "%H:%M %d %b %y"
       refreshInterval: 8
+      lastFolderTitle: true
+      branchInTitle: false
       repositories:
         - ~/poof
         - ~/vault-conductor
@@ -149,7 +168,7 @@ wtf:
       type: github
       enabled: true
       position:
-        top: 27
+        top: 26
         left: 72
         width: 68
         height: 14
@@ -167,6 +186,21 @@ wtf:
         - pirafrank/what-size.yazi
       uploadURL: ""
       username: pirafrank
+    module10:
+      title: fpira.com - PED - 3 days
+      type: cmdrunner
+      enabled: true
+      position:
+        top: 15
+        left: 0
+        width: 72
+        height: 5
+      args:
+        - -c
+        - "today=$(date +%F)\ntomorrow=$(date -d 'tomorrow' +%F)\nin_two_days=$(date -d '+2 days' +%F)\nntn datasources query 'https://app.notion.com/p/pirafrank/444?v=555&source=copy_link' --limit 100 --sort 'Publish Date asc' --filter \"{\\\"and\\\":[{\\\"or\\\":[{\\\"property\\\":\\\"Type\\\",\\\"select\\\":{\\\"equals\\\":\\\"Blog post\\\"}},{\\\"property\\\":\\\"Type\\\",\\\"select\\\":{\\\"equals\\\":\\\"Social Post\\\"}}]},{\\\"property\\\":\\\"Publish Date\\\",\\\"date\\\":{\\\"on_or_after\\\":\\\"$today\\\"}},{\\\"property\\\":\\\"Publish Date\\\",\\\"date\\\":{\\\"on_or_before\\\":\\\"$in_two_days\\\"}}]}\" --json |\njq -r --arg today \"$today\" --arg tomorrow \"$tomorrow\" --arg in_two_days \"$in_two_days\" '\n  def title:\n    [.properties.Name.title[]?.plain_text] | join(\"\");\n  def status:\n    (.properties.Status.status.name // .properties.Status.select.name // \"\")\n    | .[0:8] as $status\n    | $status + (\"        \"[0:(8 - ($status | length))]);\n  def relative_date:\n    if . == $today then \"today\"\n    elif . == $tomorrow then \"tmrrw\"\n    elif . == $in_two_days then \"2 dys\"\n    else .\n    end;\n  .results[] |\n  (.properties[\"Publish Date\"].date.start // \"\" | .[0:10] | relative_date) as $date |\n  \"\\($date) | \\(status) | \\(title)\"\n'\n"
+      cmd: /bin/sh
+      maxLines: 100
+      refreshInterval: 5m
   grid:
     columns: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     rows: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
