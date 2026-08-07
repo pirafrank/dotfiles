@@ -26,7 +26,8 @@ function Register-LazyFnmCommand {
 param([Parameter(ValueFromRemainingArguments=`$true)][object[]]`$args)
 . '$path'
 Initialize-Fnm
-& '$Name' @args
+`$command = Get-Command '$Name' -CommandType Application -ErrorAction Stop | Select-Object -First 1
+& `$command.Source @args
 "@)
     Set-Item "function:global:$Name" -Value $sb
 }
