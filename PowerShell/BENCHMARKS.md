@@ -124,6 +124,12 @@ Run this several times and focus optimization work on consistently expensive
 statements. A profiler run adds measurement overhead, so use the startup
 benchmark above for the actual user-visible cost.
 
+## fnm startup and first-prompt measurements
+
+When evaluating fnm changes, measure both fresh process startup and first-prompt
+latency. The profile should not run `fnm env` during process startup; the first
+prompt render is expected to include that one-time initialization cost.
+
 ## References
 
 - [Optimizing your `$Profile`](https://devblogs.microsoft.com/powershell/optimizing-your-profile/)

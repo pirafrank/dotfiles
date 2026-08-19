@@ -96,6 +96,13 @@ $Env:CDPATH = ".;C:\Users\francesco\Code"
 # Lazy-load prompt module and Terminal-Icons on first render.
 # Saves ~600ms+ at startup; one-time delay before first prompt.
 function prompt {
+    # Initialize fnm on first prompt render so Node global executables are
+    # available before the first interactive command, without adding fnm env
+    # work to every PowerShell process startup.
+    if (Get-Command fnm -CommandType Application -ErrorAction SilentlyContinue) {
+        . (Join-Path $script:FunctionsRoot 'fnm.ps1')
+        Initialize-Fnm
+    }
     Import-Module (Join-Path $script:ModulesRoot 'pirafrank') -Force
     Import-Module Terminal-Icons -ErrorAction SilentlyContinue
     Remove-Item function:global:prompt -Force -ErrorAction SilentlyContinue

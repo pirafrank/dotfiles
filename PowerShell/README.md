@@ -37,7 +37,7 @@ The profile avoids work at startup:
 
 - No `Get-ChildItem` loops or dot-sourcing of script directories
 - No `Import-Module` for heavy modules (PSFzf, Terminal-Icons, ZLocation)
-- No `fnm env` during profile load
+- No `fnm env` during profile load; fnm initializes on first prompt render
 - No PATH replacement (see below)
 
 Commands are registered as tiny stubs via `Register-LazyCommand`. The real
@@ -65,7 +65,7 @@ stubs when loaded.
 | Terminal-Icons | First prompt render |
 | ZLocation | First `z` call |
 | Chocolatey tab completion | First `choco` call |
-| fnm / Node | First `node`, `npm`, `npx`, `pnpm`, `yarn`, `corepack`, or `fnm` call |
+| fnm / Node | First prompt render (with command-triggered lazy fallback) |
 | All custom functions | First invocation of each command |
 
 ## PATH on Windows
@@ -86,6 +86,8 @@ Measure-Command { pwsh -Command 'exit' } | Select-Object TotalMilliseconds
 
 The delta is profile overhead. The target is near-zero profile cost on top of
 pwsh's own startup time, not literal 0 ms total.
+
+The first prompt render includes the one-time fnm initialization cost. Measure that separately from process startup when evaluating interactive responsiveness.
 
 ## What to avoid in the profile
 
