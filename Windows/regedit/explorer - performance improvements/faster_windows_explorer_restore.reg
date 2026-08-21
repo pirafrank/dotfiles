@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+; Restore File Explorer to open to Quick Access (Windows 11 default)
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"LaunchTo"=dword:00000002
+
+; Restore automatic folder type discovery (remove NotSpecified value)
+[HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell]
+"FolderType"=-
+
+; Remove custom icon cache setting (restore to Windows default)
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer]
+"Max Cached Icons"=-

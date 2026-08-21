@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+; Enable Web Search in Windows Search
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"DisableWebSearch"=dword:00000000
+"ConnectedSearchUseWeb"=dword:00000001
+"AllowCortana"=dword:00000001
+
+; Additional Web Search Settings
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000001
+"CortanaConsent"=dword:00000001
+
+; Reset Search Service Setup
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search]
+"SetupCompletedSuccessfully"=dword:00000001
