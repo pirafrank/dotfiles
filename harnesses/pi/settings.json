@@ -1,0 +1,9 @@
+{
+  "defaultThinkingLevel": "medium",
+  "defaultProjectTrust": "ask",
+  "extensions": ["extensions/harness"],
+  "skills": ["~/.agents/skills"],
+  "prompts": ["prompts/*.md"],
+  "enableSkillCommands": true,
+  "packages": []
+}
