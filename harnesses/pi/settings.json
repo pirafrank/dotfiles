@@ -1,9 +1,24 @@
 {
   "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
-  "extensions": ["extensions/harness"],
-  "skills": ["~/.agents/skills"],
-  "prompts": ["prompts/*.md"],
+  "extensions": [
+    "extensions/harness"
+  ],
+  "skills": [
+    "~/.agents/skills"
+  ],
+  "prompts": [
+    "prompts/*.md"
+  ],
   "enableSkillCommands": true,
-  "packages": []
+  "packages": [
+    "npm:@cortexkit/pi-antigravity-auth",
+    "npm:@companion-ai/feynman",
+    "npm:pi-web-access",
+    "npm:pi-mcp-adapter",
+    "npm:@andrewjacop/pi-herdr"
+  ],
+  "lastChangelogVersion": "0.84.4",
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5"
 }
