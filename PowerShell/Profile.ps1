@@ -147,6 +147,8 @@ if ($env:OS -like "*Windows*") {
     Register-LazyCommand -Name java11 -SourceFile 'java.ps1'
     Register-LazyCommand -Name java16 -SourceFile 'java.ps1'
     Register-LazyCommand -Name java17 -SourceFile 'java.ps1'
+    Register-LazyCommand -Name java21 -SourceFile 'java.ps1'
+    Register-LazyCommand -Name java25 -SourceFile 'java.ps1'
 
     # Lazy-load Chocolatey tab-completion on first 'choco' call.
     $global:_chocoProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
