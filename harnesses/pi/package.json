@@ -2,12 +2,17 @@
   "name": "pirafrank-pi-harness",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test tests/*.test.mjs", "check": "node --check lib/graph.mjs && node --check lib/permissions.mjs && tsc --noEmit" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check lib/graph.mjs && node --check lib/permissions.mjs && tsc --noEmit",
+    "check:setup": "node scripts/check-setup.mjs"
+  },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "0.83.0",
+    "@earendil-works/pi-coding-agent": "1.5.0",
     "@types/node": "24.10.0",
+    "ajv": "8.20.0",
     "typebox": "1.0.14",
     "typescript": "5.9.3",
-    "yaml": "2.8.1"
+    "yaml": "2.9.1"
   }
 }

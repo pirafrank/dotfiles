@@ -4,7 +4,7 @@ export const DEFAULT_LIMITS = Object.freeze({ maxNodes: 12, maxParallel: 3, maxR
 export const stableHash = (value) => createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
 export function validateGraph(graph, knownAgents, limits = DEFAULT_LIMITS) {
-  if (!graph || typeof graph.name !== "string" || !Array.isArray(graph.nodes) || graph.nodes.length === 0) throw new Error("graph requires a name and nodes");
+  if (!graph || typeof graph.name !== "string" || !/^[A-Za-z0-9_-]+$/.test(graph.name) || !Array.isArray(graph.nodes) || graph.nodes.length === 0) throw new Error("graph requires a safe name and nodes");
   if (graph.nodes.length > limits.maxNodes) throw new Error(`graph exceeds maxNodes (${limits.maxNodes})`);
   const byId = new Map();
   for (const node of graph.nodes) {
@@ -12,6 +12,8 @@ export function validateGraph(graph, knownAgents, limits = DEFAULT_LIMITS) {
     if (byId.has(node.id)) throw new Error(`duplicate node id: ${node.id}`);
     if (!knownAgents.has(node.agent)) throw new Error(`unknown agent: ${node.agent}`);
     if ((node.retries ?? 0) > limits.maxRetries) throw new Error(`node ${node.id} exceeds maxRetries`);
+    if (node.retries !== undefined && (!Number.isInteger(node.retries) || node.retries < 0)) throw new Error("invalid retries");
+    if (node.dependsOn !== undefined && !Array.isArray(node.dependsOn)) throw new Error("dependsOn must be an array");
     byId.set(node.id, { ...node, dependsOn: node.dependsOn ?? [], retries: node.retries ?? limits.maxRetries });
   }
   const visiting = new Set(); const visited = new Set();
@@ -30,6 +32,14 @@ export function validateGraph(graph, knownAgents, limits = DEFAULT_LIMITS) {
 export async function scheduleGraph(graph, executeNode, options = {}) {
   const limits = { ...DEFAULT_LIMITS, ...options.limits };
   const states = new Map(graph.nodes.map((node) => [node.id, { status: "pending", retries: 0 }]));
+  // Queue immutable snapshots so concurrent completions cannot overwrite newer state.
+  let saving = Promise.resolve();
+  const persist = () => {
+    const snapshot = structuredClone(Object.fromEntries(states));
+    saving = saving.then(() => options.onState?.(snapshot));
+    return saving;
+  };
+  await persist();
   while ([...states.values()].some((state) => state.status === "pending" || state.status === "running")) {
     const writerRunning = [...states.values()].some((state) => state.status === "running" && state.workspace === "shared");
     const candidates = graph.nodes.filter((node) => {
@@ -42,14 +52,22 @@ export async function scheduleGraph(graph, executeNode, options = {}) {
       if (node.workspace === "shared" && ready.some((candidate) => candidate.workspace === "shared")) continue;
       ready.push(node);
     }
-    if (!ready.length) { for (const node of graph.nodes) if (states.get(node.id).status === "pending") states.set(node.id, { status: "skipped", reason: "failed dependency", retries: 0 }); break; }
+    if (!ready.length || options.signal?.aborted) { for (const node of graph.nodes) if (states.get(node.id).status === "pending") states.set(node.id, { status: "skipped", reason: options.signal?.aborted ? "cancelled" : "failed dependency", retries: 0 }); await persist(); break; }
     await Promise.all(ready.map(async (node) => {
       let retries = 0;
       while (true) {
         states.set(node.id, { status: "running", retries, workspace: node.workspace });
-        try { states.set(node.id, { status: "ok", result: await executeNode(node), retries, workspace: node.workspace }); break; }
-        catch (error) {
-          if (retries >= node.retries) { states.set(node.id, { status: "failed", error: String(error), retries, workspace: node.workspace }); break; }
+        await persist();
+        let result;
+        let failure;
+        try {
+          const predecessors = Object.fromEntries(node.dependsOn.map((id) => [id, structuredClone(states.get(id).result)]));
+          result = await executeNode(node, predecessors);
+          if (result && typeof result === "object" && "status" in result && result.status !== "ok") throw new Error(`node returned ${result.status}`);
+        } catch (error) { failure = error; }
+        if (!failure) { states.set(node.id, { status: "ok", result, retries, workspace: node.workspace }); await persist(); break; }
+        else {
+          if (retries >= node.retries || options.signal?.aborted) { states.set(node.id, { status: "failed", error: String(failure), retries, workspace: node.workspace }); await persist(); break; }
           retries += 1;
         }
       }

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-HARNESS_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+HARNESS_DIR="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 # Note: the following assumes you have already run:
 #       git clone https://github.com/pirafrank/skills.git ~/.local/share/skills
 SKILLS_SRC="${SKILLS_SRC:-$HOME/.local/share/skills}"

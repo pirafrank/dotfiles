@@ -27,3 +27,31 @@ test("retries a failing node within its bound", async () => {
   assert.equal(attempts, 2);
   assert.equal(state.a.retries, 1);
 });
+
+test("passes predecessor results and persists running and completed states", async () => {
+  const graph = validateGraph({ name: "handoff", nodes: [{ id: "a", agent: "explorer", task: "explore" }, { id: "b", agent: "reviewer", task: "review", dependsOn: ["a"] }] }, agents);
+  const snapshots = [];
+  const evidence = { status: "ok", summary: "found implementation" };
+  await scheduleGraph(graph, async (node, predecessors) => {
+    if (node.id === "b") assert.deepEqual(predecessors, { a: evidence });
+    return evidence;
+  }, { onState: async (state) => snapshots.push(state) });
+  assert.equal(snapshots[0].a.status, "pending");
+  assert.ok(snapshots.some((state) => state.a.status === "running"));
+  assert.equal(snapshots.at(-1).b.status, "ok");
+});
+
+test("failed structured results skip dependents and cancellation prevents launch", async () => {
+  const graph = validateGraph({ name: "failed", nodes: [{ id: "a", agent: "explorer", task: "x", retries: 0 }, { id: "b", agent: "reviewer", task: "x", dependsOn: ["a"] }] }, agents);
+  const state = await scheduleGraph(graph, async () => ({ status: "failed", summary: "no evidence" }));
+  assert.equal(state.a.status, "failed");
+  assert.equal(state.b.status, "skipped");
+  const signal = AbortSignal.abort();
+  await scheduleGraph(graph, async () => assert.fail("must not launch"), { signal });
+});
+
+test("persistence errors abort scheduling instead of retrying the agent", async () => {
+  const graph = validateGraph({ name: "disk", nodes: [{ id: "a", agent: "explorer", task: "x" }] }, agents);
+  await assert.rejects(scheduleGraph(graph, async () => assert.fail("must not launch"), { onState: () => { throw new Error("disk full"); } }), /disk full/);
+  assert.throws(() => validateGraph({ ...graph, name: "../escape" }, agents), /safe name/);
+});
