@@ -1,1 +1,9 @@
-{ "version": 1, "packages": [] }
+{
+  "version": 1,
+  "packages": [
+    "npm:@cortexkit/pi-antigravity-auth@2.1.0",
+    "npm:@companion-ai/feynman@0.5.62",
+    "npm:pi-web-access@0.46.0",
+    "npm:@andrewjacop/pi-herdr@0.4.0"
+  ]
+}

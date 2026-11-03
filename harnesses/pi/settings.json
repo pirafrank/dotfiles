@@ -1,24 +1,29 @@
 {
+  "$schema": "https://pi.dev/schemas/settings.schema.json",
   "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
   "extensions": [
     "extensions/harness"
   ],
-  "skills": [
-    "~/.agents/skills"
-  ],
-  "prompts": [
-    "prompts/*.md"
+  "defaultTools": [
+    "+codemode"
   ],
   "enableSkillCommands": true,
   "packages": [
-    "npm:@cortexkit/pi-antigravity-auth",
-    "npm:@companion-ai/feynman",
-    "npm:pi-web-access",
-    "npm:pi-mcp-adapter",
-    "npm:@andrewjacop/pi-herdr"
+    "npm:@cortexkit/pi-antigravity-auth@2.1.0",
+    "npm:@companion-ai/feynman@0.5.62",
+    "npm:pi-web-access@0.46.0",
+    "npm:@andrewjacop/pi-herdr@0.4.0"
   ],
-  "lastChangelogVersion": "0.84.4",
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.5"
+  "defaultModel": "gpt-6.1-sol",
+  "lastChangelogVersion": "1.5.0",
+  "extensionChangelogVersions": {
+    "{\"source\":\"npm:pi-web-access@0.27.0\",\"scope\":\"user\"}": "0.27.0",
+    "{\"source\":\"npm:@andrewjacop/pi-herdr@0.4.0\",\"scope\":\"user\"}": "0.4.0",
+    "{\"source\":\"npm:pi-web-access@0.46.0\",\"scope\":\"user\"}": "0.46.0"
+  },
+  "terminal": {
+    "showTerminalProgress": true
+  }
 }

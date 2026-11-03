@@ -14,6 +14,7 @@ const agents = new Set(["explorer", "planner", "architect", "implementer", "debu
 const workflowPath = (name: string) => join(homedir(), ".agents", "workflows", `${name}.yaml`);
 
 async function resolveGraph(value: string) {
+  if (!value.trim().startsWith("{") && !/^[A-Za-z0-9_-]+$/.test(value)) throw new Error("invalid workflow name");
   const source = value.trim().startsWith("{") ? JSON.parse(value) : YAML.parse(await readFile(workflowPath(value), "utf8"));
   return validateGraph(source, agents);
 }
@@ -23,15 +24,16 @@ export function registerGraph(pi: ExtensionAPI) {
     const graph = await resolveGraph(params.graph); graphs.set(graph.name, graph);
     return { content: [{ type: "text", text: `${graph.name}: ${graph.nodes.length} validated nodes` }], details: { graph } };
   }});
-  pi.registerTool({ name: "graph_run", label: "Run graph", description: "Run a previously validated static graph.", parameters: Type.Object({ name: Type.String() }), async execute(_id: string, params: any, signal: AbortSignal) {
+  pi.registerTool({ name: "graph_run", label: "Run graph", description: "Run a previously validated static graph.", parameters: Type.Object({ name: Type.String() }), async execute(_id: string, params: any, signal: AbortSignal | undefined) {
     const graph = graphs.get(params.name); if (!graph) throw new Error(`graph is not validated: ${params.name}`);
     const runId = randomUUID();
-    const state = await scheduleGraph(graph, async (node: any) => {
-      const result = await runDelegatedTask({ agent: node.agent, task: node.task, model: node.model, timeoutMs: node.timeoutMs }, signal);
-      return { ...result.result, agent: result.agent, transcript: result.raw.slice(-16384) };
-    });
+    const state = await scheduleGraph(graph, async (node: any, predecessors: any) => {
+      const result = await runDelegatedTask({ agent: node.agent, task: node.task, context: JSON.stringify(predecessors), model: node.model, timeoutMs: node.timeoutMs }, signal);
+      return result.result;
+    }, { signal, onState: (state: any) => saveRun(graph, runId, { runId, graphHash: graph.hash, state, updatedAt: new Date().toISOString() }) });
     const directory = await saveRun(graph, runId, { runId, graphHash: graph.hash, state, completedAt: new Date().toISOString() });
-    return { content: [{ type: "text", text: `${graph.name} completed; run state: ${directory}` }], details: { runId, state, directory } };
+    const failed = Object.values(state).some((node: any) => node.status !== "ok");
+    return { isError: failed, content: [{ type: "text", text: `${graph.name} ${failed ? "failed or cancelled" : "completed"}; run state: ${directory}` }], details: { runId, state, directory } };
   }});
   pi.registerTool({ name: "graph_status", label: "Graph status", description: "Show the in-session validated graph summary.", parameters: Type.Object({ name: Type.String() }), async execute(_id: string, params: any) {
     const graph = graphs.get(params.name); if (!graph) throw new Error(`unknown graph: ${params.name}`);
