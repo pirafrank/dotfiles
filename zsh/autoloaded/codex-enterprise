@@ -1,0 +1,3 @@
+# Separate Codex state for the ChatGPT Enterprise workspace.
+mkdir -p -- "$HOME/.codex-enterprise" || return $?
+CODEX_HOME="$HOME/.codex-enterprise" command codex "$@"

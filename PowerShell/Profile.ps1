@@ -83,6 +83,7 @@ Register-LazyCommand -Name cd2               -SourceFile 'cd2.ps1'
 Register-LazyCommand -Name Get-Detailed-List -SourceFile 'Get-Detailed-List.ps1'
 Register-LazyCommand -Name reload            -SourceFile 'reload.ps1'
 Register-LazyCommand -Name yy                -SourceFile 'yy.ps1'
+Register-LazyCommand -Name codex-enterprise  -SourceFile 'codex-enterprise.ps1'
 Set-Alias symlink Invoke-Symlink
 
 # bat output style
