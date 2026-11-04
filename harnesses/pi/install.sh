@@ -68,7 +68,7 @@ remove_owned_children() {
 if (( UNINSTALL )); then
   uninstall_root="$HOME/.pi/agent"
   remove_owned_children "$uninstall_root/skills"
-  for resource in AGENTS.md roles agents prompts settings.json extensions; do
+  for resource in AGENTS.md roles agents prompts settings.json harness.json extensions; do
     remove_owned "$uninstall_root/$resource"
   done
   echo "Pi harness links uninstalled."
@@ -101,6 +101,7 @@ NODE
   link_owned "$SKILLS_SRC/roles" "$pi_root/agents"
   link_owned "$SKILLS_SRC/prompts" "$pi_root/prompts"
   link_owned "$PI_DIR/settings.json" "$pi_root/settings.json"
+  link_owned "$PI_DIR/harness.json" "$pi_root/harness.json"
   link_owned "$PI_DIR/extensions" "$pi_root/extensions"
 fi
 

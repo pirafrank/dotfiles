@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "summary"],
+  "properties": {
+    "status": { "enum": ["ok", "failed", "cancelled", "timeout"] },
+    "summary": { "type": "string" },
+    "decision": { "enum": ["accept", "revise", "replan", "complete", "needs_user"] },
+    "findings": { "type": "array", "items": { "type": "string" } },
+    "evidence": { "type": "array", "items": { "type": "object", "required": ["criterion", "evidence"], "properties": { "criterion": { "type": "string", "minLength": 1 }, "evidence": { "type": "string", "minLength": 1 } }, "additionalProperties": true } },
+    "files": { "type": "array", "items": { "type": "string" } },
+    "risks": { "type": "array", "items": { "type": "string" } },
+    "uncertainties": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": true
+}

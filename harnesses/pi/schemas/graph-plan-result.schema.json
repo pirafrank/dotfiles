@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "summary", "acceptanceCriteria", "graph"],
+  "properties": {
+    "status": { "const": "ok" },
+    "summary": { "type": "string" },
+    "acceptanceCriteria": { "type": "array", "minItems": 1, "items": { "type": "string", "minLength": 1 } },
+    "graph": { "type": "object", "required": ["name", "entry", "nodes"], "properties": { "name": { "type": "string" }, "entry": { "type": "string" }, "nodes": { "type": "array", "minItems": 1 } }, "additionalProperties": true }
+  },
+  "additionalProperties": true
+}

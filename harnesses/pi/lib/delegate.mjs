@@ -29,7 +29,7 @@ export function createResultParser(validate) {
     },
     finish() {
       if (pending.trim()) throw new Error("Incomplete Pi JSONL record");
-      if (aborted || !finalMessage || finalMessage.stopReason !== "stop") throw new Error(`Pi did not finish successfully: ${finalMessage?.stopReason ?? "missing assistant response"}`);
+      if (aborted || !finalMessage || finalMessage.stopReason !== "stop") throw new Error(`Pi did not finish successfully: ${finalMessage?.stopReason ?? "missing assistant response"}${finalMessage?.errorMessage ? `: ${finalMessage.errorMessage}` : ""}`);
       const text = finalMessage.content.filter((block) => block.type === "text").map((block) => block.text).join("\n");
       const result = JSON.parse(text);
       if (!validate(result)) throw new Error("Invalid delegated node result (node-result.schema.json)");

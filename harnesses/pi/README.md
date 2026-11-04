@@ -1,7 +1,8 @@
 # Pi harness
 
 This directory contains the machine-specific Pi settings, owned extensions,
-pinned Node dependencies, approved package allowlist, and installer.
+goal/workflow configuration, pinned Node dependencies, approved package
+allowlist, and installer.
 
 ## Setup
 
@@ -15,9 +16,10 @@ From the harness repository root, install the full Pi setup:
 ./pi/install.sh
 ```
 
-This links skills and shared resources into `~/.pi/agent`, links the Pi settings
-and extensions from this repository, installs the pinned local dependencies with
-`npm ci`, and syncs the packages approved in `packages.lock.json`. The root
+This links skills and shared resources into `~/.pi/agent`, links the Pi settings,
+harness model tiers, and extensions from this repository, installs the pinned
+local dependencies with `npm ci`, and syncs the packages approved in
+`packages.lock.json`. The root
 `./install.sh --target pi` command delegates to the same installer. Uninstall
 owned Pi links with either:
 
@@ -33,12 +35,13 @@ outside both repositories.
 
 ## Configuration and packages
 
-The default model is `openai-codex/gpt-6.1-sol`; codemode is enabled alongside
-the default tools. The local SDK is pinned to 1.5.0, so keep the installed CLI
-aligned with it.
+Pi's interactive default model is set in `settings.json`; workflow model tiers
+and the fixed selector model are set in `harness.json`. Codemode is enabled
+alongside the default tools. The local SDK is pinned to 1.5.0, so keep the
+installed CLI aligned with it.
 
 [`packages.lock.json`](packages.lock.json) is the authoritative package
-allowlist, and `settings.json` must match it exactly. The installer validates
+allowlist, and the package sources in `settings.json` must match it exactly. The installer validates
 parity before syncing and accepts exact scoped npm specifications. Package
 pinning does not establish compatibility of third-party extensions; verify them
 interactively. Feynman 0.5.62 and pi-web-access 0.46.0 replace older packages
@@ -55,12 +58,22 @@ The owned extension layer provides:
 
 - isolated specialist delegation with compact structured results;
 - permission gates for destructive, external, install, and ambiguous shell work;
-- validated static task graphs with bounded concurrency, retries, persisted run
-  state, and a single shared-checkout writer;
+- goal planning through the configured planner tier, with `pi-goal` managing
+  session-scoped goal state and guarded continuation;
+- validated dependency graphs and bounded routed workflows, tier-constrained
+  model selection, structured outcomes, persisted run state, and run-by-ID resume;
+- bounded edit/review loops, deterministic outcome branches, and a constrained
+  model route decision only when graph conditions leave no single route;
 - shared role, skill, prompt, and charter discovery from `pirafrank/skills`.
 
-Delegation validates the final JSONL assistant response against
-`schemas/node-result.schema.json` adjacent to the linked roles directory.
+Direct delegation validates the final JSONL assistant response against
+`schemas/node-result.schema.json` adjacent to the linked roles directory. Graph
+tasks use the harness-owned `schemas/workflow-result.schema.json`, which adds
+structured decisions, findings, and evidence. `harness.json` maps agent roles to
+homogeneous capability tiers and lists the Pi model IDs allowed in each tier.
+The selector chooses only among models in the assigned tier. Provider failures
+fall back through that tier's candidates; model choices and failures are saved
+with the run.
 Invalid, failed, aborted, and timed-out responses fail the node. Role tool
 declarations restrict the child's built-in tools; absent declarations use the
 built-in coding tools. Delegates disable MCP and recursive harness tools, append
@@ -69,16 +82,22 @@ operations require confirmation and are blocked in non-interactive delegates.
 These gates are not an OS sandbox; third-party extension internals and shell
 programs remain trusted code.
 
-Graphs pass structured direct-predecessor results to each dependent node. State
-is saved at pending, running, completion, and failure transitions, with atomic
-state-file replacement. This supports inspection after interruption, not
-automatic resume or replay. Delegate transcripts are bounded to 64 KiB, JSONL
-records to 1 MiB; timeout or cancellation terminates the process group and
-escalates to kill.
+Graphs pass structured predecessor results to dependent nodes. Existing DAGs
+retain bounded concurrency and a single shared-checkout writer. Routed graphs
+run one selected path at a time, use declared outcome conditions first, and
+allow only acyclic route edges; iterative edit/review work uses a bounded
+`review_loop` node (at most three passes). State is saved at pending, running,
+progress, completion, and failure transitions with atomic state-file
+replacement. Use `graph_status({runId})` to inspect a saved run and
+`graph_resume({runId})` to continue it; completed nodes are retained and
+interrupted nodes rerun only when the saved graph and model-tier configuration
+hashes still match. Delegate transcripts are bounded to 64 KiB, JSONL records
+to 1 MiB; timeout or cancellation terminates the process group and escalates to
+kill.
 
-Skills and prompts use Pi's conventional discovery directories. The settings file
-is linked into the user configuration, so Pi may write runtime changelog state
-back into this repository through that link.
+Skills and prompts use Pi's conventional discovery directories. The settings and
+harness configuration are linked into the user configuration, so Pi may write
+runtime changelog state back into this repository through the settings link.
 
 ## Verification
 
@@ -109,9 +128,9 @@ pi list
 pi mcp list
 ```
 
-Expect CLI version `1.5.0`, the configured model in the catalog, the four pinned
-packages, and any machine-configured MCP servers (an empty server list is
-valid). `check:setup` requires the configured packages to be installed at their
+Expect CLI version `1.5.0`, the configured model in the catalog, the exact
+packages in `packages.lock.json`, and any machine-configured MCP servers (an
+empty server list is valid). `check:setup` requires the configured packages to be installed at their
 pinned versions. It fails on resource-loading errors, warnings, or built-in
 command conflicts; it does not run session-start hooks or make a model request.
 Start `pi` for interactive skill, delegation, graph, and permission smoke tests.
