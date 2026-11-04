@@ -2,16 +2,14 @@
 set -euo pipefail
 
 HARNESS_DIR="$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-# Note: the following assumes you have already run:
-#       git clone https://github.com/pirafrank/skills.git ~/.local/share/skills
 SKILLS_SRC="${SKILLS_SRC:-$HOME/.local/share/skills}"
-SYNC_PI=0
 UNINSTALL=0
 TARGET=""
 
 usage() {
   cat >&2 <<EOF
-Usage: $0 [--target codex|pi|jcode|opencode|universal] [--uninstall] [--sync-pi]
+Usage: $0 [--target codex|pi|jcode|opencode|universal] [--uninstall]
+For Pi setup details, see pi/README.md or run pi/install.sh directly.
 EOF
 }
 
@@ -24,10 +22,6 @@ while (($#)); do
       ;;
     --uninstall)
       UNINSTALL=1
-      shift
-      ;;
-    --sync-pi)
-      SYNC_PI=1
       shift
       ;;
     -h|--help)
@@ -60,11 +54,6 @@ case "$TARGET" in
     exit 2
     ;;
 esac
-
-if (( SYNC_PI )) && [[ "$TARGET" != pi || $UNINSTALL -eq 1 ]]; then
-  echo "--sync-pi is only valid when installing the pi target" >&2
-  exit 2
-fi
 
 if (( ! UNINSTALL )); then
   [[ -d "$SKILLS_SRC" ]] || { echo "Skills source is missing: $SKILLS_SRC" >&2; exit 1; }
@@ -136,17 +125,19 @@ uninstall_harness() {
   remove_owned "$root/roles"
 }
 
+if [[ "$TARGET" == pi ]]; then
+  if (( UNINSTALL )); then
+    SKILLS_SRC="$SKILLS_SRC" "$HARNESS_DIR/pi/install.sh" --uninstall
+  else
+    SKILLS_SRC="$SKILLS_SRC" "$HARNESS_DIR/pi/install.sh"
+  fi
+  exit $?
+fi
+
 if (( UNINSTALL )); then
   case "$TARGET" in
     universal) uninstall_universal ;;
     codex) uninstall_harness "$HOME/.codex" ;;
-    pi)
-      uninstall_harness "$HOME/.pi/agent"
-      remove_owned "$HOME/.pi/agent/agents"
-      remove_owned "$HOME/.pi/agent/prompts"
-      remove_owned "$HOME/.pi/agent/settings.json"
-      remove_owned "$HOME/.pi/agent/extensions"
-      ;;
     jcode) uninstall_harness "$HOME/.jcode" ;;
     opencode) uninstall_harness "$HOME/.config/opencode" ;;
   esac
@@ -157,16 +148,8 @@ fi
 case "$TARGET" in
   universal) install_universal ;;
   codex) install_harness "$HOME/.codex" ;;
-  pi)
-    install_harness "$HOME/.pi/agent"
-    link_owned "$SKILLS_SRC/roles" "$HOME/.pi/agent/agents"
-    link_owned "$SKILLS_SRC/prompts" "$HOME/.pi/agent/prompts"
-    link_owned "$HARNESS_DIR/pi/settings.json" "$HOME/.pi/agent/settings.json"
-    link_owned "$HARNESS_DIR/pi/extensions" "$HOME/.pi/agent/extensions"
-    ;;
   jcode) install_harness "$HOME/.jcode" ;;
   opencode) install_harness "$HOME/.config/opencode" ;;
 esac
 
-if (( SYNC_PI )); then "$HARNESS_DIR/pi/install.sh"; fi
-echo "Harness links installed for $TARGET. Run with --target pi --sync-pi to install pinned Pi harness dependencies and approved packages."
+echo "Harness links installed for $TARGET."
