@@ -1,5 +1,5 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
+import { readFile, realpath } from "node:fs/promises";
+import { join, dirname } from "node:path";
 import { homedir } from "node:os";
 import { randomUUID } from "node:crypto";
 import type { ExtensionAPI, ExtensionToolContext } from "@earendil-works/pi-coding-agent";
@@ -7,8 +7,11 @@ import { Type } from "typebox";
 import YAML from "yaml";
 import { Ajv2020 } from "ajv/dist/2020.js";
 import { scheduleGraph, validateGraph, stableHash } from "../../lib/graph.mjs";
-import { saveRun, loadRunById } from "../../lib/runs.mjs";
+import { saveRun, loadRunById, withRunLock, withWorkspaceLock } from "../../lib/runs.mjs";
 import { chooseGraphRoute, chooseTierModel, getTierCandidates, validateModelConfig } from "../../lib/model-selection.mjs";
+import { routeTemplate } from "../../lib/workflows.mjs";
+import { captureSource } from "../../lib/source.mjs";
+import { runGovernedGraph, validateContract } from "../../lib/governance.mjs";
 import { runDelegatedTask } from "./delegate.ts";
 
 const graphs = new Map<string, any>();
@@ -18,17 +21,19 @@ const validateWorkflowResult = new Ajv2020({ strict: true }).compile(workflowSch
 const graphPlanSchema = JSON.parse(await readFile(new URL("../../schemas/graph-plan-result.schema.json", import.meta.url), "utf8"));
 const validateGraphPlan = new Ajv2020({ strict: true }).compile(graphPlanSchema);
 const configUrl = new URL("../../harness.json", import.meta.url);
-const workflowPath = (name: string) => join(homedir(), ".agents", "workflows", `${name}.yaml`);
+const rolesDirectory = () => join(homedir(), ".pi", "agent", "agents");
+const workflowPath = async (name: string) => join(dirname(await realpath(rolesDirectory())), "workflows", `${name}.yaml`);
 
 async function loadConfig(ctx: ExtensionToolContext) {
   const config = JSON.parse(await readFile(configUrl, "utf8"));
   return validateModelConfig(config, ctx.modelRegistry);
 }
 
-async function resolveGraph(value: string, config: any) {
+async function resolveGraph(value: string, config: any, acceptanceCriteria?: string[]) {
   if (!value.trim().startsWith("{") && !/^[A-Za-z0-9_-]+$/.test(value)) throw new Error("invalid workflow name");
-  const source = value.trim().startsWith("{") ? JSON.parse(value) : YAML.parse(await readFile(workflowPath(value), "utf8"));
-  return validateGraph(source, agents, undefined, config);
+  let source = value.trim().startsWith("{") ? JSON.parse(value) : YAML.parse(await readFile(await workflowPath(value), "utf8"));
+  if (acceptanceCriteria) source = { ...source, acceptanceCriteria };
+  return validateGraph(value.trim().startsWith("{") ? source : routeTemplate(source), agents, undefined, config);
 }
 
 function availableModel(ctx: ExtensionToolContext, modelId: string) {
@@ -44,7 +49,7 @@ function isProviderFailure(error: unknown) {
 async function runWithTier(params: any, tierName: string, config: any, ctx: ExtensionToolContext, signal: AbortSignal | undefined, schema = workflowSchema, validate = validateWorkflowResult) {
   const selection = await chooseTierModel(config, ctx.modelRegistry, tierName, { task: params.task, agent: params.agent, context: params.context }, signal);
   const candidates = getTierCandidates(config, ctx.modelRegistry, tierName);
-  const order = [selection.modelId, ...candidates.map(({ id }) => id).filter((id) => id !== selection.modelId)];
+  const order = [selection.modelId, ...candidates.map(({ id }: { id: string }) => id).filter((id: string) => id !== selection.modelId)];
   const failures: string[] = [];
   for (const modelId of order) {
     const model = availableModel(ctx, modelId);
@@ -106,15 +111,23 @@ function preflightGraph(graph: any, config: any, ctx: ExtensionToolContext, init
   }
 }
 
-async function runGraph(graph: any, runId: string, ctx: ExtensionToolContext, config: any, signal: AbortSignal | undefined, initialState?: any) {
-  preflightGraph(graph, config, ctx, initialState);
+async function runGraph(graph: any, runId: string, ctx: ExtensionToolContext, config: any, signal: AbortSignal | undefined, contract: any, previous?: any) {
+  const source = await captureSource(ctx.cwd);
+  const contractHash = await validateContract(contract, graph, source, rolesDirectory());
+  preflightGraph(graph, config, ctx, previous?.state);
   const configHash = stableHash(config);
-  const onState = (state: any) => saveRun(graph, runId, { runId, graphHash: graph.hash, configHash, state, updatedAt: new Date().toISOString() });
-  const state = await scheduleGraph(graph,
-    (node: any, predecessors: any, reportProgress: (progress: unknown) => Promise<unknown>) => executeNode(node, { acceptanceCriteria: graph.acceptanceCriteria ?? [], ...predecessors }, reportProgress, config, ctx, signal),
-    { signal, initialState, onState, chooseRoute: (routes: any[], context: any, routeSignal?: AbortSignal) => chooseGraphRoute(config, ctx.modelRegistry, routes, context, routeSignal) });
-  const directory = await saveRun(graph, runId, { runId, graphHash: graph.hash, configHash, state, completedAt: new Date().toISOString() });
-  return { state, directory, configHash };
+  const result = await withWorkspaceLock(source.root, () => withRunLock(graph.name, runId, () => runGovernedGraph({
+    graph, runId, contract, contractHash, configHash, cwd: ctx.cwd, signal, previous,
+    persist: (record: any) => saveRun(graph, runId, record),
+    executeNode: (node: any, predecessors: any, reportProgress: any) => executeNode(node, predecessors, reportProgress, config, ctx, signal),
+    chooseRoute: (routes: any[], context: any, routeSignal?: AbortSignal) => chooseGraphRoute(config, ctx.modelRegistry, routes, context, routeSignal),
+    approve: async (gate: string, payload: any) => {
+      if (!ctx.hasUI) return { approved: false, actor: "noninteractive" };
+      const approved = await ctx.ui.confirm(`Human approval: ${gate}`, JSON.stringify(payload, null, 2));
+      return { approved, actor: process.env.USER ?? "local operator" };
+    }
+  })));
+  return { ...result, directory: (await loadRunById(runId)).directory };
 }
 
 export function registerGraph(pi: ExtensionAPI) {
@@ -122,7 +135,7 @@ export function registerGraph(pi: ExtensionAPI) {
     event.systemPromptOptions.sections["goal-graph-workflow"] = [
       "For an active /goal, use graph_plan to have the configured planner tier produce explicit acceptance criteria and a validated workflow before editing.",
       "Run that graph with graph_run. Use graph_status and graph_resume for persisted runs. Follow structured outcomes and do not bypass route or permission decisions.",
-      "Only call goal_complete after a verifier node returns decision=complete with one evidence record for every acceptance criterion. If a graph returns needs_user, failed, or cancelled, call goal_wait with the goal ID and reason so automatic continuation stops. If it returns replan or finished without verification, create and run a new graph. Never claim completion without verifier evidence."
+      "Only call goal_complete after graph_run or graph_resume reports status=complete, including durable human completion approval. A verifier decision alone is insufficient. If a graph returns needs_user, failed, or cancelled, call goal_wait with the goal ID and reason so automatic continuation stops. If it returns replan or finished without verification, create and run a new graph. Never claim completion without verifier evidence."
     ].join(" ");
   });
   pi.registerTool({ name: "graph_plan", label: "Plan goal graph", description: "Use the configured planner model tier to turn a goal into acceptance criteria and a validated routed workflow graph; stores the graph for graph_run.", parameters: Type.Object({ goal: Type.String(), context: Type.Optional(Type.String()) }), async execute(_id: string, params: any, signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
@@ -135,18 +148,17 @@ export function registerGraph(pi: ExtensionAPI) {
     graphs.set(graph.name, graph);
     return { content: [{ type: "text", text: `Planned ${graph.name}: ${graph.nodes.length} nodes; acceptance criteria: ${planned.acceptanceCriteria.join("; ")}` }], details: { graph, summary: planned.summary, selectedModel: planned.selectedModel, modelTier: planned.modelTier } };
   }});
-  pi.registerTool({ name: "graph_create", label: "Create graph", description: "Validate and store a static dependency graph or bounded routed workflow.", parameters: Type.Object({ graph: Type.String() }), async execute(_id: string, params: any, _signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
+  pi.registerTool({ name: "graph_create", label: "Create graph", description: "Validate and store a static dependency graph or bounded routed workflow.", parameters: Type.Object({ graph: Type.String(), acceptanceCriteria: Type.Optional(Type.Array(Type.String({ minLength: 1 }))) }), async execute(_id: string, params: any, _signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
     const config = await loadConfig(ctx);
-    const graph = await resolveGraph(params.graph, config); graphs.set(graph.name, graph);
+    const graph = await resolveGraph(params.graph, config, params.acceptanceCriteria); graphs.set(graph.name, graph);
     return { content: [{ type: "text", text: `${graph.name}: ${graph.nodes.length} validated nodes${graph.routed ? `, entry ${graph.entry}` : ""}` }], details: { graph } };
   }});
-  pi.registerTool({ name: "graph_run", label: "Run graph", description: "Run a validated graph with configured model tiers, structured outcomes, and bounded review loops.", parameters: Type.Object({ name: Type.String() }), async execute(_id: string, params: any, signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
+  pi.registerTool({ name: "graph_run", label: "Run graph", description: "Run a validated graph with configured model tiers, structured outcomes, and bounded review loops.", parameters: Type.Object({ name: Type.String(), contract: Type.String({ description: "JSON task contract: goal, repository absolute root, baseSha, acceptanceCriteria, approvalGates={scope:true,completion:true}" }) }), async execute(_id: string, params: any, signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
     const graph = graphs.get(params.name); if (!graph) throw new Error(`graph is not validated: ${params.name}`);
     const config = await loadConfig(ctx);
     const validated = validateGraph(graph, agents, undefined, config);
     const runId = randomUUID();
-    const { state, directory } = await runGraph(validated, runId, ctx, config, signal);
-    const status = state._workflow?.status ?? (Object.values(state).some((node: any) => node?.status === "failed") ? "failed" : "finished");
+    const { state, directory, status } = await runGraph(validated, runId, ctx, config, signal, JSON.parse(params.contract));
     return { isError: ["failed", "cancelled"].includes(status), content: [{ type: "text", text: `${validated.name} ${status}; run id: ${runId}; state: ${directory}` }], details: { runId, status, state, directory } };
   }});
   pi.registerTool({ name: "graph_resume", label: "Resume graph", description: "Resume a persisted graph run by its run ID, preserving completed nodes and restarting interrupted work.", parameters: Type.Object({ runId: Type.String() }), async execute(_id: string, params: any, signal: AbortSignal | undefined, _update: any, ctx: ExtensionToolContext) {
@@ -155,17 +167,17 @@ export function registerGraph(pi: ExtensionAPI) {
     const graph = validateGraph(bundle.graph, agents, undefined, config);
     if (graph.hash !== bundle.run.graphHash) throw new Error("saved graph hash does not match run state");
     if (bundle.run.configHash && bundle.run.configHash !== stableHash(config)) throw new Error("harness model-tier configuration changed; create a new graph run instead of resuming with different routing");
-    const { state, directory } = await runGraph(graph, params.runId, ctx, config, signal, bundle.run.state);
-    const status = state._workflow?.status ?? (Object.values(state).some((node: any) => node?.status === "failed") ? "failed" : "finished");
+    if (!bundle.run.contract) throw new Error("Legacy run has no approved contract; create a new run");
+    const { state, directory, status } = await runGraph(graph, params.runId, ctx, config, signal, bundle.run.contract, bundle.run);
     return { isError: ["failed", "cancelled"].includes(status), content: [{ type: "text", text: `${graph.name} ${status}; run id: ${params.runId}; state: ${directory}` }], details: { runId: params.runId, status, state, directory } };
   }});
   pi.registerTool({ name: "graph_status", label: "Graph status", description: "Inspect a validated graph template or persisted run.", parameters: Type.Object({ name: Type.Optional(Type.String()), runId: Type.Optional(Type.String()) }), async execute(_id: string, params: any) {
     if (params.runId) {
       const bundle = await loadRunById(params.runId);
-      return { content: [{ type: "text", text: `${bundle.graph.name} ${bundle.run.state?._workflow?.status ?? "run state available"}; run id: ${params.runId}` }], details: { graph: bundle.graph, state: bundle.run.state } };
+      return { content: [{ type: "text", text: `${bundle.graph.name} ${bundle.run.phase === "complete" ? "complete" : bundle.run.phase === "review" || bundle.run.phase === "scope" ? "needs_user" : bundle.run.state?._workflow?.status ?? "run state available"}; run id: ${params.runId}` }], details: { graph: bundle.graph, state: bundle.run.state, phase: bundle.run.phase, approvals: bundle.run.approvals, source: bundle.run.source, contract: bundle.run.contract } };
     }
     if (typeof params.name !== "string") throw new Error("provide a graph name or runId");
     const graph = graphs.get(params.name); if (!graph) throw new Error(`unknown graph: ${params.name}`);
-    return { content: [{ type: "text", text: `${graph.name}: ${graph.nodes.map((node: any) => node.id).join(" -> ")}` }], details: { graph } };
+    return { content: [{ type: "text", text: `${graph.name}: ${graph.nodes.map((node: any) => node.id).join(" -> ")}` }], details: { graph, state: undefined, phase: undefined, approvals: undefined, source: undefined, contract: undefined } };
   }});
 }

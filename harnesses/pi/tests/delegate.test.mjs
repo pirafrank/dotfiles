@@ -32,7 +32,7 @@ test("enforces role tools, preserves the base prompt, and separates CLI input", 
 });
 
 test("streams large transcripts while retaining the final validated result", async () => {
-  const code = `for(let i=0;i<2000;i++) process.stdout.write(JSON.stringify({type:'message_update',text:'x'.repeat(100)})+'\\n'); process.stdout.write(${JSON.stringify(event())});`;
+  const code = `for(let i=0;i<2000;i++) process.stdout.write(JSON.stringify({type:'message_update',text:'x'.repeat(100)})+String.fromCharCode(10)); process.stdout.write(${JSON.stringify(event())});`;
   const output = await runPi(["-e", code], 5000, undefined, validate, process.execPath);
   assert.deepEqual(output.result, result);
   assert.ok(output.raw.length <= 65536);

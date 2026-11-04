@@ -1,6 +1,10 @@
-import { readFileSync } from "node:fs";
+import { readFileSync, realpathSync, readdirSync } from "node:fs";
 import { homedir } from "node:os";
-import { join } from "node:path";
+import { join, dirname } from "node:path";
+import YAML from "yaml";
+import { Ajv2020 } from "ajv/dist/2020.js";
+import { routeTemplate } from "../lib/workflows.mjs";
+import { validateGraph } from "../lib/graph.mjs";
 import { DefaultResourceLoader, SettingsManager } from "@earendil-works/pi-coding-agent";
 import { validatePackages } from "../lib/packages.mjs";
 
@@ -11,6 +15,13 @@ const agentDir = process.env.PI_CODING_AGENT_DIR ?? join(homedir(), ".pi", "agen
 const settings = readJson(join(agentDir, "settings.json"));
 const lock = readJson(new URL("../packages.lock.json", import.meta.url));
 const packages = validatePackages(lock, settings);
+const sharedRoot = dirname(realpathSync(join(agentDir, "agents")));
+new Ajv2020({ strict: true }).compile(readJson(join(sharedRoot, "schemas/task-contract.schema.json")));
+const agents = new Set(["explorer", "planner", "architect", "implementer", "debugger", "reviewer", "security-reviewer", "verifier"]);
+const workflows = readdirSync(join(sharedRoot, "workflows")).filter((file) => file.endsWith(".yaml"));
+for (const file of workflows) {
+  validateGraph(routeTemplate(YAML.parse(readFileSync(join(sharedRoot, "workflows", file), "utf8"))), agents, undefined, readJson(join(agentDir, "harness.json")));
+}
 
 // Fail before resource loading if a package is absent or stale, rather than
 // letting the loader install it as a side effect of this check.
@@ -38,5 +49,5 @@ if (diagnostics.length) {
   console.error(JSON.stringify(diagnostics, null, 2));
   process.exitCode = 1;
 } else {
-  console.log(`Pi setup OK: ${packages.length} pinned packages, ${loaded.extensions.length} loaded extensions, no resource warnings or command conflicts.`);
+  console.log(`Pi setup OK: ${packages.length} pinned packages, ${loaded.extensions.length} loaded extensions, ${workflows.length} validated workflows, shared contract schema valid, no resource warnings or command conflicts.`);
 }
