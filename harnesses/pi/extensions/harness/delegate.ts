@@ -44,7 +44,7 @@ export async function runDelegatedTask(params: { agent: string; task: string; co
     const rolesRoot = await realpath(agentsDirectory());
     schema = JSON.parse(await readFile(join(dirname(rolesRoot), "schemas", "node-result.schema.json"), "utf8"));
   }
-  const validate = new Ajv2020({ strict: true }).compile(schema);
+  const validate = new Ajv2020({ strict: true }).compile(schema!);
   const args = delegatedArgs(agent, { ...params, schema });
   const output = await runPi(args, params.timeoutMs ?? 300000, signal, validate);
   return { agent: agent.name, ...output };

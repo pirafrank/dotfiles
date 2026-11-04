@@ -112,6 +112,63 @@ runtime changelog state back into this repository through the settings link.
 
 ## Verification
 
+### Contracts, checkpoints, and human approval
+
+Every `graph_run` requires a JSON `contract` string validated against both the
+installed skills repository's `schemas/task-contract.schema.json` and this
+harness's `schemas/task-execution.schema.json`. For example:
+
+```json
+{
+  "goal": "Fix the parser regression",
+  "repository": "/absolute/path/to/repository",
+  "baseSha": "REPLACE_WITH_FULL_GIT_HEAD_SHA",
+  "acceptanceCriteria": ["The regression test passes"],
+  "writeAllowed": ["src/**", "tests/**"],
+  "writeForbidden": ["AGENTS.md", ".github/**"],
+  "approvalGates": { "scope": true, "completion": true }
+}
+```
+
+The repository must be the Git root and `baseSha` its current HEAD. Criteria
+must exactly match the graph. Optional write rules accept exact paths,
+`directory/**`, or `**`; an empty `writeAllowed` permits no source changes.
+Omitting write rules leaves file scope unrestricted within the approved goal.
+Scope checks detect changes after execution; they do not sandbox shell commands.
+
+Use `graph_plan` to create a goal graph, then inspect its criteria and supply
+the matching contract to `graph_run({name, contract})`. For shared templates,
+use `graph_create({graph: "feature", acceptanceCriteria: [...]})` first.
+Templates resolve alongside the installed roles directory, so a separate
+`~/.agents/workflows` link is unnecessary. Pi adapts portable templates into
+sequential routes in dependency order; a review must accept before continuing.
+Templates without a verifier stop for human input and cannot complete a goal.
+
+The interactive host asks for scope approval before execution and completion
+approval after verifier evidence covers all criteria. Decisions, local operator
+identity, timestamps, contract and graph hashes, and source fingerprints are
+persisted in the run record. Noninteractive runs stop with `needs_user`.
+Declined completion can be revisited with `graph_resume({runId})` without
+rerunning the verifier. `graph_status` exposes phase and approval history.
+Only the tool's final `status=complete` authorizes goal completion.
+
+Checkpoints fingerprint HEAD, index entries, tracked files, nonignored untracked
+files, executable modes, and symlink targets. Evidence records receive the
+source fingerprint and contract hash from the harness. Verifiers must leave
+source unchanged. Governed runs serialize nodes and lock the checkout and run
+to avoid overlapping executions. Resume refuses source/configuration/contract
+drift; interrupted work additionally requires human approval before replay.
+Legacy runs without contracts require a new run. After a crash, lock directories
+must be removed manually only after confirming no runner is active.
+
+These checkpoints identify source state; they do not store file contents or
+restore a lost checkout. Ignored build artifacts and external dependencies are
+outside the fingerprint, and submodule checkouts are currently rejected. Agent
+evidence remains a claim bound to source, rather than an independently verified
+test attestation. Approval records use local filesystem trust and the local
+operator name, not an authenticated remote identity. Independent acceptance,
+credential isolation, and trusted publication remain future unattended-run work.
+
 From this repository root, validate the installed Pi packages and resource
 loading:
 

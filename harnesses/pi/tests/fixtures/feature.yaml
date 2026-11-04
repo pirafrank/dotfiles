@@ -1,0 +1,13 @@
+name: feature
+nodes:
+  - id: implement
+    agent: implementer
+    task: Implement the approved plan.
+  - id: review
+    agent: reviewer
+    task: Review the change.
+    dependsOn: [implement]
+  - id: verify
+    agent: verifier
+    task: Verify acceptance criteria.
+    dependsOn: [implement]
