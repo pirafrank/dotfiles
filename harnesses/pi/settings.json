@@ -3,7 +3,8 @@
   "defaultThinkingLevel": "medium",
   "defaultProjectTrust": "ask",
   "extensions": [
-    "extensions/harness"
+    "extensions/harness",
+    "extensions/aliases"
   ],
   "defaultTools": [
     "+codemode"
@@ -66,7 +67,8 @@
     "{\"source\":\"npm:@andrewjacop/pi-herdr@0.4.0\",\"scope\":\"user\"}": "0.4.0",
     "{\"source\":\"npm:pi-web-access@0.46.0\",\"scope\":\"user\"}": "0.46.0",
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0",
-    "{\"source\":\"npm:@rahularya01/pi-cursor\",\"scope\":\"user\"}": "1.4.39"
+    "{\"source\":\"npm:@rahularya01/pi-cursor\",\"scope\":\"user\"}": "1.4.39",
+    "{\"source\":\"npm:@rahularya01/pi-cursor@1.4.39\",\"scope\":\"user\"}": "1.4.39"
   },
   "terminal": {
     "showTerminalProgress": true

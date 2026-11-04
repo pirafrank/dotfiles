@@ -54,6 +54,17 @@ machine-specific server configuration outside this repository.
 
 ## Harness behavior
 
+### Command aliases
+
+Edit [`extensions/aliases/aliases.json`](extensions/aliases/aliases.json) to map
+existing Pi command names to aliases, without leading slashes. The initial
+`{"quit": "exit"}` entry makes both `exit` and `/exit` run `/quit` in the
+interactive editor. For example, adding `"model": "m"` enables `/m` (or `m`)
+and forwards any arguments to `/model`. Use `/reload` after editing the JSON.
+Aliases expand once, before Pi dispatches commands, and work with built-in and
+extension commands. Existing editor customizations are preserved when the alias
+extension loads; another extension that later replaces the editor may override it.
+
 The owned extension layer provides:
 
 - isolated specialist delegation with compact structured results;
