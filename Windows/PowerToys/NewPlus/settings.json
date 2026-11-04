@@ -1,0 +1,15 @@
+{
+  "properties": {
+    "HideFileExtension": {
+      "value": true
+    },
+    "HideStartingDigits": {
+      "value": true
+    },
+    "TemplateLocation": {
+      "value": "C:\\Users\\francesco\\dotfiles\\Windows\\PowerToys\\NewPlus\\Templates"
+    }
+  },
+  "name": "NewPlus",
+  "version": "1.0"
+}
