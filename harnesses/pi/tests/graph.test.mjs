@@ -29,7 +29,7 @@ test("retries a failing node within its bound", async () => {
 });
 
 test("passes predecessor results and persists running and completed states", async () => {
-  const graph = validateGraph({ name: "handoff", nodes: [{ id: "a", agent: "explorer", task: "explore" }, { id: "b", agent: "reviewer", task: "review", dependsOn: ["a"] }] }, agents);
+  const graph = validateGraph({ name: "handoff", nodes: [{ id: "a", agent: "explorer", task: "explore" }, { id: "b", agent: "explorer", task: "review", dependsOn: ["a"] }] }, agents);
   const snapshots = [];
   const evidence = { status: "ok", summary: "found implementation" };
   await scheduleGraph(graph, async (node, predecessors) => {
@@ -42,7 +42,7 @@ test("passes predecessor results and persists running and completed states", asy
 });
 
 test("failed structured results skip dependents and cancellation prevents launch", async () => {
-  const graph = validateGraph({ name: "failed", nodes: [{ id: "a", agent: "explorer", task: "x", retries: 0 }, { id: "b", agent: "reviewer", task: "x", dependsOn: ["a"] }] }, agents);
+  const graph = validateGraph({ name: "failed", nodes: [{ id: "a", agent: "explorer", task: "x", retries: 0 }, { id: "b", agent: "explorer", task: "x", dependsOn: ["a"] }] }, agents);
   const state = await scheduleGraph(graph, async () => ({ status: "failed", summary: "no evidence" }));
   assert.equal(state.a.status, "failed");
   assert.equal(state.b.status, "skipped");
@@ -54,4 +54,25 @@ test("persistence errors abort scheduling instead of retrying the agent", async 
   const graph = validateGraph({ name: "disk", nodes: [{ id: "a", agent: "explorer", task: "x" }] }, agents);
   await assert.rejects(scheduleGraph(graph, async () => assert.fail("must not launch"), { onState: () => { throw new Error("disk full"); } }), /disk full/);
   assert.throws(() => validateGraph({ ...graph, name: "../escape" }, agents), /safe name/);
+});
+
+test("routed retries can recover and unmet dependencies stop execution", async () => {
+  const source = { name: "routed", entry: "a", nodes: [{ id: "a", agent: "explorer", task: "inspect", retries: 1, routes: [{ id: "stop", to: "needs_user" }] }] };
+  let attempts = 0;
+  const state = await scheduleGraph(validateGraph(source, agents), async () => {
+    if (++attempts === 1) throw new Error("temporary");
+    return { status: "ok", summary: "inspected" };
+  });
+  assert.equal(state.a.status, "ok");
+  assert.equal(attempts, 2);
+  const dependent = { ...source, nodes: [{ ...source.nodes[0], dependsOn: ["b"] }, { id: "b", agent: "explorer", task: "prerequisite", routes: [{ id: "stop", to: "needs_user" }] }] };
+  const blocked = await scheduleGraph(validateGraph(dependent, agents), async () => assert.fail("must not execute"));
+  assert.match(blocked._workflow.reason, /unsatisfied dependency/);
+});
+
+test("unmatched conditional routes cannot be selected by a model", async () => {
+  const graph = validateGraph({ name: "conditions", entry: "a", nodes: [{ id: "a", agent: "explorer", task: "inspect", routes: [{ id: "accept", to: "needs_user", when: { decision: "accept" } }, { id: "revise", to: "replan", when: { decision: "revise" } }] }] }, agents);
+  const state = await scheduleGraph(graph, async () => ({ status: "ok", summary: "no decision" }), { chooseRoute: async (routes) => { assert.equal(routes.length, 0); return undefined; } });
+  assert.equal(state._workflow.status, "needs_user");
+  assert.equal(state._workflow.routeHistory.length, 0);
 });

@@ -143,7 +143,7 @@ export async function scheduleGraph(graph, executeNode, options = {}) {
           if (result && typeof result === "object" && "status" in result && result.status !== "ok") throw new Error(`node returned ${result.status}`);
         } catch (error) { failure = error; }
         if (!failure) { states.set(node.id, { status: "ok", result, retries, workspace: node.workspace }); await persist(); break; }
-        if (retries >= node.retries || options.signal?.aborted) { states.set(node.id, { ...states.get(node.id), status: "failed", error: String(failure), retries, workspace: node.workspace }); await persist(); break; }
+        if (failure?.retryable === false || retries >= node.retries || options.signal?.aborted) { states.set(node.id, { ...states.get(node.id), status: "failed", error: String(failure), retries, workspace: node.workspace }); await persist(); break; }
         retries += 1;
       }
     }));
@@ -174,6 +174,7 @@ export async function scheduleRoutedGraph(graph, executeNode, options = {}) {
     if (options.signal?.aborted) return settled("cancelled");
     const node = graph.nodes.find((candidate) => candidate.id === current);
     if (!node) return settled("needs_user", `unknown next node: ${current}`);
+    if (node.dependsOn.some((id) => states[id]?.status !== "ok")) return settled("needs_user", `unsatisfied dependency for ${current}`);
     if (states[current].status === "ok") return settled("needs_user", `cannot resume completed node ${current} without its saved next route`);
     if (states[current].status === "failed" || states[current].status === "skipped") states[current] = { ...states[current], status: "pending", retries: 0 };
     meta.currentNode = current;
@@ -193,10 +194,11 @@ export async function scheduleRoutedGraph(graph, executeNode, options = {}) {
         });
         if (!result || typeof result !== "object" || !STATUSES.has(result.status)) throw new Error("node returned an invalid workflow result");
         if (result.status !== "ok") throw new Error(`node returned ${result.status}: ${result.summary ?? ""}`);
+        failure = undefined;
         break;
       } catch (error) {
         failure = error;
-        if (retries >= node.retries || options.signal?.aborted) break;
+        if (error?.retryable === false || retries >= node.retries || options.signal?.aborted) break;
         retries += 1;
         states[current] = { ...states[current], status: "running", retries };
         await persist();
@@ -220,7 +222,7 @@ export async function scheduleRoutedGraph(graph, executeNode, options = {}) {
     if (!routes.length) return settled("finished", result.summary);
     const matches = routes.filter((route) => routeMatches(route, result));
     const defaults = routes.filter((route) => !route.when);
-    const eligible = matches.length ? matches : defaults.length ? defaults : routes.length > 1 ? routes : [];
+    const eligible = matches.length ? matches : defaults;
     let selected;
     let selectionReason;
     if (eligible.length === 1) {
