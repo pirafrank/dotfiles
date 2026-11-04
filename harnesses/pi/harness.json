@@ -1,0 +1,47 @@
+{
+  "selectorModel": "openai-codex/gpt-6.1-sol",
+  "reviewPasses": 3,
+  "roles": {
+    "explorer": "fast",
+    "planner": "frontier",
+    "architect": "frontier",
+    "implementer": "medium",
+    "debugger": "medium",
+    "reviewer": "frontier",
+    "security-reviewer": "frontier",
+    "verifier": "frontier"
+  },
+  "tiers": {
+    "frontier": {
+      "class": "frontier-reasoning",
+      "models": [
+        "github-copilot/claude-opus-5.5",
+        "amazon-bedrock/eu.anthropic.claude-opus-5-5",
+        "cursor/claude-opus-5-5",
+        "openai-codex/gpt-6.1-sol",
+        "github-copilot/gpt-6.1-sol"
+      ]
+    },
+    "medium": {
+      "class": "medium-coding",
+      "models": [
+        "github-copilot/claude-sonnet-5.5",
+        "amazon-bedrock/eu.anthropic.claude-sonnet-5-5",
+        "cursor/claude-sonnet-5-5",
+        "openai-codex/gpt-5.6-luna",
+        "github-copilot/gpt-5.6-luna",
+        "cursor/gpt-5.6-luna"
+      ]
+    },
+    "fast": {
+      "class": "fast-tool-use",
+      "models": [
+        "github-copilot/claude-haiku-5.5",
+        "amazon-bedrock/eu.anthropic.claude-haiku-5-5",
+        "cursor/claude-haiku-5-5",
+        "github-copilot/gemini-3.8-flash",
+        "google-antigravity/antigravity-gemini-3.6-flash"
+      ]
+    }
+  }
+}

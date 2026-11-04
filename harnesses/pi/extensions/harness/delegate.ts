@@ -37,11 +37,13 @@ export function registerDelegate(pi: ExtensionAPI) {
   });
 }
 
-export async function runDelegatedTask(params: { agent: string; task: string; context?: string; model?: string; timeoutMs?: number }, signal: AbortSignal | undefined) {
+export async function runDelegatedTask(params: { agent: string; task: string; context?: string; model?: string; timeoutMs?: number; schema?: Record<string, unknown> }, signal: AbortSignal | undefined) {
   const agent = await findAgent(params.agent);
-  // Roles are linked from the portable skills checkout; use its schema directly.
-  const rolesRoot = await realpath(agentsDirectory());
-  const schema = JSON.parse(await readFile(join(dirname(rolesRoot), "schemas", "node-result.schema.json"), "utf8"));
+  let schema = params.schema;
+  if (!schema) {
+    const rolesRoot = await realpath(agentsDirectory());
+    schema = JSON.parse(await readFile(join(dirname(rolesRoot), "schemas", "node-result.schema.json"), "utf8"));
+  }
   const validate = new Ajv2020({ strict: true }).compile(schema);
   const args = delegatedArgs(agent, { ...params, schema });
   const output = await runPi(args, params.timeoutMs ?? 300000, signal, validate);
