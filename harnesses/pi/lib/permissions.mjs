@@ -49,6 +49,6 @@ export function classifyToolCall(toolName, input = {}, cwd = process.cwd()) {
     } catch { return ask("cannot resolve write scope safely"); }
   }
   // Nested calls are classified individually by Pi's tool_call pipeline.
-  if (["codemode", "tool_search", "delegate", "graph_create", "graph_run", "graph_status"].includes(toolName)) return allow("owned orchestration tool; nested operations retain permission checks");
+  if (["codemode", "tool_search", "delegate", "graph_plan", "graph_create", "graph_run", "graph_resume", "graph_status"].includes(toolName)) return allow("owned orchestration tool; nested operations retain permission checks");
   return ask("unknown or MCP tool effects require review");
 }
