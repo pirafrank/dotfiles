@@ -49,6 +49,7 @@ local function merge_seq_of_tables(win_only, nix)
                 entry[k] = w
             end
         end
+        entry.domain = { DomainName = 'local' }
         merged[#win_only + i] = entry
     end
     return merged
