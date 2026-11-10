@@ -4,11 +4,14 @@
   "defaultProjectTrust": "ask",
   "extensions": [
     "extensions/harness",
-    "extensions/aliases"
+    "extensions/aliases",
+    "extensions/clean-copy",
+    "extensions/interactive-router"
   ],
   "defaultTools": [
     "+codemode"
   ],
+  "fullscreenCopyOnSelect": true,
   "enableSkillCommands": true,
   "packages": [
     "npm:@cortexkit/pi-antigravity-auth@2.1.0",
@@ -61,7 +64,7 @@
   ],
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
-  "lastChangelogVersion": "1.5.1",
+  "lastChangelogVersion": "1.5.2",
   "extensionChangelogVersions": {
     "{\"source\":\"npm:pi-web-access@0.27.0\",\"scope\":\"user\"}": "0.27.0",
     "{\"source\":\"npm:@andrewjacop/pi-herdr@0.4.0\",\"scope\":\"user\"}": "0.4.0",
@@ -74,6 +77,7 @@
     "showTerminalProgress": true
   },
   "enabledModels": [
+    "harness/auto",
     "openai-codex/gpt-5.6-luna",
     "openai-codex/gpt-5.6-sol",
     "openai-codex/gpt-5.6-terra",
