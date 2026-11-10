@@ -71,8 +71,11 @@ stubs when loaded.
 ## PATH on Windows
 
 `install_dotfiles.ps1` symlinks `%USERPROFILE%\bin` to `dotfiles\Windows\bin`.
-The profile does **not** replace `$env:Path`. It only prepends `~\bin` if the
-symlink exists and is missing from PATH.
+The profile preserves inherited PATH entries. It prepends `~\bin` if the
+symlink exists and is missing from PATH. When pyenv-win is installed, it also
+puts its `bin` and `shims` directories first, without duplicates, so pyenv's
+selected Python takes precedence over standalone Python and WindowsApps.
+It uses `PYENV_ROOT`, falling back to `~\.pyenv\pyenv-win`.
 
 ## Measuring startup
 

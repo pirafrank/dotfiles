@@ -167,6 +167,18 @@ if ($env:OS -like "*Windows*") {
     if ((Test-Path $binLink) -and $env:Path -notlike "*$binLink*") {
         $env:Path = "$binLink$([IO.Path]::PathSeparator)$env:Path"
     }
+
+    # Put pyenv-win ahead of standalone Python installations and WindowsApps.
+    $pyenvRoot = if ($env:PYENV_ROOT) { $env:PYENV_ROOT } else {
+        Join-Path $env:USERPROFILE '.pyenv\pyenv-win'
+    }
+    if (Test-Path -LiteralPath (Join-Path $pyenvRoot 'bin\pyenv.bat')) {
+        $pyenvPaths = @((Join-Path $pyenvRoot 'bin'), (Join-Path $pyenvRoot 'shims'))
+        $otherPaths = $env:Path -split ';' | Where-Object {
+            $_.TrimEnd('\') -notin $pyenvPaths
+        }
+        $env:Path = ($pyenvPaths + $otherPaths) -join ';'
+    }
 }
 
 # Lazy-load fnm on first Node-related command.
