@@ -8,7 +8,7 @@
     "check:setup": "node scripts/check-setup.mjs"
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "1.5.0",
+    "@earendil-works/pi-coding-agent": "1.5.2",
     "@types/node": "24.10.0",
     "ajv": "8.20.0",
     "typebox": "1.0.14",
