@@ -6,7 +6,7 @@ allowlist, and installer.
 
 ## Pi setup
 
-Pi 1.5.0 requires Node.js 22.19.0 or newer.
+Pi 1.5.2 requires Node.js 22.19.0 or newer.
 
 It can be installed as managed or unmanaged install. Managed is preferred.
 To do so run: `curl -fsSL <https://pi.dev/install.sh> | sh`.
@@ -16,7 +16,7 @@ npm variant, `npm uninstall -g @earendil-works/pi-coding-agent`, if installed.
 
 ## Pi harness setup
 
-Install the Pi CLI at version 1.5.0 or above, and make sure the shared skills
+Install the Pi CLI at version 1.5.2 or above, and make sure the shared skills
 checkout exists at `~/.local/share/skills` (or set `SKILLS_SRC` to its path).
 
 From the harness repository root, install the full Pi setup:
@@ -46,7 +46,7 @@ outside both repositories.
 
 Pi's interactive default model is set in `settings.json`; workflow model tiers
 and the fixed selector model are set in `harness.json`. Codemode is enabled
-alongside the default tools. The local SDK is pinned to 1.5.0, so keep the
+alongside the default tools. The local SDK is pinned to 1.5.2, so keep the
 installed CLI aligned with it.
 
 [`packages.lock.json`](packages.lock.json) is the authoritative package
@@ -62,6 +62,20 @@ Use Pi's native MCP configuration in `~/.pi/agent/mcp.json` (or trusted project
 machine-specific server configuration outside this repository.
 
 ## Harness behavior
+
+### Interactive virtual model
+
+Select `/model harness/auto` for per-prompt routing through the tiers and selector
+in `harness.json`. New interactive sessions starting from the configured physical
+default select it automatically. Explicit CLI choices and restored sessions retain
+their selections. Delegates keep their physical default and workflow routing.
+
+Classification failures fall back to medium; model-selection failures use the
+first available candidate in the selected tier. If that tier has no available
+models, routing reports an error. Tool continuations, retries, and compaction
+retain the previous physical model. Selection adds up to two selector requests
+per user turn. Pi displays the physical model in its footer and transcript.
+Provider failures follow Pi's normal retry behavior.
 
 ### Command aliases
 
@@ -205,7 +219,7 @@ pi list
 pi mcp list
 ```
 
-Expect CLI version `1.5.0`, the configured model in the catalog, the exact
+Expect CLI version `1.5.2`, the configured model in the catalog, the exact
 packages in `packages.lock.json`, and any machine-configured MCP servers (an
 empty server list is valid). `check:setup` requires the configured packages to be installed at their
 pinned versions. It fails on resource-loading errors, warnings, or built-in

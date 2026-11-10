@@ -42,7 +42,7 @@ function parseJson(text) {
   return JSON.parse(trimmed.slice(start, end + 1));
 }
 
-async function askSelector(config, registry, context, kind, candidates, signal) {
+export async function askSelector(config, registry, context, kind, candidates, signal) {
   const available = availableModels(registry);
   const selector = available.get(config.selectorModel);
   if (!selector) throw new Error(`selector model is unavailable: ${config.selectorModel}`);

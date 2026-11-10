@@ -35,7 +35,7 @@ function currentPolicy(ctx: any): string {
   for (const entry of ctx.sessionManager.getBranch()) {
     if (entry.type === "custom" && entry.customType === "harness:permissions") {
       const id = (entry.data as { policy?: string })?.policy;
-      if (policies.some((policy) => policy.id === id)) selected = id;
+      if (id && policies.some((policy) => policy.id === id)) selected = id;
     }
   }
   return selected;
