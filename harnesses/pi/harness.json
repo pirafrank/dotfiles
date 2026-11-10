@@ -1,6 +1,6 @@
 {
   "selectorModel": "openai-codex/gpt-6.1-sol",
-  "reviewPasses": 3,
+  "reviewPasses": 1,
   "roles": {
     "explorer": "fast",
     "planner": "frontier",
