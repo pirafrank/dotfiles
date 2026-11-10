@@ -4,11 +4,20 @@ This directory contains the machine-specific Pi settings, owned extensions,
 goal/workflow configuration, pinned Node dependencies, approved package
 allowlist, and installer.
 
-## Setup
+## Pi setup
 
-Pi 1.5.0 requires Node.js 22.19.0 or newer. Install the Pi CLI at version
-1.5.0, and make sure the shared skills checkout exists at
-`~/.local/share/skills` (or set `SKILLS_SRC` to its path).
+Pi 1.5.0 requires Node.js 22.19.0 or newer.
+
+It can be installed as managed or unmanaged install. Managed is preferred.
+To do so run: `curl -fsSL <https://pi.dev/install.sh> | sh`.
+
+Pi native managed installation will install Pi to `~/.local/bin/pi`, and remove its
+npm variant, `npm uninstall -g @earendil-works/pi-coding-agent`, if installed.
+
+## Pi harness setup
+
+Install the Pi CLI at version 1.5.0 or above, and make sure the shared skills
+checkout exists at `~/.local/share/skills` (or set `SKILLS_SRC` to its path).
 
 From the harness repository root, install the full Pi setup:
 
