@@ -17,7 +17,7 @@ if (!prototype.__cleanCopyOriginal) {
 	prototype.__cleanCopyEnabled = true;
 	prototype.copyTextToClipboard = function (text) {
 		const cleaned = prototype.__cleanCopyEnabled
-			? text.split(/\r?\n/).filter((line) => !line.startsWith(" ")).join("\n")
+			? text.replace(/^ /gm, "")
 			: text;
 		return prototype.__cleanCopyOriginal!.call(this, cleaned);
 	};
@@ -25,7 +25,7 @@ if (!prototype.__cleanCopyOriginal) {
 
 export default function registerCleanCopy(pi: ExtensionAPI) {
 	pi.registerCommand("clean-copy", {
-		description: "Toggle removal of space-prefixed lines from fullscreen mouse selections",
+		description: "Remove one leading space per line from fullscreen mouse selections (on|off)",
 		handler: async (args, ctx) => {
 			const option = args.trim().toLowerCase();
 			if (option === "on") prototype.__cleanCopyEnabled = true;
