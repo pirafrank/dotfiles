@@ -25,7 +25,7 @@ function trustedReadDirectories(): string[] {
 }
 
 const policies = [
-  { id: "scoped", label: "Scoped access (current + /add-dir roots)", description: "Allow simple operations inside the listed roots; ask outside them or for risky/ambiguous operations." },
+  { id: "scoped", label: "Scoped access (current + /add-dir roots)", description: "Allow local commands, chains, and pipelines inside the listed roots; ask outside them or for risky/ambiguous operations." },
   { id: "confirm-changes", label: "Confirm shell commands and edits", description: "Ask before every shell command or file change. Reads still follow the scoped policy." },
   { id: "confirm-all", label: "Confirm every tool call", description: "Ask before every tool call, including reads and orchestration." },
 ];

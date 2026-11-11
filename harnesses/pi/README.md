@@ -116,6 +116,15 @@ operations require confirmation and are blocked in non-interactive delegates.
 These gates are not an OS sandbox; third-party extension internals and shell
 programs remain trusted code.
 
+The default `scoped` permission policy allows local shell commands joined by
+`;`, `&&`, `||`, newlines, and pipes, including `2>&1` and file redirections
+inside the allowed roots. Each command, redirection, and `cd` target is checked
+against the session's current directory and `/add-dir` roots. Directory changes
+do not add new trusted roots. Credentials, paths outside those roots, protected
+Git/package operations, and unsupported shell syntax still require confirmation.
+Trusted Pi resource directories permit reads only. Use `/reload` to load updated
+extension code in a running Pi session.
+
 Graphs pass structured predecessor results to dependent nodes. Existing DAGs
 retain bounded concurrency and a single shared-checkout writer. Routed graphs
 run one selected path at a time, use declared outcome conditions first, and
