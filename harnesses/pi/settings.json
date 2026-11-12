@@ -60,7 +60,8 @@
     "npm:pi-add-dir@1.3.1",
     "npm:@juanibiapina/pi-powerbar@0.16.0",
     "npm:@rahularya01/pi-cursor@1.4.39",
-    "npm:@schovest/pi-goal@0.2.1"
+    "npm:@schovest/pi-goal@0.2.1",
+    "npm:pi-alibaba-models"
   ],
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
@@ -71,7 +72,8 @@
     "{\"source\":\"npm:pi-web-access@0.46.0\",\"scope\":\"user\"}": "0.46.0",
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0",
     "{\"source\":\"npm:@rahularya01/pi-cursor\",\"scope\":\"user\"}": "1.4.39",
-    "{\"source\":\"npm:@rahularya01/pi-cursor@1.4.39\",\"scope\":\"user\"}": "1.4.39"
+    "{\"source\":\"npm:@rahularya01/pi-cursor@1.4.39\",\"scope\":\"user\"}": "1.4.39",
+    "{\"source\":\"npm:pi-alibaba-models\",\"scope\":\"user\"}": "1.1.1"
   },
   "terminal": {
     "showTerminalProgress": true
@@ -140,7 +142,6 @@
     "cursor/claude-sonnet-5-5",
     "cursor/claude-sonnet-5-5-max-mode",
     "cursor/gemini-3.1-pro",
-    "cursor/gemini-3.7-flash",
     "cursor/gemini-3.8-flash",
     "cursor/gemini-4-argon",
     "cursor/gemini-4-argon-max-mode",
@@ -163,6 +164,11 @@
     "cursor/muse-wonder-1.0-1m",
     "cursor/glm-5p3",
     "cursor/deepseek-v41-flash-1017",
-    "cursor/composer-2.5"
+    "cursor/composer-2.5",
+    "alibaba-plan/qwen3.8-flash",
+    "alibaba-plan/deepseek-v4-pro",
+    "alibaba-plan/qwen4-max-preview",
+    "alibaba-plan/deepseek-v4.1-flash-1017",
+    "alibaba-plan/glm-5.3"
   ]
 }
