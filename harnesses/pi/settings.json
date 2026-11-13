@@ -61,7 +61,8 @@
     "npm:@juanibiapina/pi-powerbar@0.16.0",
     "npm:@rahularya01/pi-cursor@1.4.39",
     "npm:@schovest/pi-goal@0.2.1",
-    "npm:pi-alibaba-models"
+    "npm:pi-alibaba-models@1.1.1",
+    "npm:pi-model-auto@0.3.0"
   ],
   "defaultProvider": "openai-codex",
   "defaultModel": "gpt-6-luna",
