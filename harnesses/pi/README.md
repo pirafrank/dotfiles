@@ -49,6 +49,28 @@ and the fixed selector model are set in `harness.json`. Codemode is enabled
 alongside the default tools. The local SDK is pinned to 1.5.2, so keep the
 installed CLI aligned with it.
 
+The configured physical default is `openai-codex/gpt-6-luna`, set in
+[`settings.json`](settings.json):
+
+```json
+{
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-luna"
+}
+```
+
+The `extensions/interactive-router` extension automatically selects `harness/auto`
+for eligible new interactive sessions starting from this default. Disabling that
+extension leaves new sessions on `openai-codex/gpt-6-luna` directly. Explicit CLI
+model choices and restored sessions retain their own selections.
+
+The installed `pi-model-auto` package provides a separate `pi-router/auto` model.
+Run `/model pi-router/auto` to use it.
+Installing the package does not change the configured default. To make it the
+default, set `defaultProvider` to `pi-router` and `defaultModel` to `auto`.
+Graph nodes and delegated agents continue using the harness tiers and selector
+in `harness.json`.
+
 [`packages.lock.json`](packages.lock.json) is the authoritative package
 allowlist, and the package sources in `settings.json` must match it exactly. The installer validates
 parity before syncing and accepts exact scoped npm specifications. Package
@@ -57,9 +79,10 @@ interactively. Feynman 0.5.62 and pi-web-access 0.46.0 replace older packages
 that triggered Pi 1.5 host-dependency warnings and Feynman's built-in
 `/thinking` command conflict.
 
-Use Pi's native MCP configuration in `~/.pi/agent/mcp.json` (or trusted project
-`.pi/mcp.json`). The adapter is no longer declared. Keep credentials and
-machine-specific server configuration outside this repository.
+Configure user-level MCP servers in `~/.pi/agent/mcp.json`. Pi also supports
+project-level configuration in `.pi/mcp.json` for trusted projects. The adapter
+is no longer declared. Keep credentials and machine-specific server
+configuration outside this repository.
 
 ## Harness behavior
 
