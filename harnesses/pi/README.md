@@ -49,27 +49,35 @@ and the fixed selector model are set in `harness.json`. Codemode is enabled
 alongside the default tools. The local SDK is pinned to 1.5.2, so keep the
 installed CLI aligned with it.
 
-The configured physical default is `openai-codex/gpt-6-luna`, set in
+The configured default is `pi-router/auto`, provided by `pi-model-auto` and set in
 [`settings.json`](settings.json):
 
 ```json
 {
-  "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-6-luna"
+  "defaultProvider": "pi-router",
+  "defaultModel": "auto"
 }
 ```
 
-The `extensions/interactive-router` extension automatically selects `harness/auto`
-for eligible new interactive sessions starting from this default. Disabling that
-extension leaves new sessions on `openai-codex/gpt-6-luna` directly. Explicit CLI
-model choices and restored sessions retain their own selections.
+New sessions use `pi-model-auto` to choose a physical model for each task.
+The `extensions/interactive-router` startup hook only selects `harness/auto`
+when starting from `openai-codex/gpt-6-luna`, so it does not override this default.
+Explicit CLI model choices and restored sessions retain their own selections.
 
 The installed `pi-model-auto` package provides a separate `pi-router/auto` model.
 Run `/model pi-router/auto` to use it.
-Installing the package does not change the configured default. To make it the
-default, set `defaultProvider` to `pi-router` and `defaultModel` to `auto`.
+Installing the package alone does not change the configured default; this
+harness explicitly selects it through the settings above.
 Graph nodes and delegated agents continue using the harness tiers and selector
 in `harness.json`.
+
+> [!WARNING]
+> For a clean setup, keep the harness tools and workflow routing,
+> disable only `extensions/interactive-router`, and use `pi-router/auto` for
+> interactive routing. For now, both routers remain available; switch explicitly
+> between them. Avoid `@low`, `@high`, and `@model:` prompt prefixes while using
+> `harness/auto`, because pi-model-auto's input hook can process those prefixes
+> even when its router is not selected.
 
 [`packages.lock.json`](packages.lock.json) is the authoritative package
 allowlist, and the package sources in `settings.json` must match it exactly. The installer validates
