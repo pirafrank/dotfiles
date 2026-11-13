@@ -144,7 +144,6 @@
     "cursor/gemini-3.1-pro",
     "cursor/gemini-3.8-flash",
     "cursor/gemini-4-argon",
-    "cursor/gemini-4-argon-max-mode",
     "cursor/gpt-5.6-terra-max",
     "cursor/gpt-5.6-terra-1m",
     "cursor/gpt-5.6-terra",
@@ -169,6 +168,19 @@
     "alibaba-plan/deepseek-v4-pro",
     "alibaba-plan/qwen4-max-preview",
     "alibaba-plan/deepseek-v4.1-flash-1017",
-    "alibaba-plan/glm-5.3"
+    "alibaba-plan/glm-5.3",
+    "github-copilot/gemini-4-carbon",
+    "opencode/gemini-4-argon",
+    "cursor/gemini-4-carbon",
+    "cursor/gemini-4-hydrogen",
+    "opencode/glm-5.3",
+    "opencode/minimax-m3",
+    "opencode/qwen3.8-flash",
+    "opencode/claude-fable-5-2",
+    "opencode/deepseek-v4.1-flash",
+    "opencode/minimax-m3.1-flash-free",
+    "opencode/nemotron-3.5-lightning-free",
+    "opencode/deepseek-v4.1-flash-free",
+    "opencode/longcat-2.5-free"
   ]
 }
