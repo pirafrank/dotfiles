@@ -74,7 +74,9 @@
     "{\"source\":\"npm:pi-web-access\",\"scope\":\"user\"}": "0.46.0",
     "{\"source\":\"npm:@rahularya01/pi-cursor\",\"scope\":\"user\"}": "1.4.39",
     "{\"source\":\"npm:@rahularya01/pi-cursor@1.4.39\",\"scope\":\"user\"}": "1.4.39",
-    "{\"source\":\"npm:pi-alibaba-models\",\"scope\":\"user\"}": "1.1.1"
+    "{\"source\":\"npm:pi-alibaba-models\",\"scope\":\"user\"}": "1.1.1",
+    "{\"source\":\"npm:pi-alibaba-models@1.1.1\",\"scope\":\"user\"}": "1.1.1",
+    "{\"source\":\"npm:pi-model-auto@0.3.0\",\"scope\":\"user\"}": "0.3.0"
   },
   "terminal": {
     "showTerminalProgress": true
@@ -182,6 +184,8 @@
     "opencode/minimax-m3.1-flash-free",
     "opencode/nemotron-3.5-lightning-free",
     "opencode/deepseek-v4.1-flash-free",
-    "opencode/longcat-2.5-free"
+    "opencode/longcat-2.5-free",
+    "pi-router/auto",
+    "alibaba-plan/auto"
   ]
 }
