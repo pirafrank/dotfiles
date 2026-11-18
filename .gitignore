@@ -4,3 +4,6 @@
 
 # Local Netlify folder
 .netlify
+
+# Project-local Pi MCP configuration may contain credentials
+.pi/mcp.json
