@@ -88,9 +88,16 @@ that triggered Pi 1.5 host-dependency warnings and Feynman's built-in
 `/thinking` command conflict.
 
 Configure user-level MCP servers in `~/.pi/agent/mcp.json`. Pi also supports
-project-level configuration in `.pi/mcp.json` for trusted projects. The adapter
-is no longer declared. Keep credentials and machine-specific server
-configuration outside this repository.
+project-level configuration in `.pi/mcp.json` for trusted projects. A project
+`.pi/mcp.json` has the highest precedence and overrides user-level entries with
+the same server name, but Pi loads it only after the project has been trusted.
+The adapter is no longer declared.
+
+This setup intentionally leaves `PI_CODING_AGENT_DIR` unset and uses symlinks
+for the harness resources it owns. Keep project MCP files, credentials, and
+other machine-specific configuration outside this public repository; when a
+project needs `.pi/mcp.json`, use an untracked symlink to a private file so the
+configuration can be selected per machine without committing it.
 
 ## Harness behavior
 
