@@ -62,7 +62,8 @@
     "npm:@rahularya01/pi-cursor@1.4.39",
     "npm:@schovest/pi-goal@0.2.1",
     "npm:pi-alibaba-models@1.1.1",
-    "npm:pi-model-auto@0.3.0"
+    "npm:pi-model-auto@0.3.0",
+    "npm:pi-provider-litellm"
   ],
   "defaultProvider": "pi-router",
   "defaultModel": "auto",
@@ -93,8 +94,6 @@
     "github-copilot/claude-sonnet-5.5",
     "github-copilot/claude-sonnet-5",
     "github-copilot/claude-opus-5.5",
-    "github-copilot/claude-opus-5",
-    "github-copilot/claude-opus-4.8",
     "github-copilot/claude-fable-5.1",
     "github-copilot/claude-fable-5",
     "github-copilot/gemini-4-argon",
@@ -120,7 +119,6 @@
     "github-copilot/gpt-6-sol",
     "github-copilot/gpt-6-luna",
     "github-copilot/gpt-6-astra",
-    "github-copilot/gpt-5.6-terra",
     "github-copilot/gpt-5.6-sol",
     "amazon-bedrock/eu.anthropic.claude-sonnet-5-5",
     "amazon-bedrock/eu.anthropic.claude-opus-5-5",
@@ -186,6 +184,11 @@
     "opencode/deepseek-v4.1-flash-free",
     "opencode/longcat-2.5-free",
     "pi-router/auto",
-    "alibaba-plan/auto"
+    "alibaba-plan/auto",
+    "cursor/gemini-4-neon",
+    "litellm/claude-sonnet",
+    "litellm/claude-haiku",
+    "litellm/claude-opus",
+    "litellm/qwen38-27b"
   ]
 }
