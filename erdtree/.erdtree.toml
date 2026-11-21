@@ -1,0 +1,52 @@
+# General-purpose defaults for exploring this dotfiles repository.
+human = true
+icons = true
+no-git = true
+layout = "inverted"
+sort = "name"
+dir-order = "first"
+truncate = true
+
+# Match the Zprezto and local Zsh listing aliases.
+[ll]
+long = true
+level = 1
+human = true
+
+[la]
+hidden = true
+level = 1
+human = true
+
+[l]
+level = 1
+human = true
+
+[lt]
+sort = "rmod"
+level = 1
+human = true
+
+# A conventional tree view, including dotfiles while omitting .git.
+[tree]
+hidden = true
+no-git = true
+human = true
+
+# Disk usage view that includes ignored files while still skipping .git.
+# Use with: erd --config du
+[du]
+human = true
+icons = true
+hidden = true
+no-git = true
+no-ignore = true
+layout = "flat"
+sort = "rsize"
+
+# Count lines by source file type. Use with: erd --config code-lines
+[code-lines]
+disk-usage = "line"
+hidden = true
+no-git = true
+pattern = "\\.(c|cc|cpp|h|hpp|js|jsx|mjs|ts|tsx|py|rs|go|java|kt|sh|zsh|lua|vim)$"

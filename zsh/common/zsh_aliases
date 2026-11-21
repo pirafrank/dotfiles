@@ -16,6 +16,12 @@ alias nv='nvim'
 alias l='ls -lhA'
 alias lr='ll -RA'
 alias lt='ll -t'
+# erdtree variants of Prezto's ll/la/lt and this file's l aliases.
+alias ell='erd --config ll'
+alias ela='erd --config la'
+alias el='erd --config l'
+alias elt='erd --config lt'
+alias etree='erd --config tree'
 alias gdb='nocorrect gdb'
 alias wgetnc="wget --no-check-certificate"
 alias sshnosave="ssh -o 'UserKnownHostsFile /dev/null'"
