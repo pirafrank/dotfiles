@@ -17,15 +17,208 @@ if [ "$#" -lt 1 ]; then
   exit 1
 fi
 
-# respect XDG_DATA_HOME if defined
-if [ -n "$XDG_DATA_HOME" ]; then
-  TRASH_PATH="$XDG_DATA_HOME/Trash"
-else
-  # fallback for Darwin and more Linux
-  TRASH_PATH="$HOME/.Trash"
-fi
+OS=$(uname -s) || exit 1
+uid=$(id -u) || exit 1
 
-mkdir -p "$TRASH_PATH"
+case "$OS" in
+  Darwin)
+    FALLBACK_TRASH="$HOME/.Trash"
+    ;;
+  Linux)
+    FALLBACK_TRASH="${XDG_DATA_HOME:-$HOME/.local/share}/Trash"
+    ;;
+  *)
+    echo "trash: unsupported operating system: $OS" >&2
+    exit 1
+    ;;
+esac
+
+mount_for() {
+  # `df -P` keeps the mount point on one line. Some implementations escape
+  # whitespace in paths, so decode it after selecting the final column.
+  df -P "$1" 2>/dev/null | awk 'END { print $NF }' | while IFS= read -r mount; do
+    printf '%b\n' "$mount"
+  done
+}
+
+unique_name() {
+  directory=$1
+  name=$2
+  companion_directory=$3
+  candidate=$name
+  number=1
+
+  while [ -e "$directory/$candidate" ] || [ -L "$directory/$candidate" ] ||
+        { [ -n "$companion_directory" ] && { [ -e "$companion_directory/$candidate.trashinfo" ] || [ -L "$companion_directory/$candidate.trashinfo" ]; }; }; do
+    candidate="$name.$number"
+    number=$((number + 1))
+  done
+
+  printf '%s\n' "$candidate"
+}
+
+# Freedesktop .trashinfo stores the original path as a URL-encoded Path value.
+url_encode_path() {
+  printf '%s' "$1" | LC_ALL=C od -An -v -tu1 | awk '{
+    for (i = 1; i <= NF; i++) {
+      n = $i
+      if ((n >= 48 && n <= 57) || (n >= 65 && n <= 90) ||
+          (n >= 97 && n <= 122) || n == 45 || n == 46 ||
+          n == 47 || n == 95 || n == 126) {
+        printf "%c", n
+      } else {
+        printf "%%%02X", n
+      }
+    }
+  }'
+}
+
+# Record the fallback trash filesystem when possible. It is used only when it
+# is on the same mount as the item being trashed.
+mkdir -p "$FALLBACK_TRASH" 2>/dev/null || true
+FALLBACK_MOUNT=$(mount_for "$FALLBACK_TRASH")
+
+status=0
+
 for file in "$@"; do
-  mv -f "$file" "$TRASH_PATH/$(basename "$file")_$(date '+%Y-%m-%d_%H%M%S')"
+  # Prefix relative paths so utility operands beginning with '-' are treated
+  # as paths, not options.
+  case "$file" in
+    /*) input_path=$file ;;
+    *) input_path=./$file ;;
+  esac
+
+  if [ ! -e "$input_path" ] && [ ! -L "$input_path" ]; then
+    echo "trash: '$file' does not exist" >&2
+    status=1
+    continue
+  fi
+
+  # Resolve the parent directory physically, while preserving the final path
+  # component so a symlink itself is moved instead of its target.
+  parent=$(cd -P "$(dirname "$input_path")" 2>/dev/null && pwd -P)
+  if [ -z "$parent" ]; then
+    echo "trash: cannot resolve the parent directory of '$file'" >&2
+    status=1
+    continue
+  fi
+  source="$parent/$(basename "$input_path")"
+
+  if [ -L "$input_path" ]; then
+    source_mount=$(mount_for "$parent")
+  else
+    source_mount=$(mount_for "$source")
+  fi
+  if [ -z "$source_mount" ]; then
+    echo "trash: cannot determine the filesystem for '$file'" >&2
+    status=1
+    continue
+  fi
+
+  case "$OS" in
+    Darwin)
+      private_trash="${source_mount%/}/.Trashes/$uid"
+      [ "$source_mount" = / ] && private_trash="/.Trashes/$uid"
+      shared_trash=
+      ;;
+    Linux)
+      private_trash="${source_mount%/}/.Trash-$uid"
+      [ "$source_mount" = / ] && private_trash="/.Trash-$uid"
+      shared_trash="${source_mount%/}/.Trash/$uid"
+      [ "$source_mount" = / ] && shared_trash="/.Trash/$uid"
+      ;;
+  esac
+
+  trash_path=
+  if [ "$source_mount" = "$FALLBACK_MOUNT" ] &&
+     mkdir -p "$FALLBACK_TRASH" 2>/dev/null && chmod 700 "$FALLBACK_TRASH" 2>/dev/null; then
+    trash_path=$FALLBACK_TRASH
+  fi
+
+  if [ -z "$trash_path" ] &&
+     { [ -d "$private_trash" ] || { [ ! -e "$private_trash" ] && [ -w "$source_mount" ]; }; }; then
+    if mkdir -m 700 -p "$private_trash" 2>/dev/null; then
+      if chmod 700 "$private_trash" 2>/dev/null; then
+        trash_path=$private_trash
+      fi
+    fi
+  fi
+
+  # The shared Freedesktop trash is safe only when its top-level directory is
+  # sticky, as required for a shared writable directory.
+  if [ -z "$trash_path" ] && [ -n "$shared_trash" ] &&
+     [ -d "${shared_trash%/*}" ] && [ ! -L "${shared_trash%/*}" ] &&
+     [ -k "${shared_trash%/*}" ]; then
+    if mkdir -m 700 -p "$shared_trash" 2>/dev/null; then
+      if chmod 700 "$shared_trash" 2>/dev/null; then
+        trash_path=$shared_trash
+      fi
+    fi
+  fi
+
+  if [ -z "$trash_path" ] && [ "$source_mount" = "$FALLBACK_MOUNT" ]; then
+    if mkdir -p "$FALLBACK_TRASH" 2>/dev/null && chmod 700 "$FALLBACK_TRASH" 2>/dev/null; then
+      trash_path=$FALLBACK_TRASH
+    fi
+  fi
+
+  # A pre-existing trash path could be a symlink to another filesystem.
+  # Verify the directory actually created/resolved to the source mount.
+  if [ -n "$trash_path" ] && [ "$(mount_for "$trash_path")" != "$source_mount" ]; then
+    trash_path=
+    if [ "$source_mount" = "$FALLBACK_MOUNT" ] &&
+       mkdir -p "$FALLBACK_TRASH" 2>/dev/null && chmod 700 "$FALLBACK_TRASH" 2>/dev/null &&
+       [ "$(mount_for "$FALLBACK_TRASH")" = "$source_mount" ]; then
+      trash_path=$FALLBACK_TRASH
+    fi
+  fi
+
+  if [ -z "$trash_path" ]; then
+    echo "trash: cannot create a trash directory on the filesystem containing '$file'" >&2
+    status=1
+    continue
+  fi
+
+  if [ "$OS" = Linux ]; then
+    files_path="$trash_path/files"
+    info_path="$trash_path/info"
+    if ! mkdir -p "$files_path" "$info_path" 2>/dev/null ||
+       ! chmod 700 "$files_path" "$info_path" 2>/dev/null; then
+      echo "trash: cannot prepare files and info directories in '$trash_path'" >&2
+      status=1
+      continue
+    fi
+
+    # Reserve the metadata name atomically before moving the item, as required
+    # by the Freedesktop Trash specification.
+    while :; do
+      filename=$(unique_name "$files_path" "$(basename "$source")" "$info_path")
+      item_info="$info_path/$filename.trashinfo"
+      encoded_source=$(url_encode_path "$source")
+      deletion_date=$(date '+%Y-%m-%dT%H:%M:%S')
+      if (set -C; printf '[Trash Info]\nPath=%s\nDeletionDate=%s\n' "$encoded_source" "$deletion_date" > "$item_info") 2>/dev/null; then
+        break
+      fi
+      if [ ! -e "$item_info" ] && [ ! -L "$item_info" ]; then
+        echo "trash: cannot create trash metadata '$item_info'" >&2
+        status=1
+        filename=
+        break
+      fi
+    done
+    [ -n "$filename" ] || continue
+    destination="$files_path/$filename"
+  else
+    filename=$(unique_name "$trash_path" "$(basename "$source")" "")
+    destination="$trash_path/$filename"
+  fi
+
+  if ! mv "$source" "$destination"; then
+    echo "trash: could not move '$file' to '$destination'" >&2
+    [ "$OS" = Linux ] && rm -f "$item_info"
+    status=1
+    continue
+  fi
 done
+
+exit "$status"
