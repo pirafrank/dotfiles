@@ -60,7 +60,16 @@
     ~/.editorconfig: editorconfig/.editorconfig
     ~/.inputrc: inputrc/.inputrc
     ~/.config/htop/htoprc: htop/htoprc
+    ~/.config/fish:
+        path: fish
+        force: true
+    ~/.config/helix:
+        path: helix
+        force: true
     ~/.config/lazygit/config.yml: lazygit/config.yml
+    ~/.config/television:
+        path: television
+        force: true
     ~/.config/lf/lfrc: lf/lfrc
     ~/.config/lf/icons: lf/icons
     ~/.config/mc:
@@ -96,5 +105,8 @@
     - [touch ~/.zsh_custom_pre ~/.zsh_custom, Creating zsh custom files]
     # zprezto stuff - end
     - [/bin/bash ~/dotfiles/yazi/install.sh, Installing Yazi TUI file manager]
+    - [/bin/bash ~/dotfiles/erdtree/install.sh, Installing erdtree configuration]
+    - [/bin/bash ~/dotfiles/nushell/install.sh, Installing Nushell configuration]
+    - [cd ~/dotfiles/wtf && ./install.sh, Installing WTFUtil configuration]
     # - [python3 -m pip install --upgrade pynvim, Installing pynvim for vim]
     # - [vim -E -s -u "$HOME/.vimrc" +PlugInstall +qall, Installing vim plugins]

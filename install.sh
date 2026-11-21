@@ -39,23 +39,29 @@ function show_help {
   echo "  ctags         - Install ctags configuration"
   echo "  custom        - Custom installation (edit script to add functions)"
   echo "  editorconfig  - Install editorconfig"
+  echo "  erdtree       - Install erdtree configuration"
+  echo "  fish          - Install Fish configuration"
   echo "  fzf           - Install fzf configuration"
   echo "  gama          - Install gama configuration"
   echo "  git           - Install git configuration"
   echo "  gpg           - Install GPG configuration"
   echo "  htoprc        - Install htop configuration"
+  echo "  helix         - Install Helix configuration"
   echo "  inputrc       - Install inputrc configuration"
   echo "  lazygit       - Install lazygit configuration"
   echo "  lf            - Install lf file manager configuration"
   echo "  makedirs      - Create necessary directories"
   echo "  mc            - Install Midnight Commander configuration"
   echo "  neofetch      - Install neofetch configuration"
+  echo "  nushell       - Install Nushell configuration"
   echo "  nvim          - Install Neovim configuration"
   echo "  shellfish     - Install Shellfish configuration"
   echo "  tmux          - Install tmux configuration"
+  echo "  television    - Install television configuration"
   echo "  vim           - Install Vim configuration with plugins"
   echo "  vim-minimal   - Install minimal Vim configuration"
   echo "  vim-noplugins - Install Vim configuration without plugins"
+  echo "  wtf           - Install WTFUtil configuration"
   echo "  xplr          - Install xplr file manager configuration"
   echo "  yazi          - Install yazi file manager configuration"
   echo "  zellij        - Install zellij terminal multiplexer configuration"
@@ -130,6 +136,42 @@ function gpginstall {
 function editorconfiginstall {
     move_if_exists "${HOME}/.editorconfig"
     ln -s ${DOTFILES}/editorconfig/.editorconfig ${HOME}/.editorconfig
+}
+
+function erdtree_install {
+    (
+        cd "${DOTFILES}/erdtree" || exit 1
+        ./install.sh
+    )
+}
+
+function fishinstall {
+    move_if_exists "${USERCONFIG}/fish"
+    ln -s "${DOTFILES}/fish" "${USERCONFIG}/fish"
+}
+
+function helix_install {
+    move_if_exists "${USERCONFIG}/helix"
+    ln -s "${DOTFILES}/helix" "${USERCONFIG}/helix"
+}
+
+function nushell_install {
+    (
+        cd "${DOTFILES}/nushell" || exit 1
+        ./install.sh
+    )
+}
+
+function television_install {
+    move_if_exists "${USERCONFIG}/television"
+    ln -s "${DOTFILES}/television" "${USERCONFIG}/television"
+}
+
+function wtf_install {
+    (
+        cd "${DOTFILES}/wtf" || exit 1
+        ./install.sh
+    )
 }
 
 function gamainstall {
@@ -397,8 +439,11 @@ case "$1" in
         gitinstall
         gpginstall
         editorconfiginstall
+        erdtree_install
+        fishinstall
         inputrcinstall
         htoprcinstall
+        helix_install
         lazygitinstall
         tmuxinstall
         viminstall
@@ -415,6 +460,9 @@ case "$1" in
         xplrinstall
         zellij_install
         neofetchinstall
+        nushell_install
+        television_install
+        wtf_install
         gamainstall
         ;;
     ctags)
@@ -422,6 +470,12 @@ case "$1" in
         ;;
     editorconfig)
         editorconfiginstall
+        ;;
+    erdtree)
+        erdtree_install
+        ;;
+    fish)
+        fishinstall
         ;;
     fzf)
         fzfinstall
@@ -437,6 +491,9 @@ case "$1" in
         ;;
     htoprc)
         htoprcinstall
+        ;;
+    helix)
+        helix_install
         ;;
     inputrc)
         inputrcinstall
@@ -456,11 +513,17 @@ case "$1" in
     neofetch)
         neofetchinstall
         ;;
+    nushell)
+        nushell_install
+        ;;
     nvim)
         nviminstall
         ;;
     tmux)
         tmuxinstall
+        ;;
+    television)
+        television_install
         ;;
     vim)
         viminstall
@@ -489,6 +552,9 @@ case "$1" in
         ;;
     shellfish)
         shellfishinstall
+        ;;
+    wtf)
+        wtf_install
         ;;
     custom)
         echo "Open the script and place functions to exec below this line"
