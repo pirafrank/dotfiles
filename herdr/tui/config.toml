@@ -1,0 +1,39 @@
+onboarding = false
+# Herdr TUI configuration for Linux, including desktop, headless, and WSL2 terminals.
+
+[terminal]
+# Keep new tabs in the current pane's working directory, like WezTerm.
+new_cwd = "follow"
+
+[keys]
+prefix = "ctrl+a"
+reload_config = "prefix+shift+r"
+detach = "prefix+d"
+
+# Tabs, following the tmux window bindings in tmux/.tmux.conf.
+new_tab = "prefix+t"
+previous_tab = "ctrl+left"
+next_tab = "ctrl+right"
+close_tab = "prefix+shift+k"
+rename_tab = "prefix+comma"
+
+# Agents: open Herdr's Go To picker and step through the agent panel.
+goto = "prefix+a"
+previous_agent = "prefix+["
+next_agent = "prefix+]"
+focus_agent = "prefix+1..9"
+switch_tab = "prefix+shift+1..9"
+
+# Panes: prefix+h/j/k/l, plus the direct Alt-arrow bindings from tmux.
+focus_pane_left = ["prefix+h", "alt+left"]
+focus_pane_down = ["prefix+j", "alt+down"]
+focus_pane_up = ["prefix+k", "alt+up"]
+focus_pane_right = ["prefix+l", "alt+right"]
+split_vertical = "prefix+v"
+split_horizontal = "prefix+minus"
+
+# Workspaces
+workspace_picker = "prefix+w"
+new_workspace = "prefix+n"
+close_workspace = "prefix+shift+d"
+rename_workspace = "prefix+e"

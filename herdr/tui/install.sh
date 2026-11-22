@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+script_dir=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 config_source="$script_dir/config.toml"
 config_directory="${XDG_CONFIG_HOME:-$HOME/.config}/herdr"
 config_destination="$config_directory/config.toml"

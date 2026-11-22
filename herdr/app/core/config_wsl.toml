@@ -1,0 +1,4 @@
+# Herdr Core (hc) Windows shell configuration for the Herdr desktop app.
+
+# Run new default Core terminals in the default WSL distribution.
+shell = ["wsl.exe"]
