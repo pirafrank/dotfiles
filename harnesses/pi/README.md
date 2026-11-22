@@ -4,7 +4,7 @@ This directory contains the machine-specific Pi settings, owned extensions,
 goal/workflow configuration, pinned Node dependencies, approved package
 allowlist, and installer.
 
-## Pi setup
+## Requirements
 
 Pi 1.5.2 requires Node.js 22.19.0 or newer.
 
@@ -14,7 +14,9 @@ To do so run: `curl -fsSL <https://pi.dev/install.sh> | sh`.
 Pi native managed installation will install Pi to `~/.local/bin/pi`, and remove its
 npm variant, `npm uninstall -g @earendil-works/pi-coding-agent`, if installed.
 
-## Pi harness setup
+## Install and remove the harness
+
+### Install
 
 Install the Pi CLI at version 1.5.2 or above, and make sure the shared skills
 checkout exists at `~/.local/share/skills` (or set `SKILLS_SRC` to its path).
@@ -28,21 +30,29 @@ From the harness repository root, install the full Pi setup:
 This links skills and shared resources into `~/.pi/agent`, links the Pi settings,
 harness model tiers, and extensions from this repository, installs the pinned
 local dependencies with `npm ci`, and syncs the packages approved in
-`packages.lock.json`. The root
-`./install.sh --target pi` command delegates to the same installer. Uninstall
-owned Pi links with either:
+`packages.lock.json`. The root `./install.sh --target pi` command delegates to
+the same installer.
+
+### Remove
+
+Uninstall owned Pi links with either:
 
 ```bash
 ./pi/install.sh --uninstall
 ./install.sh --target pi --uninstall
 ```
 
-`./pi/install.sh --check` validates the approved package manifest and reports
-its package specifications without installing them. Keep credentials, Pi
-authentication, sessions, trust state, caches, `node_modules`, and graph-run data
-outside both repositories.
+### Check
 
-## Configuration and packages
+`./pi/install.sh --check` validates the approved package manifest and reports
+its package specifications without installing them.
+
+Keep credentials, Pi authentication, sessions, trust state, caches,
+`node_modules`, and graph-run data outside both repositories.
+
+## Configuration
+
+### Models and routing
 
 Pi's interactive default model is set in `settings.json`; workflow model tiers
 and the fixed selector model are set in `harness.json`. Codemode is enabled
@@ -79,6 +89,8 @@ in `harness.json`.
 > `harness/auto`, because pi-model-auto's input hook can process those prefixes
 > even when its router is not selected.
 
+### Approved extension packages
+
 [`packages.lock.json`](packages.lock.json) is the authoritative package
 allowlist, and the package sources in `settings.json` must match it exactly. The installer validates
 parity before syncing and accepts exact scoped npm specifications. Package
@@ -92,6 +104,8 @@ session's working directory. Use `/cd` to show the current directory, or
 `/cd <path>` to switch; paths may be relative, absolute, or start with `~`.
 Run `./pi/install.sh` to sync the package to the user-level Pi installation.
 
+### MCP servers and private settings
+
 Configure user-level MCP servers in `~/.pi/agent/mcp.json`. Pi also supports
 project-level configuration in `.pi/mcp.json` for trusted projects. A project
 `.pi/mcp.json` has the highest precedence and overrides user-level entries with
@@ -104,7 +118,17 @@ other machine-specific configuration outside this public repository; when a
 project needs `.pi/mcp.json`, use an untracked symlink to a private file so the
 configuration can be selected per machine without committing it.
 
-## Harness behavior
+## Runtime behavior
+
+### Shared roles and workflows
+
+Shared roles and workflow templates come from the skills checkout configured by
+`SKILLS_SRC` (by default, `~/.local/share/skills`) through symlinks. The harness
+is not fixed to a particular set of roles: adding or editing role files there
+is picked up without reinstalling. Prompt text alone does not change which
+roles are available or selected; workflow and routing configuration determines
+which roles can be chosen or delegated. A new role may also need to be added to
+the relevant workflow or routing configuration before the harness uses it.
 
 ### Interactive virtual model
 
@@ -131,6 +155,8 @@ Aliases expand once, before Pi dispatches commands, and work with built-in and
 extension commands. Existing editor customizations are preserved when the alias
 extension loads; another extension that later replaces the editor may override it.
 
+### Delegation, permissions, and extensions
+
 The owned extension layer provides:
 
 - isolated specialist delegation with compact structured results;
@@ -142,6 +168,8 @@ The owned extension layer provides:
 - bounded edit/review loops, deterministic outcome branches, and a constrained
   model route decision only when graph conditions leave no single route;
 - shared role, skill, prompt, and charter discovery from `pirafrank/skills`.
+
+#### Delegated agents and permissions
 
 Direct delegation validates the final JSONL assistant response against
 `schemas/node-result.schema.json` adjacent to the linked roles directory. Graph
@@ -168,6 +196,8 @@ Git/package operations, and unsupported shell syntax still require confirmation.
 Trusted Pi resource directories permit reads only. Use `/reload` to load updated
 extension code in a running Pi session.
 
+#### Workflow graphs and resume
+
 Graphs pass structured predecessor results to dependent nodes. Existing DAGs
 retain bounded concurrency and a single shared-checkout writer. Routed graphs
 run one selected path at a time, use declared outcome conditions first, and
@@ -181,13 +211,15 @@ hashes still match. Delegate transcripts are bounded to 64 KiB, JSONL records
 to 1 MiB; timeout or cancellation terminates the process group and escalates to
 kill.
 
+#### Resource discovery and reload
+
 Skills and prompts use Pi's conventional discovery directories. The settings and
 harness configuration are linked into the user configuration, so Pi may write
 runtime changelog state back into this repository through the settings link.
 
 ## Verification
 
-### Contracts, checkpoints, and human approval
+### Task contracts and approval flow
 
 Every `graph_run` requires a JSON `contract` string validated against both the
 installed skills repository's `schemas/task-contract.schema.json` and this
@@ -227,6 +259,8 @@ Declined completion can be revisited with `graph_resume({runId})` without
 rerunning the verifier. `graph_status` exposes phase and approval history.
 Only the tool's final `status=complete` authorizes goal completion.
 
+### Checkpoints and resumability
+
 Checkpoints fingerprint HEAD, index entries, tracked files, nonignored untracked
 files, executable modes, and symlink targets. Evidence records receive the
 source fingerprint and contract hash from the harness. Verifiers must leave
@@ -236,6 +270,8 @@ drift; interrupted work additionally requires human approval before replay.
 Legacy runs without contracts require a new run. After a crash, lock directories
 must be removed manually only after confirming no runner is active.
 
+### Limits and trust boundaries
+
 These checkpoints identify source state; they do not store file contents or
 restore a lost checkout. Ignored build artifacts and external dependencies are
 outside the fingerprint, and submodule checkouts are currently rejected. Agent
@@ -243,6 +279,8 @@ evidence remains a claim bound to source, rather than an independently verified
 test attestation. Approval records use local filesystem trust and the local
 operator name, not an authenticated remote identity. Independent acceptance,
 credential isolation, and trusted publication remain future unattended-run work.
+
+### Local validation
 
 From this repository root, validate the installed Pi packages and resource
 loading:
@@ -260,6 +298,8 @@ npm --prefix pi test
 ./pi/install.sh --check
 npm --prefix pi run check:setup
 ```
+
+### Runtime checks
 
 Check the installed CLI version, configured model availability, declared
 packages, and native MCP connections separately:
