@@ -24,7 +24,13 @@ Unix-like
 
 ```sh
 mkdir -p "$HOME/.config/rio"
-ln -sf "$HOME/dotfiles/terminals/rio/config_$(uname -s).toml" "$HOME/.config/rio/config.toml"
+ln -sf "$HOME/dotfiles/terminals/rio/config.toml" "$HOME/.config/rio/config.toml"
+```
+
+If installed via FlatHub:
+
+```sh
+ln -sf "$HOME/dotfiles/terminals/rio/config.toml" "$HOME/.var/app/com.rioterm.Rio/config/rio/config.toml"
 ```
 
 Windows
