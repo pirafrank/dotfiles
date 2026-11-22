@@ -63,7 +63,7 @@
     "npm:@schovest/pi-goal@0.2.1",
     "npm:pi-alibaba-models@1.1.1",
     "npm:pi-model-auto@0.3.0",
-    "npm:pi-provider-litellm",
+    "npm:pi-provider-litellm@3.4.0",
     "npm:@steveimm/pi-change-dir@0.2.0"
   ],
   "defaultProvider": "pi-router",
