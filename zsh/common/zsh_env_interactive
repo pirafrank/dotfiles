@@ -53,6 +53,16 @@ if [[ -d "$HOME/.nvm" ]]; then
     [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
   }
   add-zsh-hook precmd _nvm_load_once
+
+  # Lazy wrapper: makes `nvm` usable in interactive shells that never draw a
+  # prompt (e.g. `zsh -ic 'nvm use 20'`), where the precmd hook never fires.
+  # nvm.sh redefines nvm(), so the stub is replaced on first call.
+  nvm() {
+    unfunction nvm
+    add-zsh-hook -d precmd _nvm_load_once 2>/dev/null
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+    nvm "$@"
+  }
 fi
 
 # rvm - same one-shot precmd pattern as nvm.
