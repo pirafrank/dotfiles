@@ -17,7 +17,11 @@ mouse_events   = [ "click", "scroll" ]
 
 [plugin]
 prepend_previewers = [
-  { url = "*.md", run = "glow" },
+  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+  { url = "*.tar*", run = 'piper --format=url -- tar tf "$1"' },
+  { url = "*.csv", run = 'piper -- bat -p --color=always "$1"'},
+  { url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
+  { mime = "application/sqlite3", run  = 'piper -- sqlite3 "$1" ".schema --indent"' },
 ]
 #prepend_fetchers = [
 #  { id = "git", name = "*", run = "git" },
