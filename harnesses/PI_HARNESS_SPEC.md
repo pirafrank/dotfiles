@@ -49,11 +49,11 @@ Install or symlink `pi-bot` onto `PATH` (e.g., `~/.local/bin/pi-bot` on Linux; a
 ### 3.1 CLI Interface
 
 ```text
-pi-bot --list
+pi-bot --list [--group <group>]
 pi-bot <name> [pi-args...]
 ```
 
-- `--list`: Enumerate every valid bot directory under `$BOTS_DIR` (contains `SOUL.md` and `bot.json`), printing `<name>\t<description>`.
+- `--list`: Enumerate every valid bot directory under `$BOTS_DIR` (contains `SOUL.md` and `bot.json`), printing `<name>\t<group>\t<privacyTier>\t<description>` (optionally filtered by `--group <group>`).
 - `<name>`: Resolve bot directory `$BOTS_DIR/<name>`. Exit non-zero with a clear message if missing or if `SOUL.md` / `bot.json` is absent.
 - Remaining `[pi-args...]` MUST be forwarded verbatim to `pi`.
 
@@ -73,9 +73,13 @@ pi-bot <name> [pi-args...]
    - Target path: `$BOTS_STATE_DIR/<name>/MEMORY.md`.
    - If missing and `bot.json` specifies `memoryTemplate` (e.g., `MEMORY.example.md`) and that file exists in `$BOTS_DIR/<name>/`, copy it to `$BOTS_STATE_DIR/<name>/MEMORY.md`.
    - Otherwise create an empty `MEMORY.md` with `# <name> Memory`.
-4. **Optional state repo freshness check (non-blocking):**
+4. **Enforce `privacyTier` model routing:**
+   - Read optional `privacyTier` from `bot.json` (`"local-only"` or `"cloud-ok"`).
+   - When `privacyTier == "local-only"`, route exclusively to a configured local provider/model (e.g., Ollama / llama.cpp via `model-router.json`) and **refuse to fall back to a cloud provider**—exit non-zero with a clear error if no local model is configured or reachable.
+   - When `privacyTier` is `"cloud-ok"` or omitted, use normal `model-router.json` / user-supplied `[pi-args...]` selection.
+5. **Optional state repo freshness check (non-blocking):**
    - If `$BOTS_STATE_DIR` is a Git repository, optionally warn (do not abort) when the branch is behind upstream or has uncommitted changes from another session.
-5. **Compose runtime prompt context & launch Pi:**
+6. **Compose runtime prompt context & launch Pi:**
    Pass the bot identity and live state into Pi using **one** of the two mechanisms in Section 4.
 
 ---
@@ -121,4 +125,5 @@ When deeper Pi integration is desired (e.g., `/bot <name>` switching inside an a
 - [ ] Running `install.sh --uninstall` removes `~/.pi/agent/bots` cleanly.
 - [ ] `pi-bot --list` discovers all bots dynamically with zero bot names hardcoded in `dotfiles`.
 - [ ] `pi-bot architect` seeds `$BOTS_STATE_DIR/architect/MEMORY.md` on first run, loads `SOUL.md` + `MEMORY.md`, and exposes the resolved `MEMORY.md` path to the session.
+- [ ] `pi-bot <local-only-bot>` refuses to launch on a cloud provider and routes exclusively to a local model.
 - [ ] `grep -rn "spec-writer\|architect" ~/dotfiles/harnesses/pi/` returns zero matches.
